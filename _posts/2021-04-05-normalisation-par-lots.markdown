@@ -96,9 +96,7 @@ Finalement, on calcule les valeurs de **sortie de la couche de normalisation par
 
 AJOUTER SCHEMA 3
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_3.jpg">  
-</p>
-<p align="center">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_3.jpg">
   <strong>Schéma 3: Intérêt des paramètres 𝛾 et 𝛽.</strong> Les modifications sur la distribution (en haut) permettent d’exploiter différentes parties de la fonction non-linéaire (en bas).
 </p>
 
