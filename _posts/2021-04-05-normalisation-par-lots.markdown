@@ -77,6 +77,9 @@ AJOUTER LES EQUATIONS !!!!!!!!!!!!!!
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/bn_eq2.gif">
 </p>
 
+<p align="center">
+  <img src="https://latex.codecogs.com/svg.image?\mu&space;=&space;\frac{1}{n}*\sum_{i}Z^{(i)}" title="\mu = \frac{1}{n}*\sum_{i}Z^{(i)}" />
+</p>
 
 
 - On calcule d’abord la moyenne 𝜇 et l’écart-type σ des vecteurs d’activations à l’échelle du lot (1) et (2).
