@@ -56,9 +56,9 @@ Toutes les infrastructures de développements (ou frameworks) populaires propose
 
 
 
-Article de référence : [“Batch-normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift”](url=https://arxiv.org/abs/1502.03167) (trad. “Normalisation par Lots : Accélération de l’entraînement des réseaux de neurones profonds par la réduction du décalage de covariable interne”).
+<ins>Article de référence :</ins> [“Batch-normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift”](url=https://arxiv.org/abs/1502.03167) (trad. “Normalisation par Lots : Accélération de l’entraînement des réseaux de neurones profonds par la réduction du décalage de covariable interne”).
 
-Article (contribution significative dans la compréhension du concept) : [“How does batch normalization help optimization”](url=https://arxiv.org/pdf/1805.11604.pdf) (trad. “Comment la normalisation par lots aide l’optimisation.”).
+<ins>Article (contribution significative dans la compréhension du concept) :</ins> [“How does batch normalization help optimization”](url=https://arxiv.org/pdf/1805.11604.pdf) (trad. “Comment la normalisation par lots aide l’optimisation.”).
 
 
 
