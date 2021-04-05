@@ -78,8 +78,7 @@ AJOUTER LES EQUATIONS !!!!!!!!!!!!!!
 </p>
 
 <p align="center">
-  <img src="https://latex.codecogs.com/svg.image?(1)\hspace{0.2cm}\mu&space;=&space;\frac{1}{n}*\sum_{i}Z^{(i)}\hspace{2cm}(2)\hspace{0.2cm}\sigma&space;=&space;\frac{1}{n}*\sum_{i}(Z^{(i)}-\mu)" title="(1)\hspace{0.2cm}\mu = \frac{1}{n}*\sum_{i}Z^{(i)}\hspace{2cm}(2)\hspace{0.2cm}\sigma = \frac{1}{n}*\sum_{i}(Z^{(i)}-\mu)" />
-  <<img src="https://latex.codecogs.com/svg.image?(3)\hspace{0.2cm}Z_{(i)}^{norm}=\frac{Z^{(i)}-\mu}{\sqrt{\sigma&space;^2&space;&plus;&space;\epsilon}}\hspace{2cm}(4)\hspace{0.2cm}\breve{Z}=\gamma&space;*&space;Z^{(i)}_{norm}&plus;\beta" title="(3)\hspace{0.2cm}Z_{(i)}^{norm}=\frac{Z^{(i)}-\mu}{\sqrt{\sigma ^2 + \epsilon}}\hspace{2cm}(4)\hspace{0.2cm}\breve{Z}=\gamma * Z^{(i)}_{norm}+\beta" />
+  <img src="https://latex.codecogs.com/svg.image?(1)\hspace{0.2cm}\mu&space;=&space;\frac{1}{n}*\sum_{i}Z^{(i)}\hspace{2cm}(2)\hspace{0.2cm}\sigma&space;=&space;\frac{1}{n}*\sum_{i}(Z^{(i)}-\mu)" title="(1)\hspace{0.2cm}\mu = \frac{1}{n}*\sum_{i}Z^{(i)}\hspace{2cm}(2)\hspace{0.2cm}\sigma = \frac{1}{n}*\sum_{i}(Z^{(i)}-\mu)" /><img src="https://latex.codecogs.com/svg.image?(3)\hspace{0.2cm}Z_{(i)}^{norm}=\frac{Z^{(i)}-\mu}{\sqrt{\sigma&space;^2&space;&plus;&space;\epsilon}}\hspace{2cm}(4)\hspace{0.2cm}\breve{Z}=\gamma&space;*&space;Z^{(i)}_{norm}&plus;\beta" title="(3)\hspace{0.2cm}Z_{(i)}^{norm}=\frac{Z^{(i)}-\mu}{\sqrt{\sigma ^2 + \epsilon}}\hspace{2cm}(4)\hspace{0.2cm}\breve{Z}=\gamma * Z^{(i)}_{norm}+\beta" />	
 </p>
 
 
