@@ -6,12 +6,65 @@ categories: Apprentissage-profond
 ---
 
 
-# head1
-## head2
+
+
+Il est surprenant de constater le manque de contenu en français que l’on peut trouver sur internet à propos de ce concept, pourtant largement utilisé en apprentissage profond. Le foisonnement d’articles traitant du sujet n’est d’ailleurs par toujours éclairant ; beaucoup s’appuyant sur les premières explications proposées par les inventeurs de la technique, qui ont été très largement remises en question depuis la publication de l’article original.
+
+
+Objectifs de cet article : 
+- Permettre d’appréhender le concept de Normalisation par lots selon 3 niveaux de complexité :  en 30 secondes, en 3 minutes, et dans une exploration plus détaillée ;
+- Aborder les éléments clefs à avoir à l’esprit pour exploiter efficacement la couche BN ;
+- Proposer une implémentation simple de la couche BN sous PyTorch, pour voir en détail sa mise en pratique ;
+- Faire le point sur le niveau de compréhension actuel que l’on a de ce concept.
+
+
+
+
+
+| Nom français          | Nom anglais         | Abréviation courante |
+|-----------------------|---------------------|----------------------|
+| Normalization par lot | Batch Normalization | BN                   |
+
+
+
+
+
+
+## En 30 secondes
+
+
+La **Normalisation par lots** (en anglais ***Batch-Normalization*** - notée ***BN***) est une méthode algorithmique qui permet d’entraîner un réseau de neurones profond de manière plus rapide et plus stable. 
+
+Cette méthode consiste à normaliser les vecteurs d’activation des couches cachées en utilisant les caractéristiques statistiques du lot (ou *batch*) - la moyenne et l’écart-type - juste avant (ou juste après) le passage dans la fonction non-linéaire.
+
+
+
+Schéma 1.a Perceptron multicouche **sans normalisation par lots (BN)**
+
+
+Schéma 1.b Perceptron multicouche **avec normalisation par lots (BN)**
+
+Toutes les infrastructures de développements (ou frameworks) populaires proposent des implémentations de cette méthode sous la forme de couche computationnelle, que l’on peut facilement insérer dans un réseau de neurones.
+
+
+
+
+Article de référence : [“Batch-normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift”](url=https://arxiv.org/abs/1502.03167) (trad. “Normalisation par Lots : Accélération de l’entraînement des réseaux de neurones profonds par la réduction du décalage de covariable interne”).
+Article (contribution significative dans la compréhension du concept) : [“How does batch normalization help optimization”](url=https://arxiv.org/pdf/1805.11604.pdf) (trad. “Comment la normalisation par lots aide l’optimisation.”).
+
+
+
+
+
+
+
 ### head3
 #### head4
 ##### head5
 ###### head6
+
+
+
 
 You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
