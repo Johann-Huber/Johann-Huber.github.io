@@ -97,7 +97,8 @@ Finalement, on calcule les valeurs de **sortie de la couche de normalisation par
 AJOUTER SCHEMA 3
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_3.jpg">
-  <strong>Schéma 3 : Intérêt des paramètres 𝛾 et 𝛽.</strong> Les modifications sur la distribution (en haut) permettent d’exploiter différentes parties de la fonction non-linéaire (en bas).
+  
+  <strong>Schéma 3: Intérêt des paramètres 𝛾 et 𝛽.</strong> Les modifications sur la distribution (en haut) permettent d’exploiter différentes parties de la fonction non-linéaire (en bas).
 </p>
 
 
@@ -125,10 +126,10 @@ En pratique, on considère la normalisation par lots comme une couche à part en
 
 On trouve la couche de normalisation par lots (ou couche BN) dans les infrastructures de développements (ou frameworks) populaires.
 
-| Pytorch            | torch.nn.BatchNorm1d, torch.nn.BatchNorm2d, torch.nn.BatchNorm3d |
+| Librairie          | Couches BN
 |--------------------|------------------------------------------------------------------|
+| Pytorch            | torch.nn.BatchNorm1d, torch.nn.BatchNorm2d, torch.nn.BatchNorm3d |
 | Tensorflow / Keras | tf.nn.batch_normalization, tf.keras.layers.BatchNormalization    |
-
 
 <ins>Remarque :</ins> Il est très facile de trouver la documentation de la couche BN pour votre infrastructure de développement, qu’il s’agisse de Mxnet, Matlab, Caffe …  
 
@@ -545,7 +546,7 @@ AJOUTER SCHÉMA 10
 
 Ajouter la couche BN atténue très largement l’interdépendance entre les couches pendant l’apprentissage. La normalisation agit comme une porte que l’optimiseur peut ajuster à partir des seuls paramètres 𝛽 et 𝛾. Il n’est alors plus nécessaire de tenir compte de tous les paramètres du réseau pour avoir des informations statistique sur une couche cachée.
 
-Remarque : L’optimiseur peut alors se permettre de faire de bien plus grosses modifications de poids sur chacune des couches, sans que cela n’altère le travail réalisé sur les couches successives. Il est donc beaucoup plus facile de déterminer des hyperparamètres qui convergeront vers une solution optimale.
+<ins>Remarque :</ins> L’optimiseur peut alors se permettre de faire de bien plus grosses modifications de poids sur chacune des couches, sans que cela n’altère le travail réalisé sur les couches successives. Il est donc beaucoup plus facile de déterminer des hyperparamètres qui convergeront vers une solution optimale.
 
 AJOUTER ENCARTS
 Cet exemple met de côté l’hypothèse dans laquelle la BN servirait à faire tendre les valeurs d’activations des couches cachées vers une loi normale centrée réduite. 
@@ -697,7 +698,8 @@ Cette liste n’est bien entendu pas exhaustive, et beaucoup de mystères demeur
 
 ##### Sources et références
 
-Articles :
+
+<ins>Articles :</ins>
 
 [1] “Normalisation par Lots : Accélération de l’entraînement des réseaux de neurones profonds par la réduction du décalage de covariable interne”, l’article original : [article](https://arxiv.org/abs/1502.03167) 
 
@@ -707,8 +709,7 @@ Articles :
 Réseau Inception : [article](https://arxiv.org/abs/1409.4842 ) 
 
 
-
-Liens :
+<ins>Liens :</ins>
 
 Brillante présentation de Ian Goodfellow (malgré la qualité sonore), dont le début traite de la normalisation par lot :
 https://www.youtube.com/watch?v=Xogn6veSyxA
