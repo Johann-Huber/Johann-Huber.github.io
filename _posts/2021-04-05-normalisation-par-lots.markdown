@@ -39,9 +39,10 @@ Cette méthode consiste à normaliser les vecteurs d’activation des couches ca
 
 
 
+![useful image]({{https://github.com/Johann-Huber/Johann-Huber.github.io}}/assets/sbn_1a_fr.png)
 Schéma 1.a Perceptron multicouche **sans normalisation par lots (BN)**
 
-
+![useful image]({{https://github.com/Johann-Huber/Johann-Huber.github.io}}/assets/sbn_1a_fr.png)
 Schéma 1.b Perceptron multicouche **avec normalisation par lots (BN)**
 
 Toutes les infrastructures de développements (ou frameworks) populaires proposent des implémentations de cette méthode sous la forme de couche computationnelle, que l’on peut facilement insérer dans un réseau de neurones.
@@ -50,6 +51,7 @@ Toutes les infrastructures de développements (ou frameworks) populaires propose
 
 
 Article de référence : [“Batch-normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift”](url=https://arxiv.org/abs/1502.03167) (trad. “Normalisation par Lots : Accélération de l’entraînement des réseaux de neurones profonds par la réduction du décalage de covariable interne”).
+
 Article (contribution significative dans la compréhension du concept) : [“How does batch normalization help optimization”](url=https://arxiv.org/pdf/1805.11604.pdf) (trad. “Comment la normalisation par lots aide l’optimisation.”).
 
 
