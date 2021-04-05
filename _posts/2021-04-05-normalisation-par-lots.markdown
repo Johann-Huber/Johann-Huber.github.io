@@ -73,8 +73,8 @@ Pour chaque couche cachée, on calcule la normalisation par lot de la façon sui
 
 AJOUTER LES EQUATIONS !!!!!!!!!!!!!!
 <p align="center">
-  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/bn_eq1.gif">
-  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/bn_eq2.gif">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/bn_eq1.gif">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/bn_eq2.gif">
 </p>
 
 
@@ -84,7 +84,7 @@ AJOUTER LES EQUATIONS !!!!!!!!!!!!!!
 
 AJOUTER SCHEMA 2
 <p align="center">
-  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/sbn_2.jpg">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_2.jpg">
   <strong>Schéma 2 : 1ère étape de la normalisation par lots.</strong> Exemple d’une couche de 3 neurones, avec un lot de taille b. Pour chaque neurone, les valeurs à l’échelles du batch suivent une loi normal centrée réduite.
 </p>
 
@@ -96,7 +96,7 @@ Finalement, on calcule les valeurs de **sortie de la couche de normalisation par
 
 AJOUTER SCHEMA 3
 <p align="center">
-  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/sbn_3.jpg">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_3.jpg">
   <strong>Schéma 3 : Intérêt des paramètres 𝛾 et 𝛽.</strong> Les modifications sur la distribution (en haut) permettent d’exploiter différentes parties de la fonction non-linéaire (en bas).
 </p>
 
@@ -146,7 +146,7 @@ En guise de mise en bouche, regardons rapidement les résultats obtenus dans l�
 
 AJOUTER GRAPHIQUE 1
 <p align="center">
-  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/gbn_1.png">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/gbn_1.png">
   <strong>Graphique 1 : Efficacité de la couche BN en entraînement</strong> (source : [1]). Précision sur le jeu de validation ImageNet (2012) en fonction du nombre d’itération d'entraînement, pour des réseaux Inception avec ou sans BN, en augmentant les taux d’apprentissage pour les réseaux BN (1 fois, 5 fois, 30 fois le taux optimal du réseau Inception).
 </p>
 
@@ -178,7 +178,7 @@ Ce résultat peut être reproduit rapidement sans GPU, je vous invite à essayer
 
 AJOUTER GRAPHIQUE 2
 <p align="center">
-  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/gbn_2.png">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/gbn_2.png">
   <strong></strong> 
 </p>
 
@@ -189,7 +189,7 @@ Pour la deuxième expérience, regardons l’impact de cette méthode sur l’ac
 
 AJOUTER GRAPHIQUE 3
 <p align="center">
-  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/gbn_3.png">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/gbn_3.png">
   <strong></strong> 
 </p>
 
@@ -198,7 +198,7 @@ Sans la normalisation par lot, les valeurs d’activations varient fortement au 
 
 AJOUTER GRAPHIQUE 4
 <p align="center">
-  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/gbn_4.png">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/gbn_4.png">
   <strong></strong> 
 </p>
 
@@ -213,7 +213,7 @@ Ils obtiennent les résultats suivant :
 
 AJOUTER GRAPHIQUE 5
 <p align="center">
-  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/gbn_1.png">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/gbn_1.png">
   <strong>Graphique 1 : Efficacité de la couche BN en entraînement</strong> (source : [1]). Précision sur le jeu de validation ImageNet (2012) en fonction du nombre d’itération d'entraînement, pour des réseaux Inception avec ou sans BN, en augmentant les taux d’apprentissage pour les réseaux BN (1 fois, 5 fois, 30 fois le taux optimal du réseau Inception).
 </p>
 
@@ -294,7 +294,7 @@ Imaginons que l’on entraîne un réseau à partir d'images ne contenant que de
 
 AJOUTER IMAGES
 <p align="center">
-  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/car_n_shoes2.jpg">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/car_n_shoes2.jpg">
   Si la distribution d'entrée durant la phase de test est trop différente de celle de la phase d'entraînement, le modèle peut surréagir à certains signaux, entraînant les couches d'activations à diverger.
 </p>
 
@@ -394,7 +394,7 @@ On aurait bien-sûr une image RGB en entrée, un ensemble de couches de neurones
 
 AJOUTER SCHÉMA 5
 <p align="center">
-  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/sbn_5fr.jpg">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_5fr.jpg">
   <strong>Schéma 5 : Réseau convolutif simple pour réaliser une tâche de classification. </strong>
 </p>
 
@@ -405,7 +405,7 @@ Mais imaginons que nous ne disposions que de voiture “classiques” (de ville,
 
 AJOUTER IMAGES
 <p align="center">
-  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/car_n_shoes.jpg">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/car_n_shoes.jpg">
   Comme évoqué dans la section (section C.2.4), le décalage de distribution peut détériorer les performances du réseau, voir provoquer une explosion des valeurs d'activation.
 </p>
 
@@ -417,7 +417,7 @@ Si on représentait les caractéristiques extraites par notre modèle dans l’e
 
 AJOUTER SCHÉMA 6.a
 <p align="center">
-  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/sbn_6afr.jpg">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_6afr.jpg">
   <strong>Schéma 6.a : Pourquoi faut-il normaliser les valeur d’entrée d’un modèle ? cas non-normalisé.</strong> À l’entraînement, les valeurs d’entrée sont très éparses : la fonction approximée sera précise là où la densité de points est forte. Au contraire, elle sera imprécise là où la densité est faible (pouvant prendre l’une des courbes tracées à titre d’exemple).
 </p>
 
@@ -439,7 +439,7 @@ On retrouve ce même problème dans des cas plus simples que celui des réseaux 
 
 AJOUTER SCHÉMA 6.b
 <p align="center">
-  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/sbn_6bfr.jpg">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_6bfr.jpg">
   <strong>Schéma 6.b : Pourquoi faut-il normaliser les valeur d’entrée d’un modèle ? cas normalisé.</strong> Le signal d’entré normalisé rend les valeurs moins éparses à l’entraînement : il sera plus facile de trouver une fonction généralisante. 
 </p>
 
@@ -451,7 +451,7 @@ BONNE TAILLE DE TITRE ?
 
 AJOUTER SCHÉMA 7
 <p align="center">
-  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/sbn_7fr.jpg">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_7fr.jpg">
   <strong>Schéma 7 : Principe du décalage de covariable (ICS)</strong> au sens de la distribution (ICSdistrib).
 </p>
 
@@ -465,7 +465,7 @@ Néanmoins, il n’est pas souhaitable que tous nos signaux d’activations suiv
 
 AJOUTER SCHEMA 8
 <p align="center">
-  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/sbn_8.jpg">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_8.jpg">
   <strong>Schéma 8 : Pourquoi il n’est pas souhaitable de contraindre l’activation à une loi normale centrée réduite.</strong> La sigmoïde ne fonctionne ici qu’en régime linéaire.
 </p>
 
@@ -500,7 +500,7 @@ Considérons l’exemple suivant :
 
 AJOUTER SCHÉMA 9
 <p align="center">
-  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/sbn_9fr.jpg">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_9fr.jpg">
   <strong>Schéma 9 : Principe simplifié d’un réseau de neurone profond,</strong> composé uniquement de transformation linéaires.
 </p>
 
@@ -537,7 +537,7 @@ Imaginez pour des réseaux très profonds ...
 
 AJOUTER SCHÉMA 10
 <p align="center">
-  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/sbn_10fr.jpg">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_10fr.jpg">
   <strong>Schéma 10 : Principe de l’hypothèse n°2.</strong> En normalisant puis ajustant le signal avec 𝛽 et 𝛾, la couche BN simplifie le contrôle du signal au niveau de chaque couche cachée.
 </p>
 
@@ -571,7 +571,7 @@ Ils observent ensuite la précision obtenue par chaque modèle, ainsi que l’é
 
 AJOUTER GRAPHIQUE 6
 <p align="center">
-  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/gbn_6.png">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/gbn_6.png">
   <strong>Graphique 6 : Impact de la couche BN sur l’ICSdistrib</strong> (source : [2]). Les deux réseaux qui utilisent la couche BN s’entraînent plus vite que le réseau standard ; ajouter explicitement de l’ICSdistrib sur un réseau normalisé ne détériore pas ces propriétés.
 </p>
 
@@ -595,7 +595,7 @@ Le cosinus de l’angle orienté : Les gradients ont-ils une direction similaire
 
 AJOUTER GRAPHIQUE 7
 <p align="center">
-  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/gbn_7.png">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/gbn_7.png">
   <strong>Graphique 7 : Impact de la couche BN sur l’ICSopti</strong> (source : [2]). Les différence de normes et d’angles de gradient suggère qu’elle n’empêche pas le décalage ; le phénomène semble au contraire s’aggraver.
 </p>
 
@@ -611,7 +611,7 @@ Voici la dernière expérience que nous allons aborder dans cet article :
 
 AJOUTER SCHÉMA 11
 <p align="center">
-  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/sbn_11.jpeg">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_11.jpeg">
   <strong>Schéma 11 : Exploration du paysage d’optimisation</strong> dans la direction du gradient. Expérience menée dans l’article [2].
 </p>
 
@@ -624,7 +624,7 @@ Place aux résultats :
 
 AJOUTER GRAPHIQUE 8
 <p align="center">
-  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/gbn_8.png">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/gbn_8.png">
   <strong>Graphique 8 : Impact de la couche BN sur le lissage du paysage d’optimisation</strong> (source : [2]). Avec la normalisation par lots, on constate l’atténuation des fortes variations du gradient.
 </p>
 
