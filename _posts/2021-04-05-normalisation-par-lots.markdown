@@ -27,6 +27,7 @@ Objectifs de cet article :
 
 
 
+-----------
 
 
 
@@ -59,6 +60,9 @@ Toutes les infrastructures de développements (ou frameworks) populaires propose
 <ins>Article de référence :</ins> [“Batch-normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift”](url=https://arxiv.org/abs/1502.03167) (trad. “Normalisation par Lots : Accélération de l’entraînement des réseaux de neurones profonds par la réduction du décalage de covariable interne”).
 
 <ins>Article (contribution significative dans la compréhension du concept) :</ins> [“How does batch normalization help optimization”](url=https://arxiv.org/pdf/1805.11604.pdf) (trad. “Comment la normalisation par lots facilite l’optimisation.”).
+
+
+-----------
 
 
 ## B) En 3 minutes
@@ -139,7 +143,7 @@ Si l’on est loin d’avoir compris tous les mécanismes sous-jacents à la cou
 
 En guise de mise en bouche, regardons rapidement les résultats obtenus dans l’article officiel [1] :
 
-AJOUTER GRAPHIQUE 1
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/gbn_1.png">
   <strong>Graphique 1 : Efficacité de la couche BN en entraînement</strong> (source : [1]). Précision sur le jeu de validation ImageNet (2012) en fonction du nombre d’itération d'entraînement, pour des réseaux Inception avec ou sans BN, en augmentant les taux d’apprentissage pour les réseaux BN (1 fois, 5 fois, 30 fois le taux optimal du réseau Inception).
@@ -157,7 +161,7 @@ Voilà de quoi comprendre le principe des couches BN, leur intérêt, et d’êt
 
 J’ai ré-implémenté cette méthode sous Pytorch, de manière à retrouver les résultats de l’article officiel. Vous pourrez le trouver dans [ce repo git](https://github.com/Johann-Huber/batchnorm_pytorch/blob/main/batch_normalization_in_pytorch.ipynb).
 
-Je vous invite à parcourir les diverses implémentations de la couche BN disponible en ligne (presque toujours en anglais), en premier lieu celle de l'infrastructure avec laquelle vous travaillez.
+Je vous invite à parcourir les diverses implémentations de la couche BN disponible en ligne (presque toujours en anglais), à commencer par celle de l'infrastructure avec laquelle vous travaillez.
 
 ### II) La couche BN en pratique
 
@@ -167,7 +171,7 @@ J’ai décidé de commencer par présenter les résultats obtenus avec la couch
 
 L’article officiel [1] a réalisé 3 expériences pour évaluer l’efficacité de leur méthode. 
 
-La première a pour but de montrer l’efficacité de la normalisation par lots sur un exemple simple : Il s’agit d’entraîner un classificateur sur le jeu de donnée MNIST (reconnaissance de chiffres écrits à la main, issue du célèbre article de Y. Lecun). Le modèle consiste en une succession de 3 couches entièrement connectées de 100 neurones, suivis de fonctions sigmoïdes. On entraîne le tout sur 50 000 itérations en utilisant un algorithme de gradient stochastique (en anglais Stochastic Gradient Descent - notée SGD), avec ou sans couche de normalisation par lots pour comparer.
+La première a pour but de montrer l’efficacité de la normalisation par lots sur un exemple simple : Il s’agit d’entraîner un classificateur sur le jeu de donnée MNIST (reconnaissance de chiffres écrits à la main, issue du [célèbre article de Y. Lecun](http://yann.lecun.com/exdb/publis/pdf/lecun-90c.pdf)). Le modèle consiste en une succession de 3 couches entièrement connectées de 100 neurones, suivis de fonctions sigmoïdes. On entraîne le tout sur 50 000 itérations en utilisant un algorithme de gradient stochastique (en anglais *Stochastic Gradient Descent* - notée SGD), avec ou sans couche de normalisation par lots pour comparer.
 
 Ce résultat peut être reproduit rapidement sans GPU, je vous invite à essayer par vous-même pour vous faire la main.
 
@@ -198,7 +202,7 @@ Sans la normalisation par lot, les valeurs d’activations varient fortement au 
 </p>
 
 
-Le signal est d’ailleurs moins bruité, lorsque l’on utilise la normalisation par lots. On constate que l’optimiseur (en anglais optimizer) fait converger les poids beaucoup plus facilement.
+Le signal est d’ailleurs moins bruité, lorsque l’on utilise la normalisation par lots. On constate que l’optimiseur (en anglais *optimizer*) fait converger les poids beaucoup plus facilement.
 
 Cet exemple simple ne montre cependant pas toute l’étendue de l’impact de cette méthode.
 
@@ -322,10 +326,10 @@ Historiquement, la couche BN est positionnée juste avant la fonction non-linéa
 
 Dans leur article, ils déclarent :
 
-AJOTUER CITATION
-“Notre voudrions être certains que le réseau produise toujours une activation avec une distribution statistique désirée.”
-Sergey Ioffe & Christian Szegedy
-source : [1]
+AJOUTER CITATION
+> “Notre voudrions être certains que le réseau produise toujours une activation avec une distribution statistique désirée.”
+> Sergey Ioffe & Christian Szegedy
+> source : [1]
 
 
 En revanche, des expérimentations ont montré que la couche BN positionnée après la fonction non-linéaire donne de meilleurs résultats.
@@ -336,9 +340,9 @@ Cette petite expérience en est [un exemple](https://github.com/ducha-aiki/caffe
 François Chollet, créateur de Keras et actuellement ingénieur chez Google, a d’ailleurs prétendu à ce sujet que :
 AJOUTER CITATION
 
-“Je n’ai pas vérifié ce qui est suggéré dans l’article original, mais je peux garantir avoir vu dans du code écrit récemment par Christian [Szegedy] que la ReLU est appliquée avant la BN. Mais c’est parfois encore sujet à débat.”
-François Chollet
-source :  https://github.com/keras-team/keras/issues/1802
+> “Je n’ai pas vérifié ce qui est suggéré dans l’article original, mais je peux garantir avoir vu dans du code écrit récemment par Christian [Szegedy] que la ReLU est appliquée avant la BN. Mais c’est parfois encore sujet à débat.”
+> François Chollet
+> [source](https://github.com/keras-team/keras/issues/1802)
 
 
 
@@ -351,6 +355,8 @@ Remarquez que l’article [2] - qui remet en question les intuitions défendues 
 
 <ins>Pour en savoir plus :</ins> [Conversation  intéressante](https://www.reddit.com/r/MachineLearning/comments/67gonq/d_batch_normalization_before_or_after_relu/dgqaksn/) (hélas en anglais) sur reddit - même si certains arguments sont fragiles - avec une grosse tendance en faveur de la BN après l’activation.
 
+-----------
+
 
 ### III) Pourquoi la couche BN est-elle efficace ?
 
@@ -361,9 +367,9 @@ Bien que fondamental, la normalisation par lots est un concept souvent mal compr
 Dans l’article officiel, les auteurs introduisent la BN comme suit : 
 
 AJOUTER CITATION
-“Nous appelons Décalage de Covariable Interne (en anglais Internal Covariate Shift) la modification au cours de l’entraînement de la distribution statistique des noeuds internes d’un réseau profond. [...] Nous proposons un nouveau mécanisme, que l’on appelle Normalisation par Lots (Batch Normalization), qui résout en partie le problème du décalage de covariable interne, et se faisant accélère significativement l’entraînement des réseaux de neurones profonds.”
-Sergey Ioffe & Christian Szegedy
-source : [1] article officiel
+> “Nous appelons Décalage de Covariable Interne (en anglais *Internal Covariate Shift*) la modification au cours de l’entraînement de la distribution statistique des noeuds internes d’un réseau profond. [...] Nous proposons un nouveau mécanisme, que l’on appelle Normalisation par Lots (Batch Normalization), qui résout en partie le problème du décalage de covariable interne, et se faisant accélère significativement l’entraînement des réseaux de neurones profonds.”
+> Sergey Ioffe & Christian Szegedy
+> source : [1] article officiel
 
 
 Autrement dit, l’efficacité de la couche BN réside dans sa résolution (partielle) du problème de décalage de covariable interne.
@@ -376,7 +382,7 @@ Pour comprendre ce qui a suscité cette confusion, intéressons-nous à ce qu’
 Notation : L’abréviation ICS fait référence au Décalage de Covariable Interne (venant de l’anglais Internal Covariate Shift). 
 
 BONNE TAILLE DE TITRE ?
-##### Qu’est-ce que le décalage de covariable (au sens de la distribution) ?
+#### Qu’est-ce que le décalage de covariable (au sens de la distribution) ?
 
 Les auteurs l’ont dit : le décalage de covariable, au sens de la distribution, décrit la modification de distribution statistique au cours de l’entraînement d’un modèle, et, par extension, le décalage de covariable interne décrit ce phénomène à l’intérieur d’un réseau de neurone profond.
 
@@ -422,9 +428,9 @@ Le problème pourrait être résumé ainsi :
 
 AJOUTER CITATION
 
-Du point de vu du modèle, les images sont trop différentes les unes des autres. Autrement dit, leurs paramètres statistiques sont trop différents. 
-
-On dit qu’il y a décalage de covariable [au sens de la distribution] (en anglais covariate shift). 
+> Du point de vu du modèle, les images sont trop différentes les unes des autres. Autrement dit, leurs paramètres statistiques sont trop différents. 
+> 
+> On dit qu’il y a décalage de covariable [au sens de la distribution] (en anglais *covariate shift*). 
 
 
 On retrouve ce même problème dans des cas plus simples que celui des réseaux de neurones profonds, comme lors de régressions linéaires. Il est apparu beaucoup plus facile de résoudre des problèmes de régression lorsque le jeu d’entraînement suit une loi normale centrée réduite (moyenne = 0, écart-type = 1) ; c’est pourquoi il est très fréquent de normaliser les valeurs d’entrées d’un modèle.
@@ -438,7 +444,7 @@ On retrouve ce même problème dans des cas plus simples que celui des réseaux 
 Cette solution était déjà connue et mise en pratique avant la publication de l’article qui nous intéresse ici. La couche de BN, elle, considère ce problème au niveau des couches cachées.
 
 BONNE TAILLE DE TITRE ?
-##### Le décalage de covariable interne, hypothèse défendue par l’article original
+#### Le décalage de covariable interne, hypothèse défendue par l’article original
 
 
 <p align="center">
@@ -536,7 +542,7 @@ Ajouter la couche BN atténue très largement l’interdépendance entre les cou
 <ins>Remarque :</ins> L’optimiseur peut alors se permettre de faire de bien plus grosses modifications de poids sur chacune des couches, sans que cela n’altère le travail réalisé sur les couches successives. Il est donc beaucoup plus facile de déterminer des hyperparamètres qui convergeront vers une solution optimale.
 
 AJOUTER ENCARTS
-Cet exemple met de côté l’hypothèse dans laquelle la BN servirait à faire tendre les valeurs d’activations des couches cachées vers une loi normale centrée réduite. 
+> Cet exemple met de côté l’hypothèse dans laquelle la BN servirait à faire tendre les valeurs d’activations des couches cachées vers une loi normale centrée réduite. 
 
 Ici, il s’agit de faciliter le travail de l’optimiseur en lui permettant d’ajuster les distributions statistiques internes en jouant sur seulement deux paramètres à la fois.
 
@@ -569,9 +575,9 @@ N’écartons pas l’ICS trop vite : la définition du décalage de covariable 
 
 
 AJOUTER ENCART
-Considérons une entrée fixe à notre modèle, notée X. 
-
-On définit le décalge de covariable interne d’un point de vu de l’optimisation (noté ICSopti ), la différence entre le gradient calculé au niveau d’une couche k après avoir rétropropagé l’erreur L(X)It, et le gradient calculé au niveau de la même couche k après la mise à jour des poids des couches précédentes L(X)It+1.
+> Considérons une entrée fixe à notre modèle, notée X. 
+> 
+> On définit le décalge de covariable interne d’un point de vu de l’optimisation (noté ICSopti ), la différence entre le gradient calculé au niveau d’une couche k après avoir rétropropagé l’erreur L(X)It, et le gradient calculé au niveau de la même couche k après la mise à jour des poids des couches précédentes L(X)It+1.
 
 
 Cette définition a pour but de focaliser l’attention sur le gradient de l’erreur, plus que sur la distribution des valeurs d’activation. On cherche ainsi à s’intéresser directement au problème d’optimisation sous-jacent pour comprendre l’efficacité de la couche BN, et voir le lien que peut avoir l’ICS sur l’entraînement.
@@ -659,7 +665,7 @@ Ces questions ouvertes ne nous empêche cependant pas de profiter de l’efficac
 ### VI) En résumé
 
 AJOUTER ENCART
-La normalization par lot (ou Batch-normalization - notée BN) constitue une des plus grandes avancées liées à l’émergence de l’apprentissage profond. 
+> La normalization par lot (ou Batch-normalization - notée BN) constitue une des plus grandes avancées liées à l’émergence de l’apprentissage profond. 
 
 Reposant sur la succession de deux transformations linéaires, cette méthode rend les entraînements de réseaux de neurones profonds (perceptrons multicouches ou réseaux convolutifs) plus rapides et plus stables. L’intérêt majeur de cette technique réside dans le fait qu’elle atténue très largement l’impact de l’interdépendance entre les poids du réseau sur les paramètres statistiques au niveau des couches cachées. 
 
