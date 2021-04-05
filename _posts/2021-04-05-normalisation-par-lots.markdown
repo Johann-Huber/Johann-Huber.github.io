@@ -155,6 +155,10 @@ Le résultat est net : en ajoutant des couches BN, le **réseau s’entraîne pl
 Voilà de quoi comprendre le principe des couches BN, leur intérêt, et d’être en mesure de les utiliser en pratique. une compréhension un peu plus approfondie est cependant nécessaire pour ne pas tomber des nues devant le comportement d’un réseau de neurone.
 
 
+
+-----------
+
+
 ## C) Comprendre la Normalisation par lots (BN)
 
 ### I) Implémentation
@@ -328,6 +332,7 @@ Dans leur article, ils déclarent :
 
 AJOUTER CITATION
 > “Notre voudrions être certains que le réseau produise toujours une activation avec une distribution statistique désirée.”
+> 
 > Sergey Ioffe & Christian Szegedy
 > source : [1]
 
@@ -341,6 +346,7 @@ François Chollet, créateur de Keras et actuellement ingénieur chez Google, a 
 AJOUTER CITATION
 
 > “Je n’ai pas vérifié ce qui est suggéré dans l’article original, mais je peux garantir avoir vu dans du code écrit récemment par Christian [Szegedy] que la ReLU est appliquée avant la BN. Mais c’est parfois encore sujet à débat.”
+> 
 > François Chollet
 > [source](https://github.com/keras-team/keras/issues/1802)
 
@@ -548,14 +554,14 @@ Ici, il s’agit de faciliter le travail de l’optimiseur en lui permettant d�
 
 Il s’agit néanmoins d’intuitions autour du fonctionnement de la normalisation par lot, et il n’existe pas, à ma connaissance, de solides preuves de ces hypothèses. 
 
-Un article paru en 2019 par une équipe du MIT a apportée une contribution intéressante à la compréhension de l’efficacité de la couche BN. Les auteurs remettent très fortement en question le lien entre l’efficacité de la couche BN et la réduction du décalage de covariable interne, au sens de la distribution (première hypothèse) !
+Un article paru en 2019 par une équipe du MIT a apporté une contribution intéressante à la compréhension de l’efficacité de la couche BN. Les auteurs remettent très fortement en question le lien entre l’efficacité de la couche BN et la réduction du décalage de covariable interne, au sens de la distribution (première hypothèse) !
 
 
 #### 3) Troisième hypothèse - lissage du paysage d’optimisation :
 
-Note de rédaction : Dans cette partie, je m’efforce de synthétiser l’article [2], pour présenter leurs principales conclusions quant aux propriétés de la couche BN. Cet article est dense, je vous invite à vous y pencher avec plus d’attention si ces concepts vous intéressent.  
+*Note de rédaction : Dans cette partie, je m’efforce de synthétiser l’article [2], pour présenter leurs principales conclusions quant aux propriétés de la couche BN. Cet article est dense, je vous invite à vous y pencher avec plus d’attention si ces concepts vous intéressent.*
 
-Intéressons-nous directement à la deuxième expérience de cet article. Les auteurs entraînent trois réseaux VGG (sur CIFAR-10) :
+Intéressons-nous directement à la deuxième expérience de cet article. Les auteurs entraînent trois [réseaux VGG](https://arxiv.org/abs/1409.1556) (sur CIFAR-10) :
 Le premier sans couche BN ;
 Le deuxième avec des couches BN ;
 Le troisième est identique au deuxième, à ceci prêt qu’ils ajoutent explicitement de l’ICS au niveau des couches cachées en ajoutant du bruit (valeurs aléatoires ajoutées/multipliées à la moyenne/variance) ; 
@@ -604,7 +610,7 @@ Voici la dernière expérience que nous allons aborder dans cet article :
 
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_11.jpeg">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_11.jpg">
   <strong>Schéma 11 : Exploration du paysage d’optimisation</strong> dans la direction du gradient. Expérience menée dans l’article [2].
 </p>
 
@@ -698,7 +704,9 @@ Cette liste n’est bien entendu pas exhaustive, et beaucoup de mystères demeur
 [2] [“Comment la normalisation par lots aide l’optimisation.” ](https://arxiv.org/pdf/1805.11604.pdf)
 
 
-Réseau Inception : [article](https://arxiv.org/abs/1409.4842) 
+Réseau [Inception](https://arxiv.org/abs/1409.4842) 
+
+Réseau [VGG](https://arxiv.org/abs/1409.1556)
 
 
 <ins>Liens :</ins>
