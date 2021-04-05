@@ -71,12 +71,6 @@ La normalisation par lot s’articule différemment pendant la phase d’entraî
 
 Pour chaque couche cachée, on calcule la normalisation par lot de la façon suivante :
 
-AJOUTER LES EQUATIONS !!!!!!!!!!!!!!
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/bn_eq1.gif">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/bn_eq2.gif">
-</p>
-
 <p align="center">
   <img src="https://latex.codecogs.com/svg.image?(1)\hspace{0.2cm}\mu&space;=&space;\frac{1}{n}*\sum_{i}Z^{(i)}\hspace{2cm}(2)\hspace{0.2cm}\sigma&space;=&space;\frac{1}{n}*\sum_{i}(Z^{(i)}-\mu)" title="(1)\hspace{0.2cm}\mu = \frac{1}{n}*\sum_{i}Z^{(i)}\hspace{2cm}(2)\hspace{0.2cm}\sigma = \frac{1}{n}*\sum_{i}(Z^{(i)}-\mu)" /><img src="https://latex.codecogs.com/svg.image?(3)\hspace{0.2cm}Z_{(i)}^{norm}=\frac{Z^{(i)}-\mu}{\sqrt{\sigma&space;^2&space;&plus;&space;\epsilon}}\hspace{2cm}(4)\hspace{0.2cm}\breve{Z}=\gamma&space;*&space;Z^{(i)}_{norm}&plus;\beta" title="(3)\hspace{0.2cm}Z_{(i)}^{norm}=\frac{Z^{(i)}-\mu}{\sqrt{\sigma ^2 + \epsilon}}\hspace{2cm}(4)\hspace{0.2cm}\breve{Z}=\gamma * Z^{(i)}_{norm}+\beta" />	
 </p>
@@ -85,7 +79,7 @@ AJOUTER LES EQUATIONS !!!!!!!!!!!!!!
 - On calcule d’abord la moyenne 𝜇 et l’écart-type σ des vecteurs d’activations à l’échelle du lot (1) et (2).
 - En utilisant ces valeurs, on normalise le vecteur d’activation Z(i) (3). De cette façon, la distribution des valeurs d’activations associées à chaque exemple du lot suit une loi normale centrée réduite. (𝜀 est ici une constante de stabilisation numérique)
 
-AJOUTER SCHEMA 2
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_2.jpg">
   <strong>Schéma 2 : 1ère étape de la normalisation par lots.</strong> Exemple d’une couche de 3 neurones, avec un lot de taille b. Pour chaque neurone, les valeurs à l’échelles du batch suivent une loi normal centrée réduite.
@@ -97,7 +91,6 @@ Finalement, on calcule les valeurs de **sortie de la couche de normalisation par
 - 𝛽 joue le rôle de biais, décalant à gauche ou à droite la gaussienne.
 
 
-AJOUTER SCHEMA 3
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_3.jpg">
   <strong>Schéma 3: Intérêt des paramètres 𝛾 et 𝛽.</strong> Les modifications sur la distribution (en haut) permettent d’exploiter différentes parties de la fonction non-linéaire (en bas).
@@ -178,7 +171,7 @@ La première a pour but de montrer l’efficacité de la normalisation par lots 
 
 Ce résultat peut être reproduit rapidement sans GPU, je vous invite à essayer par vous-même pour vous faire la main.
 
-AJOUTER GRAPHIQUE 2
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/gbn_2.png">
   <strong></strong> 
@@ -189,7 +182,7 @@ Bonne nouvelle, la normalisation par lots améliore les performances du réseau.
 
 Pour la deuxième expérience, regardons l’impact de cette méthode sur l’activation des neurones au niveau des couches cachées. Voici les valeurs d’activations obtenues sur la dernière couche cachée, juste avant le passage dans la fonction non-linéaire :
 
-AJOUTER GRAPHIQUE 3
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/gbn_3.png">
   <strong></strong> 
@@ -198,7 +191,7 @@ AJOUTER GRAPHIQUE 3
 Sans la normalisation par lot, les valeurs d’activations varient fortement au cours des premières itérations. En revanche, les courbes d’activations ne présentent pas d’à-coups avec l’utilisation de couches BN. 
 
 
-AJOUTER GRAPHIQUE 4
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/gbn_4.png">
   <strong></strong> 
@@ -213,7 +206,7 @@ L’article officiel explore une troisième expérience. Il s’agit d’évalue
 
 Ils obtiennent les résultats suivant :
 
-AJOUTER GRAPHIQUE 5
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/gbn_1.png">
   <strong>Graphique 1 : Efficacité de la couche BN en entraînement</strong> (source : [1]). Précision sur le jeu de validation ImageNet (2012) en fonction du nombre d’itération d'entraînement, pour des réseaux Inception avec ou sans BN, en augmentant les taux d’apprentissage pour les réseaux BN (1 fois, 5 fois, 30 fois le taux optimal du réseau Inception).
@@ -294,7 +287,6 @@ On a mentionné plus haut comment sont calculés 𝜇pop et σpop, de façon à 
 
 Imaginons que l’on entraîne un réseau à partir d'images ne contenant que des chaussures de sport. Comment réagirait le réseau s'il rencontre des images contenant des chaussures de villes ?
 
-AJOUTER IMAGES
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/car_n_shoes2.jpg">
   Si la distribution d'entrée durant la phase de test est trop différente de celle de la phase d'entraînement, le modèle peut surréagir à certains signaux, entraînant les couches d'activations à diverger.
@@ -306,7 +298,7 @@ Ce phénomène est amplifié par une propriété connue de la couche BN : au cou
 
 En général, on s’assure que les jeux de données d’entraînement et de tests soient suffisamment proches pour que (𝜇pop, σpop) soient cohérents. Dans le cas inverse, on pourrait penser que le jeu d’entraînement n’est pas suffisamment large et de bonne qualité pour entraîner notre modèle sur la tâche désirée.
 
-Mais il existe des cas où ce problème survient (lien : https://discuss.pytorch.org/t/model-eval-gives-incorrect-loss-for-model-with-batchnorm-layers/7561/38 ), j’en ai moi même fait les frais : Au cours de la compétition Kaggle de prédiction de l’évolution de la maladie de fibrose pulmonaire (lien : https://www.kaggle.com/c/osic-pulmonary-fibrosis-progression), nous disposions d’un petit jeu de donnée d’entraînement contenant - entres autres - des scanners 3D des poumons de chaque patient. Le contenu était si riche et si divers (pour une petite centaine d’exemples), que le réseau convolutif avec lequel je comptais faire de l’extraction de caractéristiques m’a fait la fâcheuse surprise de retourner des valeurs astronomiques sitôt que l’entraînement se trouvait en phase de validation...un régale à déboguer. ;)
+Mais il existe des [cas où ce problème survient](https://discuss.pytorch.org/t/model-eval-gives-incorrect-loss-for-model-with-batchnorm-layers/7561/38), j’en ai moi même fait les frais : Au cours de la compétition Kaggle de prédiction de l’évolution de la maladie de fibrose pulmonaire (lien : https://www.kaggle.com/c/osic-pulmonary-fibrosis-progression), nous disposions d’un petit jeu de donnée d’entraînement contenant - entres autres - des scanners 3D des poumons de chaque patient. Le contenu était si riche et si divers (pour une petite centaine d’exemples), que le réseau convolutif avec lequel je comptais faire de l’extraction de caractéristiques m’a fait la fâcheuse surprise de retourner des valeurs astronomiques sitôt que l’entraînement se trouvait en phase de validation...un régale à déboguer. ;)
 
 Dans ce genre de contexte où les jeux de données d’entraînement sont limités, il faut faire avec les moyens du bord. 
 
@@ -394,7 +386,6 @@ Supposons que l’on cherche à entraîner un réseau classificateur qui puisse 
 
 On aurait bien-sûr une image RGB en entrée, un ensemble de couches de neurones convolutifs, suivis de quelques couches entièrement connectées (perceptrons). On souhaite obtenir en sortie une seule valeur flottante comprise entre 0 et 1, décrivant la probabilité que l’image contienne effectivement une voiture.
 
-AJOUTER SCHÉMA 5
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_5fr.jpg">
   <strong>Schéma 5 : Réseau convolutif simple pour réaliser une tâche de classification. </strong>
@@ -405,7 +396,6 @@ Pour entraîner un tel modèle, il nous faudrait un nombre conséquent d’image
 
 Mais imaginons que nous ne disposions que de voiture “classiques” (de ville, ou de sport) pour l'entraînement. Comment le modèle réagirait si nous lui demandions de classifier une image contenant une formule 1 ?
 
-AJOUTER IMAGES
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/car_n_shoes.jpg">
   Comme évoqué dans la section (section C.2.4), le décalage de distribution peut détériorer les performances du réseau, voir provoquer une explosion des valeurs d'activation.
@@ -417,7 +407,7 @@ Dans cet exemple, il y a un décalage entre la distribution statistique associé
 
 Si on représentait les caractéristiques extraites par notre modèle dans l’espace de caractéristique, on aurait sans doute quelque chose comme ça :
 
-AJOUTER SCHÉMA 6.a
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_6afr.jpg">
   <strong>Schéma 6.a : Pourquoi faut-il normaliser les valeur d’entrée d’un modèle ? cas non-normalisé.</strong> À l’entraînement, les valeurs d’entrée sont très éparses : la fonction approximée sera précise là où la densité de points est forte. Au contraire, elle sera imprécise là où la densité est faible (pouvant prendre l’une des courbes tracées à titre d’exemple).
@@ -439,7 +429,7 @@ On dit qu’il y a décalage de covariable [au sens de la distribution] (en angl
 
 On retrouve ce même problème dans des cas plus simples que celui des réseaux de neurones profonds, comme lors de régressions linéaires. Il est apparu beaucoup plus facile de résoudre des problèmes de régression lorsque le jeu d’entraînement suit une loi normale centrée réduite (moyenne = 0, écart-type = 1) ; c’est pourquoi il est très fréquent de normaliser les valeurs d’entrées d’un modèle.
 
-AJOUTER SCHÉMA 6.b
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_6bfr.jpg">
   <strong>Schéma 6.b : Pourquoi faut-il normaliser les valeur d’entrée d’un modèle ? cas normalisé.</strong> Le signal d’entré normalisé rend les valeurs moins éparses à l’entraînement : il sera plus facile de trouver une fonction généralisante. 
@@ -451,7 +441,6 @@ BONNE TAILLE DE TITRE ?
 ##### Le décalage de covariable interne, hypothèse défendue par l’article original
 
 
-AJOUTER SCHÉMA 7
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_7fr.jpg">
   <strong>Schéma 7 : Principe du décalage de covariable (ICS)</strong> au sens de la distribution (ICSdistrib).
@@ -465,7 +454,6 @@ Si le signal d’entré présente un grand décalage de covariable (c’est à d
 Néanmoins, il n’est pas souhaitable que tous nos signaux d’activations suivent une loi normal centrée réduite. Cela limiterait sa capacité de représentativité, et pour cause :
 
 
-AJOUTER SCHEMA 8
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_8.jpg">
   <strong>Schéma 8 : Pourquoi il n’est pas souhaitable de contraindre l’activation à une loi normale centrée réduite.</strong> La sigmoïde ne fonctionne ici qu’en régime linéaire.
@@ -500,7 +488,6 @@ Ce n’est plus tout à fait la même chose. Ici, le passage à la loi normale c
 
 Considérons l’exemple suivant :
 
-AJOUTER SCHÉMA 9
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_9fr.jpg">
   <strong>Schéma 9 : Principe simplifié d’un réseau de neurone profond,</strong> composé uniquement de transformation linéaires.
@@ -537,7 +524,6 @@ Tout cela pour finalement ne tenir compte que des interactions du 2e ordre. Dans
 Imaginez pour des réseaux très profonds ...
 
 
-AJOUTER SCHÉMA 10
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_10fr.jpg">
   <strong>Schéma 10 : Principe de l’hypothèse n°2.</strong> En normalisant puis ajustant le signal avec 𝛽 et 𝛾, la couche BN simplifie le contrôle du signal au niveau de chaque couche cachée.
@@ -571,7 +557,6 @@ Le troisième est identique au deuxième, à ceci prêt qu’ils ajoutent explic
 Ils observent ensuite la précision obtenue par chaque modèle, ainsi que l’évolution des distributions d’activations au niveau des couches cachées. Voici les résultats obtenus :
 
 
-AJOUTER GRAPHIQUE 6
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/gbn_6.png">
   <strong>Graphique 6 : Impact de la couche BN sur l’ICSdistrib</strong> (source : [2]). Les deux réseaux qui utilisent la couche BN s’entraînent plus vite que le réseau standard ; ajouter explicitement de l’ICSdistrib sur un réseau normalisé ne détériore pas ces propriétés.
@@ -595,7 +580,7 @@ L’expérience suivante évalue cette nouvelle approche de l’ICS. Pour cela, 
 La différence L2 : Les gradients ont-ils une norme proche avant et après la mise à jour des poids ? Idéalement : L2-diff = 0 ;
 Le cosinus de l’angle orienté : Les gradients ont-ils une direction similaire avant et après la mise à jour des poids ? Idéalement: cos(grad(k)It , grad(k)It+1) = 1 .
 
-AJOUTER GRAPHIQUE 7
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/gbn_7.png">
   <strong>Graphique 7 : Impact de la couche BN sur l’ICSopti</strong> (source : [2]). Les différence de normes et d’angles de gradient suggère qu’elle n’empêche pas le décalage ; le phénomène semble au contraire s’aggraver.
@@ -611,7 +596,7 @@ Intéressons nous directement au problème de l’optimisation : quel est l’im
 
 Voici la dernière expérience que nous allons aborder dans cet article :
 
-AJOUTER SCHÉMA 11
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_11.jpeg">
   <strong>Schéma 11 : Exploration du paysage d’optimisation</strong> dans la direction du gradient. Expérience menée dans l’article [2].
@@ -624,7 +609,7 @@ AJOUTER SCHÉMA 11
 Place aux résultats :
 
 
-AJOUTER GRAPHIQUE 8
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/gbn_8.png">
   <strong>Graphique 8 : Impact de la couche BN sur le lissage du paysage d’optimisation</strong> (source : [2]). Avec la normalisation par lots, on constate l’atténuation des fortes variations du gradient.
@@ -674,7 +659,7 @@ Ces questions ouvertes ne nous empêche cependant pas de profiter de l’efficac
 ### VI) En résumé
 
 AJOUTER ENCART
-La normalization par lot (ou Batch-normalization - notée BN) constitue une des plus grande avancée liées à l’émergence de l’apprentissage profond. 
+La normalization par lot (ou Batch-normalization - notée BN) constitue une des plus grandes avancées liées à l’émergence de l’apprentissage profond. 
 
 Reposant sur la succession de deux transformations linéaires, cette méthode rend les entraînements de réseaux de neurones profonds (perceptrons multicouches ou réseaux convolutifs) plus rapides et plus stables. L’intérêt majeur de cette technique réside dans le fait qu’elle atténue très largement l’impact de l’interdépendance entre les poids du réseau sur les paramètres statistiques au niveau des couches cachées. 
 
@@ -697,38 +682,38 @@ En particulier, on se demande :
 Cette liste n’est bien entendu pas exhaustive, et beaucoup de mystères demeurent autour de la Normalisation par lots. À suivre, donc … ;)
 
 
-##### Sources et références
+#### Sources et références
 
 
 <ins>Articles :</ins>
 
-[1] “Normalisation par Lots : Accélération de l’entraînement des réseaux de neurones profonds par la réduction du décalage de covariable interne”, l’article original : [article](https://arxiv.org/abs/1502.03167) 
+[1] [“Normalisation par Lots : Accélération de l’entraînement des réseaux de neurones profonds par la réduction du décalage de covariable interne”, l’article original](https://arxiv.org/abs/1502.03167) 
 
-[2] “Comment la normalisation par lots aide l’optimisation.” : [article](https://arxiv.org/pdf/1805.11604.pdf) 
+[2] [“Comment la normalisation par lots aide l’optimisation.” ](https://arxiv.org/pdf/1805.11604.pdf)
 
 
-Réseau Inception : [article](https://arxiv.org/abs/1409.4842 ) 
+Réseau Inception : [article](https://arxiv.org/abs/1409.4842) 
 
 
 <ins>Liens :</ins>
 
-Brillante présentation de Ian Goodfellow (malgré la qualité sonore), dont le début traite de la normalisation par lot :
-https://www.youtube.com/watch?v=Xogn6veSyxA
-
-Présentation de l’article “Comment la normalisation par lots aide l’optimisation ?” par l’un des auteurs chez Microsoft ; l’audience est incisive sur les questions, les débats déclenchés sont passionnants :
-https://www.microsoft.com/en-us/research/video/how-does-batch-normalization-help-optimization/
+Brillante [présentation de Ian Goodfellow](https://www.youtube.com/watch?v=Xogn6veSyxA) (malgré la qualité sonore), dont le début traite de la normalisation par lot.
 
 
-À propos de la moyenne mobile : [lien](https://fr.wikipedia.org/wiki/Moyenne_mobile)
+[Présentation de l’article “Comment la normalisation par lots aide l’optimisation ?”](https://www.microsoft.com/en-us/research/video/how-does-batch-normalization-help-optimization/) par l’un des auteurs, lors d'une intervention chez Microsoft ; l’audience est incisive sur les questions, et les débats déclenchés sont passionnants.
 
 
-Expérimentation - BN après l’activation donne de meilleurs résultats qu’avant : [lien](https://github.com/ducha-aiki/caffenet-benchmark/blob/master/batchnorm.md#bn----before-or-after-relu)
+
+À propos de la [moyenne mobile](https://fr.wikipedia.org/wiki/Moyenne_mobile)
 
 
-Positionnement de la BN avant ou après l’activation : [lien](https://stackoverflow.com/questions/39691902/ordering-of-batch-normalization-and-dropout)
+Expérimentation - [BN après l’activation donne de meilleurs résultats qu’avant](https://github.com/ducha-aiki/caffenet-benchmark/blob/master/batchnorm.md#bn----before-or-after-relu)
 
 
-Citation de F. Chollet à propos de la place de la BN : [lien](https://github.com/keras-team/keras/issues/1802)
+Positionnement de la [BN avant ou après l’activation](https://stackoverflow.com/questions/39691902/ordering-of-batch-normalization-and-dropout)
+
+
+Citation de F. Chollet [à propos de la place de la BN](https://github.com/keras-team/keras/issues/1802)
 
 
 
