@@ -39,10 +39,9 @@ Cette méthode consiste à normaliser les vecteurs d’activation des couches ca
 
 
 
-![sbn_1a_fr]()
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_1a_fr.jpg">
-  <h5>Schéma 1.a Perceptron multicouche **sans normalisation par lots (BN)**</h5>
+  Schéma 1.a Perceptron multicouche **sans normalisation par lots (BN)**
 </p>
 
 	
