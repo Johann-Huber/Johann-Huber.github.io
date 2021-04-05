@@ -72,12 +72,21 @@ La normalisation par lot s’articule différemment pendant la phase d’entraî
 Pour chaque couche cachée, on calcule la normalisation par lot de la façon suivante :
 
 AJOUTER LES EQUATIONS !!!!!!!!!!!!!!
+<p align="center">
+  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/bn_eq1.gif">
+  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/bn_eq2.gif">
+</p>
+
 
 
 - On calcule d’abord la moyenne 𝜇 et l’écart-type σ des vecteurs d’activations à l’échelle du lot (1) et (2).
 - En utilisant ces valeurs, on normalise le vecteur d’activation Z(i) (3). De cette façon, la distribution des valeurs d’activations associées à chaque exemple du lot suit une loi normale centrée réduite. (𝜀 est ici une constante de stabilisation numérique)
 
 AJOUTER SCHEMA 2
+<p align="center">
+  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/sbn_2.jpg">
+  <strong>Schéma 2 : 1ère étape de la normalisation par lots.</strong> Exemple d’une couche de 3 neurones, avec un lot de taille b. Pour chaque neurone, les valeurs à l’échelles du batch suivent une loi normal centrée réduite.
+</p>
 
 
 Finalement, on calcule les valeurs de **sortie de la couche de normalisation par lot** Ẑ(i) en appliquant une transformation linéaire avec deux paramètres à entraîner (4). Cette dernière opération permet au modèle de définir à chaque couche cachée la distribution optimale, en ajustant ces deux paramètres :
@@ -86,6 +95,10 @@ Finalement, on calcule les valeurs de **sortie de la couche de normalisation par
 
 
 AJOUTER SCHEMA 3
+<p align="center">
+  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/sbn_3.jpg">
+  <strong>Schéma 3 : Intérêt des paramètres 𝛾 et 𝛽.</strong> Les modifications sur la distribution (en haut) permettent d’exploiter différentes parties de la fonction non-linéaire (en bas).
+</p>
 
 
 <ins>Remarque :</ins> Les raisons qui rendent la couche BN efficace ont souvent fait l’objet d’incompréhensions et d’erreurs, jusque dans l’article officiel. Des recherches récentes ont écartées certaines hypothèses erronées, et ont permis une meilleure compréhension de cette technique. Ces aspects sont abordés plus largement dans la partie C.III : “Pourquoi la couche BN est-elle efficace ?” de cet article.
@@ -132,8 +145,12 @@ Si l’on est loin d’avoir compris tous les mécanismes sous-jacents à la cou
 En guise de mise en bouche, regardons rapidement les résultats obtenus dans l’article officiel [1] :
 
 AJOUTER GRAPHIQUE 1
+<p align="center">
+  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/gbn_1.png">
+  <strong>Graphique 1 : Efficacité de la couche BN en entraînement</strong> (source : [1]). Précision sur le jeu de validation ImageNet (2012) en fonction du nombre d’itération d'entraînement, pour des réseaux Inception avec ou sans BN, en augmentant les taux d’apprentissage pour les réseaux BN (1 fois, 5 fois, 30 fois le taux optimal du réseau Inception).
+</p>
 
-Le résultat est sans appel : en ajoutant des couches BN, le **réseau s’entraîne plus vite et plus efficacement**.
+Le résultat est net : en ajoutant des couches BN, le **réseau s’entraîne plus vite et plus efficacement**.
 
 
 Voilà de quoi comprendre le principe des couches BN, leur intérêt, et d’être en mesure de les utiliser en pratique. une compréhension un peu plus approfondie est cependant nécessaire pour ne pas tomber des nues devant le comportement d’un réseau de neurone.
@@ -160,17 +177,31 @@ La première a pour but de montrer l’efficacité de la normalisation par lots 
 Ce résultat peut être reproduit rapidement sans GPU, je vous invite à essayer par vous-même pour vous faire la main.
 
 AJOUTER GRAPHIQUE 2
+<p align="center">
+  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/gbn_2.png">
+  <strong></strong> 
+</p>
+
 
 Bonne nouvelle, la normalisation par lots améliore les performances du réseau.
 
 Pour la deuxième expérience, regardons l’impact de cette méthode sur l’activation des neurones au niveau des couches cachées. Voici les valeurs d’activations obtenues sur la dernière couche cachée, juste avant le passage dans la fonction non-linéaire :
 
 AJOUTER GRAPHIQUE 3
+<p align="center">
+  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/gbn_3.png">
+  <strong></strong> 
+</p>
 
 Sans la normalisation par lot, les valeurs d’activations varient fortement au cours des premières itérations. En revanche, les courbes d’activations ne présentent pas d’à-coups avec l’utilisation de couches BN. 
 
 
 AJOUTER GRAPHIQUE 4
+<p align="center">
+  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/gbn_4.png">
+  <strong></strong> 
+</p>
+
 
 Le signal est d’ailleurs moins bruité, lorsque l’on utilise la normalisation par lots. On constate que l’optimiseur (en anglais optimizer) fait converger les poids beaucoup plus facilement.
 
@@ -181,6 +212,11 @@ L’article officiel explore une troisième expérience. Il s’agit d’évalue
 Ils obtiennent les résultats suivant :
 
 AJOUTER GRAPHIQUE 5
+<p align="center">
+  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/gbn_1.png">
+  <strong>Graphique 1 : Efficacité de la couche BN en entraînement</strong> (source : [1]). Précision sur le jeu de validation ImageNet (2012) en fonction du nombre d’itération d'entraînement, pour des réseaux Inception avec ou sans BN, en augmentant les taux d’apprentissage pour les réseaux BN (1 fois, 5 fois, 30 fois le taux optimal du réseau Inception).
+</p>
+
 
 AJOUTER GRAS ET COULEURS
 
@@ -254,9 +290,13 @@ Si la normalisation par lots marche généralement très bien, il arrive parfois
 
 On a mentionné plus haut comment sont calculés 𝜇pop et σpop, de façon à estimer les paramètres de normalisation des valeurs d’activation au cours de l’évaluation : on fait la moyenne des (𝜇lot, σlot) vus lors des précédentes itérations.
 
-Imaginons que l’on entraîne un réseau à partir d’image de jour, alors que notre jeu de test contient des images de nuit. Le réseau n’aura pas été formé à traiter efficacement ces images, quel qu’en soit la tâche. 
+Imaginons que l’on entraîne un réseau à partir d'images ne contenant que des chaussures de sport. Comment réagirait le réseau s'il rencontre des images contenant des chaussures de villes ?
 
 AJOUTER IMAGES
+<p align="center">
+  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/car_n_shoes2.jpg">
+  Si la distribution d'entrée durant la phase de test est trop différente de celle de la phase d'entraînement, le modèle peut surréagir à certains signaux, entraînant les couches d'activations à diverger.
+</p>
 
 On devine que les valeurs d’activation au niveau des couches cachées risquent de suivre des distributions tout à fait différentes - trop, sans doute. Dans ce cas, la paire (𝜇pop, σpop) estimée au cours de l’entraînement n’est pas représentative de la population réelle que rencontre le réseau en phase de test. Appliquer (𝜇pop, σpop) risque d’éloigner le signal de la loi normale centrée réduite désirée, pouvant mener à une surestimation des valeurs d’activation. 
 
@@ -353,12 +393,22 @@ Supposons que l’on cherche à entraîner un réseau classificateur qui puisse 
 On aurait bien-sûr une image RGB en entrée, un ensemble de couches de neurones convolutifs, suivis de quelques couches entièrement connectées (perceptrons). On souhaite obtenir en sortie une seule valeur flottante comprise entre 0 et 1, décrivant la probabilité que l’image contienne effectivement une voiture.
 
 AJOUTER SCHÉMA 5
+<p align="center">
+  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/sbn_5fr.jpg">
+  <strong>Schéma 5 : Réseau convolutif simple pour réaliser une tâche de classification. </strong>
+</p>
+
 
 Pour entraîner un tel modèle, il nous faudrait un nombre conséquent d’images étiquetées (1 : “Cette image contient une voiture.”, ou 0 : “Cette image ne contient pas de voiture).
 
 Mais imaginons que nous ne disposions que de voiture “classiques” (de ville, ou de sport) pour l'entraînement. Comment le modèle réagirait si nous lui demandions de classifier une image contenant une formule 1 ?
 
-AJOUTER IMAGES : VERIFIER SUR L'ARTICLE : comment ça a été géré ?
+AJOUTER IMAGES
+<p align="center">
+  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/car_n_shoes.jpg">
+  Comme évoqué dans la section (section C.2.4), le décalage de distribution peut détériorer les performances du réseau, voir provoquer une explosion des valeurs d'activation.
+</p>
+
 
 Dans cet exemple, il y a un décalage entre la distribution statistique associées aux images de voitures utilisées pour l’entraînement, et la distribution statistique associées aux images de voitures de test. Plus généralement, il suffit d’une autre orientation, forme, luminosité ou condition climatique que celles vues pendant la phase d’entraînement pour que nos performances se gâtent. On dit alors que notre modèle ne généralise pas efficacement.
 
@@ -366,6 +416,11 @@ Dans cet exemple, il y a un décalage entre la distribution statistique associé
 Si on représentait les caractéristiques extraites par notre modèle dans l’espace de caractéristique, on aurait sans doute quelque chose comme ça :
 
 AJOUTER SCHÉMA 6.a
+<p align="center">
+  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/sbn_6afr.jpg">
+  <strong>Schéma 6.a : Pourquoi faut-il normaliser les valeur d’entrée d’un modèle ? cas non-normalisé.</strong> À l’entraînement, les valeurs d’entrée sont très éparses : la fonction approximée sera précise là où la densité de points est forte. Au contraire, elle sera imprécise là où la densité est faible (pouvant prendre l’une des courbes tracées à titre d’exemple).
+</p>
+
 
 Considérons que le symbole croix corresponde aux caractéristiques associées à une image ne contenant pas une voiture, et que le symbole rond corresponde aux caractéristiques associées à une image contenant une voiture. On peut voir qu’une même fonction séparerait efficacement les deux ensembles. Mais il y a fort à parier que notre modèle déduise du jeu d’entraînement une fonction moins précise pour la partie supérieure du graphique, puisqu’il n’y a pas de valeur d’entraînement qui se situe dans cette zone pour servir de repère à l’optimiseur. Ce dernier approximera la fonction du mieux qu’il pourra, poussant le classificateur à faire beaucoup d’erreurs. 
 
@@ -383,6 +438,10 @@ On dit qu’il y a décalage de covariable [au sens de la distribution] (en angl
 On retrouve ce même problème dans des cas plus simples que celui des réseaux de neurones profonds, comme lors de régressions linéaires. Il est apparu beaucoup plus facile de résoudre des problèmes de régression lorsque le jeu d’entraînement suit une loi normale centrée réduite (moyenne = 0, écart-type = 1) ; c’est pourquoi il est très fréquent de normaliser les valeurs d’entrées d’un modèle.
 
 AJOUTER SCHÉMA 6.b
+<p align="center">
+  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/sbn_6bfr.jpg">
+  <strong>Schéma 6.b : Pourquoi faut-il normaliser les valeur d’entrée d’un modèle ? cas normalisé.</strong> Le signal d’entré normalisé rend les valeurs moins éparses à l’entraînement : il sera plus facile de trouver une fonction généralisante. 
+</p>
 
 Cette solution était déjà connue et mise en pratique avant la publication de l’article qui nous intéresse ici. La couche de BN, elle, considère ce problème au niveau des couches cachées.
 
@@ -391,6 +450,10 @@ BONNE TAILLE DE TITRE ?
 
 
 AJOUTER SCHÉMA 7
+<p align="center">
+  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/sbn_7fr.jpg">
+  <strong>Schéma 7 : Principe du décalage de covariable (ICS)</strong> au sens de la distribution (ICSdistrib).
+</p>
 
 Dans notre exemple du classificateur de voiture, on peut envisager les couches cachées comme des unités qui s’activent lorsqu’elle identifient certaines caractéristiques “conceptuelles” associées à la voiture : par exemple une roue, un pneu, ou une portière. On peut supposer que le même phénomène précédemment décrit a lieu au niveau des couches cachées. Un pneu orienté d’une certaine façon activera un neurone selon une certaine distribution. On souhaite alors qu’un autre pneu, même orienté différemment, puisse activer le même neurone avec une distribution statistique comparable, afin que le réseau puisse en tirer des conclusions sur la probabilité que l’image de départ contienne une voiture.
 
@@ -401,13 +464,17 @@ Néanmoins, il n’est pas souhaitable que tous nos signaux d’activations suiv
 
 
 AJOUTER SCHEMA 8
+<p align="center">
+  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/sbn_8.jpg">
+  <strong>Schéma 8 : Pourquoi il n’est pas souhaitable de contraindre l’activation à une loi normale centrée réduite.</strong> La sigmoïde ne fonctionne ici qu’en régime linéaire.
+</p>
 
 
 Si l’on prend l’exemple donné de l’article original, la sigmoïde, un signal d’entré compris en 0 et 1 limiterait la fonction non-linéaire à son régime … linéaire. 
 
 Pour pallier à ce problème, les auteurs ont alors ajoutés deux paramètres, 𝛽 et 𝛾, pour permettre à l’optimiseur de définir lui même la moyenne (via 𝛽) et l’écart type (via 𝛾) optimal pour une tâche donné.
 
-⚠Nous arrivons au point qui est souvent l’objet de confusion. Pendant quelques années après la sortie de l’article original, on a déduit de l’efficacité de la couche BN l’explication suivante :
+**⚠Nous arrivons au point qui est souvent l’objet de confusion.** Pendant quelques années après la sortie de l’article original, on a déduit de l’efficacité de la couche BN l’explication suivante :
 
 TROUVER UNE MISE EN PAGE 
 Hypothèse 1 : 
@@ -432,6 +499,12 @@ Ce n’est plus tout à fait la même chose. Ici, le passage à la loi normale c
 Considérons l’exemple suivant :
 
 AJOUTER SCHÉMA 9
+<p align="center">
+  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/sbn_9fr.jpg">
+  <strong>Schéma 9 : Principe simplifié d’un réseau de neurone profond,</strong> composé uniquement de transformation linéaires.
+</p>
+
+
 
 Où (a), (b), (c), (d) et (e) sont les couches successives d’un réseau de neurones. Notre cas est très simple, il s’agit d’un réseau constitué d’une succession de transformations linéaires. On cherche à entraîner ce réseau avec la méthode de descente de gradient (Stochastic Gradient Descent, SGD).
 
@@ -463,6 +536,12 @@ Imaginez pour des réseaux très profonds ...
 
 
 AJOUTER SCHÉMA 10
+<p align="center">
+  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/sbn_10fr.jpg">
+  <strong>Schéma 10 : Principe de l’hypothèse n°2.</strong> En normalisant puis ajustant le signal avec 𝛽 et 𝛾, la couche BN simplifie le contrôle du signal au niveau de chaque couche cachée.
+</p>
+
+
 
 Ajouter la couche BN atténue très largement l’interdépendance entre les couches pendant l’apprentissage. La normalisation agit comme une porte que l’optimiseur peut ajuster à partir des seuls paramètres 𝛽 et 𝛾. Il n’est alors plus nécessaire de tenir compte de tous les paramètres du réseau pour avoir des informations statistique sur une couche cachée.
 
@@ -491,6 +570,10 @@ Ils observent ensuite la précision obtenue par chaque modèle, ainsi que l’é
 
 
 AJOUTER GRAPHIQUE 6
+<p align="center">
+  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/gbn_6.png">
+  <strong>Graphique 6 : Impact de la couche BN sur l’ICSdistrib</strong> (source : [2]). Les deux réseaux qui utilisent la couche BN s’entraînent plus vite que le réseau standard ; ajouter explicitement de l’ICSdistrib sur un réseau normalisé ne détériore pas ces propriétés.
+</p>
 
 
 On observe que le 3e réseau a, comme prévu, un très fort ICS. Pourtant, cela ne l’empêche pas d’être entraîné de manière plus rapide et plus stable que le réseau standard. Les performances sont assez similaires au réseau avec des couches BN mais sans ajout explicit d’ICS, suggérant que l’efficacité de la BN n’est pas lié à la diminution de l’ICS, comme le soutient l’hypothèse 1.
@@ -511,6 +594,10 @@ La différence L2 : Les gradients ont-ils une norme proche avant et après la mi
 Le cosinus de l’angle orienté : Les gradients ont-ils une direction similaire avant et après la mise à jour des poids ? Idéalement: cos(grad(k)It , grad(k)It+1) = 1 .
 
 AJOUTER GRAPHIQUE 7
+<p align="center">
+  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/gbn_7.png">
+  <strong>Graphique 7 : Impact de la couche BN sur l’ICSopti</strong> (source : [2]). Les différence de normes et d’angles de gradient suggère qu’elle n’empêche pas le décalage ; le phénomène semble au contraire s’aggraver.
+</p>
 
 Les résultats sont surprenants : Le réseau qui repose sur des couches de normalisation par lots a un décalage de covariable interne similaire, voir supérieur, au réseau standard. Rappelons-le, le réseau qui utilise des couche de BN (courbe bleue) s’entraîne beaucoup plus vite et converge vers une meilleure solution (courbe rouge) !
 
@@ -523,6 +610,10 @@ Intéressons nous directement au problème de l’optimisation : quel est l’im
 Voici la dernière expérience que nous allons aborder dans cet article :
 
 AJOUTER SCHÉMA 11
+<p align="center">
+  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/sbn_11.jpeg">
+  <strong>Schéma 11 : Exploration du paysage d’optimisation</strong> dans la direction du gradient. Expérience menée dans l’article [2].
+</p>
 
 À partir d’un même gradient, on réalise la mise à jour des poids pour différents pas d’optimisation (comparable à une augmentation du taux d’apprentissage !). Intuitivement, on définit une direction à partir d’un certain point de l’hyperplan dans l’espace des paramètres, puis on explore le paysage d’optimisation en suivant cette direction de plus en plus loin. 
 
@@ -532,6 +623,10 @@ Place aux résultats :
 
 
 AJOUTER GRAPHIQUE 8
+<p align="center">
+  <img src="https://github.com/Johann-Huber/Johann-Huber.github.io/blob/master/assets/gbn_8.png">
+  <strong>Graphique 8 : Impact de la couche BN sur le lissage du paysage d’optimisation</strong> (source : [2]). Avec la normalisation par lots, on constate l’atténuation des fortes variations du gradient.
+</p>
 
 On peut voir très distinctement que le paysage d’optimisation est bien plus lisse avec la couche BN que sans. 
 
