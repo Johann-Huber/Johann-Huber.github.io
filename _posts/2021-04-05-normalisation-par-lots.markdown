@@ -347,8 +347,7 @@ AJOUTER CITATION
 
 > “Je n’ai pas vérifié ce qui est suggéré dans l’article original, mais je peux garantir avoir vu dans du code écrit récemment par Christian [Szegedy] que la ReLU est appliquée avant la BN. Mais c’est parfois encore sujet à débat.”
 > 
-> François Chollet
-> [source](https://github.com/keras-team/keras/issues/1802)
+> [François Chollet](https://github.com/keras-team/keras/issues/1802)
 
 
 
@@ -372,22 +371,22 @@ Bien que fondamental, la normalisation par lots est un concept souvent mal compr
 
 Dans l’article officiel, les auteurs introduisent la BN comme suit : 
 
-AJOUTER CITATION
+
 > “Nous appelons Décalage de Covariable Interne (en anglais *Internal Covariate Shift*) la modification au cours de l’entraînement de la distribution statistique des noeuds internes d’un réseau profond. [...] Nous proposons un nouveau mécanisme, que l’on appelle Normalisation par Lots (Batch Normalization), qui résout en partie le problème du décalage de covariable interne, et se faisant accélère significativement l’entraînement des réseaux de neurones profonds.”
-> Sergey Ioffe & Christian Szegedy
-> source : [1] article officiel
+> 
+> Sergey Ioffe & Christian Szegedy [1]
 
 
 Autrement dit, l’efficacité de la couche BN réside dans sa résolution (partielle) du problème de décalage de covariable interne.
 
-AJOUTER LIEN
-Ce point à été remis en question dans des recherches postérieures (liens).
+
+Ce point à été remis en question dans des recherches postérieures [2].
 
 Pour comprendre ce qui a suscité cette confusion, intéressons-nous à ce qu’est le décalage de covariable, et aux effet de la normalisation par lot sur un réseau de neurones profond.
 
 Notation : L’abréviation ICS fait référence au Décalage de Covariable Interne (venant de l’anglais Internal Covariate Shift). 
 
-BONNE TAILLE DE TITRE ?
+
 #### Qu’est-ce que le décalage de covariable (au sens de la distribution) ?
 
 Les auteurs l’ont dit : le décalage de covariable, au sens de la distribution, décrit la modification de distribution statistique au cours de l’entraînement d’un modèle, et, par extension, le décalage de covariable interne décrit ce phénomène à l’intérieur d’un réseau de neurone profond.
@@ -432,8 +431,6 @@ Entraîner efficacement notre réseau nécessiterait beaucoup d’images de voit
 
 Le problème pourrait être résumé ainsi :
 
-AJOUTER CITATION
-
 > Du point de vu du modèle, les images sont trop différentes les unes des autres. Autrement dit, leurs paramètres statistiques sont trop différents. 
 > 
 > On dit qu’il y a décalage de covariable [au sens de la distribution] (en anglais *covariate shift*). 
@@ -449,7 +446,7 @@ On retrouve ce même problème dans des cas plus simples que celui des réseaux 
 
 Cette solution était déjà connue et mise en pratique avant la publication de l’article qui nous intéresse ici. La couche de BN, elle, considère ce problème au niveau des couches cachées.
 
-BONNE TAILLE DE TITRE ?
+
 #### Le décalage de covariable interne, hypothèse défendue par l’article original
 
 
@@ -579,8 +576,6 @@ On observe que le 3e réseau a, comme prévu, un très fort ICS. Pourtant, cela 
 
 N’écartons pas l’ICS trop vite : la définition du décalage de covariable interne (donnée dans l’article original de la couche BN) liée à la distribution est peut-être insatisfaisante. Les auteurs de [2] ont explorés une autre définition de l’ICS, cette fois-ci exprimant les propriété d’optimisation du modèle. En voici une définition :
 
-
-AJOUTER ENCART
 > Considérons une entrée fixe à notre modèle, notée X. 
 > 
 > On définit le décalge de covariable interne d’un point de vu de l’optimisation (noté ICSopti ), la différence entre le gradient calculé au niveau d’une couche k après avoir rétropropagé l’erreur L(X)It, et le gradient calculé au niveau de la même couche k après la mise à jour des poids des couches précédentes L(X)It+1.
@@ -621,7 +616,6 @@ Voici la dernière expérience que nous allons aborder dans cet article :
 Place aux résultats :
 
 
-
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/gbn_8.png">
   <strong>Graphique 8 : Impact de la couche BN sur le lissage du paysage d’optimisation</strong> (source : [2]). Avec la normalisation par lots, on constate l’atténuation des fortes variations du gradient.
@@ -655,27 +649,28 @@ Soulignons cependant que leur principal contribution est la remise en question d
 #### 4) Bilan : Pourquoi la BN est efficace ? Ce que l’on sait aujourd’hui
 
 
-A VERIFIER
-| Hypothèse n°1 :                                                                                                            | Hypothèse n°2 :                                                                                                                                                                                            |                                                                                                      Hypothèse n°3                                                                                                      |   |   |
-|----------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|---|---|
-| La couche BN atténue le décalage de covariable interne (ICS)                                                               | La couche BN facilite la tâche de l’optimiseur en lui permettant d’ajuster la distribution des couches cachées à partir de 2 paramètres seulement                                                          |                                                         La couche BN reparamétrise le problème d’optimisation intrinsèque, le rendant plus stable et plus lisse                                                         |   |   |
-| Faux : [2] a montré qu’en pratique, on ne distingue pas de corrélation entre cet effet et les performances d’entraînement. | Peut-être : Cette hypothèse met l’accent sur l’interdépendance des paramètres du réseau entre eux, rendant difficile l’optimisation des poids vers une solution optimale.  Pas de preuve solide néanmoins. | Encore très incertain : Leurs résultats n’ont pas encore été bousculés. Les preuves semblent encore fragiles (reposant principalement sur quelques expériences, et sur quelques éléments de démonstrations théoriques). |   |   |
-|                                                                                                                            |                                                                                                                                                                                                            |                                                                                                                                                                                                                         |   |   |
+- La couche BN **atténue le décalage de covariable interne** (ICS)
+❌ **Faux** : [2] a montré qu’en pratique, on ne distingue pas de corrélation entre cet effet et les performances d’entraînement.
+
+- La couche BN **facilite la tâche de l’optimiseur** en lui permettant d’**ajuster la distribution des couches cachées** à partir de **2 paramètres seulement**
+❓ **Peut-être** : Cette hypothèse met l’accent sur l’interdépendance des paramètres du réseau entre eux, rendant difficile l’optimisation des poids vers une solution optimale. Pas de preuve solide néanmoins.
 
 
-De nombreuses questions demeurent, donc, et la couche BN est toujours l’objet de recherches à l’heure où j’écris ces lignes. Mais l'évaluation de ces hypothèses nous donnent une meilleur compréhension de la couche de normalisation par lots, nous éloignant des justifications erronées que l’on a eu longtemps à l’esprit. 
+- La couche BN **reparamétrise le problème d’optimisation intrinsèque, le rendant plus stable et plus lisse**
+❓ **Encore très incertain** : Leurs résultats n’ont pas encore été bousculés. Les preuves semblent encore fragiles (reposant principalement sur quelques expériences, et sur quelques éléments de démonstrations théoriques).
+
+De nombreuses questions demeurent, donc, et la couche BN est toujours l’objet de recherches à l’heure où j’écris ces lignes. Mais l'évaluation de ces hypothèses nous donnent une meilleure compréhension de la couche de normalisation par lots, nous éloignant des justifications erronées que l’on a eu longtemps à l’esprit. 
 
 Ces questions ouvertes ne nous empêche cependant pas de profiter de l’efficacité des couches BN dans un réseau !
 
 
 ### VI) En résumé
 
-AJOUTER ENCART
-> La normalization par lot (ou Batch-normalization - notée BN) constitue une des plus grandes avancées liées à l’émergence de l’apprentissage profond. 
+La normalization par lot (ou Batch-normalization - notée BN) constitue une des plus grandes avancées liées à l’émergence de l’apprentissage profond. 
 
 Reposant sur la succession de deux transformations linéaires, cette méthode rend les entraînements de réseaux de neurones profonds (perceptrons multicouches ou réseaux convolutifs) plus rapides et plus stables. L’intérêt majeur de cette technique réside dans le fait qu’elle atténue très largement l’impact de l’interdépendance entre les poids du réseau sur les paramètres statistiques au niveau des couches cachées. 
 
-À l’heure où j’écris cet article, toutes les méthodes de l’état de l’art exploitent massivement cette méthode, que ce soit pour l’extraction de caractéristiques (EfficientNet(lien de l’article)), la détection d’objets (EfficientDet (lien de l’article)), la segmentation (? (lien)), … .
+À l’heure où j’écris cet article, beaucoup des modèles parmi les plus utilisées en réseaux de neurones profond exploitent massivement cette méthode (ex: ResNet[4], EfficientNet [5], ...).
 
 Si vous êtes intéressés par l’apprentissage profond, vous ne pourrez pas y couper !
 
@@ -685,49 +680,43 @@ Si vous êtes intéressés par l’apprentissage profond, vous ne pourrez pas y 
 
 Même si la normalisation par lots a montré son efficacité en pratique depuis des années, ce concept est encore mal compris. Et si certains articles ont bousculé la compréhension largement admise pendant des années par la communauté scientifique, les mécanismes intrinsèques qui régissent ce concept restent très incertains.
 
-En particulier, on se demande :
+Voici une liste non-exhaustive des questions ouvertes à propos de la couche BN :
 - Comment la normalisation par lots d’aide le réseau à généraliser plus efficacement ?
 - La couche BN est-elle la meilleure solution de normalization pour faciliter l’optimisation ?
 - Dans quelle mesure les paramètres 𝛽 et 𝛾 influencent le lissage du paysage d’optimisation ?
 - Les expérimentations montrant l’effet de lissage de la couche BN sur le paysage d’optimisation ont réalisées dans des conditions de court-terme ; on a regardé l’évolution du gradient et de la fonction de coût à partir d’une seule itération, testant différentes longueurs de pas. Au delà de l’impact direct que ces expériences mettent en lumière, qu’en est-il sur le long terme ? L’interdépendances des poids provoque-t-elle d’autres effets remarquables sur le paysage d’optimisation ?
 
-Cette liste n’est bien entendu pas exhaustive, et beaucoup de mystères demeurent autour de la Normalisation par lots. À suivre, donc … ;)
 
+#### Remerciements
 
-#### Sources et références
+Merci à Lou Hacquet-Delepine pour les schémas fait-mains, et pour son aide précieuse de relecture !
 
-
-<ins>Articles :</ins>
+#### Références
 
 [1] [“Normalisation par Lots : Accélération de l’entraînement des réseaux de neurones profonds par la réduction du décalage de covariable interne”, l’article original](https://arxiv.org/abs/1502.03167) 
 
 [2] [“Comment la normalisation par lots aide l’optimisation.” ](https://arxiv.org/pdf/1805.11604.pdf)
 
 
-Réseau [Inception](https://arxiv.org/abs/1409.4842) 
+[3] [Szegedy, C., Liu, W., Jia, Y., Sermanet, P., Reed, S., Anguelov, D., … & Rabinovich, A. (2015). Going deeper with convolutions, Proceedings of the IEEE conference on computer vision and pattern recognition](https://arxiv.org/abs/1409.4842) 
 
-Réseau [VGG](https://arxiv.org/abs/1409.1556)
+[4] [He, K., Zhang, X., Ren, S., & Sun, J. (2016). Deep residual learning for image recognition. In Proceedings of the IEEE conference on computer vision and pattern recognition](https://arxiv.org/abs/1512.03385)
 
+[5] [Tan, M., & Le, Q. V. (2019). Efficientnet: Rethinking model scaling for convolutional neural networks, arXiv preprint arXiv:1905.11946.](https://arxiv.org/abs/1905.11946)
 
-<ins>Liens :</ins>
+[6] [Goodfellow, I., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, S., Courville, A. Bengio, Y. (2014), Generative adversarial nets, Advances in neural information processing systems](https://proceedings.neurips.cc/paper/2014/hash/5ca3e9b122f61f8f06494c97b1afccf3-Abstract.html)
+
+#### Pour aller plus loin
 
 Brillante [présentation de Ian Goodfellow](https://www.youtube.com/watch?v=Xogn6veSyxA) (malgré la qualité sonore), dont le début traite de la normalisation par lot.
-
 
 [Présentation de l’article “Comment la normalisation par lots aide l’optimisation ?”](https://www.microsoft.com/en-us/research/video/how-does-batch-normalization-help-optimization/) par l’un des auteurs, lors d'une intervention chez Microsoft ; l’audience est incisive sur les questions, et les débats déclenchés sont passionnants.
 
 
+Positionnement de la [BN avant ou après l’activation sur stackoverflow](https://stackoverflow.com/questions/39691902/ordering-of-batch-normalization-and-dropout)
 
-À propos de la [moyenne mobile](https://fr.wikipedia.org/wiki/Moyenne_mobile)
+Positionnement de la [BN avant ou après l’activation sur reddit](https://www.reddit.com/r/MachineLearning/comments/67gonq/d_batch_normalization_before_or_after_relu/dgqaksn/)
 
-
-Expérimentation - [BN après l’activation donne de meilleurs résultats qu’avant](https://github.com/ducha-aiki/caffenet-benchmark/blob/master/batchnorm.md#bn----before-or-after-relu)
-
-
-Positionnement de la [BN avant ou après l’activation](https://stackoverflow.com/questions/39691902/ordering-of-batch-normalization-and-dropout)
-
-
-Citation de F. Chollet [à propos de la place de la BN](https://github.com/keras-team/keras/issues/1802)
 
 
 
