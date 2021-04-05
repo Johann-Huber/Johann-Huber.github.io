@@ -41,16 +41,17 @@ Cette méthode consiste à normaliser les vecteurs d’activation des couches ca
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_1a_fr.jpg">
-  Schéma 1.a Perceptron multicouche **sans normalisation par lots (BN)**
+  Schéma 1.a Perceptron multicouche <strong>sans normalisation par lots (BN)</strong>
 </p>
 
 	
-![sbn_1b_fr](https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_1b_fr.jpg)
-<p align="center"><h5>Schéma 1.b Perceptron multicouche **avec normalisation par lots (BN)**</h5></p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_1b_fr.jpg">
+  Schéma 1.b Perceptron multicouche <strong>avec normalisation par lots (BN)</strong>
+</p>
+
 
 Toutes les infrastructures de développements (ou frameworks) populaires proposent des implémentations de cette méthode sous la forme de couche computationnelle, que l’on peut facilement insérer dans un réseau de neurones.
-
-
 
 
 
