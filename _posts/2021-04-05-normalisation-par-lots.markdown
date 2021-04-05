@@ -40,7 +40,9 @@ Cette méthode consiste à normaliser les vecteurs d’activation des couches ca
 
 
 ![sbn_1a_fr](https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_1a_fr.jpg)
-<p align="center"><h5>Schéma 1.a Perceptron multicouche **sans normalisation par lots (BN)**</h5></p>
+<p align="center">
+  <h5>Schéma 1.a Perceptron multicouche **sans normalisation par lots (BN)**</h5>
+</p>
  	
 ![sbn_1b_fr](https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_1b_fr.jpg)
 <p align="center"><h5>Schéma 1.b Perceptron multicouche **avec normalisation par lots (BN)**</h5></p>
