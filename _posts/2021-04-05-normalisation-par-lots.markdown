@@ -18,30 +18,29 @@ Objectifs de cet article :
 - Faire le point sur le niveau de compréhension actuel que l’on a de ce concept.
 
 
-
-```
 **Sommaire :**
+```
 A) En 30 secondes
 B) En 3 minutes
-	- 1. Principe
-		- 1.1. Phase d’entraînement
-		- 1.2. Phase d’évaluation
-	- 2. En pratique
-	- 3. Un coup d’oeil aux résultats
+  - 1. Principe
+    - 1.1. Phase d’entraînement
+    - 1.2. Phase d’évaluation
+  - 2. En pratique
+  - 3. Un coup d’oeil aux résultats
 C) Comprendre la normalisation par lots (BN)
-	- 1. Implémentation
-	- 2. La couche BN en pratique
-		- 2.1. Résultats de l’article original
-		- 2.2. Régularisation, effet de bord de la normalisation par lots
-		- 2.3. Paramètres statistiques lors de la phase d’évaluation
-		- 2.4. Stabilité de la couche BN
-		- 2.5. Réseaux récurrents, normalisation par couches
-		- 2.6. Avant ou après la fonction non-linéaire ?
-	- 3. Pourquoi la couche BN est-elle efficace ?
-		- 3.1. Première hypothèse - confusion autour du décalage de covariable interne (ICS)
-		- 3.2. Deuxième hypothèse - limiter l’interdépendance de distribution
-		- 3.3. Troisième hypothèse - lissage du paysage d’optimisation
-	- 4. Bilan : pourquoi la BN est-elle efficace ? Ce que l’on sait aujourd’hui
+  - 1. Implémentation
+  - 2. La couche BN en pratique
+    - 2.1. Résultats de l’article original
+    - 2.2. Régularisation, effet de bord de la normalisation par lots
+    - 2.3. Paramètres statistiques lors de la phase d’évaluation
+    - 2.4. Stabilité de la couche BN
+    - 2.5. Réseaux récurrents, normalisation par couches
+    - 2.6. Avant ou après la fonction non-linéaire ?
+  - 3. Pourquoi la couche BN est-elle efficace ?
+    - 3.1. Première hypothèse - confusion autour du décalage de covariable interne (ICS)
+    - 3.2. Deuxième hypothèse - limiter l’interdépendance de distribution
+    - 3.3. Troisième hypothèse - lissage du paysage d’optimisation
+  - 4. Bilan : pourquoi la BN est-elle efficace ? Ce que l’on sait aujourd’hui
 En résumé
 Les questions en suspent
 Remerciements
