@@ -1,6 +1,6 @@
-title: Titre
+title: J-Huber
 description: Desc
-#author: "Johann Huber"
+author: "Johann Huber"
 
 
 theme: minima
@@ -13,7 +13,7 @@ github_username: Johann-Huber
 show_excerpts: true
 
 minima:
-  date_format: "%Y-%m-%d"
+  date_format: "%d-%m-%Y"
 
 # Minima: custom header links
 #header_pages:
