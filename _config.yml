@@ -24,6 +24,8 @@ title: Johann Huber
 #  Write an awesome description for your new site here. You can edit this
 #  line in _config.yml. It will appear in your document head meta (for
 #  Google search results) and in your feed.xml site description.
+
+author: "Johann Huber"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 #twitter_username: jekyllrb
@@ -33,6 +35,14 @@ github_username:  Johann-Huber
 theme: minima
 plugins:
   - jekyll-feed
+
+
+# Minima: show excerpts in the frontpage
+show_excerpts: true
+
+minima:
+  date_format: "%d-%m-%Y"
+
 
 # Exclude from processing.
 # The following items will not be processed, by default.
