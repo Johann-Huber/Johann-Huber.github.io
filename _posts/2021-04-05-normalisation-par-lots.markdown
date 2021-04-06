@@ -37,9 +37,9 @@ C) Comprendre la normalisation par lots (BN)
     - 2.5. Réseaux récurrents, normalisation par couches
     - 2.6. Avant ou après la fonction non-linéaire ?
   - 3. Pourquoi la couche BN est-elle efficace ?
-    - 3.1. Première hypothèse - confusion autour du décalage de covariable interne (ICS)
-    - 3.2. Deuxième hypothèse - limiter l’interdépendance de distribution
-    - 3.3. Troisième hypothèse - lissage du paysage d’optimisation
+    - 3.1. 1ère hypothèse - confusion autour du décalage de covariable interne (ICS)
+    - 3.2. 2e hypothèse - limiter l’interdépendance de distribution
+    - 3.3. 3e hypothèse - lissage du paysage d’optimisation
   - 4. Bilan : pourquoi la BN est-elle efficace ? Ce que l’on sait aujourd’hui
 En résumé
 Les questions en suspent
