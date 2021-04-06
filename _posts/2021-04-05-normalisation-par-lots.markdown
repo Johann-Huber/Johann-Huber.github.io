@@ -245,7 +245,6 @@ Ce dernier point est davantage intéressant pour ce qu’il représente, que pou
 
 Pour montrer la valeur de ce résultats, je me permets de paraphraser/reformuler les propos de Yann Goodfellow, référence dans le monde de l’apprentissage profond (inventeur des réseaux GANs [6], et auteur de l’ouvrage de référence “Deep learning handbook”) : 
 
-INSERER CITATION FORME
 > Avant la BN, les chercheurs pensaient qu’il était presqu’impossible d’entraîner efficacement des modèles qui ne reposent que sur des sigmoïdes au niveau des couches cachées. Plusieurs approches ont été envisagées pour résoudre les problèmes d’instabilité à l’entraînement, cherchant des méthodes plus optimales d’initialisation des poids ; les embryons de solutions reposaient sur des découvertes heuristiques, fragiles, et peu satisfaisantes. L’arrivée de la BN a rendu exploitables des réseaux que l’on n’arrivaient pas à entraîner efficacement ; Cet exemple en est une preuve. 
 > 
 > [Yann Goodfellow](https://www.youtube.com/watch?v=Xogn6veSyxA)
@@ -327,8 +326,7 @@ Dans leur article, ils déclarent :
 
 > “Notre voudrions être certains que le réseau produise toujours une activation avec une distribution statistique désirée.”
 > 
-> Sergey Ioffe & Christian Szegedy
-> source : [1]
+> Sergey Ioffe & Christian Szegedy [1]
 
 
 En revanche, des expérimentations ont montré que la couche BN positionnée après la fonction non-linéaire donne de meilleurs résultats.
@@ -464,7 +462,7 @@ Si l’on prend l’exemple donné de l’article original, la sigmoïde, un sig
 
 Pour pallier à ce problème, les auteurs ont alors ajouté deux paramètres, 𝛽 et 𝛾, pour permettre à l’optimiseur de définir lui même la moyenne (via 𝛽) et l’écart type (via 𝛾) optimal pour une tâche donné.
 
-**⚠Nous arrivons au point qui est souvent l’objet de confusion.** Pendant quelques années après la sortie de l’article original, on a déduit de l’efficacité de la couche BN l’explication suivante :
+**⚠ Nous arrivons au point qui est souvent l’objet de confusion.** Pendant quelques années après la sortie de l’article original, on a déduit de l’efficacité de la couche BN l’explication suivante :
 
 
 **Hypothèse 1 :**
@@ -484,7 +482,7 @@ Ce n’est plus tout à fait la même chose. Ici, le passage à la loi normale c
 
 #### 2) Deuxième hypothèse : limiter l’interdépendance de distributions 
 
-*Note de rédaction : Ne disposant pas de preuves irréfutables, je me permets de m’appuyer très largement sur les explications de Yann Goodfellow à ce sujet (qu’il exprime dans cet brillante vidéo (https://www.youtube.com/watch?v=Xogn6veSyxA)), et sur quelques discussions en ligne citées en références.*
+*Note de rédaction : Ne disposant pas de preuves irréfutables, je me permets de m’appuyer très largement sur les explications de [Yann Goodfellow à ce sujet](https://www.youtube.com/watch?v=Xogn6veSyxA), et sur quelques discussions en ligne citées en références.*
 
 Considérons l’exemple suivant :
 
@@ -520,7 +518,6 @@ Ajouter la couche BN atténue très largement l’interdépendance entre les cou
 
 <ins>Remarque :</ins> L’optimiseur peut alors se permettre de faire de bien plus grosses modifications de poids sur chacune des couches, sans que cela n’altère le travail réalisé sur les couches successives. Il est donc beaucoup plus facile de déterminer des hyperparamètres qui convergeront vers une solution optimale.
 
-AJOUTER ENCARTS
 > Cet exemple met de côté l’hypothèse dans laquelle la BN servirait à faire tendre les valeurs d’activations des couches cachées vers une loi normale centrée réduite. 
 > 
 > Ici, il s’agit de **faciliter le travail de l’optimiseur** en lui permettant d’**ajuster les distributions statistiques internes** en jouant sur seulement **deux paramètres à la fois**.
