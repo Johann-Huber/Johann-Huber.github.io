@@ -20,10 +20,41 @@ Objectifs de cet article :
 
 
 
+**Sommaire :**
+
+A) En 30 secondes
+B) En 3 minutes
+	- 1. Principe
+		- 1.1. Phase d’entraînement
+		- 1.2. Phase d’évaluation
+	- 2. En pratique
+	- 3. Un coup d’oeil aux résultats
+C) Comprendre la normalisation par lots (BN)
+	- 1. Implémentation
+	- 2. La couche BN en pratique
+		- 2.1. Résultats de l’article original
+		- 2.2. Régularisation, effet de bord de la normalisation par lots
+		- 2.3. Paramètres statistiques lors de la phase d’évaluation
+		- 2.4. Stabilité de la couche BN
+		- 2.5. Réseaux récurrents, normalisation par couches
+		- 2.6. Avant ou après la fonction non-linéaire ?
+	- 3. Pourquoi la couche BN est-elle efficace ?
+		- 3.1. Première hypothèse - confusion autour du décalage de covariable interne (ICS)
+		- 3.2. Deuxième hypothèse - limiter l’interdépendance de distribution
+		- 3.3. Troisième hypothèse - lissage du paysage d’optimisation
+	- 4. Bilan : pourquoi la BN est-elle efficace ? Ce que l’on sait aujourd’hui
+En résumé
+Les questions en suspent
+Remerciements
+Références
+Pour aller plus loin
+
+
 
 | Nom français          | Nom anglais         | Abréviation courante |
 |-----------------------|---------------------|----------------------|
 | Normalization par lot | Batch Normalization | BN                   |
+
 
 
 
@@ -64,14 +95,13 @@ Toutes les infrastructures de développements (ou frameworks) populaires propose
 
 -----------
 
-
 ## B) En 3 minutes
 
-### 1) Principe
+### 1. Principe
 
 La normalisation par lot s’articule différemment pendant la phase d’entraînement et la phase d’évaluation.
 
-#### a) Phase d’entraînement
+#### 1.1. Phase d’entraînement
 
 Pour chaque couche cachée, on calcule la normalisation par lot de la façon suivante :
 
@@ -105,7 +135,7 @@ Finalement, on calcule les valeurs de **sortie de la couche de normalisation par
 
 À chaque itération, le réseau calcule la moyenne 𝜇 et l’écart-type σ correspondant au lot en cours. Les paramètres 𝛾 et 𝛽 sont ajustés via la rétropropagation des gradients, en appliquant une [moyenne mobile](https://fr.wikipedia.org/wiki/Moyenne_mobile). De cette façon, l’ajustement des paramètres 𝛾 et 𝛽 tiennent davantage compte des dernières itérations que des premières. 
 
-#### b) Phase d’évaluation
+#### 1.2. Phase d’évaluation
 
 Contrairement à la phase d’entraînement, **on ne dispose pas forcément d’un lot complet à inférer lors de l’évaluation.**
 
@@ -118,7 +148,7 @@ Ces valeurs sont déterminées à partir des (𝜇lot , σlot) rencontrés penda
 <ins>Remarque :</ins> Cet aspect est plus largement décrit dans la partie C.II.3 : Paramètres statistiques lors de la phase d’évaluation”.
 
 
-### 2) Principe
+### 2. Principe
 
 En pratique, on considère la normalisation par lots comme une couche à part entière, au même titre qu’un perceptron, qu’une couche de convolution, qu’une fonction d’activation ou qu’un dropout.
 
@@ -137,7 +167,7 @@ Toutes donnent la possibilités de modifier les paramètres que cette méthode f
 - Le nombre de filtres de la couche cachée, dans le cas d’un réseau convolutif.
 
 
-### 3) Un coup d’oeil aux résultats
+### 3. Un coup d’oeil aux résultats
 
 Si l’on est loin d’avoir compris tous les mécanismes sous-jacents à la couche BN (voir C.III), il y a un point sur lequel tout le monde s’accorde : ça marche.
 
@@ -161,15 +191,16 @@ Voilà de quoi comprendre le principe des couches BN, leur intérêt, et d’êt
 
 ## C) Comprendre la Normalisation par lots (BN)
 
-### I) Implémentation
+### 1. Implémentation
 
 J’ai ré-implémenté cette méthode sous Pytorch, de manière à retrouver les résultats de l’article officiel. Vous pourrez le trouver dans [ce repo git](https://github.com/Johann-Huber/batchnorm_pytorch/blob/main/batch_normalization_in_pytorch.ipynb).
 
 Je vous invite à parcourir les diverses implémentations de la couche BN disponible en ligne (presque toujours en anglais), à commencer par celle de l'infrastructure avec laquelle vous travaillez.
 
-### II) La couche BN en pratique
 
-#### 1) Résultats de l’article original
+### 2. La couche BN en pratique
+
+#### 2.1. Résultats de l’article original
 
 J’ai décidé de commencer par présenter les résultats obtenus avec la couche de normalisation par lots car **c’est le point sur lequel tout s’accorde** la concernant : **Elle est efficace en pratique.**
 
@@ -251,12 +282,12 @@ Pour montrer la valeur de ce résultats, je me permets de paraphraser/reformuler
 
 Ces résultats donnent un aperçu de l’efficacité remarquable de la normalisation par lots. Mais cette technique implique quelques effets qu’il est important d’avoir à l’esprit pour l’exploiter pleinement.
 
-
-#### 2) Régularisation, effet de bord de la normalisation par lots
+	
+#### 2.2. Régularisation, effet de bord de la normalisation par lots
 
 La normalisation par lots repose sur les valeurs de moyenne et de variance de chaque lot (ou *batch*). Les valeurs d’activations de chaque couche cachée dépendent donc du lot actuellement traité par le réseau. Cette transformation ajoute donc du bruit lié aux distributions des exemples du lot au niveau de chaque couche cachée.
 
-Ajouter un peu de bruit dans un réseau pour éviter le sur-apprentissage … cela ressemble à un processus de régularisation, non ? ;)
+Ajouter un peu de bruit dans un réseau pour éviter le sur-apprentissage … cela ressemble à un processus de régularisation, non ?
 
 En pratique, on ne compte pas sur la normalisation par lot pour éviter le sur-apprentissage d’un réseau, pour des raisons d’[orthogonalités](https://en.wikipedia.org/wiki/Orthogonality_(programming)). Pour faire simple, on s’assure que chacun des modules de notre réseau remplissent un rôle précis, au lieu de compter sur plusieurs modules pour gérer différents problèmes en même temps (ce qui est le meilleur moyen de ne pas aboutir à un solution optimale).
 
@@ -265,7 +296,7 @@ Néanmoins, il est intéressant d’avoir conscience de ce phénomène, puisqu�
 <ins>Remarque :</ins> Plus le lot est grand, moins l’effet de régularisation sera important (minimisation de l’impact du bruit).
 
 
-#### 3) Paramètres statistiques lors de la phase d’évaluation
+#### 2.3. Paramètres statistiques lors de la phase d’évaluation
 
 Le modèle est appelé en phase d’évaluation dans deux contextes :
 Dans le cadre d’un processus de validation / de test, réalisée au cours du développement et de l’entraînement du modèle ;
@@ -281,7 +312,8 @@ L’astuce consiste à définir 𝜇pop et σpop, qui sont respectivement l’es
 
 Cependant, cette astuce peut être à l’origine d’instabilité lors de la phase d’évaluation ; voyons cela dans la partie suivante.
 
-#### 4) Stabilité de la couche BN
+
+#### 2.4. Stabilité de la couche BN
 
 Si la normalisation par lots marche généralement très bien, il arrive parfois que les choses se compliquent: l'implémentation de cette couche peut entraîner une divergence des valeurs d'activations du réseau durant la phase d’évaluation.
 
@@ -306,7 +338,7 @@ Dans ce genre de contexte où les jeux de données d’entraînement sont limit�
 
 Ajouter systématiquement des BN dans notre réseau - en pensant que cela n’aura que des effets positifs - n’est certainement pas la meilleure stratégie !
 
-#### 5) Réseaux récurrents, et normalisation par couches
+#### 2.5. Réseaux récurrents, et normalisation par couches
 
 En pratique, il est largement admis le principe suivant :
 Pour les réseaux convolutifs (CNN) : utiliser de préférence la Normalisation par Lots (Batch Normalization, notée BN)
@@ -318,7 +350,7 @@ Si la BN normalise à l’échelle des exemples de chaque lot, la LN normalise �
 Je ne m’attarderai pas davantage sur ce point, ce n’est pas précisément l’objet de cet article.
 
 
-#### 6) Avant ou après la fonction non-linéaire ?
+#### 2.6. Avant ou après la fonction non-linéaire ?
 
 Historiquement, la couche BN est positionnée juste avant la fonction non-linéaire. Ceci étant cohérent avec les objectifs et les hypothèses des auteurs à l’époque. 
 
@@ -353,9 +385,10 @@ Remarquez que l’article [2] - qui remet en question les intuitions défendues 
 -----------
 
 
-### III) Pourquoi la couche BN est-elle efficace ?
 
-#### 1) Première hypothèse - Confusion autour du décalage de covariable interne
+### 3. Pourquoi la couche BN est-elle efficace ?
+
+#### 3.1. Première hypothèse - Confusion autour du décalage de covariable interne
 
 Bien que fondamental, la normalisation par lots est un concept souvent mal compris. Cela tient plus d’une erreur longtemps propagée, que de la complexité de la notion.
 
@@ -416,7 +449,7 @@ Si on représentait les caractéristiques extraites par notre modèle dans l’e
 
 Considérons que le symbole croix corresponde aux caractéristiques associées à une image ne contenant pas une voiture, et que le symbole rond corresponde aux caractéristiques associées à une image contenant une voiture. On peut voir qu’une même fonction séparerait efficacement les deux ensembles. Mais il y a fort à parier que notre modèle déduise du jeu d’entraînement une fonction moins précise pour la partie supérieure du graphique, puisqu’il n’y a pas de valeur d’entraînement qui se situe dans cette zone pour servir de repère à l’optimiseur. Ce dernier approximera la fonction du mieux qu’il pourra, poussant le classificateur à faire beaucoup d’erreurs. 
 
-Entraîner efficacement notre réseau nécessiterait beaucoup d’images de voitures, de sorte que notre jeu d’entraînement contiennent à peu prêt toutes les variations de positions et de contexte imaginable. Même si dans les faits, c’est de cette façon que l’on entraîne de bons réseaux de neurones aujourd’hui, on aimerait bien que nos modèles puisse généraliser à partir du plus petit nombre d’exemple possible.
+Entraîner efficacement notre réseau nécessiterait beaucoup d’images de voitures, de sorte que notre jeu d’entraînement contiennent à peu prêt toutes les variations de positions et de contexte imaginables. Même si dans les faits, c’est de cette façon que l’on entraîne de bons réseaux de neurones aujourd’hui, on aimerait bien que nos modèles puisse généraliser à partir du plus petit nombre d’exemple possible.
 
 Le problème pourrait être résumé ainsi :
 
@@ -480,7 +513,7 @@ Ce n’est plus tout à fait la même chose. Ici, le passage à la loi normale c
 
 
 
-#### 2) Deuxième hypothèse : limiter l’interdépendance de distributions 
+#### 3.2. Deuxième hypothèse : limiter l’interdépendance de distributions 
 
 *Note de rédaction : Ne disposant pas de preuves irréfutables, je me permets de m’appuyer très largement sur les explications de [Yann Goodfellow à ce sujet](https://www.youtube.com/watch?v=Xogn6veSyxA), et sur quelques discussions en ligne citées en références.*
 
@@ -527,7 +560,7 @@ Il s’agit néanmoins d’intuitions autour du fonctionnement de la normalisati
 Un article paru en 2019 par une équipe du MIT a apporté une contribution intéressante à la compréhension de l’efficacité de la couche BN. Les auteurs remettent très fortement en question le lien entre l’efficacité de la couche BN et la réduction du décalage de covariable interne, au sens de la distribution (première hypothèse) !
 
 
-#### 3) Troisième hypothèse - lissage du paysage d’optimisation :
+#### 3.3. Troisième hypothèse - lissage du paysage d’optimisation :
 
 *Note de rédaction : Dans cette partie, je m’efforce de synthétiser l’article [2], pour présenter leurs principales conclusions quant aux propriétés de la couche BN. Cet article est dense, je vous invite à vous y pencher avec plus d’attention si ces concepts vous intéressent.*
 
@@ -617,7 +650,7 @@ Une hypothèse à ce sujet est brièvement évoqué en fin d’article, soutenan
 Soulignons cependant que leur principal contribution est la remise en question de la vision communément admise depuis la sortie de l’article officiel - ce qui est, déjà, significatif.
 
 
-#### 4) Bilan : Pourquoi la BN est efficace ? Ce que l’on sait aujourd’hui
+#### 4. Bilan : Pourquoi la BN est efficace ? Ce que l’on sait aujourd’hui
 
 
 - La couche BN **atténue le décalage de covariable interne** (ICS)
@@ -633,7 +666,7 @@ De nombreuses questions demeurent, donc, et la couche BN est toujours l’objet 
 Ces questions ouvertes ne nous empêche cependant pas de profiter de l’efficacité des couches BN dans un réseau !
 
 
-### VI) En résumé
+### En résumé
 
 **La normalization par lots** (ou *Batch-normalization* - notée BN) constitue **une des plus grandes avancées** liées à l’émergence de **l’apprentissage profond**. 
 
@@ -642,7 +675,7 @@ Reposant sur la succession de deux transformations linéaires, cette méthode re
 À l’heure où j’écris cet article, beaucoup des modèles parmi les plus utilisées en réseaux de neurones profond exploitent massivement cette méthode (ex: ResNet[4], EfficientNet [5], ...).
 
 
-### VII) Les questions en suspent
+### Les questions en suspent
 
 Même si la normalisation par lots a montré son efficacité en pratique depuis des années, ce concept est encore mal compris. Et si certains articles ont bousculé la compréhension largement admise pendant des années par la communauté scientifique, les mécanismes intrinsèques qui régissent ce concept restent très incertains.
 
@@ -683,42 +716,3 @@ Positionnement de la [BN avant ou après l’activation sur stackoverflow](https
 Positionnement de la [BN avant ou après l’activation sur reddit](https://www.reddit.com/r/MachineLearning/comments/67gonq/d_batch_normalization_before_or_after_relu/dgqaksn/)
 
 
-
-
------------
-
-
-
-###
-
-### head3
-#### head4
-##### head5
-###### head6
-
-
-
-
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
-
-Jekyll requires blog post files to be named according to the following format:
-
-`YEAR-MONTH-DAY-title.MARKUP`
-
-Where `YEAR` is a four-digit number, `MONTH` and `DAY` are both two-digit numbers, and `MARKUP` is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.
-
-Jekyll also offers powerful support for code snippets:
-
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
-
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
-
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
