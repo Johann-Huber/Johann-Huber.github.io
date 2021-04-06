@@ -19,9 +19,8 @@ Objectifs de cet article :
 
 
 
-
+```
 **Sommaire :**
-
 A) En 30 secondes
 B) En 3 minutes
 	- 1. Principe
@@ -48,7 +47,7 @@ Les questions en suspent
 Remerciements
 Références
 Pour aller plus loin
-
+```
 
 
 | Nom français          | Nom anglais         | Abréviation courante |
