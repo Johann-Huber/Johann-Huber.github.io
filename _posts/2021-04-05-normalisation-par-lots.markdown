@@ -22,25 +22,25 @@ Objectifs de cet article :
 ```
 A) En 30 secondes
 B) En 3 minutes
-  - 1. Principe
-    - 1.1. Phase d’entraînement
-    - 1.2. Phase d’évaluation
-  - 2. En pratique
-  - 3. Un coup d’oeil aux résultats
+  1. Principe
+    1.1. Phase d’entraînement
+    1.2. Phase d’évaluation
+  2. En pratique
+  3. Un coup d’oeil aux résultats
 C) Comprendre la normalisation par lots (BN)
-  - 1. Implémentation
-  - 2. La couche BN en pratique
-    - 2.1. Résultats de l’article original
-    - 2.2. Régularisation, effet de bord de la normalisation par lots
-    - 2.3. Paramètres statistiques lors de la phase d’évaluation
-    - 2.4. Stabilité de la couche BN
-    - 2.5. Réseaux récurrents, normalisation par couches
-    - 2.6. Avant ou après la fonction non-linéaire ?
-  - 3. Pourquoi la couche BN est-elle efficace ?
-    - 3.1. 1ère hypothèse - confusion autour du décalage de covariable interne (ICS)
-    - 3.2. 2e hypothèse - limiter l’interdépendance de distribution
-    - 3.3. 3e hypothèse - lissage du paysage d’optimisation
-  - 4. Bilan : pourquoi la BN est-elle efficace ? Ce que l’on sait aujourd’hui
+  1. Implémentation
+  2. La couche BN en pratique
+    2.1. Résultats de l’article original
+    2.2. Régularisation, effet de bord de la normalisation par lots
+    2.3. Paramètres statistiques lors de la phase d’évaluation
+    2.4. Stabilité de la couche BN
+    2.5. Réseaux récurrents, normalisation par couches
+    2.6. Avant ou après la fonction non-linéaire ?
+  3. Pourquoi la couche BN est-elle efficace ?
+    3.1. 1ère hypothèse - confusion autour du décalage de covariable interne (ICS)
+    3.2. 2e hypothèse - limiter l’interdépendance de distribution
+    3.3. 3e hypothèse - lissage du paysage d’optimisation
+  4. Bilan : pourquoi la BN est-elle efficace ? Ce que l’on sait aujourd’hui
 En résumé
 Les questions en suspent
 Remerciements
@@ -58,7 +58,7 @@ Pour aller plus loin
 
 -----------
 
-
+<br/>
 
 ## A) En 30 secondes
 
@@ -86,9 +86,9 @@ Toutes les infrastructures de développements (ou frameworks) populaires propose
 
 
 
-<ins>Article de référence :</ins> [“Batch-normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift”](url=https://arxiv.org/abs/1502.03167) (trad. “Normalisation par Lots : Accélération de l’entraînement des réseaux de neurones profonds par la réduction du décalage de covariable interne”).
+<ins>Article de référence :</ins> [“Batch-normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift”](url=https://arxiv.org/abs/1502.03167) [1] (trad. “Normalisation par Lots : Accélération de l’entraînement des réseaux de neurones profonds par la réduction du décalage de covariable interne”).
 
-<ins>Article (contribution significative dans la compréhension du concept) :</ins> [“How does batch normalization help optimization”](url=https://arxiv.org/pdf/1805.11604.pdf) (trad. “Comment la normalisation par lots facilite l’optimisation.”).
+<ins>Article (contribution significative dans la compréhension du concept) :</ins> [“How does batch normalization help optimization”](url=https://arxiv.org/pdf/1805.11604.pdf) [2] (trad. “Comment la normalisation par lots facilite l’optimisation.”).
 
 
 -----------
@@ -128,7 +128,7 @@ Finalement, on calcule les valeurs de **sortie de la couche de normalisation par
   <strong>Schéma 3: Intérêt des paramètres 𝛾 et 𝛽.</strong> Les modifications sur la distribution (en haut) permettent d’exploiter différentes parties de la fonction non-linéaire (en bas).
 </p>
 
-<ins>Remarque :</ins> Les raisons qui rendent la couche BN efficace ont souvent fait l’objet d’incompréhensions et d’erreurs, jusque dans l’article officiel. Des recherches récentes ont écartées certaines hypothèses erronées, et ont permis une meilleure compréhension de cette technique. Ces aspects sont abordés plus largement dans la partie C.III : “Pourquoi la couche BN est-elle efficace ?” de cet article.
+<ins>Remarque :</ins> Les raisons qui rendent la couche BN efficace ont souvent fait l’objet d’incompréhensions et d’erreurs, jusque dans l’article officiel. Des recherches récentes ont écartées certaines hypothèses erronées, et ont permis une meilleure compréhension de cette technique. Ces aspects sont abordés plus largement dans la partie C.3 : “Pourquoi la couche BN est-elle efficace ?” de cet article.
 
 
 À chaque itération, le réseau calcule la moyenne 𝜇 et l’écart-type σ correspondant au lot en cours. Les paramètres 𝛾 et 𝛽 sont ajustés via la rétropropagation des gradients, en appliquant une [moyenne mobile](https://fr.wikipedia.org/wiki/Moyenne_mobile). De cette façon, l’ajustement des paramètres 𝛾 et 𝛽 tiennent davantage compte des dernières itérations que des premières. 
@@ -143,7 +143,7 @@ Pour s’affranchir de ce problème, on détermine (𝜇pop , σpop), tel que :
 
 Ces valeurs sont déterminées à partir des (𝜇lot , σlot) rencontrés pendant l'entraînement, et appliquée systématiquement dans l’équation (3), au lieu d’avoir recours aux équations (1) et (2).
 
-<ins>Remarque :</ins> Cet aspect est plus largement décrit dans la partie C.II.3 : Paramètres statistiques lors de la phase d’évaluation”.
+<ins>Remarque :</ins> Cet aspect est plus largement décrit dans la partie C.2.3 : Paramètres statistiques lors de la phase d’évaluation”.
 
 
 ### 2. Principe
@@ -167,7 +167,7 @@ Toutes donnent la possibilités de modifier les paramètres que cette méthode f
 
 ### 3. Un coup d’oeil aux résultats
 
-Si l’on est loin d’avoir compris tous les mécanismes sous-jacents à la couche BN (voir C.III), il y a un point sur lequel tout le monde s’accorde : ça marche.
+Si l’on est loin d’avoir compris tous les mécanismes sous-jacents à la couche BN (voir C.3), il y a un point sur lequel tout le monde s’accorde : ça marche.
 
 En guise de mise en bouche, regardons rapidement les résultats obtenus dans l’article officiel [1] :
 
@@ -321,7 +321,7 @@ Imaginons que l’on entraîne un réseau à partir d'images ne contenant que de
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/car_n_shoes2.jpg">
-  Si la distribution d'entrée durant la phase de test est trop différente de celle de la phase d'entraînement, le modèle peut surréagir à certains signaux, entraînant les couches d'activations à diverger.
+  Si la distribution d'entrée durant la phase de test est trop différente de celle de la phase d'entraînement, le modèle peut surréagir à certains signaux, entraînant les couches d'activations à diverger. | Crédit : [gauche](https://unsplash.com/@grailify?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) et [droite](https://unsplash.com/@jimmy2018?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 </p>
 
 On devine que les valeurs d’activation au niveau des couches cachées risquent de suivre des distributions tout à fait différentes - trop, sans doute. Dans ce cas, la paire (𝜇pop, σpop) estimée au cours de l’entraînement n’est pas représentative de la population réelle que rencontre le réseau en phase de test. Appliquer (𝜇pop, σpop) risque d’éloigner le signal de la loi normale centrée réduite désirée, pouvant mener à une surestimation des valeurs d’activation. 
@@ -373,7 +373,7 @@ François Chollet (créateur de Keras et ingénieur chez Google) a d’ailleurs 
 
 Même si le vent semble tourner, beaucoup d’architectures communément utilisées pour de l’apprentissage par transfert (ResNet, mobilenet-v2, ...) placent toujours BN avant.
 
-Remarquez que l’article [2] - qui remet en question les intuitions défendues par l’article original [1] pour expliquer l’efficacité de la couche BN (voir C.III.3) - ont placé la couche BN avant la fonction d’activation. Ils n’apportent toutefois aucun élément d’explication sur cet aspect.
+Remarquez que l’article [2] - qui remet en question les intuitions défendues par l’article original [1] pour expliquer l’efficacité de la couche BN (voir C.3.3) - ont placé la couche BN avant la fonction d’activation. Ils n’apportent toutefois aucun élément d’explication sur cet aspect.
 
 À ma connaissance, cette question est donc toujours en discussion. 
 
@@ -404,7 +404,8 @@ Ce point à été remis en question dans des recherches postérieures [2].
 
 Pour comprendre ce qui a suscité cette confusion, intéressons-nous à ce qu’est le décalage de covariable, et aux effet de la normalisation par lot sur un réseau de neurones profond.
 
-Notation : L’abréviation ICS fait référence au Décalage de Covariable Interne (venant de l’anglais Internal Covariate Shift). 
+
+<ins>Notation :</ins> : L’abréviation ICS fait référence au Décalage de Covariable Interne (venant de l’anglais Internal Covariate Shift). 
 
 
 #### Qu’est-ce que le décalage de covariable (au sens de la distribution) ?
@@ -429,7 +430,7 @@ Mais imaginons que nous ne disposions que de voiture “classiques” (de ville,
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/car_n_shoes.jpg">
-  Comme évoqué dans la section (section C.2.4), le décalage de distribution peut détériorer les performances du réseau, voir provoquer une explosion des valeurs d'activation.
+  Comme évoqué dans la section (section C.2.4), le décalage de distribution peut détériorer les performances du réseau, voir provoquer une explosion des valeurs d'activation. | Crédit : [gauche](https://unsplash.com/@dhivakrishna?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) et [droite](https://unsplash.com/@ferhat?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 </p>
 
 
@@ -686,7 +687,7 @@ Voici une liste non-exhaustive des questions ouvertes à propos de la couche BN 
 
 #### Remerciements
 
-Merci à Lou Hacquet-Delepine pour la réalisation des schémas, et pour son aide précieuse de relecture !
+Merci à [Lou Hacquet-Delepine](https://www.instagram.com/louhacquetdelepine/) pour la réalisation des schémas, et pour son aide précieuse de relecture !
 
 #### Références
 
