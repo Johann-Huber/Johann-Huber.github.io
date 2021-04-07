@@ -324,7 +324,8 @@ Imaginons que l’on entraîne un réseau à partir d'images ne contenant que de
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/car_n_shoes2.jpg">
-  Si la distribution d'entrée durant la phase de test est trop différente de celle de la phase d'entraînement, le modèle peut surréagir à certains signaux, entraînant les couches d'activations à diverger. | Crédit : <a href="https://unsplash.com/@grailify?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">gauche</a> et <a href="https://unsplash.com/@jimmy2018?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">droite</a> [droite]()
+  Si la distribution d'entrée durant la phase de test est trop différente de celle de la phase d'entraînement, le modèle peut surréagir à certains signaux, entraînant les couches d'activations à diverger. 
+  Crédit : <a href="https://unsplash.com/@grailify?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">gauche</a> et <a href="https://unsplash.com/@jimmy2018?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">droite</a>
 </p>
 
 On devine que les valeurs d’activation au niveau des couches cachées risquent de suivre des distributions tout à fait différentes - trop, sans doute. Dans ce cas, la paire (𝜇pop, σpop) estimée au cours de l’entraînement n’est pas représentative de la population réelle que rencontre le réseau en phase de test. Appliquer (𝜇pop, σpop) risque d’éloigner le signal de la loi normale centrée réduite désirée, pouvant mener à une surestimation des valeurs d’activation. 
@@ -433,7 +434,8 @@ Mais imaginons que nous ne disposions que de voiture “classiques” (de ville,
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/car_n_shoes.jpg">
-  Comme évoqué dans la section (section C.2.4), le décalage de distribution peut détériorer les performances du réseau, voir provoquer une explosion des valeurs d'activation. | Crédit : [gauche](https://unsplash.com/@dhivakrishna?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) et [droite](https://unsplash.com/@ferhat?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  Comme évoqué dans la section (section C.2.4), le décalage de distribution peut détériorer les performances du réseau, voir provoquer une explosion des valeurs d'activation.
+  Crédit : <a href="https://unsplash.com/@dhivakrishna?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">gauche</a> et <a href="https://unsplash.com/@ferhat?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">droite</a>
 </p>
 
 
