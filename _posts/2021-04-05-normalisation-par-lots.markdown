@@ -56,7 +56,6 @@ Pour aller plus loin
 | Normalization par lot | Batch Normalization | BN                   |
 
 
----
 
 <br/>
 
@@ -90,9 +89,6 @@ Toutes les infrastructures de développements (ou frameworks) populaires propose
 
 <ins>Article (contribution significative dans la compréhension du concept) :</ins> [“How does batch normalization help optimization”](url=https://arxiv.org/pdf/1805.11604.pdf) [2] (trad. “Comment la normalisation par lots facilite l’optimisation.”).
 
-<br/>
-
------------
 
 <br/>
 
@@ -148,8 +144,8 @@ Ces valeurs sont déterminées à partir des (𝜇lot , σlot) rencontrés penda
 
 <ins>Remarque :</ins> Cet aspect est plus largement décrit dans la partie C.2.3 : Paramètres statistiques lors de la phase d’évaluation”.
 
-
-### 2. Principe
+<br/>
+### 2. En pratique
 
 En pratique, on considère la normalisation par lots comme une couche à part entière, au même titre qu’un perceptron, qu’une couche de convolution, qu’une fonction d’activation ou qu’un dropout.
 
@@ -167,6 +163,7 @@ Toutes donnent la possibilités de modifier les paramètres que cette méthode f
 - Le nombre de neurones de la couche cachée, dans le cas d’un perceptron multicouche ;
 - Le nombre de filtres de la couche cachée, dans le cas d’un réseau convolutif.
 
+<br/>
 
 ### 3. Un coup d’oeil aux résultats
 
@@ -186,9 +183,7 @@ Le résultat est net : en ajoutant des couches BN, le **réseau s’entraîne pl
 Voilà de quoi comprendre le principe des couches BN, leur intérêt, et d’être en mesure de les utiliser en pratique. une compréhension un peu plus approfondie est cependant nécessaire pour ne pas tomber des nues devant le comportement d’un réseau de neurone.
 
 
-
------------
-
+<br/>
 
 ## C) Comprendre la Normalisation par lots (BN)
 
@@ -198,6 +193,7 @@ J’ai ré-implémenté cette méthode sous Pytorch, de manière à retrouver le
 
 Je vous invite à parcourir les diverses implémentations de la couche BN disponible en ligne (presque toujours en anglais), à commencer par celle de l'infrastructure avec laquelle vous travaillez.
 
+<br/>
 
 ### 2. La couche BN en pratique
 
@@ -325,6 +321,7 @@ Imaginons que l’on entraîne un réseau à partir d'images ne contenant que de
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/car_n_shoes2.jpg">
   Si la distribution d'entrée durant la phase de test est trop différente de celle de la phase d'entraînement, le modèle peut surréagir à certains signaux, entraînant les couches d'activations à diverger. 
+  <br/>
   Crédit : <a href="https://unsplash.com/@grailify?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">gauche</a> et <a href="https://unsplash.com/@jimmy2018?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">droite</a>
 </p>
 
@@ -384,8 +381,7 @@ Remarquez que l’article [2] - qui remet en question les intuitions défendues 
 
 <ins>Pour en savoir plus :</ins> [Conversation  intéressante](https://www.reddit.com/r/MachineLearning/comments/67gonq/d_batch_normalization_before_or_after_relu/dgqaksn/) (hélas en anglais) sur reddit - même si certains arguments sont fragiles - avec une grosse tendance en faveur de la BN après l’activation.
 
------------
-
+<br/>
 
 
 ### 3. Pourquoi la couche BN est-elle efficace ?
@@ -435,6 +431,7 @@ Mais imaginons que nous ne disposions que de voiture “classiques” (de ville,
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/car_n_shoes.jpg">
   Comme évoqué dans la section (section C.2.4), le décalage de distribution peut détériorer les performances du réseau, voir provoquer une explosion des valeurs d'activation.
+  <br/>
   Crédit : <a href="https://unsplash.com/@dhivakrishna?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">gauche</a> et <a href="https://unsplash.com/@ferhat?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">droite</a>
 </p>
 
@@ -653,7 +650,7 @@ Une hypothèse à ce sujet est brièvement évoqué en fin d’article, soutenan
 
 Soulignons cependant que leur principal contribution est la remise en question de la vision communément admise depuis la sortie de l’article officiel - ce qui est, déjà, significatif.
 
-
+<br/>
 #### 4. Bilan : Pourquoi la BN est efficace ? Ce que l’on sait aujourd’hui
 
 
@@ -669,7 +666,7 @@ De nombreuses questions demeurent, donc, et la couche BN est toujours l’objet 
 
 Ces questions ouvertes ne nous empêche cependant pas de profiter de l’efficacité des couches BN dans un réseau !
 
-
+<br/>
 ### En résumé
 
 **La normalization par lots** (ou *Batch-normalization* - notée BN) constitue **une des plus grandes avancées** liées à l’émergence de **l’apprentissage profond**. 
@@ -678,7 +675,7 @@ Reposant sur la succession de deux transformations linéaires, cette méthode re
 
 À l’heure où j’écris cet article, beaucoup des modèles parmi les plus utilisées en réseaux de neurones profond exploitent massivement cette méthode (ex: ResNet[4], EfficientNet [5], ...).
 
-
+<br/>
 ### Les questions en suspent
 
 Même si la normalisation par lots a montré son efficacité en pratique depuis des années, ce concept est encore mal compris. Et si certains articles ont bousculé la compréhension largement admise pendant des années par la communauté scientifique, les mécanismes intrinsèques qui régissent ce concept restent très incertains.
@@ -689,11 +686,12 @@ Voici une liste non-exhaustive des questions ouvertes à propos de la couche BN 
 - Dans quelle mesure les paramètres 𝛽 et 𝛾 influencent le lissage du paysage d’optimisation ?
 - Les expérimentations montrant l’effet de lissage de la couche BN sur le paysage d’optimisation ont réalisées dans des conditions de court-terme ; on a regardé l’évolution du gradient et de la fonction de coût à partir d’une seule itération, testant différentes longueurs de pas. Au delà de l’impact direct que ces expériences mettent en lumière, qu’en est-il sur le long terme ? L’interdépendances des poids provoque-t-elle d’autres effets remarquables sur le paysage d’optimisation ?
 
-
+<br/>
 #### Remerciements
 
 Merci à [Lou Hacquet-Delepine](https://www.instagram.com/louhacquetdelepine/) pour la réalisation des schémas, et pour son aide précieuse de relecture !
 
+<br/>
 #### Références
 
 [1] [Ioffe, S., & Szegedy, C. (2015, June). Batch normalization: Accelerating deep network training by reducing internal covariate shift. In International conference on machine learning (pp. 448-456). PMLR.](https://arxiv.org/abs/1502.03167) 
@@ -708,6 +706,7 @@ Merci à [Lou Hacquet-Delepine](https://www.instagram.com/louhacquetdelepine/) p
 
 [6] [Goodfellow, I., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, S., Courville, A. Bengio, Y. (2014), Generative adversarial nets, Advances in neural information processing systems](https://proceedings.neurips.cc/paper/2014/hash/5ca3e9b122f61f8f06494c97b1afccf3-Abstract.html)
 
+<br/>
 #### Pour aller plus loin
 
 Brillante [présentation de Ian Goodfellow](https://www.youtube.com/watch?v=Xogn6veSyxA) (malgré la qualité sonore), dont le début traite de la normalisation par lot.
