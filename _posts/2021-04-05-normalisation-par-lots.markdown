@@ -6,6 +6,9 @@ categories: Apprentissage-profond
 ---
 
 
+<p align="center">
+  <a href="https://towardsdatascience.com/batch-normalization-in-3-levels-of-understanding-14c2da90a338">English translation</a>
+</p>
 
 
 Il est surprenant de constater le manque de contenu en français que l’on peut trouver sur internet à propos de ce concept, pourtant largement utilisé en apprentissage profond. Le foisonnement d’articles traitant du sujet n’est d’ailleurs par toujours éclairant ; beaucoup s’appuyant sur les premières explications proposées par les inventeurs de la technique, qui ont été très largement remises en question depuis la publication de l’article original.
@@ -18,6 +21,7 @@ Objectifs de cet article :
 - Faire le point sur le niveau de compréhension actuel que l’on a de ce concept.
 
 <br/>
+
 
 **Sommaire :**
 ```
