@@ -17,6 +17,7 @@ Objectifs de cet article :
 - Proposer une implémentation simple de la couche BN sous PyTorch, pour voir en détail sa mise en pratique ;
 - Faire le point sur le niveau de compréhension actuel que l’on a de ce concept.
 
+<br/>
 
 **Sommaire :**
 ```
@@ -56,7 +57,7 @@ Pour aller plus loin
 
 
 
------------
+---
 
 <br/>
 
@@ -90,8 +91,11 @@ Toutes les infrastructures de développements (ou frameworks) populaires propose
 
 <ins>Article (contribution significative dans la compréhension du concept) :</ins> [“How does batch normalization help optimization”](url=https://arxiv.org/pdf/1805.11604.pdf) [2] (trad. “Comment la normalisation par lots facilite l’optimisation.”).
 
+<br/>
 
 -----------
+
+<br/>
 
 ## B) En 3 minutes
 
@@ -114,7 +118,7 @@ Pour chaque couche cachée, on calcule la normalisation par lot de la façon sui
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_2.jpg">
-  <strong>Schéma 2 : 1ère étape de la normalisation par lots.</strong> Exemple d’une couche de 3 neurones, avec un lot de taille b. Pour chaque neurone, les valeurs à l’échelles du batch suivent une loi normal centrée réduite.
+  <br/><strong>Schéma 2 : 1ère étape de la normalisation par lots.</strong> Exemple d’une couche de 3 neurones, avec un lot de taille b. Pour chaque neurone, les valeurs à l’échelles du batch suivent une loi normal centrée réduite.
 </p>
 
 
