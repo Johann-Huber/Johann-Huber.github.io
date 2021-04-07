@@ -15,6 +15,8 @@ Il est surprenant de constater le manque de contenu en français que l’on peut
 - Proposer une implémentation simple de la couche BN sous PyTorch, pour voir en détail sa mise en pratique ;
 - Faire le point sur le niveau de compréhension actuel que l’on a de ce concept.
 
+<br/>
+
 <p align="center">
   <a href="https://towardsdatascience.com/batch-normalization-in-3-levels-of-understanding-14c2da90a338">English translation</a>
 </p>
