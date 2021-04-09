@@ -18,7 +18,7 @@ Il est surprenant de constater le manque de contenu en français que l’on peut
 <br/>
 
 <p align="center">
-  <a href="https://towardsdatascience.com/batch-normalization-in-3-levels-of-understanding-14c2da90a338">English translation</a>
+  <a href="https://towardsdatascience.com/batch-normalization-in-3-levels-of-understanding-14c2da90a338">(English translation)</a>
 </p>
 
 
