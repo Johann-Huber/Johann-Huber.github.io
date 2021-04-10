@@ -9,14 +9,14 @@ Traduit depuis [Lil'Log](https://lilianweng.github.io/lil-log/2018/02/19/a-long-
 
 
 
-
-
+<br/>
 
 ## Qu’est-ce que le Gradient de la Politique ?
 
 Le Gradient de la Politique (ou *Policy Gradient*) est une approche de résolution de problèmes en Apprentissage par Renforcement.
 
 En apprentissage par renforcement, l’objectif est de trouver une stratégie de comportement optimale pour un agent, de sorte qu’il puisse obtenir les récompenses optimales. Les méthodes de **gradient de la politique** visent à modéliser et à optimiser la politique directement. La politique généralement modélisée par une fonction paramétrique de <img src="https://latex.codecogs.com/svg.image?\theta" title="\theta" />, notée <img src="https://latex.codecogs.com/svg.image?\pi_\theta(a|s)" title="\pi_\theta(a|s)" />. Les valeurs de la fonction de récompenses (fonction objectif) dépendent de cette politique. Plusieurs algorithmes peuvent être appliqués pour optimiser <img src="https://latex.codecogs.com/svg.image?\theta" title="\theta" />, pour permettre à l’agent d’obtenir la meilleure récompense possible.
+<br/>
 
 
 ### Notations
@@ -44,7 +44,11 @@ En dérivant, on obtient :
 </p>
 
 
-Or, comment estimer <img src="https://latex.codecogs.com/svg.image?\nabla&space;\mu(s)" title="\nabla \mu(s)" /> sans connaître l'environnement ?
+Comment estimer <img src="https://latex.codecogs.com/svg.image?\nabla&space;\mu(s)" title="\nabla \mu(s)" />, dans les cas où l'on ne connait pas les dynamiques qui régissent l'environnement dans lequel l'agent évolue ?
+
+Il existe un moyen de contourner le problème, en écrivant le gradient de la performance sous une forme simplifiée. C'est ce que permet de le théorème du Gradient de la Politique.
+
+<br/>
 
 ### Théorème du Gradient de la Politique
 
@@ -75,7 +79,7 @@ Dans le cas continue, on définit la performance sous la forme de récompense mo
 </p>
 
 
-En outre, <img src="https://latex.codecogs.com/svg.image?v_{\pi}" title="v_{\pi}" /> et <img src="https://latex.codecogs.com/svg.image?q_{\pi}" title="q_{\pi}" /> sont fonctions du retour différentiel, définit par : 
+En outre, <img src="https://latex.codecogs.com/svg.image?v_{\pi}" title="v_{\pi}" /> et <img src="https://latex.codecogs.com/svg.image?q_{\pi}" title="q_{\pi}" /> sont fonctions du retour différentiel, définit comme la différence entre la récompense obtenue à chaque pas, et la récompense moyenne : 
 <p align="center">
 	<img src="https://latex.codecogs.com/svg.image?G_t&space;=&space;R_{t&plus;1}&space;-&space;r(\pi)&space;&plus;&space;R_{t&plus;2}&space;-&space;r(\pi)&space;&plus;&space;..." title="G_t = R_{t+1} - r(\pi) + R_{t+2} - r(\pi) + ..." />
 </p>
