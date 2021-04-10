@@ -16,26 +16,52 @@ Traduit depuis [Lil'Log](https://lilianweng.github.io/lil-log/2018/02/19/a-long-
 
 Le Gradient de la Politique (ou *Policy Gradient*) est une approche de résolution de problèmes en Apprentissage par Renforcement.
 
-En apprentissage par renforcement, l’objectif est de trouver une stratégie de comportement optimale pour un agent, de sorte qu’il puisse obtenir les récompenses optimales. Les méthodes de **gradient de la politique** visent à modéliser et à optimiser la politique directement. La politique généralement modélisée par une fonction paramétrique de θ, notée <img src="https://latex.codecogs.com/svg.image?\pi_\theta(a|s)" title="\pi_\theta(a|s)" />. Les valeurs de la fonction de récompenses (fonction objectif) dépendent de cette politique. Plusieurs algorithmes peuvent être appliqués pour optimiser θ, pour permettre à l’agent d’obtenir la meilleure récompense possible.
+En apprentissage par renforcement, l’objectif est de trouver une stratégie de comportement optimale pour un agent, de sorte qu’il puisse obtenir les récompenses optimales. Les méthodes de **gradient de la politique** visent à modéliser et à optimiser la politique directement. La politique généralement modélisée par une fonction paramétrique de <img src="https://latex.codecogs.com/svg.image?\theta" title="\theta" />, notée <img src="https://latex.codecogs.com/svg.image?\pi_\theta(a|s)" title="\pi_\theta(a|s)" />. Les valeurs de la fonction de récompenses (fonction objectif) dépendent de cette politique. Plusieurs algorithmes peuvent être appliqués pour optimiser <img src="https://latex.codecogs.com/svg.image?\theta" title="\theta" />, pour permettre à l’agent d’obtenir la meilleure récompense possible.
 
 
 #### Notations
 
+(Ajouter tableau notations)
 
-La fonction de récompense est définie par :
+
+La fonction de récompense (ou fonction de performance) est définie par :
 <p align="center">
-	<img src="https://latex.codecogs.com/svg.image?&space;J(\theta)=\sum_{s\in&space;S}&space;\mu(s)v^\pi(s)&space;=&space;\sum_{s\in&space;S}&space;\mu(s)\sum_{a\in&space;A}\pi_\theta(a|s)q^\pi(s)" title=" J(\theta)=\sum_{s\in S} \mu(s)v^\pi(s) = \sum_{s\in S} \mu(s)\sum_{a\in A}\pi_\theta(a|s)q^\pi(s)" />
+	<img src="https://latex.codecogs.com/svg.image?J(\theta)=\sum_{s\in&space;S}&space;\mu(s)v_\pi(s)&space;=&space;\sum_{s\in&space;S}&space;\mu(s)\sum_{a\in&space;A}\pi_\theta(a|s)q_\pi(s)" title="J(\theta)=\sum_{s\in S} \mu(s)v_\pi(s) = \sum_{s\in S} \mu(s)\sum_{a\in A}\pi_\theta(a|s)q_\pi(s)" />
 </p>
-
-
 
 Avec <img src="https://latex.codecogs.com/svg.image?\mu(s)" title="\mu(s)" />: la distribution stationnaire de la chaïne markovienne sous la politique <img src="https://latex.codecogs.com/svg.image?\pi_\theta" title="\pi_\theta" />.
 
+On cherche donc à trouver les valeurs de <img src="https://latex.codecogs.com/svg.image?\theta" title="\theta" /> qui maximise la récompense. Ce problème peut être résolu via la méthode d'ascension de gradient :
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\theta_{t&plus;1}=&space;\theta_t&space;&plus;&space;\alpha*&space;\widehat{\nabla&space;J(\theta_t)}" title="\theta_{t+1}= \theta_t + \alpha* \widehat{\nabla J(\theta_t)}" />
+</p>
+
+Où <img src="https://latex.codecogs.com/svg.image?\widehat{\nabla&space;J(\theta_t)}" title="\widehat{\nabla J(\theta_t)}" /> est une estimation stochastique dont l'espérence est le gradient de la performance mesurée par rapport à <img src="https://latex.codecogs.com/svg.image?\theta_t" title="\theta_t" />.
+
+En dérivant, on obtient :
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?&space;\nabla&space;J(\theta)=\sum_{s\in&space;S}&space;\nabla&space;\mu(s)&space;v_\pi(s)&space;&plus;&space;\mu(s)&space;\nabla&space;v_\pi(s)" title=" \nabla J(\theta)=\sum_{s\in S} \nabla \mu(s) v_\pi(s) + \mu(s) \nabla v_\pi(s)" />
+</p>
 
 
+Or, comment estimer <img src="https://latex.codecogs.com/svg.image?\nabla&space;\mu(s)" title="\nabla \mu(s)" /> sans connaître l'environnement ?
+
+#### Théorème du Gradient de la Politique
 
 
+Le théorème du Gradient la Politique s'énonce de la façon suivante :
 
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\nabla&space;J(\theta)=&space;\nabla_\theta&space;\sum_{s\in&space;S}&space;\mu(s)&space;\sum_{a&space;\in&space;A}&space;q_\pi(s,a)&space;\pi_\theta(a|s)" title="\nabla J(\theta)= \nabla_\theta \sum_{s\in S} \mu(s) \sum_{a \in A} q_\pi(s,a) \pi_\theta(a|s)" />
+	<img src="https://latex.codecogs.com/svg.image?\nabla&space;J(\theta)&space;\propto&space;\sum_{s\in&space;S}&space;\mu(s)&space;\sum_{a&space;\in&space;A}&space;q_\pi(s,a)&space;\nabla_\theta&space;\pi_\theta(a|s)" title="\nabla J(\theta) \propto \sum_{s\in S} \mu(s) \sum_{a \in A} q_\pi(s,a) \nabla_\theta \pi_\theta(a|s)" />
+</p>
+
+Cette formulation permet d'estimer le gradient de la performance en s'afranchissant du terme <img src="https://latex.codecogs.com/svg.image?\nabla&space;\mu(s)" title="\nabla \mu(s)" />.
+
+
+<ins>Preuve :</ins>
+|Ceci est la preuve. Elle doit tenir
+dans ce cadre.|
 
 ---
 
