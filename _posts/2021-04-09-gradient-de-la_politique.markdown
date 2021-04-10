@@ -16,15 +16,17 @@ Traduit depuis [Lil'Log](https://lilianweng.github.io/lil-log/2018/02/19/a-long-
 
 Le Gradient de la Politique (ou *Policy Gradient*) est une approche de résolution de problèmes en Apprentissage par Renforcement.
 
-
-#### Notations
-
 En apprentissage par renforcement, l’objectif est de trouver une stratégie de comportement optimale pour un agent, de sorte qu’il puisse obtenir les récompenses optimales. Les méthodes de **gradient de la politique** visent à modéliser et à optimiser la politique directement. La politique généralement modélisée par une fonction paramétrique de θ, notée πθ(a|s). Les valeurs de la fonction de récompenses (fonction objectif) dépendent de cette politique. Plusieurs algorithmes peuvent être appliqués pour optimiser θ, pour permettre à l’agent d’obtenir la meilleure récompense possible.
 
 
-La fonction de récompense est définie par :
+#### Notations
 
-<img src="https://render.githubusercontent.com/render/math?math=\sum_s e^{i \pi} = -1">
+
+La fonction de récompense est définie par :
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?&space;J(\theta)=\sum_{s\in&space;S}&space;\mu(s)v^\pi(s)&space;=&space;\sum_{s\in&space;S}&space;\mu(s)\sum_{a\in&space;A}\pi_\theta(a|s)q^\pi(s)" title=" J(\theta)=\sum_{s\in S} \mu(s)v^\pi(s) = \sum_{s\in S} \mu(s)\sum_{a\in A}\pi_\theta(a|s)q^\pi(s)" />
+</p>
+
 
 
 Et ceci est un test : <img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">
@@ -34,7 +36,9 @@ La **Normalisation par lots** (en anglais ***Batch-Normalization*** - notée ***
 Cette méthode consiste à normaliser les vecteurs d’activation des couches cachées en utilisant les caractéristiques statistiques du lot (ou *batch*) - la moyenne et l’écart-type - juste avant (ou juste après) le passage dans la fonction non-linéaire.
 
 
+---
 
+<img src="https://render.githubusercontent.com/render/math?math=\sum_s e^{i \pi} = -1">
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/sbn_1a_fr.jpg">
   Schéma 1.a Perceptron multicouche <strong>sans normalisation par lots (BN)</strong>
