@@ -67,8 +67,11 @@ On distingue le **cas épisodique** du **cas continue**, pour lesquels la foncti
 
 **Cas épisodique**
  
-(...)
- 
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\begin{align*}&space;\nabla&space;v_\pi(s)&space;&=&space;\nabla&space;\sum_{a&space;\in&space;A}&space;\pi(a|s)&space;q_\pi(s,a)&space;\\&=&space;\sum_{a&space;\in&space;A}&space;(\nabla&space;\pi(a|s)&space;q_\pi(s,a)&space;&plus;&space;\pi(a|s)&space;\nabla&space;q_\pi(s,a))&space;\\&=&space;\sum_{a&space;\in&space;A}&space;\nabla&space;\pi(a|s)&space;q_\pi(s,a)&space;&plus;&space;\pi(a|s)&space;(\sum_{r,s^\prime}p(s,s^\prime|s,a)(r&plus;v_\pi(s^\prime)))&space;\\&=&space;\sum_{a&space;\in&space;A}&space;\nabla&space;\pi(a|s)&space;q_\pi(s,a)&space;&plus;&space;\pi(a|s)&space;\nabla&space;\sum_{s^\prime}p(s,s^\prime|s,a)(r&plus;v_\pi(s^\prime))&space;\\\nabla&space;v_\pi(s)&space;&=&space;\sum_{a&space;\in&space;A}&space;\nabla&space;\pi(a|s)&space;q_\pi(s,a)&space;&plus;&space;\pi(a|s)&space;\sum_{s^\prime}p(s^\prime|s,a)&space;\nabla&space;v_\pi(s^\prime)\end{align*}" title="\begin{align*} \nabla v_\pi(s) &= \nabla \sum_{a \in A} \pi(a|s) q_\pi(s,a) \\&= \sum_{a \in A} (\nabla \pi(a|s) q_\pi(s,a) + \pi(a|s) \nabla q_\pi(s,a)) \\&= \sum_{a \in A} \nabla \pi(a|s) q_\pi(s,a) + \pi(a|s) (\sum_{r,s^\prime}p(s,s^\prime|s,a)(r+v_\pi(s^\prime))) \\&= \sum_{a \in A} \nabla \pi(a|s) q_\pi(s,a) + \pi(a|s) \nabla \sum_{s^\prime}p(s,s^\prime|s,a)(r+v_\pi(s^\prime)) \\\nabla v_\pi(s) &= \sum_{a \in A} \nabla \pi(a|s) q_\pi(s,a) + \pi(a|s) \sum_{s^\prime}p(s^\prime|s,a) \nabla v_\pi(s^\prime)\end{align*}" />
+</p>
+
+
  
 **Cas continue**
 
