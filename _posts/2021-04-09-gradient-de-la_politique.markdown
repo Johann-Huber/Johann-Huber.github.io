@@ -19,19 +19,15 @@ Le Gradient de la Politique (ou *Policy Gradient*) est une approche de résoluti
 
 #### Notations
 
-(Ajouter tableau)
-
 En apprentissage par renforcement, l’objectif est de trouver une stratégie de comportement optimale pour un agent, de sorte qu’il puisse obtenir les récompenses optimales. Les méthodes de **gradient de la politique** visent à modéliser et à optimiser la politique directement. La politique généralement modélisée par une fonction paramétrique de θ, notée πθ(a|s). Les valeurs de la fonction de récompenses (fonction objectif) dépendent de cette politique. Plusieurs algorithmes peuvent être appliqués pour optimiser θ, pour permettre à l’agent d’obtenir la meilleure récompense possible.
 
 
 La fonction de récompense est définie par :
 
-<img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">
+<img src="https://render.githubusercontent.com/render/math?math=\sum_s e^{i \pi} = -1">
 
 
 Et ceci est un test : <img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">
-Encore un : '<img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">'
-Un dernier : `<img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">`
 
 La **Normalisation par lots** (en anglais ***Batch-Normalization*** - notée ***BN***) est une méthode algorithmique qui permet d’entraîner un réseau de neurones profond de manière plus rapide et plus stable. 
 
