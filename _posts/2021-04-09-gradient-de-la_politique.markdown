@@ -71,11 +71,46 @@ On distingue le **cas épisodique** du **cas continue**, pour lesquels la foncti
 
 Dans le cas continue, on définit la performance sous la forme de récompense moyenne par pas de temps :
 <p align="center">
-	<img src="https://latex.codecogs.com/svg.image?\begin{align*}&space;J(\theta)&space;&\doteq&space;r(\pi)&space;\doteq&space;\displaystyle&space;\lim_{h&space;\to&space;\infty}&space;\sum_{t=1}^{h}\mathop{\mathbb{E}}[R_t|S_0,A_{0&space;:&space;t-1}\sim\pi]&space;&space;\\&&space;=&space;\lim_{h&space;\to&space;\infty}&space;\mathop{\mathbb{E}}[R_t|S_0,A_{0&space;:&space;t-1}\sim\pi]&space;&space;\\&space;\\&&space;=&space;\sum_s&space;\mu(s)&space;\sum_a&space;\pi(a|s)&space;\sum_{s^\prime,r}&space;p(^\prime,r|s,a)r\end{align*}" title="\begin{align*} J(\theta) &\doteq r(\pi) \doteq \displaystyle \lim_{h \to \infty} \sum_{t=1}^{h}\mathop{\mathbb{E}}[R_t|S_0,A_{0 : t-1}\sim\pi] \\& = \lim_{h \to \infty} \mathop{\mathbb{E}}[R_t|S_0,A_{0 : t-1}\sim\pi] \\ \\& = \sum_s \mu(s) \sum_a \pi(a|s) \sum_{s^\prime,r} p(^\prime,r|s,a)r\end{align*}" />
+	<img src="https://latex.codecogs.com/svg.image?\begin{align*}&space;J(\theta)&space;&\doteq&space;r(\pi)&space;\doteq&space;\displaystyle&space;\lim_{h&space;\to&space;\infty}&space;\sum_{t=1}^{h}\mathop{\mathbb{E}}[R_t|S_0,A_{0&space;:&space;t-1}\sim\pi]&space;\\&&space;=&space;\lim_{h&space;\to&space;\infty}&space;\mathop{\mathbb{E}}[R_t|S_0,A_{0&space;:&space;t-1}\sim\pi]&space;\\&&space;=&space;\sum_s&space;\mu(s)&space;\sum_a&space;\pi(a|s)&space;\sum_{s^\prime,r}&space;p(^\prime,r|s,a)r\end{align*}" title="\begin{align*} J(\theta) &\doteq r(\pi) \doteq \displaystyle \lim_{h \to \infty} \sum_{t=1}^{h}\mathop{\mathbb{E}}[R_t|S_0,A_{0 : t-1}\sim\pi] \\& = \lim_{h \to \infty} \mathop{\mathbb{E}}[R_t|S_0,A_{0 : t-1}\sim\pi] \\& = \sum_s \mu(s) \sum_a \pi(a|s) \sum_{s^\prime,r} p(^\prime,r|s,a)r\end{align*}" />
 </p>
 
 
-En outre, <img src="https://latex.codecogs.com/svg.image?v_{\pi}" title="v_{\pi}" /> et <img src="https://latex.codecogs.com/svg.image?q_{\pi}" title="q_{\pi}" /> sont fonctions du retour différentiel, définit par : <img src="https://latex.codecogs.com/svg.image?G_t&space;=&space;R_{t&plus;1}&space;-&space;r(\pi)&space;&plus;&space;R_{t&plus;2}&space;-&space;r(\pi)&space;&plus;&space;..." title="G_t = R_{t+1} - r(\pi) + R_{t+2} - r(\pi) + ..." />
+En outre, <img src="https://latex.codecogs.com/svg.image?v_{\pi}" title="v_{\pi}" /> et <img src="https://latex.codecogs.com/svg.image?q_{\pi}" title="q_{\pi}" /> sont fonctions du retour différentiel, définit par : 
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?G_t&space;=&space;R_{t&plus;1}&space;-&space;r(\pi)&space;&plus;&space;R_{t&plus;2}&space;-&space;r(\pi)&space;&plus;&space;..." title="G_t = R_{t+1} - r(\pi) + R_{t+2} - r(\pi) + ..." />
+</p>
+
+On procède d'une façon analogue au cas épisodique :
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\begin{align*}&space;\nabla&space;v_\pi(s)&space;&&space;=&space;\nabla_\theta&space;\sum_a&space;\pi(a|s)q_\pi(s,a)&space;\\&&space;=&space;\sum_a&space;(\nabla\pi(a|s)&space;q_\pi(s,a)&plus;\pi(a|s)&space;\nabla&space;q_\pi(a,s)&space;)&space;&space;\\&&space;=&space;\sum_a&space;(\nabla\pi(a|s)&space;q_\pi(s,a)&plus;\pi(a|s)&space;\nabla\sum_{s^\prime,r}&space;p(s^\prime,r|s,a)(r-r(\theta)&plus;v_\pi(s)))\\&&space;=&space;\nabla\sum_a&space;(\nabla\pi(a|s)&space;q_\pi(s,a)&plus;\pi(a|s)&space;\sum_{s^\prime,r}&space;p(s^\prime,r|s,a)(-\nabla&space;r(\theta)&plus;\nabla&space;v_\pi(s^\prime)))&space;\\&&space;\sum_a&space;(\nabla\pi(a|s)&space;q_\pi(s,a)&plus;\pi(a|s)&space;\sum_{s^\prime}&space;p(s^\prime|s,a)(-\nabla&space;r(\theta)&plus;\nabla&space;v_\pi(s^\prime)))&space;\\&&space;=&space;\sum_a&space;(\nabla\pi(a|s)&space;q_\pi(s,a)&space;-&space;\pi(a|s)\nabla&space;r(\theta)&space;&plus;&space;\pi(a|s)&space;\sum_{s^\prime}&space;p(s^\prime|s,a)\nabla&space;v_\pi(s^\prime))&space;\\&&space;=&space;\end{align*}" title="\begin{align*} \nabla v_\pi(s) & = \nabla_\theta \sum_a \pi(a|s)q_\pi(s,a) \\& = \sum_a (\nabla\pi(a|s) q_\pi(s,a)+\pi(a|s) \nabla q_\pi(a,s) ) \\& = \sum_a (\nabla\pi(a|s) q_\pi(s,a)+\pi(a|s) \nabla\sum_{s^\prime,r} p(s^\prime,r|s,a)(r-r(\theta)+v_\pi(s)))\\& = \nabla\sum_a (\nabla\pi(a|s) q_\pi(s,a)+\pi(a|s) \sum_{s^\prime,r} p(s^\prime,r|s,a)(-\nabla r(\theta)+\nabla v_\pi(s^\prime))) \\& \sum_a (\nabla\pi(a|s) q_\pi(s,a)+\pi(a|s) \sum_{s^\prime} p(s^\prime|s,a)(-\nabla r(\theta)+\nabla v_\pi(s^\prime))) \\& = \sum_a (\nabla\pi(a|s) q_\pi(s,a) - \pi(a|s)\nabla r(\theta) + \pi(a|s) \sum_{s^\prime} p(s^\prime|s,a)\nabla v_\pi(s^\prime)) \\& = \end{align*}" />
+</p>
+
+Ce qui nous permet d'isoler <img src="https://latex.codecogs.com/svg.image?\nabla&space;r(\theta)&space;" title="\nabla r(\theta) " /> :
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\nabla&space;r(\theta)&space;=&space;\sum_a&space;\nabla\pi(a|s)q_\pi(s,a)&space;&plus;&space;\sum_a&space;\pi(a|s)\sum_{s^\prime}p(s^\prime|s,a)\nabla&space;v_\pi(s^\prime)-\nabla&space;v_\pi(s)" title="\nabla r(\theta) = \sum_a \nabla\pi(a|s)q_\pi(s,a) + \sum_a \pi(a|s)\sum_{s^\prime}p(s^\prime|s,a)\nabla v_\pi(s^\prime)-\nabla v_\pi(s)" />
+</p>
+
+Par définition, <img src="https://latex.codecogs.com/svg.image?J(\theta)=r(\theta)" title="J(\theta)=r(\theta)" />. Or <img src="https://latex.codecogs.com/svg.image?r(\theta)" title="r(\theta)" /> est indépendant de s. L'équation du gradient de la performance est donc toujours juste si l'on multiplie le terme de droite par <img src="https://latex.codecogs.com/svg.image?\sum_s&space;\mu(s)" title="\sum_s \mu(s)" />, puisque <img src="https://latex.codecogs.com/svg.image?\sum_s&space;\mu(s)&space;=&space;1" title="\sum_s \mu(s) = 1" />.
+
+Ainsi :
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\begin{align*}&space;\nabla&space;J(\theta)&space;&=&space;\sum_s&space;\mu(s)&space;(\sum_a&space;(\nabla\pi(a|s)q_\pi(s,a)&space;&plus;&space;\pi(a|s)\sum_{s^\prime}p(s^\prime|s,a)\nabla&space;v_\pi(s^\prime))-\nabla&space;v_\pi(s))&space;\\&=&space;\sum_s&space;\mu(s)&space;\sum_a&space;\nabla\pi(a|s)q_\pi(s,a)&space;&plus;&space;\sum_{s^\prime}&space;\sum_{s}&space;\mu(s)&space;\sum_a&space;\pi(a|s)p(s^\prime|s,a)\nabla&space;v_\pi(s^\prime)&space;-&space;\sum_s&space;\mu(s)&space;\nabla&space;v_\pi(s)&space;\\&=&space;\sum_s&space;\mu(s)&space;\sum_a&space;\nabla\pi(a|s)q_\pi(s,a)&space;&plus;&space;\sum_{s^\prime}&space;\mu(s^\prime)\nabla&space;v_\pi(s^\prime)&space;-&space;\sum_s&space;\mu(s)&space;\nabla&space;v_\pi(s)&space;\\\nabla&space;J(\theta)&space;&=&space;\sum_s&space;\mu(s)&space;\sum_a&space;\nabla\pi(a|s)q_\pi(s,a)\end{align*}" title="\begin{align*} \nabla J(\theta) &= \sum_s \mu(s) (\sum_a (\nabla\pi(a|s)q_\pi(s,a) + \pi(a|s)\sum_{s^\prime}p(s^\prime|s,a)\nabla v_\pi(s^\prime))-\nabla v_\pi(s)) \\&= \sum_s \mu(s) \sum_a \nabla\pi(a|s)q_\pi(s,a) + \sum_{s^\prime} \sum_{s} \mu(s) \sum_a \pi(a|s)p(s^\prime|s,a)\nabla v_\pi(s^\prime) - \sum_s \mu(s) \nabla v_\pi(s) \\&= \sum_s \mu(s) \sum_a \nabla\pi(a|s)q_\pi(s,a) + \sum_{s^\prime} \mu(s^\prime)\nabla v_\pi(s^\prime) - \sum_s \mu(s) \nabla v_\pi(s) \\\nabla J(\theta) &= \sum_s \mu(s) \sum_a \nabla\pi(a|s)q_\pi(s,a)\end{align*}" />
+</p>
+
+On retrouve la même forme que dans le cas épisodique. 
+
+**Forme générale**
+
+Dans les deux cas, on a :
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\nabla&space;J(\theta)&space;\propto&space;\sum_{s\in&space;S}&space;\mu(s)&space;\sum_{a&space;\in&space;A}&space;q_\pi(s,a)&space;\nabla_\theta&space;\pi_\theta(a|s)" title="\nabla J(\theta) \propto \sum_{s\in S} \mu(s) \sum_{a \in A} q_\pi(s,a) \nabla_\theta \pi_\theta(a|s)" />
+</p>
+
+Avec pour coefficient de proportionnalité:
+- (...) dans le cas épisodique ;
+- 1 dans le cas continue.
+
 
 
 
