@@ -19,7 +19,7 @@ Le Gradient de la Politique (ou *Policy Gradient*) est une approche de résoluti
 En apprentissage par renforcement, l’objectif est de trouver une stratégie de comportement optimale pour un agent, de sorte qu’il puisse obtenir les récompenses optimales. Les méthodes de **gradient de la politique** visent à modéliser et à optimiser la politique directement. La politique généralement modélisée par une fonction paramétrique de <img src="https://latex.codecogs.com/svg.image?\theta" title="\theta" />, notée <img src="https://latex.codecogs.com/svg.image?\pi_\theta(a|s)" title="\pi_\theta(a|s)" />. Les valeurs de la fonction de récompenses (fonction objectif) dépendent de cette politique. Plusieurs algorithmes peuvent être appliqués pour optimiser <img src="https://latex.codecogs.com/svg.image?\theta" title="\theta" />, pour permettre à l’agent d’obtenir la meilleure récompense possible.
 
 
-#### Notations
+### Notations
 
 (Ajouter tableau notations)
 
@@ -46,7 +46,7 @@ En dérivant, on obtient :
 
 Or, comment estimer <img src="https://latex.codecogs.com/svg.image?\nabla&space;\mu(s)" title="\nabla \mu(s)" /> sans connaître l'environnement ?
 
-#### Théorème du Gradient de la Politique
+### Théorème du Gradient de la Politique
 
 
 Le théorème du Gradient la Politique s'énonce de la façon suivante :
@@ -58,10 +58,27 @@ Le théorème du Gradient la Politique s'énonce de la façon suivante :
 
 Cette formulation permet d'estimer le gradient de la performance en s'afranchissant du terme <img src="https://latex.codecogs.com/svg.image?\nabla&space;\mu(s)" title="\nabla \mu(s)" />.
 
+#### Preuve
 
-<ins>Preuve :</ins>
-|Ceci est la preuve. Elle doit tenir
-dans ce cadre.|
+On distingue le **cas épisodique** du **cas continue**, pour lesquels la fonction de performance ne s'exprime pas exactement de la même manière.
+
+**1) Cas épisodique**
+ 
+ 
+ 
+ 
+**2) Cas continue**
+
+Dans le cas continue, on définit la performance sous la forme de récompense moyenne par pas de temps :
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\begin{align*}&space;J(\theta)&space;&\doteq&space;r(\pi)&space;\doteq&space;\displaystyle&space;\lim_{h&space;\to&space;\infty}&space;\sum_{t=1}^{h}\mathop{\mathbb{E}}[R_t|S_0,A_{0&space;:&space;t-1}\sim\pi]&space;&space;\\&&space;=&space;\lim_{h&space;\to&space;\infty}&space;\mathop{\mathbb{E}}[R_t|S_0,A_{0&space;:&space;t-1}\sim\pi]&space;&space;\\&space;\\&&space;=&space;\sum_s&space;\mu(s)&space;\sum_a&space;\pi(a|s)&space;\sum_{s^\prime,r}&space;p(^\prime,r|s,a)r\end{align*}" title="\begin{align*} J(\theta) &\doteq r(\pi) \doteq \displaystyle \lim_{h \to \infty} \sum_{t=1}^{h}\mathop{\mathbb{E}}[R_t|S_0,A_{0 : t-1}\sim\pi] \\& = \lim_{h \to \infty} \mathop{\mathbb{E}}[R_t|S_0,A_{0 : t-1}\sim\pi] \\ \\& = \sum_s \mu(s) \sum_a \pi(a|s) \sum_{s^\prime,r} p(^\prime,r|s,a)r\end{align*}" />
+</p>
+
+
+En outre, <img src="https://latex.codecogs.com/svg.image?v_{\pi}" title="v_{\pi}" /> et <img src="https://latex.codecogs.com/svg.image?q_{\pi}" title="q_{\pi}" /> sont fonctions du retour différentiel, définit par : <img src="https://latex.codecogs.com/svg.image?G_t&space;=&space;R_{t&plus;1}&space;-&space;r(\pi)&space;&plus;&space;R_{t&plus;2}&space;-&space;r(\pi)&space;&plus;&space;..." title="G_t = R_{t+1} - r(\pi) + R_{t+2} - r(\pi) + ..." />
+
+
+
 
 ---
 
