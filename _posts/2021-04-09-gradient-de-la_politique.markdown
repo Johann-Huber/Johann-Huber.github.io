@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Gradient de la politique"
-date:   2021-04-00 21:07:00 +0200
+date:   2021-04-09 21:07:00 +0200
 categories: Apprentissage-profond
 ---
 
