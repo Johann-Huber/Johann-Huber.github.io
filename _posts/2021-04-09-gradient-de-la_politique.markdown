@@ -56,8 +56,7 @@ Il existe un moyen de contourner le problème, en écrivant le gradient de la pe
 Le théorème du Gradient la Politique s'énonce de la façon suivante :
 
 <p align="center">
-	<img src="https://latex.codecogs.com/svg.image?\nabla&space;J(\theta)=&space;\nabla_\theta&space;\sum_{s\in&space;S}&space;\mu(s)&space;\sum_{a&space;\in&space;A}&space;q_\pi(s,a)&space;\pi_\theta(a|s)" title="\nabla J(\theta)= \nabla_\theta \sum_{s\in S} \mu(s) \sum_{a \in A} q_\pi(s,a) \pi_\theta(a|s)" />
-	<img src="https://latex.codecogs.com/svg.image?\nabla&space;J(\theta)&space;\propto&space;\sum_{s\in&space;S}&space;\mu(s)&space;\sum_{a&space;\in&space;A}&space;q_\pi(s,a)&space;\nabla_\theta&space;\pi_\theta(a|s)" title="\nabla J(\theta) \propto \sum_{s\in S} \mu(s) \sum_{a \in A} q_\pi(s,a) \nabla_\theta \pi_\theta(a|s)" />
+	<img src="https://latex.codecogs.com/svg.image?\begin{align*}&space;\nabla&space;J(\theta)&space;&=&space;\nabla_\theta&space;\sum_{s\in&space;S}&space;\mu(s)&space;\sum_{a&space;\in&space;A}&space;q_\pi(s,a)&space;\pi_\theta(a|s)&space;\\&&space;\propto&space;\sum_{s\in&space;S}&space;\mu(s)&space;\sum_{a&space;\in&space;A}&space;q_\pi(s,a)&space;\nabla_\theta&space;\pi_\theta(a|s)\end{align*}" title="\begin{align*} \nabla J(\theta) &= \nabla_\theta \sum_{s\in S} \mu(s) \sum_{a \in A} q_\pi(s,a) \pi_\theta(a|s) \\& \propto \sum_{s\in S} \mu(s) \sum_{a \in A} q_\pi(s,a) \nabla_\theta \pi_\theta(a|s)\end{align*}" />
 </p>
 
 Cette formulation permet d'estimer le gradient de la performance en s'afranchissant du terme <img src="https://latex.codecogs.com/svg.image?\nabla&space;\mu(s)" title="\nabla \mu(s)" />.
@@ -66,12 +65,12 @@ Cette formulation permet d'estimer le gradient de la performance en s'afranchiss
 
 On distingue le **cas épisodique** du **cas continue**, pour lesquels la fonction de performance ne s'exprime pas exactement de la même manière.
 
-**1) Cas épisodique**
+**Cas épisodique**
+ 
+(...)
  
  
- 
- 
-**2) Cas continue**
+**Cas continue**
 
 Dans le cas continue, on définit la performance sous la forme de récompense moyenne par pas de temps :
 <p align="center">
