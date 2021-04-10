@@ -16,7 +16,7 @@ Traduit depuis [Lil'Log](https://lilianweng.github.io/lil-log/2018/02/19/a-long-
 
 Le Gradient de la Politique (ou *Policy Gradient*) est une approche de résolution de problèmes en Apprentissage par Renforcement.
 
-En apprentissage par renforcement, l’objectif est de trouver une stratégie de comportement optimale pour un agent, de sorte qu’il puisse obtenir les récompenses optimales. Les méthodes de **gradient de la politique** visent à modéliser et à optimiser la politique directement. La politique généralement modélisée par une fonction paramétrique de θ, notée πθ(a|s). Les valeurs de la fonction de récompenses (fonction objectif) dépendent de cette politique. Plusieurs algorithmes peuvent être appliqués pour optimiser θ, pour permettre à l’agent d’obtenir la meilleure récompense possible.
+En apprentissage par renforcement, l’objectif est de trouver une stratégie de comportement optimale pour un agent, de sorte qu’il puisse obtenir les récompenses optimales. Les méthodes de **gradient de la politique** visent à modéliser et à optimiser la politique directement. La politique généralement modélisée par une fonction paramétrique de θ, notée <img src="https://latex.codecogs.com/svg.image?\pi_\theta(a|s)" title="\pi_\theta(a|s)" />. Les valeurs de la fonction de récompenses (fonction objectif) dépendent de cette politique. Plusieurs algorithmes peuvent être appliqués pour optimiser θ, pour permettre à l’agent d’obtenir la meilleure récompense possible.
 
 
 #### Notations
@@ -29,14 +29,20 @@ La fonction de récompense est définie par :
 
 
 
-Avec <img src="https://latex.codecogs.com/svg.image?\mu(s)" title="\mu(s)" />: la distribution stationnaire de la chaïne markovienne sour la politique <img src="https://latex.codecogs.com/svg.image?\pi_\theta" title="\pi_\theta" />.
+Avec <img src="https://latex.codecogs.com/svg.image?\mu(s)" title="\mu(s)" />: la distribution stationnaire de la chaïne markovienne sous la politique <img src="https://latex.codecogs.com/svg.image?\pi_\theta" title="\pi_\theta" />.
+
+
+
+
+
+
+
+---
 
 La **Normalisation par lots** (en anglais ***Batch-Normalization*** - notée ***BN***) est une méthode algorithmique qui permet d’entraîner un réseau de neurones profond de manière plus rapide et plus stable. 
 
 Cette méthode consiste à normaliser les vecteurs d’activation des couches cachées en utilisant les caractéristiques statistiques du lot (ou *batch*) - la moyenne et l’écart-type - juste avant (ou juste après) le passage dans la fonction non-linéaire.
 
-
----
 
 <img src="https://render.githubusercontent.com/render/math?math=\sum_s e^{i \pi} = -1">
 <p align="center">
