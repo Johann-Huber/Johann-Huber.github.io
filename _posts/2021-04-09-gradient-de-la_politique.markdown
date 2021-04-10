@@ -29,7 +29,7 @@ La fonction de récompense est définie par :
 
 
 
-Et ceci est un test : <img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">
+Avec <img src="https://render.githubusercontent.com/render/math?math=\mu(s)">: la distribution stationnaire de la chaïne markovienne sour la politique <img src="https://render.githubusercontent.com/render/math?math=\pi_ \theta">.
 
 La **Normalisation par lots** (en anglais ***Batch-Normalization*** - notée ***BN***) est une méthode algorithmique qui permet d’entraîner un réseau de neurones profond de manière plus rapide et plus stable. 
 
