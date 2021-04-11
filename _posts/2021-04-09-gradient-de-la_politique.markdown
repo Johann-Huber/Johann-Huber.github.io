@@ -63,6 +63,9 @@ Cette formulation permet d'estimer le gradient de la performance en s'afranchiss
 
 #### Preuve
 
+
+<code>
+
 On distingue le **cas épisodique** du **cas continue**, pour lesquels la fonction de performance ne s'exprime pas exactement de la même manière.
 
 <ins>Remarque :</ins> Pour simplifier l'écriture, on notera implicitement : <img src="https://latex.codecogs.com/svg.image?\nabla&space;\doteq&space;\nabla_\theta" title="\nabla \doteq \nabla_\theta" />, et <img src="https://latex.codecogs.com/svg.image?\pi(a|s)\doteq\pi_\theta(a|s)" title="\pi(a|s)\doteq\pi_\theta(a|s)" />.
@@ -143,6 +146,8 @@ Ainsi :
 
 On retrouve la même forme que dans le cas épisodique. 
 
+</code>
+
 **En résumé**
 
 Dans les deux cas, on a donc :
@@ -153,6 +158,7 @@ Dans les deux cas, on a donc :
 Avec pour coefficient de proportionnalité:
 - <img src="https://latex.codecogs.com/svg.image?\sum_{s}&space;\eta(s)" title="\sum_{s} \eta(s)" /> dans le cas épisodique ;
 - 1 dans le cas continue.
+
 
 
 <br/>
