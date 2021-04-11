@@ -221,7 +221,36 @@ Autrement dit, on peut optimiser <img src="https://latex.codecogs.com/svg.image?
 	- Pour chaque étape de l'épisode <img src="https://latex.codecogs.com/svg.image?t=0,1,...,T-1,T" title="t=0,1,...,T-1,T" /> :
 		- <img src="https://latex.codecogs.com/svg.image?G\leftarrow&space;\sum_{k=t&plus;1}^T&space;\gamma^{k-t-1}R_k" title="G\leftarrow \sum_{k=t+1}^T \gamma^{k-t-1}R_k" />
 		- <img src="https://latex.codecogs.com/svg.image?\theta&space;\leftarrow&space;\theta&space;&plus;&space;\alpha&space;\gamma^t&space;\nabla\ln\pi(A_t|S_t,\theta)" title="\theta \leftarrow \theta + \alpha \gamma^t \nabla\ln\pi(A_t|S_t,\theta)" />
-		
+
+
+**Algorithme : REINFORCE avec valeurs de référence**
+
+L'algorithme **REINFORCE avec valeurs de référence** est variante bien connue de l'algorithme REINFORCE. Il s'agit simplement de retrancher au retour de l'épisode un valeur de référence pour l'estimation du gradient de la performance. Cette modification a pour effet de **réduire la variance** tout en assurant l'absence de biais.
+
+On utilise souvent la **valeur d'état** en guise de valeur de référence, de sorte que l'on utilise la **fonction d'avantage** dans la mise à jour du gradient.
+
+
+(voir l'article en ref, et synthétiser. Démo en 3 lignes ? Intuition ?)
+
+
+
+- Définir :
+	- <img src="https://latex.codecogs.com/svg.image?\alpha^w&space;\in&space;\mathbb{R}^{&plus;*}" title="\alpha^w \in \mathbb{R}^{+*}" /> pas d'apprentissage associé aux valeurs d'états
+	- <img src="https://latex.codecogs.com/svg.image?\alpha^\theta&space;\in&space;\mathbb{R}^{&plus;*}" title="\alpha^\theta \in \mathbb{R}^{+*}" />, pas d'apprentissage associé à la politique
+- Initialiser aléatoirement :
+	- <img src="https://latex.codecogs.com/svg.image?w&space;\in&space;\mathbb{R}^{d^\prime}" title="w \in \mathbb{R}^{d^\prime}" />, les poids associés aux valeurs d'états
+	- <img src="https://latex.codecogs.com/svg.image?\theta&space;\in&space;\mathbb{R}^{d}" title="\theta \in \mathbb{R}^{d}" />, les poids associés aux caractéristiques définissant la politique
+	
+- Pour chaque épisode :
+	- Générer la trajectoire <img src="https://latex.codecogs.com/svg.image?S_1,A_1,R_2,S_2,A_2,&space;...&space;,&space;A_{T-1},&space;S_T" title="S_1,A_1,R_2,S_2,A_2, ... , A_{T-1}, S_T" /> en suivant <img src="https://latex.codecogs.com/svg.image?\pi_\theta" title="\pi_\theta" />
+	- Pour chaque étape de l'épisode <img src="https://latex.codecogs.com/svg.image?t=0,1,...,T-1,T" title="t=0,1,...,T-1,T" /> :
+		- <img src="https://latex.codecogs.com/svg.image?G\leftarrow&space;\sum_{k=t&plus;1}^T&space;\gamma^{k-t-1}R_k" title="G\leftarrow \sum_{k=t+1}^T \gamma^{k-t-1}R_k" />
+		- <img src="https://latex.codecogs.com/svg.image?\delta&space;\leftarrow&space;G&space;-&space;\hat{v}(S_t,w)" title="\delta \leftarrow G - \hat{v}(S_t,w)" />
+		- <img src="https://latex.codecogs.com/svg.image?w&space;\leftarrow&space;w&space;&plus;&space;\alpha^w&space;\delta&space;\nabla&space;\hat{v}(S_t,w)" title="w \leftarrow w + \alpha^w \delta \nabla \hat{v}(S_t,w)" />
+		- <img src="https://latex.codecogs.com/svg.image?\theta&space;\leftarrow&space;\theta&space;&plus;&space;\alpha^\theta&space;\gamma^t&space;\delta&space;\nabla\ln\pi(A_t|S_t,\theta)" title="\theta \leftarrow \theta + \alpha^\theta \gamma^t \delta \nabla\ln\pi(A_t|S_t,\theta)" />
+
+
+
 
 
 
