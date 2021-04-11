@@ -72,6 +72,42 @@ On distingue le **cas épisodique** du **cas continue**, pour lesquels la foncti
 </p>
 
 
+On obtient une forme recursive, reliant l'état s à l'état suivant s'. (sur <img src="https://latex.codecogs.com/svg.image?\nabla&space;v_\pi(s^\prime)" title="\nabla v_\pi(s^\prime)" />.)
+
+
+
+Pour simplifier l'écriture, posons <img src="https://latex.codecogs.com/svg.image?\phi(s)&space;=&space;\sum_{a&space;\in&space;A}&space;\nabla&space;\pi(a|s)q_\pi(s,a)" title="\phi(s) = \sum_{a \in A} \nabla \pi(a|s)q_\pi(s,a)" />.
+
+Soit <img src="https://latex.codecogs.com/svg.image?p_\pi(s\rightarrow&space;s^\prime,&space;k)" title="p_\pi(s\rightarrow s^\prime, k)" /> la probabilité de transitionner d'un état <img src="https://latex.codecogs.com/svg.image?s" title="s" /> à <img src="https://latex.codecogs.com/svg.image?s^\prime" title="s^\prime" /> en suivant la politique <img src="https://latex.codecogs.com/svg.image?\pi_\theta" title="\pi_\theta" />. On notera <img src="https://latex.codecogs.com/svg.image?p_\pi(s\rightarrow&space;s^\prime,&space;k)&space;=&space;p(s\rightarrow&space;s^\prime,&space;k)" title="p_\pi(s\rightarrow s^\prime, k) = p(s\rightarrow s^\prime, k)" /> par commodité d'écriture.
+
+Cette probabilité s'exprime comme produit de la probabilité de choisir l'action <img src="https://latex.codecogs.com/svg.image?a" title="a" /> à partir de <img src="https://latex.codecogs.com/svg.image?s" title="s" /> (liée à la politique), et de la probabilité d'atteindre l'état <img src="https://latex.codecogs.com/svg.image?s^\prime" title="s^\prime" /> en partant de <img src="https://latex.codecogs.com/svg.image?(s,a)" title="(s,a)" /> (liée aux dynamiques de l'environnement). On somme les probabilités sur chaque action pour obtenir la probabilité de transition : <img src="https://latex.codecogs.com/svg.image?p(s\rightarrow&space;s^\prime,&space;k=1)=\sum_a&space;\pi(a|s)p(s^\prime|s,a)" title="p(s\rightarrow s^\prime, k=1)=\sum_a \pi(a|s)p(s^\prime|s,a)" />.
+
+Notons par ailleurs que l'on peut exprimer la probabilité de transitionner d'un état vers un autre sur plusieurs pas sous la forme d'un produit des probabilités de transitions intermédiaires. Pour <img src="https://latex.codecogs.com/svg.image?\forall&space;(s,s^\prime,s^{\prime\prime})&space;\in&space;S^3" title="\forall (s,s^\prime,s^{\prime\prime}) \in S^3" />, et <img src="https://latex.codecogs.com/svg.image?\forall&space;k\in\mathbb{N}^{*}" title="\forall k\in\mathbb{N}^{*}" />, on a : <img src="https://latex.codecogs.com/svg.image?p_\pi(s\rightarrow&space;s^{\prime\prime},&space;k)&space;=&space;p(s\rightarrow&space;s^\prime,&space;k-1)&space;p(s^\prime&space;\rightarrow&space;s^{\prime\prime},&space;1)" title="p_\pi(s\rightarrow s^{\prime\prime}, k) = p(s\rightarrow s^\prime, k-1) p(s^\prime \rightarrow s^{\prime\prime}, 1)" />.
+
+Grâce à ces expression, on peut dérouler la récursion :
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\begin{align*}&space;\nabla&space;v_\pi(s)&space;&=&space;\phi(s)&plus;&space;\sum_{a&space;\in&space;A}&space;\pi(a|s)&space;\sum_{s^\prime}p(s^\prime|s,a)&space;\nabla&space;v_\pi(s^\prime)&space;\\&=&space;\phi(s)&space;&plus;&space;p(s\rightarrow&space;s^\prime,1)&space;\nabla&space;v_\pi(s^\prime)&space;\\&=&space;\phi(s)&space;&plus;&space;p(s\rightarrow&space;s^\prime,1)(\phi(s^\prime)&space;&plus;&space;p(s^\prime&space;\rightarrow&space;s^{\prime&space;\prime},1)\nabla&space;v_\pi(s^{\prime&space;\prime}))&space;\\&=&space;\phi(s)&space;&plus;&space;p(s\rightarrow&space;s^\prime,1)\phi(s^\prime)&space;&plus;&space;p(s&space;\rightarrow&space;s^{\prime&space;\prime},2)\nabla&space;v_\pi(s^{\prime&space;\prime})&space;\\&=&space;\phi(s)&space;&plus;&space;p(s\rightarrow&space;s^\prime,1)\phi(s^\prime)&space;&plus;&space;p(s&space;\rightarrow&space;s^{\prime&space;\prime},2)\phi(s^{\prime&space;\prime})&space;&plus;&space;p(s&space;\rightarrow&space;s^{\prime&space;\prime&space;\prime},3)\phi(s^{\prime&space;\prime&space;\prime})&space;&plus;&space;...\\\nabla&space;v_\pi(s)&space;&=&space;\sum_x&space;\sum_{k=0}^{\infty}p(s\rightarrow&space;x,&space;k)\phi(s)\end{align*}" title="\begin{align*} \nabla v_\pi(s) &= \phi(s)+ \sum_{a \in A} \pi(a|s) \sum_{s^\prime}p(s^\prime|s,a) \nabla v_\pi(s^\prime) \\&= \phi(s) + p(s\rightarrow s^\prime,1) \nabla v_\pi(s^\prime) \\&= \phi(s) + p(s\rightarrow s^\prime,1)(\phi(s^\prime) + p(s^\prime \rightarrow s^{\prime \prime},1)\nabla v_\pi(s^{\prime \prime})) \\&= \phi(s) + p(s\rightarrow s^\prime,1)\phi(s^\prime) + p(s \rightarrow s^{\prime \prime},2)\nabla v_\pi(s^{\prime \prime}) \\&= \phi(s) + p(s\rightarrow s^\prime,1)\phi(s^\prime) + p(s \rightarrow s^{\prime \prime},2)\phi(s^{\prime \prime}) + p(s \rightarrow s^{\prime \prime \prime},3)\phi(s^{\prime \prime \prime}) + ...\\\nabla v_\pi(s) &= \sum_x \sum_{k=0}^{\infty}p(s\rightarrow x, k)\phi(s)\end{align*}" />
+</p>
+
+
+Le théorème du gradient de la politique fait intervenir la distribution stationnaire des états <img src="https://latex.codecogs.com/svg.image?\mu_\pi(s)" title="\mu_\pi(s)" /> (notée <img src="https://latex.codecogs.com/svg.image?\mu(s)" title="\mu(s)" />), définit de la façon suivante :
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\mu(s)&space;\doteq&space;\frac{\eta(s)&space;}{\sum_{s&space;\in&space;S}\eta(s^\prime)}" title="\mu(s) \doteq \frac{\eta(s) }{\sum_{s \in S}\eta(s^\prime)}" />
+</p>
+Où <img src="https://latex.codecogs.com/svg.image?\eta(s)" title="\eta(s)" /> est l'espérence du nombre de visite de s sur un épisode, soit : <img src="https://latex.codecogs.com/svg.image?\eta(s)&space;\doteq&space;\sum_{k=0}^{\infty}p(s_0\to&space;s&space;|k)" title="\eta(s) \doteq \sum_{k=0}^{\infty}p(s_0\to s |k)" />.
+
+Cette dernière forme peut nous permettre d'exprimer les probabilités de transitions sous forme d'espérence du nombre de visite, pour faire apparaître la distribution stationnaire. 
+
+Rappelons enfin que la performance correspond à la récompense espérée sur l'épisode en suivant <img src="https://latex.codecogs.com/svg.image?\pi" title="\pi" /> à partir de l'état initial, soit : <img src="https://latex.codecogs.com/svg.image?J(\theta)&space;\doteq&space;v(s_0)" title="J(\theta) \doteq v(s_0)" />. 
+
+Nous avons maintenant tout les éléments pour finir la démonstration :
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\begin{align*}&space;\nabla&space;J(\theta)&space;&=&space;\nabla&space;v(s_0)\\&=&space;\sum_{x&space;\in&space;S}&space;\sum_{k=0}^{\infty}p(s\rightarrow&space;x,&space;k)\sum_{a&space;\in&space;A}&space;\nabla&space;\pi(a|x)q_\pi(x,a)&space;\\&=&space;\sum_{x&space;\in&space;S}&space;\eta&space;(x)&space;\sum_{a&space;\in&space;A}&space;\nabla&space;\pi(a|x)&space;q_\pi(x,a)&space;\\&=&space;\sum_{x&space;\in&space;S}&space;(\sum_{s^\prime}&space;\eta(s^\prime))\frac{\eta&space;(x)}{\sum_{s^\prime}&space;\eta(s^\prime)}&space;\sum_{a&space;\in&space;A}&space;\nabla&space;\pi(a|x)&space;q_\pi(x,a)&space;\\\nabla&space;J(\theta)&space;&=&space;\sum_{s^\prime}&space;\eta(s^\prime)&space;\sum_{x&space;\in&space;S}&space;\mu(s)&space;\sum_{a&space;\in&space;A}&space;\nabla&space;\pi(a|x)&space;q_\pi(x,a)&space;\\\nabla&space;J(\theta)&space;&\propto&space;\sum_{x&space;\in&space;S}&space;\mu(s)&space;\sum_{a&space;\in&space;A}&space;\nabla&space;\pi(a|x)&space;q_\pi(x,a)\end{align*}" title="\begin{align*} \nabla J(\theta) &= \nabla v(s_0)\\&= \sum_{x \in S} \sum_{k=0}^{\infty}p(s\rightarrow x, k)\sum_{a \in A} \nabla \pi(a|x)q_\pi(x,a) \\&= \sum_{x \in S} \eta (x) \sum_{a \in A} \nabla \pi(a|x) q_\pi(x,a) \\&= \sum_{x \in S} (\sum_{s^\prime} \eta(s^\prime))\frac{\eta (x)}{\sum_{s^\prime} \eta(s^\prime)} \sum_{a \in A} \nabla \pi(a|x) q_\pi(x,a) \\\nabla J(\theta) &= \sum_{s^\prime} \eta(s^\prime) \sum_{x \in S} \mu(s) \sum_{a \in A} \nabla \pi(a|x) q_\pi(x,a) \\\nabla J(\theta) &\propto \sum_{x \in S} \mu(s) \sum_{a \in A} \nabla \pi(a|x) q_\pi(x,a)\end{align*}" />
+</p>
+
+
  
 **Cas continue**
 
@@ -114,7 +150,7 @@ Dans les deux cas, on a donc :
 </p>
 
 Avec pour coefficient de proportionnalité:
-- (...) dans le cas épisodique ;
+- <img src="https://latex.codecogs.com/svg.image?\sum_{s}&space;\eta(s)" title="\sum_{s} \eta(s)" />dans le cas épisodique ;
 - 1 dans le cas continue.
 
 
