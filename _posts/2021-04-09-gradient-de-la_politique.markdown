@@ -215,12 +215,12 @@ Autrement dit, on peut optimiser <img src="https://latex.codecogs.com/svg.image?
 
 **Algorithme : REINFORCE**
 
-0. Initialiser aléatoirement les valeurs du vecteur <img src="https://latex.codecogs.com/svg.image?\theta" title="\theta" />, définissant la politique
-1. Pour chaque épisode :
-	1.1. Générer la trajectoire <img src="https://latex.codecogs.com/svg.image?S_1,A_1,R_2,S_2,A_2,&space;...&space;,&space;A_{T-1},&space;S_T" title="S_1,A_1,R_2,S_2,A_2, ... , A_{T-1}, S_T" /> en suivant <img src="https://latex.codecogs.com/svg.image?\pi_\theta" title="\pi_\theta" />
-	1.2. Pour chaque étape de l'épisode <img src="https://latex.codecogs.com/svg.image?t=0,1,...,T-1,T" title="t=0,1,...,T-1,T" /> :
-		<img src="https://latex.codecogs.com/svg.image?G\leftarrow&space;\sum_{k=t&plus;1}^T&space;\gamma^{k-t-1}R_k" title="G\leftarrow \sum_{k=t+1}^T \gamma^{k-t-1}R_k" />
-		<img src="https://latex.codecogs.com/svg.image?\theta&space;\leftarrow&space;\theta&space;&plus;&space;\alpha&space;\gamma^t&space;\nabla\ln\pi(A_t|S_t,\theta)" title="\theta \leftarrow \theta + \alpha \gamma^t \nabla\ln\pi(A_t|S_t,\theta)" />
+- Initialiser aléatoirement les valeurs du vecteur <img src="https://latex.codecogs.com/svg.image?\theta" title="\theta" />, définissant la politique
+- Pour chaque épisode :
+	- Générer la trajectoire <img src="https://latex.codecogs.com/svg.image?S_1,A_1,R_2,S_2,A_2,&space;...&space;,&space;A_{T-1},&space;S_T" title="S_1,A_1,R_2,S_2,A_2, ... , A_{T-1}, S_T" /> en suivant <img src="https://latex.codecogs.com/svg.image?\pi_\theta" title="\pi_\theta" />
+	- Pour chaque étape de l'épisode <img src="https://latex.codecogs.com/svg.image?t=0,1,...,T-1,T" title="t=0,1,...,T-1,T" /> :
+		- <img src="https://latex.codecogs.com/svg.image?G\leftarrow&space;\sum_{k=t&plus;1}^T&space;\gamma^{k-t-1}R_k" title="G\leftarrow \sum_{k=t+1}^T \gamma^{k-t-1}R_k" />
+		- <img src="https://latex.codecogs.com/svg.image?\theta&space;\leftarrow&space;\theta&space;&plus;&space;\alpha&space;\gamma^t&space;\nabla\ln\pi(A_t|S_t,\theta)" title="\theta \leftarrow \theta + \alpha \gamma^t \nabla\ln\pi(A_t|S_t,\theta)" />
 		
 
 
