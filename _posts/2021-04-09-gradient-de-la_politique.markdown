@@ -200,7 +200,7 @@ Et la fonction d'avantage :
 
 ## Algorithmes du Gradient de la Politique
 
-<br/>
+Dans tous les algorithmes suivant font mention du paramètre <img src="https://latex.codecogs.com/svg.image?\gamma&space;\in&space;&space;\]0;1\]" title="\gamma \in \]0;1\]" />, le facteur de réduction. Sa définition est implicite pour tous les algorithmes.
 
 ### REINFORCE
 
