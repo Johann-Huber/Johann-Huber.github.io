@@ -225,7 +225,7 @@ Autrement dit, on peut optimiser <img src="https://latex.codecogs.com/svg.image?
 - Définir <img src="https://latex.codecogs.com/svg.image?\alpha" title="\alpha" />, le pas d'apprentissage associé à la politique
 - Initialiser aléatoirement <img src="https://latex.codecogs.com/svg.image?\theta&space;\in&space;\mathbb{R}^{d}" title="\theta \in \mathbb{R}^{d}" />, les poids associés aux caractéristiques définissant la politique
 
-<ins>Execution :</ins>
+<ins>Exécution :</ins>
 - Pour chaque épisode :
 	- Générer la trajectoire <img src="https://latex.codecogs.com/svg.image?S_1,A_1,R_2,S_2,A_2,&space;...&space;,&space;A_{T-1},&space;S_T" title="S_1,A_1,R_2,S_2,A_2, ... , A_{T-1}, S_T" /> en suivant <img src="https://latex.codecogs.com/svg.image?\pi_\theta" title="\pi_\theta" />
 	- Pour chaque étape de l'épisode <img src="https://latex.codecogs.com/svg.image?t=0,1,...,T-1,T" title="t=0,1,...,T-1,T" /> :
@@ -254,7 +254,7 @@ On utilise souvent la **valeur d'état** en guise de valeur de référence, de s
 	- <img src="https://latex.codecogs.com/svg.image?w&space;\in&space;\mathbb{R}^{d^\prime}" title="w \in \mathbb{R}^{d^\prime}" />, les poids associés aux valeurs d'états
 	- <img src="https://latex.codecogs.com/svg.image?\theta&space;\in&space;\mathbb{R}^{d}" title="\theta \in \mathbb{R}^{d}" />, les poids associés aux caractéristiques définissant la politique
 	
-<ins>Execution :</ins>
+<ins>Exécution :</ins>
 - Pour chaque épisode :
 	- Générer la trajectoire <img src="https://latex.codecogs.com/svg.image?S_1,A_1,R_2,S_2,A_2,&space;...&space;,&space;A_{T-1},&space;S_T" title="S_1,A_1,R_2,S_2,A_2, ... , A_{T-1}, S_T" /> en suivant <img src="https://latex.codecogs.com/svg.image?\pi_\theta" title="\pi_\theta" />
 	- Pour chaque étape de l'épisode <img src="https://latex.codecogs.com/svg.image?t=0,1,...,T-1,T" title="t=0,1,...,T-1,T" /> :
@@ -291,7 +291,7 @@ En résumé : la politique agit, et le retour 1-pas critique.
 	- <img src="https://latex.codecogs.com/svg.image?w&space;\in&space;\mathbb{R}^{d^\prime}" title="w \in \mathbb{R}^{d^\prime}" />, les poids associés aux valeurs d'états
 	- <img src="https://latex.codecogs.com/svg.image?\theta&space;\in&space;\mathbb{R}^{d}" title="\theta \in \mathbb{R}^{d}" />, les poids associés aux caractéristiques définissant la politique
 	
-<ins>Execution :</ins>
+<ins>Exécution :</ins>
 - Pour chaque épisode :
 	- Initialiser S (premier état de l'épisode)
 	- <img src="https://latex.codecogs.com/svg.image?I&space;\leftarrow&space;1" title="I \leftarrow 1" /> (coefficient de réduction cumulée)
@@ -312,7 +312,46 @@ Par convention, on a <img src="https://latex.codecogs.com/svg.image?\hat{v}(S^\p
 <br/>
 
 
+### Acteur-Critique Hors-Politique
 
+
+Tout les algorithmes jusqu'ici présentés optimisent la politique qui a été utilisée pour recolter les échantillons de trajectoires. Dans cette section, nous abordons une variante de l'algorithme Acteur-Critique dans laquelle **la politique d'exploration n'est pas la même que la politique cible**. Une telle approche permet, entre autre, d'avoir la politique la plus efficace possible pour l'exploration, plutôt que de contraindre la politique que l'on est en train d'optimiser à aller parfois explorer de nouvelles trajectoires.
+
+
+(Ajouter démo de la règle de mise à jour)
+
+
+
+**Algorithme : Acteur-critique Hors-Politique (épisodique)**
+
+<ins>Initialisation :</ins>
+- Définir :
+	- <img src="https://latex.codecogs.com/svg.image?e_v&space;\leftarrow&space;0" title="e_v \leftarrow 0" />, (trace d'éligibilité sur les valeurs ?)
+	- <img src="https://latex.codecogs.com/svg.image?e_u&space;\leftarrow&space;0" title="e_u \leftarrow 0" />, (trace d'éligibilité sur la politique ?)
+	- <img src="https://latex.codecogs.com/svg.image?w&space;\leftarrow&space;0" title="w \leftarrow 0" />, (? utilisation de w (i) ?)
+	- <img src="https://latex.codecogs.com/svg.image?S&space;\leftarrow&space;S_0" title="S \leftarrow S_0" />, état initial
+- Initialiser aléatoirement :
+	- v, les poids associés aux valeurs d'états
+	- u, les poids associés aux caractéristiques définissant la politique
+	
+<ins>Exécution :</ins>
+- Pour chaque étape :
+	- <img src="https://latex.codecogs.com/svg.image?a&space;\sim&space;b(\cdot|s)" title="a \sim b(\cdot|s)" />
+	- Appliquer l'action a, observer (s',r)
+	- <img src="https://latex.codecogs.com/svg.image?\delta&space;\leftarrow&space;r&space;&plus;&space;\gamma(s^\prime)&space;v^Tx_{s^\prime}&space;-&space;v^Tx_s" title="\delta \leftarrow r + \gamma(s^\prime) v^Tx_{s^\prime} - v^Tx_s" />
+	- <img src="https://latex.codecogs.com/svg.image?\rho&space;\leftarrow&space;\frac{\pi_u(a|s)}{b(a|s)}" title="\rho \leftarrow \frac{\pi_u(a|s)}{b(a|s)}" />
+	- Mettre à jour le critique :
+		- <img src="https://latex.codecogs.com/svg.image?e_v&space;\leftarrow&space;\rho(x_s&plus;\gamma(s)\lambda&space;e_v)" title="e_v \leftarrow \rho(x_s+\gamma(s)\lambda e_v)" />
+		- <img src="https://latex.codecogs.com/svg.image?v&space;\leftarrow&space;v&space;&plus;&space;\alpha_v[\delta&space;e_v&space;-&space;\gamma(s^\prime)(1-\lambda)(w^Te_v)x_s]" title="v \leftarrow v + \alpha_v[\delta e_v - \gamma(s^\prime)(1-\lambda)(w^Te_v)x_s]" />
+		- <img src="https://latex.codecogs.com/svg.image?w&space;\leftarrow&space;w&space;&plus;&space;\alpha_w[\delta&space;e_v&space;-&space;(w^Tx_s)x_s]" title="w \leftarrow w + \alpha_w[\delta e_v - (w^Tx_s)x_s]" />
+	- Mettre à jour l'acteur :
+		- <img src="https://latex.codecogs.com/svg.image?e_u&space;\leftarrow&space;\rho&space;[\frac{\nabla_u\pi_u(a|s)}{\pi_u(a|s)}&plus;\gamma(s)\lambda&space;e_u]" title="e_u \leftarrow \rho [\frac{\nabla_u\pi_u(a|s)}{\pi_u(a|s)}+\gamma(s)\lambda e_u]" />
+		- <img src="https://latex.codecogs.com/svg.image?u&space;\leftarrow&space;u&space;&plus;&space;\alpha_u&space;\delta&space;e_u" title="u \leftarrow u + \alpha_u \delta e_u" />
+	
+	- <img src="https://latex.codecogs.com/svg.image?s&space;\leftarrow&space;s^\prime" title="s \leftarrow s^\prime" />
+	
+
+Avec <img src="https://latex.codecogs.com/svg.image?x_s" title="x_s" />, le vecteur de caractéristique correspondant à l'état observé <img src="https://latex.codecogs.com/svg.image?s" title="s" />.
 
 
 
