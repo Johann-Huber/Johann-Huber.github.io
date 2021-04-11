@@ -249,6 +249,7 @@ On utilise souvent la **valeur d'état** en guise de valeur de référence, de s
 - Initialiser aléatoirement :
 	- <img src="https://latex.codecogs.com/svg.image?w&space;\in&space;\mathbb{R}^{d^\prime}" title="w \in \mathbb{R}^{d^\prime}" />, les poids associés aux valeurs d'états
 	- <img src="https://latex.codecogs.com/svg.image?\theta&space;\in&space;\mathbb{R}^{d}" title="\theta \in \mathbb{R}^{d}" />, les poids associés aux caractéristiques définissant la politique
+	
 <ins>Execution :</ins>
 - Pour chaque épisode :
 	- Générer la trajectoire <img src="https://latex.codecogs.com/svg.image?S_1,A_1,R_2,S_2,A_2,&space;...&space;,&space;A_{T-1},&space;S_T" title="S_1,A_1,R_2,S_2,A_2, ... , A_{T-1}, S_T" /> en suivant <img src="https://latex.codecogs.com/svg.image?\pi_\theta" title="\pi_\theta" />
@@ -285,6 +286,7 @@ En résumé : la politique agit, et le retour 1-pas critique.
 - Initialiser aléatoirement :
 	- <img src="https://latex.codecogs.com/svg.image?w&space;\in&space;\mathbb{R}^{d^\prime}" title="w \in \mathbb{R}^{d^\prime}" />, les poids associés aux valeurs d'états
 	- <img src="https://latex.codecogs.com/svg.image?\theta&space;\in&space;\mathbb{R}^{d}" title="\theta \in \mathbb{R}^{d}" />, les poids associés aux caractéristiques définissant la politique
+	
 <ins>Execution :</ins>
 - Pour chaque épisode :
 	- Initialiser S (premier état de l'épisode)
@@ -292,8 +294,8 @@ En résumé : la politique agit, et le retour 1-pas critique.
 	- Tant que S n'est pas terminal (pour chaque pas de temps) :
 		- <img src="https://latex.codecogs.com/svg.image?A&space;\sim&space;\pi(\cdot|s,\theta)" title="A \sim \pi(\cdot|s,\theta)" />
 		- Appliquer l'action A, observer (S',R)
-		- <img src="https://latex.codecogs.com/svg.image?\delta&space;\leftarrow&space;R&space;&plus;&space;\gamma&space;\hat{v}(S^\prime,w)&space;-&space;\hat{v}(S,w)" title="\delta \leftarrow R + \gamma \hat{v}(S^\prime,w) - \hat{v}(S,w)" />		(si S' est terminal, <img src="https://latex.codecogs.com/svg.image?\hat{v}(S^\prime,w)&space;\doteq&space;0" title="\hat{v}(S^\prime,w) \doteq 0" />)
-		- <<img src="https://latex.codecogs.com/svg.image?w&space;\leftarrow&space;w&space;&plus;&space;\alpha^w&space;\delta&space;\nabla&space;\hat{v}(S,w)" title="w \leftarrow w + \alpha^w \delta \nabla \hat{v}(S,w)" />
+		- <img src="https://latex.codecogs.com/svg.image?\delta&space;\leftarrow&space;R&space;&plus;&space;\gamma&space;\hat{v}(S^\prime,w)&space;-&space;\hat{v}(S,w)" title="\delta \leftarrow R + \gamma \hat{v}(S^\prime,w) - \hat{v}(S,w)" /> <pre>			</ pre>(si S' est terminal, <img src="https://latex.codecogs.com/svg.image?\hat{v}(S^\prime,w)&space;\doteq&space;0" title="\hat{v}(S^\prime,w) \doteq 0" />)	
+		- <img src="https://latex.codecogs.com/svg.image?w&space;\leftarrow&space;w&space;&plus;&space;\alpha^w&space;\delta&space;\nabla&space;\hat{v}(S,w)" title="w \leftarrow w + \alpha^w \delta \nabla \hat{v}(S,w)" />
 		- <img src="https://latex.codecogs.com/svg.image?\theta&space;\leftarrow&space;\theta&space;&plus;&space;\alpha^\theta&space;I&space;\delta&space;\nabla\ln\pi(A|S,\theta)" title="\theta \leftarrow \theta + \alpha^\theta I \delta \nabla\ln\pi(A|S,\theta)" />
 		- <img src="https://latex.codecogs.com/svg.image?I&space;\leftarrow&space;\gamma&space;I" title="I \leftarrow \gamma I" />
 		- <img src="https://latex.codecogs.com/svg.image?S&space;\leftarrow&space;S^\prime" title="S \leftarrow S^\prime" />
