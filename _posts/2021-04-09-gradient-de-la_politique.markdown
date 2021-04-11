@@ -294,7 +294,7 @@ En résumé : la politique agit, et le retour 1-pas critique.
 	- Tant que S n'est pas terminal (pour chaque pas de temps) :
 		- <img src="https://latex.codecogs.com/svg.image?A&space;\sim&space;\pi(\cdot|s,\theta)" title="A \sim \pi(\cdot|s,\theta)" />
 		- Appliquer l'action A, observer (S',R)
-		- <img src="https://latex.codecogs.com/svg.image?\delta&space;\leftarrow&space;R&space;&plus;&space;\gamma&space;\hat{v}(S^\prime,w)&space;-&space;\hat{v}(S,w)" title="\delta \leftarrow R + \gamma \hat{v}(S^\prime,w) - \hat{v}(S,w)" /> <pre>			</ pre>(si S' est terminal, <img src="https://latex.codecogs.com/svg.image?\hat{v}(S^\prime,w)&space;\doteq&space;0" title="\hat{v}(S^\prime,w) \doteq 0" />)	
+		- <img src="https://latex.codecogs.com/svg.image?\delta&space;\leftarrow&space;R&space;&plus;&space;\gamma&space;\hat{v}(S^\prime,w)&space;-&space;\hat{v}(S,w)" title="\delta \leftarrow R + \gamma \hat{v}(S^\prime,w) - \hat{v}(S,w)" /> <pre>			</pre>(si S' est terminal, <img src="https://latex.codecogs.com/svg.image?\hat{v}(S^\prime,w)&space;\doteq&space;0" title="\hat{v}(S^\prime,w) \doteq 0" />)	
 		- <img src="https://latex.codecogs.com/svg.image?w&space;\leftarrow&space;w&space;&plus;&space;\alpha^w&space;\delta&space;\nabla&space;\hat{v}(S,w)" title="w \leftarrow w + \alpha^w \delta \nabla \hat{v}(S,w)" />
 		- <img src="https://latex.codecogs.com/svg.image?\theta&space;\leftarrow&space;\theta&space;&plus;&space;\alpha^\theta&space;I&space;\delta&space;\nabla\ln\pi(A|S,\theta)" title="\theta \leftarrow \theta + \alpha^\theta I \delta \nabla\ln\pi(A|S,\theta)" />
 		- <img src="https://latex.codecogs.com/svg.image?I&space;\leftarrow&space;\gamma&space;I" title="I \leftarrow \gamma I" />
