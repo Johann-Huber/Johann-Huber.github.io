@@ -138,7 +138,7 @@ Par définition, <img src="https://latex.codecogs.com/svg.image?J(\theta)=r(\the
 
 Ainsi :
 <p align="center">
-	<img src="https://latex.codecogs.com/svg.image?\begin{align*}&space;\nabla&space;J(\theta)&space;&=&space;\sum_s&space;\mu(s)&space;(\sum_a&space;(\nabla\pi(a|s)q_\pi(s,a)&space;&plus;&space;\pi(a|s)\sum_{s^\prime}p(s^\prime|s,a)\nabla&space;v_\pi(s^\prime))-\nabla&space;v_\pi(s))&space;\\&=&space;\sum_s&space;\mu(s)&space;\sum_a&space;\nabla\pi(a|s)q_\pi(s,a)&space;&plus;&space;\sum_{s^\prime}&space;\sum_{s}&space;\mu(s)&space;\sum_a&space;\pi(a|s)p(s^\prime|s,a)\nabla&space;v_\pi(s^\prime)&space;-&space;\sum_s&space;\mu(s)&space;\nabla&space;v_\pi(s)&space;\\&=&space;\sum_s&space;\mu(s)&space;\sum_a&space;\nabla\pi(a|s)q_\pi(s,a)&space;&plus;&space;\sum_{s^\prime}&space;\mu(s^\prime)\nabla&space;v_\pi(s^\prime)&space;-&space;\sum_s&space;\mu(s)&space;\nabla&space;v_\pi(s)&space;\\\nabla&space;J(\theta)&space;&=&space;\sum_s&space;\mu(s)&space;\sum_a&space;\nabla\pi(a|s)q_\pi(s,a)\end{align*}" title="\begin{align*} \nabla J(\theta) &= \sum_s \mu(s) (\sum_a (\nabla\pi(a|s)q_\pi(s,a) + \pi(a|s)\sum_{s^\prime}p(s^\prime|s,a)\nabla v_\pi(s^\prime))-\nabla v_\pi(s)) \\&= \sum_s \mu(s) \sum_a \nabla\pi(a|s)q_\pi(s,a) + \sum_{s^\prime} \sum_{s} \mu(s) \sum_a \pi(a|s)p(s^\prime|s,a)\nabla v_\pi(s^\prime) - \sum_s \mu(s) \nabla v_\pi(s) \\&= \sum_s \mu(s) \sum_a \nabla\pi(a|s)q_\pi(s,a) + \sum_{s^\prime} \mu(s^\prime)\nabla v_\pi(s^\prime) - \sum_s \mu(s) \nabla v_\pi(s) \\\nabla J(\theta) &= \sum_s \mu(s) \sum_a \nabla\pi(a|s)q_\pi(s,a)\end{align*}" />
+	<img src="https://latex.codecogs.com/svg.image?\begin{align*}&space;\nabla&space;J(\theta)&space;&=&space;\sum_s&space;\mu(s)&space;(\sum_a&space;(\nabla\pi(a|s)q_\pi(s,a)&space;&plus;&space;\pi(a|s)\sum_{s^\prime}p(s^\prime|s,a)\nabla&space;v_\pi(s^\prime))-\nabla&space;v_\pi(s))&space;\\&=&space;\sum_s&space;\mu(s)&space;\sum_a&space;\nabla\pi(a|s)q_\pi(s,a)&space;&plus;&space;\sum_{s^\prime}&space;\sum_{s}&space;\mu(s)&space;\sum_a&space;\pi(a|s)p(s^\prime|s,a)\nabla&space;v_\pi(s^\prime)&space;-&space;\sum_s&space;\mu(s)&space;\nabla&space;v_\pi(s)&space;\\&=&space;\sum_s&space;\mu(s)&space;\sum_a&space;\nabla\pi(a|s)q_\pi(s,a)&space;&plus;&space;\sum_{s^\prime}&space;\mu(s^\prime)\nabla&space;v_\pi(s^\prime)&space;-&space;\sum_s&space;\mu(s)&space;\nabla&space;v_\pi(s)&space;\\\nabla&space;J(\theta)&space;&=&space;\sum_s&space;\mu(s)&space;\sum_a&space;\nabla\pi(a|s)q_\pi(s,a)\end{align*}" title="	" />
 </p>
 
 On retrouve la même forme que dans le cas épisodique. 
@@ -155,6 +155,7 @@ Avec pour coefficient de proportionnalité:
 - 1 dans le cas continue.
 
 
+<br/>
 
 ### Généralisation aux algorithmes du gradient de la politique
 
@@ -184,18 +185,50 @@ Avec <img src="https://latex.codecogs.com/svg.image?\Psi_t" title="\Psi_t" />, l
 - <img src="https://latex.codecogs.com/svg.image?r_t&space;&plus;&space;v_\pi(s_{t&plus;1})-v_\pi(s_t)" title="r_t + v_\pi(s_{t+1})-v_\pi(s_t)" /> : résidu TD (différence temporelle)
 
 
-Avec les fonctions de valeurs : <img src="https://latex.codecogs.com/svg.image?v_\pi&space;(s_t)&space;\doteq&space;\mathop{\mathbb{E}}_{s_{t&plus;1}:\infty,a_t:\infty}[\sum_{l=0}^\infty&space;r_{t&plus;l}]" title="v_\pi (s_t) \doteq \mathop{\mathbb{E}}_{s_{t+1}:\infty,a_t:\infty}[\sum_{l=0}^\infty r_{t+l}]" /> et <img src="https://latex.codecogs.com/svg.image?q_\pi&space;(s_t,a_t)&space;\doteq&space;\mathop{\mathbb{E}}_{s_{t&plus;1}:\infty,a_{t&plus;1}:\infty}[\sum_{l=0}^\infty&space;r_{t&plus;l}]" title="q_\pi (s_t,a_t) \doteq \mathop{\mathbb{E}}_{s_{t+1}:\infty,a_{t+1}:\infty}[\sum_{l=0}^\infty r_{t+l}]" />
+Avec les fonctions de valeurs : 
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?v_\pi&space;(s_t)&space;\doteq&space;\mathop{\mathbb{E}}_{s_{t&plus;1}:\infty,a_t:\infty}[\sum_{l=0}^\infty&space;r_{t&plus;l}]" title="v_\pi (s_t) \doteq \mathop{\mathbb{E}}_{s_{t+1}:\infty,a_t:\infty}[\sum_{l=0}^\infty r_{t+l}]" />
+	<img src="https://latex.codecogs.com/svg.image?q_\pi&space;(s_t,a_t)&space;\doteq&space;\mathop{\mathbb{E}}_{s_{t&plus;1}:\infty,a_{t&plus;1}:\infty}[\sum_{l=0}^\infty&space;r_{t&plus;l}]" title="q_\pi (s_t,a_t) \doteq \mathop{\mathbb{E}}_{s_{t+1}:\infty,a_{t+1}:\infty}[\sum_{l=0}^\infty r_{t+l}]" />
+</p>
 
-Et la fonction d'avantage : <img src="https://latex.codecogs.com/svg.image?A_\pi(s_t,a_t)&space;\doteq&space;q_\pi(s_t,a_t)-v_\pi(s_t)" title="A_\pi(s_t,a_t) \doteq q_\pi(s_t,a_t)-v_\pi(s_t)" />
+Et la fonction d'avantage : 
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?A_\pi(s_t,a_t)&space;\doteq&space;q_\pi(s_t,a_t)-v_\pi(s_t)" title="A_\pi(s_t,a_t) \doteq q_\pi(s_t,a_t)-v_\pi(s_t)" />
+</p>
 
-
+<br/>
 
 ## Algorithmes du Gradient de la Politique
 
+<br/>
 
 ### REINFORCE
 
-(...)
+L'algorithme **REINFORCE** (gradient de la Politique avec méthode Monte-Carlo) repose sur l'expression du gradient de la performance obtenue dans le Théorème du Gradient de la Politique, appliqué aux échantillons d'épisodes. En constatant que <img src="https://latex.codecogs.com/svg.image?q_\pi(s_t,a_t)=&space;\mathop{\mathbb{E}}_\pi[G_t&space;|s_t,&space;a_t]" title="q_\pi(s_t,a_t)= \mathop{\mathbb{E}}_\pi[G_t |s_t, a_t]" />, on trouve :
+
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\begin{align*}&space;\nabla_\theta&space;J(\theta)&space;&=&space;\mathop{\mathbb{E}}_\pi[q_\pi(s,a)&space;\nabla_\theta\ln\pi_\theta(a,s)]&space;\\&=&space;\mathop{\mathbb{E}}_\pi[G_t&space;\nabla_\theta\ln\pi_\theta(a,s)]\end{align*}" title="\begin{align*} \nabla_\theta J(\theta) &= \mathop{\mathbb{E}}_\pi[q_\pi(s,a) \nabla_\theta\ln\pi_\theta(a,s)] \\&= \mathop{\mathbb{E}}_\pi[G_t \nabla_\theta\ln\pi_\theta(a,s)]\end{align*}" />
+</p>
+
+Autrement dit, on peut optimiser <img src="https://latex.codecogs.com/svg.image?\theta" title="\theta" /> à partir du retour obtenu au cours d'un épisode. Cette approche exploite la trajectoire observée sur l'épisode entier pour faire ses mises à jours, c'est pourquoi on parle de méthode de type Monte Carlo.
+
+**Algorithme : REINFORCE**
+
+0. Initialiser aléatoirement les valeurs du vecteur <img src="https://latex.codecogs.com/svg.image?\theta" title="\theta" />, définissant la politique
+1. Pour chaque épisode :
+	1.1. Générer la trajectoire <img src="https://latex.codecogs.com/svg.image?S_1,A_1,R_2,S_2,A_2,&space;...&space;,&space;A_{T-1},&space;S_T" title="S_1,A_1,R_2,S_2,A_2, ... , A_{T-1}, S_T" /> en suivant <img src="https://latex.codecogs.com/svg.image?\pi_\theta" title="\pi_\theta" />
+	1.2. Pour chaque étape de l'épisode <img src="https://latex.codecogs.com/svg.image?t=0,1,...,T-1,T" title="t=0,1,...,T-1,T" /> :
+		<img src="https://latex.codecogs.com/svg.image?G\leftarrow&space;\sum_{k=t&plus;1}^T&space;\gamma^{k-t-1}R_k" title="G\leftarrow \sum_{k=t+1}^T \gamma^{k-t-1}R_k" />
+		<img src="https://latex.codecogs.com/svg.image?\theta&space;\leftarrow&space;\theta&space;&plus;&space;\alpha&space;\gamma^t&space;\nabla\ln\pi(A_t|S_t,\theta)" title="\theta \leftarrow \theta + \alpha \gamma^t \nabla\ln\pi(A_t|S_t,\theta)" />
+		
+
+
+
+
+
+
+<br/>
 
 ### Acteur-Critique
 
