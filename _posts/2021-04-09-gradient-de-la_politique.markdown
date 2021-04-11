@@ -168,7 +168,7 @@ Cette forme constitue les fondements de la plupart des algorithmes du gradient d
 
 L'article Estimation de l'Avantage Généralisée (GAE) [Schulman et al., 2016](https://arxiv.org/pdf/1506.02438.pdf) ((i) trad ?) propose une forme une forme générale du gradient de la performance, mettant en lumière les différentes déclinaison de cette forme que l'on peut trouver dans la littérature :
 
-En posant g, le gradient de la performance, tel que : <img src="https://latex.codecogs.com/svg.image?g&space;\doteq&space;\nabla_\theta&space;\mathop{\mathbb{E}}[\sum_{t=0}^\infty&space;r_t]" title="g \doteq \nabla_\theta \mathop{\mathbb{E}}[\sum_{t=0}^\infty r_t]" />
+En posant g, le gradient de la performance, tel que <img src="https://latex.codecogs.com/svg.image?g&space;\doteq&space;\nabla_\theta&space;\mathop{\mathbb{E}}[\sum_{t=0}^\infty&space;r_t]" title="g \doteq \nabla_\theta \mathop{\mathbb{E}}[\sum_{t=0}^\infty r_t]" />
 
 On a la forme générale : 
 <p align="center">
@@ -176,12 +176,12 @@ On a la forme générale :
 </p>
 
 Avec <img src="https://latex.codecogs.com/svg.image?\Psi_t" title="\Psi_t" />, l'une des fonctions suivantes :
-1. <img src="https://latex.codecogs.com/svg.image?\sum_{t=0}^\infty&space;r_{t}" title="\sum_{t=0}^\infty r_{t}" /> : retour total de la trajectoire
-2. <img src="https://latex.codecogs.com/svg.image?\sum_{t^\prime=t}^\infty&space;r_{t^\prime}" title="\sum_{t^\prime=t}^\infty r_{t^\prime}" /> : retour suivant l'action <img src="https://latex.codecogs.com/svg.image?a_t" title="a_t" />
-3. <img src="https://latex.codecogs.com/svg.image?\sum_{t^\prime=t}^\infty&space;r_{t^\prime}-b(s_t)" title="\sum_{t^\prime=t}^\infty r_{t^\prime}-b(s_t)" /> : formule précédente, avec valeurs de références
-4. <img src="https://latex.codecogs.com/svg.image?q_\pi(s_t,a_t)" title="q_\pi(s_t,a_t)" /> : fonction de valeur d'état-action
-5. <img src="https://latex.codecogs.com/svg.image?A_\pi(s_t,a_t)" title="A_\pi(s_t,a_t)" /> : fonction d'avantage
-6. <img src="https://latex.codecogs.com/svg.image?r_t&space;&plus;&space;v_\pi(s_{t&plus;1})-v_\pi(s_t)" title="r_t + v_\pi(s_{t+1})-v_\pi(s_t)" /> : résidu TD (différence temporelle)
+- <img src="https://latex.codecogs.com/svg.image?\sum_{t=0}^\infty&space;r_{t}" title="\sum_{t=0}^\infty r_{t}" /> : retour total de la trajectoire
+- <img src="https://latex.codecogs.com/svg.image?\sum_{t^\prime=t}^\infty&space;r_{t^\prime}" title="\sum_{t^\prime=t}^\infty r_{t^\prime}" /> : retour suivant l'action <img src="https://latex.codecogs.com/svg.image?a_t" title="a_t" />
+- <img src="https://latex.codecogs.com/svg.image?\sum_{t^\prime=t}^\infty&space;r_{t^\prime}-b(s_t)" title="\sum_{t^\prime=t}^\infty r_{t^\prime}-b(s_t)" /> : formule précédente, avec valeurs de références
+- <img src="https://latex.codecogs.com/svg.image?q_\pi(s_t,a_t)" title="q_\pi(s_t,a_t)" /> : fonction de valeur d'état-action
+- <img src="https://latex.codecogs.com/svg.image?A_\pi(s_t,a_t)" title="A_\pi(s_t,a_t)" /> : fonction d'avantage
+- <img src="https://latex.codecogs.com/svg.image?r_t&space;&plus;&space;v_\pi(s_{t&plus;1})-v_\pi(s_t)" title="r_t + v_\pi(s_{t+1})-v_\pi(s_t)" /> : résidu TD (différence temporelle)
 
 
 Avec les fonctions de valeurs : <img src="https://latex.codecogs.com/svg.image?v_\pi&space;(s_t)&space;\doteq&space;\mathop{\mathbb{E}}_{s_{t&plus;1}:\infty,a_t:\infty}[\sum_{l=0}^\infty&space;r_{t&plus;l}]" title="v_\pi (s_t) \doteq \mathop{\mathbb{E}}_{s_{t+1}:\infty,a_t:\infty}[\sum_{l=0}^\infty r_{t+l}]" /> et <img src="https://latex.codecogs.com/svg.image?q_\pi&space;(s_t,a_t)&space;\doteq&space;\mathop{\mathbb{E}}_{s_{t&plus;1}:\infty,a_{t&plus;1}:\infty}[\sum_{l=0}^\infty&space;r_{t&plus;l}]" title="q_\pi (s_t,a_t) \doteq \mathop{\mathbb{E}}_{s_{t+1}:\infty,a_{t+1}:\infty}[\sum_{l=0}^\infty r_{t+l}]" />
@@ -190,6 +190,16 @@ Et la fonction d'avantage : <img src="https://latex.codecogs.com/svg.image?A_\pi
 
 
 
+## Algorithmes du Gradient de la Politique
+
+
+### REINFORCE
+
+(...)
+
+### Acteur-Critique
+
+(...)
 
 
 
