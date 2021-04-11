@@ -200,7 +200,9 @@ Et la fonction d'avantage :
 
 ## Algorithmes du Gradient de la Politique
 
-Dans tous les algorithmes suivant font mention du paramètre <img src="https://latex.codecogs.com/svg.image?\gamma&space;\in&space;&space;\]0;1\]" title="\gamma \in \]0;1\]" />, le facteur de réduction. Sa définition est implicite pour tous les algorithmes.
+Dans tous les algorithmes suivant font mention du paramètre <img src="https://latex.codecogs.com/svg.image?\gamma&space;\in&space;&space;\]0;1\]" title="\gamma \in \]0;1\]" />, le facteur de réduction. Sa définition est implicite, afin d'éviter les redondances.
+
+<br/>
 
 ### REINFORCE
 
@@ -213,7 +215,7 @@ L'algorithme **REINFORCE** (gradient de la Politique avec méthode Monte-Carlo) 
 
 Autrement dit, on peut optimiser <img src="https://latex.codecogs.com/svg.image?\theta" title="\theta" /> à partir du retour obtenu au cours d'un épisode. Cette approche exploite la trajectoire observée sur l'épisode entier pour faire ses mises à jours, c'est pourquoi on parle de méthode de type Monte Carlo.
 
-**Algorithme : REINFORCE**
+**Algorithme : REINFORCE (épisodique)**
 
 <ins>Initialisation :</ins>
 - Définir <img src="https://latex.codecogs.com/svg.image?\alpha" title="\alpha" />, le pas d'apprentissage associé à la politique
@@ -226,6 +228,7 @@ Autrement dit, on peut optimiser <img src="https://latex.codecogs.com/svg.image?
 		- <img src="https://latex.codecogs.com/svg.image?G\leftarrow&space;\sum_{k=t&plus;1}^T&space;\gamma^{k-t-1}R_k" title="G\leftarrow \sum_{k=t+1}^T \gamma^{k-t-1}R_k" />
 		- <img src="https://latex.codecogs.com/svg.image?\theta&space;\leftarrow&space;\theta&space;&plus;&space;\alpha&space;\gamma^t&space;\nabla\ln\pi(A_t|S_t,\theta)" title="\theta \leftarrow \theta + \alpha \gamma^t \nabla\ln\pi(A_t|S_t,\theta)" />
 
+<br/>
 
 ### REINFORCE avec valeurs de référence
 
@@ -237,7 +240,7 @@ On utilise souvent la **valeur d'état** en guise de valeur de référence, de s
 (voir l'article en ref, et synthétiser. Démo en 3 lignes ? Intuition ?)
 
 
-**Algorithme : REINFORCE avec valeurs de référence**
+**Algorithme : REINFORCE avec valeurs de référence (épisodique)**
 
 <ins>Initialisation :</ins>
 - Définir :
@@ -259,15 +262,47 @@ On utilise souvent la **valeur d'état** en guise de valeur de référence, de s
 
 
 
+<br/>
+
+### Acteur-Critique
+
+L'algorithme **Acteur-Critique** ressemble beaucoup à l'algorithme REINFORCE avec valeurs de référence : il s'agit de calculer une différence entre un retour, et une valeur de référence.
+
+
+En revenche, deux différences importantes les distinguent :
+- Comme toutes les méthodes de type Monte-Carlo, REINFORCE ne fait pas de mise-à-jour avant la fin de l'épisode. Par ailleurs, la valeur de référence ne tient compte que de la valeur de l'état initial (avant de prendre l'action), et ne permet par conséquent pas de juger de la qualité de l'action choisie. Par cette approche, on répond à la question : **"L'agent a-t-il bien fait de se trouver à cette position au temps t ?"**, en tenant compte de l'épisode entier.
+- Dans la méthode Acteur critique, le retour utilisé dans la mise à jour des paramètres de la poltique exploite la valeur de l'état au temps t, et de la valeur de l'état suivant ; c'est le retour 1-pas, noté <img src="https://latex.codecogs.com/svg.image?G_{t:t&plus;1}" title="G_{t:t+1}" /> (comme dans les méthodes TD(0), SARSA(0) ou Q-apprentissage). Cette approche permet donc d'évaluer la différence de valeur entre l'état initial et le nouvel état, autrement dit de juger de la qualité de l'action prise par l'agent. on répond ici à la question : **"L'agent a-t-il bien fait de choisir cette action au temps t?"**, en ne tenant compte que de la transition entre les temps t et t+1.
+
+En résumé : la politique agit, et le retour 1-pas critique.
+
+
+**Algorithme : Acteur-critique (épisodique)**
+
+<ins>Initialisation :</ins>
+- Définir :
+	- <img src="https://latex.codecogs.com/svg.image?\alpha^w&space;\in&space;\mathbb{R}^{&plus;*}" title="\alpha^w \in \mathbb{R}^{+*}" />, le pas d'apprentissage associé aux valeurs d'états
+	- <img src="https://latex.codecogs.com/svg.image?\alpha^\theta&space;\in&space;\mathbb{R}^{&plus;*}" title="\alpha^\theta \in \mathbb{R}^{+*}" />, le pas d'apprentissage associé à la politique
+- Initialiser aléatoirement :
+	- <img src="https://latex.codecogs.com/svg.image?w&space;\in&space;\mathbb{R}^{d^\prime}" title="w \in \mathbb{R}^{d^\prime}" />, les poids associés aux valeurs d'états
+	- <img src="https://latex.codecogs.com/svg.image?\theta&space;\in&space;\mathbb{R}^{d}" title="\theta \in \mathbb{R}^{d}" />, les poids associés aux caractéristiques définissant la politique
+<ins>Execution :</ins>
+- Pour chaque épisode :
+	- Initialiser S (premier état de l'épisode)
+	- <img src="https://latex.codecogs.com/svg.image?I&space;\leftarrow&space;1" title="I \leftarrow 1" /> (coefficient de réduction cumulée)
+	- Tant que S n'est pas terminal (pour chaque pas de temps) :
+		- <img src="https://latex.codecogs.com/svg.image?A&space;\sim&space;\pi(\cdot|s,\theta)" title="A \sim \pi(\cdot|s,\theta)" />
+		- Appliquer l'action A, observer (S',R)
+		- <img src="https://latex.codecogs.com/svg.image?\delta&space;\leftarrow&space;R&space;&plus;&space;\gamma&space;\hat{v}(S^\prime,w)&space;-&space;\hat{v}(S,w)" title="\delta \leftarrow R + \gamma \hat{v}(S^\prime,w) - \hat{v}(S,w)" />		(si S' est terminal, <img src="https://latex.codecogs.com/svg.image?\hat{v}(S^\prime,w)&space;\doteq&space;0" title="\hat{v}(S^\prime,w) \doteq 0" />)
+		- <<img src="https://latex.codecogs.com/svg.image?w&space;\leftarrow&space;w&space;&plus;&space;\alpha^w&space;\delta&space;\nabla&space;\hat{v}(S,w)" title="w \leftarrow w + \alpha^w \delta \nabla \hat{v}(S,w)" />
+		- <img src="https://latex.codecogs.com/svg.image?\theta&space;\leftarrow&space;\theta&space;&plus;&space;\alpha^\theta&space;I&space;\delta&space;\nabla\ln\pi(A|S,\theta)" title="\theta \leftarrow \theta + \alpha^\theta I \delta \nabla\ln\pi(A|S,\theta)" />
+		- <img src="https://latex.codecogs.com/svg.image?I&space;\leftarrow&space;\gamma&space;I" title="I \leftarrow \gamma I" />
+		- <img src="https://latex.codecogs.com/svg.image?S&space;\leftarrow&space;S^\prime" title="S \leftarrow S^\prime" />
 
 
 
 
 <br/>
 
-### Acteur-Critique
-
-(...)
 
 
 
