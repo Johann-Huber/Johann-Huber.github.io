@@ -238,7 +238,7 @@ Autrement dit, on peut optimiser <img src="https://latex.codecogs.com/svg.image?
 
 <br/>
 
-Avec Reinforce, $\theta$ est mis-à-jour en utilisant directement le retour observé lors d'une interaction avec l'environnement. Il d'y a donc **pas de biais** : la monté de gradient fera toujours évoluer $\theta$ vers des valeurs qui augmenteront l'espérence de retour. En revanche, cette méthode introduit une **forte variance** : de trop grands pas sont réalisés en fonction de l'échantillon de trajectoire considéré, rendant la convergence vers une configuration optimale plus difficile.
+Avec Reinforce, <img src="https://latex.codecogs.com/svg.image?\theta" title="\theta" /> est mis-à-jour en utilisant directement le retour observé lors d'une interaction avec l'environnement. Il d'y a donc **pas de biais** : la monté de gradient fera toujours évoluer <img src="https://latex.codecogs.com/svg.image?\theta" title="\theta" /> vers des valeurs qui augmenteront l'espérence de retour. En revanche, cette méthode introduit une **forte variance** : de trop grands pas sont réalisés en fonction de l'échantillon de trajectoire considéré, rendant la convergence vers une configuration optimale plus difficile.
 
 
 (Courbe des poids REINFORCE)
@@ -250,9 +250,35 @@ L'algorithme **REINFORCE avec valeurs de référence** est variante bien connue 
 
 On utilise souvent la **valeur d'état** en guise de valeur de référence, de sorte que l'on utilise la **fonction d'avantage** dans la mise à jour du gradient.
 
+Il s'avère qu'il est possible de montrer que le Théorème du Gradient de la Politique peut être étendu à la forme suivante :
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\nabla&space;J(\theta)&space;\propto&space;\sum_s&space;\mu(s)&space;\sum_a&space;(q_\pi(s,a)&space;-&space;b(s))\nabla&space;\pi(a|s,\theta)" title="\nabla J(\theta) \propto \sum_s \mu(s) \sum_a (q_\pi(s,a) - b(s))\nabla \pi(a|s,\theta)" />
+</p>
 
-(voir l'article en ref, et synthétiser. Démo en 3 lignes ? Intuition ?)
+Où <img src="https://latex.codecogs.com/svg.image?b(s)" title="b(s)" /> est une fonction quelconque qui **ne dépend pas des actions prises**).
 
+#### Preuve
+
+**Véracité de l'expression**
+
+L'expression du théorème avec la fonction <img src="https://latex.codecogs.com/svg.image?b(s)" title="b(s)" /> peut être reformulée de la façon suivante :
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\begin{align*}&space;\nabla&space;J(\theta)&space;&\propto&space;\sum_s&space;\mu(s)&space;\sum_a&space;(q_\pi(s,a)&space;-&space;b(s))\nabla&space;\pi(a|s,\theta)&space;\\&&space;=&space;\sum_s&space;\mu(s)&space;(\sum_a&space;q_\pi(s,a)\nabla&space;\pi(a|s,\theta)&space;-&space;\sum_a&space;b(s)\nabla&space;\pi(a|s,\theta))\end{align*}" title="\begin{align*} \nabla J(\theta) &\propto \sum_s \mu(s) \sum_a (q_\pi(s,a) - b(s))\nabla \pi(a|s,\theta) \\& = \sum_s \mu(s) (\sum_a q_\pi(s,a)\nabla \pi(a|s,\theta) - \sum_a b(s)\nabla \pi(a|s,\theta))\end{align*}" />
+</p>
+
+Or :
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\sum_a&space;b(s)\nabla&space;\pi(a|s,\theta)&space;=&space;b(s)&space;\nabla&space;\sum_a&space;\pi(a|s,\theta)=&space;b(s)&space;\nabla&space;1&space;=&space;0&space;" title="\sum_a b(s)\nabla \pi(a|s,\theta) = b(s) \nabla \sum_a \pi(a|s,\theta)= b(s) \nabla 1 = 0 " />
+</p>
+
+Insérer <img src="https://latex.codecogs.com/svg.image?b(s)" title="b(s)" /> dans l'expression ne l'invalide donc pas, puisque cette opération revient à soustraire par zéro.
+
+**Impact sur la variance**
+
+(À faire)
+
+
+---
 
 **Algorithme : REINFORCE avec valeurs de référence (épisodique)**
 
@@ -273,7 +299,7 @@ On utilise souvent la **valeur d'état** en guise de valeur de référence, de s
 		- <img src="https://latex.codecogs.com/svg.image?w&space;\leftarrow&space;w&space;&plus;&space;\alpha^w&space;\delta&space;\nabla&space;\hat{v}(S_t,w)" title="w \leftarrow w + \alpha^w \delta \nabla \hat{v}(S_t,w)" />
 		- <img src="https://latex.codecogs.com/svg.image?\theta&space;\leftarrow&space;\theta&space;&plus;&space;\alpha^\theta&space;\gamma^t&space;\delta&space;\nabla\ln\pi(A_t|S_t,\theta)" title="\theta \leftarrow \theta + \alpha^\theta \gamma^t \delta \nabla\ln\pi(A_t|S_t,\theta)" />
 
-
+---
 
 
 
@@ -290,6 +316,7 @@ En revenche, deux différences importantes les distinguent :
 
 En résumé : la politique agit, et le retour 1-pas critique.
 
+---
 
 **Algorithme : Acteur-critique (épisodique)**
 
@@ -317,6 +344,7 @@ En résumé : la politique agit, et le retour 1-pas critique.
 
 Par convention, on a <img src="https://latex.codecogs.com/svg.image?\hat{v}(S^\prime,w)&space;\doteq&space;0" title="\hat{v}(S^\prime,w) \doteq 0" /> si S' est terminal. 
 
+---
 
 
 <br/>
@@ -331,7 +359,7 @@ Tout les algorithmes jusqu'ici présentés optimisent la politique qui a été u
 (Ajouter démo de la règle de mise à jour)
 
 
-
+---
 **Algorithme : Acteur-critique Hors-Politique (épisodique)**
 
 <ins>Initialisation :</ins>
@@ -362,6 +390,9 @@ Tout les algorithmes jusqu'ici présentés optimisent la politique qui a été u
 	
 
 Avec <img src="https://latex.codecogs.com/svg.image?x_s" title="x_s" />, le vecteur de caractéristique correspondant à l'état observé <img src="https://latex.codecogs.com/svg.image?s" title="s" />.
+
+---
+
 
 
 
