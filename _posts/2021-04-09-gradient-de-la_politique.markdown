@@ -219,6 +219,8 @@ L'algorithme **REINFORCE** (gradient de la Politique avec méthode Monte-Carlo) 
 
 Autrement dit, on peut optimiser <img src="https://latex.codecogs.com/svg.image?\theta" title="\theta" /> à partir du retour obtenu au cours d'un épisode. Cette approche exploite la trajectoire observée sur l'épisode entier pour faire ses mises à jours, c'est pourquoi on parle de méthode de type Monte Carlo.
 
+---
+
 **Algorithme : REINFORCE (épisodique)**
 
 <ins>Initialisation :</ins>
@@ -232,7 +234,15 @@ Autrement dit, on peut optimiser <img src="https://latex.codecogs.com/svg.image?
 		- <img src="https://latex.codecogs.com/svg.image?G\leftarrow&space;\sum_{k=t&plus;1}^T&space;\gamma^{k-t-1}R_k" title="G\leftarrow \sum_{k=t+1}^T \gamma^{k-t-1}R_k" />
 		- <img src="https://latex.codecogs.com/svg.image?\theta&space;\leftarrow&space;\theta&space;&plus;&space;\alpha&space;\gamma^t&space;\nabla\ln\pi(A_t|S_t,\theta)" title="\theta \leftarrow \theta + \alpha \gamma^t \nabla\ln\pi(A_t|S_t,\theta)" />
 
+---
+
 <br/>
+
+Avec Reinforce, $\theta$ est mis-à-jour en utilisant directement le retour observé lors d'une interaction avec l'environnement. Il d'y a donc **pas de biais** : la monté de gradient fera toujours évoluer $\theta$ vers des valeurs qui augmenteront l'espérence de retour. En revanche, cette méthode introduit une **forte variance** : de trop grands pas sont réalisés en fonction de l'échantillon de trajectoire considéré, rendant la convergence vers une configuration optimale plus difficile.
+
+
+(Courbe des poids REINFORCE)
+
 
 ### REINFORCE avec valeurs de référence
 
@@ -276,7 +286,7 @@ L'algorithme **Acteur-Critique** ressemble beaucoup à l'algorithme REINFORCE av
 
 En revenche, deux différences importantes les distinguent :
 - Comme toutes les méthodes de type Monte-Carlo, REINFORCE ne fait pas de mise-à-jour avant la fin de l'épisode. Par ailleurs, la valeur de référence ne tient compte que de la valeur de l'état initial (avant de prendre l'action), et ne permet par conséquent pas de juger de la qualité de l'action choisie. Par cette approche, on répond à la question : **"L'agent a-t-il bien fait de se trouver à cette position au temps t ?"**, en tenant compte de l'épisode entier.
-- Dans la méthode Acteur critique, le retour utilisé dans la mise à jour des paramètres de la poltique exploite la valeur de l'état au temps t, et de la valeur de l'état suivant ; c'est le retour 1-pas, noté <img src="https://latex.codecogs.com/svg.image?G_{t:t&plus;1}" title="G_{t:t+1}" /> (comme dans les méthodes TD(0), SARSA(0) ou Q-apprentissage). Cette approche permet donc d'évaluer la différence de valeur entre l'état initial et le nouvel état, autrement dit de juger de la qualité de l'action prise par l'agent. on répond ici à la question : **"L'agent a-t-il bien fait de choisir cette action au temps t?"**, en ne tenant compte que de la transition entre les temps t et t+1.
+- Dans la méthode Acteur critique, le retour utilisé dans la mise à jour des paramètres de la poltique calcul la différence entre la valeur de l'état au temps t, et celle de l'état au temps t+1 (en tenant compte du facteur de réduction) ; c'est le retour 1-pas, noté <img src="https://latex.codecogs.com/svg.image?G_{t:t&plus;1}" title="G_{t:t+1}" /> (comme dans les méthodes TD(0), SARSA(0) ou Q-apprentissage). Cette approche permet donc d'évaluer la différence de valeur entre l'état initial et le nouvel état, autrement dit de juger de la qualité de l'action prise par l'agent. On répond ici à la question : **"L'agent a-t-il bien fait de choisir cette action au temps t?"**, en ne tenant compte que de la transition entre les temps t et t+1.
 
 En résumé : la politique agit, et le retour 1-pas critique.
 
