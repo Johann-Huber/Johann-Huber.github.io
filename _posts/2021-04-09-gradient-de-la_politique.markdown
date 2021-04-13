@@ -272,21 +272,22 @@ Or :
 Insérer <img src="https://latex.codecogs.com/svg.image?b(s)" title="b(s)" /> dans l'expression ne l'invalide donc pas, puisque cette opération revient à une soustraction par zéro.
 
 
----
+#### Intuition
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/car_n_shoes2.jpg">
+  (AJOUTER IMAGE TRAJECTOIRE MAX PERFS)
   Si la distribution d'entrée durant la phase de test est trop différente de celle de la phase d'entraînement, le modèle peut surréagir à certains signaux, entraînant les couches d'activations à diverger. 
   <br/>
   Example tiré du <a href="http://rail.eecs.berkeley.edu/deeprlcourse-fa17/f17docs/lecture_4_policy_gradient.pdf">cours de S. Levine à l'UC Berkeley</a>
 </p>
 
 
+Pour comprendre en quoi cette idée permet de faciliter grandement l'entraînement, imaginons un MDP à récompenses positives. Imaginons que trois essais nous donne les trois trajectoires, représentées ci-dessus (en z se trouve la performance, que l'on cherche à maximiser); nous aurions trois récomponses positives, plus ou moins grande selon la qualité de la trajectoire. Pourtant, il serait souhaitable d'augmenter la probabilité de choisir la meilleure trajectoire, et de réduire celle de choisir la moins bonne.
 
-Pour comprendre en quoi cette idée permet de faciliter grandement l'entraînement, imaginons un MDP à récomposes positives. Imaginons que trois essais nous donne les trois trajectoires, représentées ci-dessus (en z se trouve la performance, que l'on cherche à maximiser); nous aurions trois récomponses positives, plus ou moins grande selon la qualité de la trajectoire. Pourtant, il serait souhaitable d'augmenter la probabilité de choisir la meilleure trajectoire, et de réduire la probabilité de choisir la moins bonne.
+L'intuition derrière l'utilisation de la valeur de référence est la suivante : en soustrayant la récompense à la récompose moyenne, on incitera la politique à **choisir plus souvent des trajectoires qui ont permis l'obtention d'une récompense plus élevée que la moyenne**, tout en l'incitant à **moins choisir les trajectoires ayant abouties à une récompense inférieure à la moyenne**.
 
-L'intuition derrière l'utilisation de la valeur de référence est la suivante : en soustrayant la récompense à la récompose moyenne, on incitera la politique à choisir plus souvent des trajectoires qui ont permis l'obtention d'une récompense plus élevée que la moyenne, tout en l'incitant à moins choisir les trajectoires ayant abouties à une récompense inférieures à la moyenne.
 
+---
 
 **Algorithme : REINFORCE avec valeurs de référence (épisodique)**
 
