@@ -255,11 +255,9 @@ Il s'avère qu'il est possible de montrer que le Théorème du Gradient de la Po
 	<img src="https://latex.codecogs.com/svg.image?\nabla&space;J(\theta)&space;\propto&space;\sum_s&space;\mu(s)&space;\sum_a&space;(q_\pi(s,a)&space;-&space;b(s))\nabla&space;\pi(a|s,\theta)" title="\nabla J(\theta) \propto \sum_s \mu(s) \sum_a (q_\pi(s,a) - b(s))\nabla \pi(a|s,\theta)" />
 </p>
 
-Où <img src="https://latex.codecogs.com/svg.image?b(s)" title="b(s)" /> est une fonction quelconque qui **ne dépend pas des actions prises**).
+Où <img src="https://latex.codecogs.com/svg.image?b(s)" title="b(s)" /> est une fonction quelconque qui **ne dépend pas des actions** prises par l'agent.
 
 #### Preuve
-
-**Véracité de l'expression**
 
 L'expression du théorème avec la fonction <img src="https://latex.codecogs.com/svg.image?b(s)" title="b(s)" /> peut être reformulée de la façon suivante :
 <p align="center">
@@ -271,14 +269,24 @@ Or :
 	<img src="https://latex.codecogs.com/svg.image?\sum_a&space;b(s)\nabla&space;\pi(a|s,\theta)&space;=&space;b(s)&space;\nabla&space;\sum_a&space;\pi(a|s,\theta)=&space;b(s)&space;\nabla&space;1&space;=&space;0&space;" title="\sum_a b(s)\nabla \pi(a|s,\theta) = b(s) \nabla \sum_a \pi(a|s,\theta)= b(s) \nabla 1 = 0 " />
 </p>
 
-Insérer <img src="https://latex.codecogs.com/svg.image?b(s)" title="b(s)" /> dans l'expression ne l'invalide donc pas, puisque cette opération revient à soustraire par zéro.
-
-**Impact sur la variance**
-
-(À faire)
+Insérer <img src="https://latex.codecogs.com/svg.image?b(s)" title="b(s)" /> dans l'expression ne l'invalide donc pas, puisque cette opération revient à une soustraction par zéro.
 
 
 ---
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/car_n_shoes2.jpg">
+  Si la distribution d'entrée durant la phase de test est trop différente de celle de la phase d'entraînement, le modèle peut surréagir à certains signaux, entraînant les couches d'activations à diverger. 
+  <br/>
+  Example tiré du <a href="http://rail.eecs.berkeley.edu/deeprlcourse-fa17/f17docs/lecture_4_policy_gradient.pdf">cours de S. Levine à l'UC Berkeley</a>
+</p>
+
+
+
+Pour comprendre en quoi cette idée permet de faciliter grandement l'entraînement, imaginons un MDP à récomposes positives. Imaginons que trois essais nous donne les trois trajectoires, représentées ci-dessus (en z se trouve la performance, que l'on cherche à maximiser); nous aurions trois récomponses positives, plus ou moins grande selon la qualité de la trajectoire. Pourtant, il serait souhaitable d'augmenter la probabilité de choisir la meilleure trajectoire, et de réduire la probabilité de choisir la moins bonne.
+
+L'intuition derrière l'utilisation de la valeur de référence est la suivante : en soustrayant la récompense à la récompose moyenne, on incitera la politique à choisir plus souvent des trajectoires qui ont permis l'obtention d'une récompense plus élevée que la moyenne, tout en l'incitant à moins choisir les trajectoires ayant abouties à une récompense inférieures à la moyenne.
+
 
 **Algorithme : REINFORCE avec valeurs de référence (épisodique)**
 
@@ -353,10 +361,19 @@ Par convention, on a <img src="https://latex.codecogs.com/svg.image?\hat{v}(S^\p
 ### Acteur-Critique Hors-Politique
 
 
-Tout les algorithmes jusqu'ici présentés optimisent la politique qui a été utilisée pour recolter les échantillons de trajectoires. Dans cette section, nous abordons une variante de l'algorithme Acteur-Critique dans laquelle **la politique d'exploration n'est pas la même que la politique cible**. Une telle approche permet, entre autre, d'avoir la politique la plus efficace possible pour l'exploration, plutôt que de contraindre la politique que l'on est en train d'optimiser à aller parfois explorer de nouvelles trajectoires.
+Tous les algorithmes jusqu'ici présentés optimisent la politique qui a été utilisée pour recolter les échantillons de trajectoires. Dans cette section, nous abordons une variante de l'algorithme Acteur-Critique dans laquelle **la politique d'exploration n'est pas la même que la politique cible**. 
 
+Jetons à nouveau un coup d'oeil à l'estimateur utilisé par les algorithmes de gradient de la politique :
 
-(Ajouter démo de la règle de mise à jour)
+<p align="center">
+  <img src="https://latex.codecogs.com/svg.image?\nabla_\theta&space;J(\theta)&space;=&space;\mathop{\mathbb{E}}_{\tau&space;\sim&space;\pi_\theta(\tau)}[\nabla_\theta&space;\ln&space;\pi_\theta(\tau)r(\tau)]" title="\nabla_\theta J(\theta) = \mathop{\mathbb{E}}_{\tau \sim \pi_\theta(\tau)}[\nabla_\theta \ln \pi_\theta(\tau)r(\tau)]" />
+</p>
+
+Le gradient de la performance est calculé à partir de l'espérence sur <img src="https://latex.codecogs.com/svg.image?\tau&space;\sim&space;\pi_\theta(\tau)" title="\tau \sim \pi_\theta(\tau)" />. Une trajectoire échantillonnée à partir d'un certain <img src="https://latex.codecogs.com/svg.image?\theta" title="\theta" /> n'est donc plus valable après application d'une itération de l'algorithme de monté de gradient sur <img src="https://latex.codecogs.com/svg.image?\theta" title="\theta" />. Autrement dit, il est **nécessaire de prélever une trajectoire après chaque mise-à-jours de** <img src="https://latex.codecogs.com/svg.image?\theta" title="\theta" />, rendant caduques toutes les mesures précédemment réalisées. Le problème est de taille, sitôt que l'on se trouve sur des tâches pour lesquelles les mesures sont lentes et coûteuses (comme en robotique, par exemple).
+
+Pour cette raison, il est souhaitable de définir des algorithmes permettant d'optimiser une politique à partir de mesures réalisées *Hors-Politique*, c'est-à-dire avec une autre politique que celle que l'on optimise.
+
+Par ailleurs, une telle approche permet d'utiliser une politique la plus efficace possible pour l'exploration, sans avoir à contraindre la politique que l'on est en train d'optimiser à aller parfois explorer de nouvelles trajectoires.
 
 
 ---
