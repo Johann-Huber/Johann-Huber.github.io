@@ -5,8 +5,15 @@ date:   2021-04-09 21:07:00 +0200
 categories: Apprentissage-profond
 ---
 
-Traduit depuis [Lil'Log](https://lilianweng.github.io/lil-log/2018/02/19/a-long-peek-into-reinforcement-learning.html#policy-iteration).
 
+
+
+
+Les résultats spectaculaires obtenus depuis 2015 (DQN, GO, DOTA, Alphafold) grâce à l'apprentissage par renforcement proviennent de deux raisons majeurs : D'une part, l'augmentation toujours croissante de la capacité de calcul (SOURCE?), et d'autre part, l'émergence de méthodes d'apprentissages capables d'approximer des fonctions dans des espaces de très grandes dimensions. On regroupe ces méthodes sous le nom de d'algorithmes de **gradient de la politique**.
+
+Note de rédaction : Je mettrai à jour régulièrement cette liste pour qu'elle contiennent l'essentiel des informations pour appréhender les algorithmes de l'État de l'Art sans avoir à plonger trop en détail dans les articles originaux. J'ajouterai par ailleurs, autant que possible, une implémentation python sous la forme de script unique autant que possible.
+
+Crédit : Ces notes s'appuient très largement sur le [blog de lilian weng](https://lilianweng.github.io/lil-log/2018/04/08/policy-gradient-algorithms.html#off-policy-policy-gradient) et sur les [notes de cours de Serguey Levine, CS182 à UC Berkeley](https://cs182sp21.github.io/). L'ensemble des sources utiliées sont listés à la fin de l'article.
 
 
 <br/>
@@ -241,8 +248,6 @@ Autrement dit, on peut optimiser <img src="https://latex.codecogs.com/svg.image?
 Avec Reinforce, <img src="https://latex.codecogs.com/svg.image?\theta" title="\theta" /> est mis-à-jour en utilisant directement le retour observé lors d'une interaction avec l'environnement. Il d'y a donc **pas de biais** : la monté de gradient fera toujours évoluer <img src="https://latex.codecogs.com/svg.image?\theta" title="\theta" /> vers des valeurs qui augmenteront l'espérence de retour. En revanche, cette méthode introduit une **forte variance** : de trop grands pas sont réalisés en fonction de l'échantillon de trajectoire considéré, rendant la convergence vers une configuration optimale plus difficile.
 
 
-(Courbe des poids REINFORCE)
-
 
 ### REINFORCE avec valeurs de référence
 
@@ -316,12 +321,11 @@ L'intuition derrière l'utilisation de la valeur de référence est la suivante 
 
 ### Acteur-Critique
 
-L'algorithme **Acteur-Critique** ressemble beaucoup à l'algorithme REINFORCE avec valeurs de référence : il s'agit de calculer une différence entre un retour, et une valeur de référence.
+L'algorithme **Acteur-Critique** ressemble beaucoup à l'algorithme REINFORCE avec valeurs de référence : il s'agit de calculer une différence entre un retour, et une valeur de référence. En revenche, deux différences importantes les distinguent.
 
+Comme toutes les méthodes de type Monte-Carlo, REINFORCE ne fait pas de mise-à-jour avant la fin de l'épisode. Par ailleurs, la valeur de référence ne tient compte que de la valeur de l'état initial (avant de prendre l'action), et ne permet par conséquent pas de juger de la qualité de l'action choisie. Par cette approche, on répond à la question : **"L'agent a-t-il bien fait de se trouver à cette position au temps t ?"**, en tenant compte de l'épisode entier.
 
-En revenche, deux différences importantes les distinguent :
-- Comme toutes les méthodes de type Monte-Carlo, REINFORCE ne fait pas de mise-à-jour avant la fin de l'épisode. Par ailleurs, la valeur de référence ne tient compte que de la valeur de l'état initial (avant de prendre l'action), et ne permet par conséquent pas de juger de la qualité de l'action choisie. Par cette approche, on répond à la question : **"L'agent a-t-il bien fait de se trouver à cette position au temps t ?"**, en tenant compte de l'épisode entier.
-- Dans la méthode Acteur critique, le retour utilisé dans la mise à jour des paramètres de la poltique calcul la différence entre la valeur de l'état au temps t, et celle de l'état au temps t+1 (en tenant compte du facteur de réduction) ; c'est le retour 1-pas, noté <img src="https://latex.codecogs.com/svg.image?G_{t:t&plus;1}" title="G_{t:t+1}" /> (comme dans les méthodes TD(0), SARSA(0) ou Q-apprentissage). Cette approche permet donc d'évaluer la différence de valeur entre l'état initial et le nouvel état, autrement dit de juger de la qualité de l'action prise par l'agent. On répond ici à la question : **"L'agent a-t-il bien fait de choisir cette action au temps t?"**, en ne tenant compte que de la transition entre les temps t et t+1.
+Dans la méthode Acteur-Critique, le retour utilisé dans la mise-à-jour des paramètres de la politique calcule la différence entre la valeur de l'état au temps t, et celle de l'état au temps t+1 (en tenant compte du facteur de réduction) ; c'est le retour 1-pas, noté <img src="https://latex.codecogs.com/svg.image?G_{t:t&plus;1}" title="G_{t:t+1}" /> (comme dans les méthodes TD(0), SARSA(0) ou Q-apprentissage). Cette approche permet donc d'évaluer la différence de valeur entre l'état initial et le nouvel état, autrement dit de juger de la qualité de l'action prise par l'agent. On répond ici à la question : **"L'agent a-t-il bien fait de choisir cette action au temps t?"**, en ne tenant compte que de la transition entre les temps t et t+1.
 
 En résumé : la politique agit, et le retour 1-pas critique.
 
@@ -409,7 +413,27 @@ Par ailleurs, une telle approche permet d'utiliser une politique la plus efficac
 
 Avec <img src="https://latex.codecogs.com/svg.image?x_s" title="x_s" />, le vecteur de caractéristique correspondant à l'état observé <img src="https://latex.codecogs.com/svg.image?s" title="s" />.
 
+(à faire 3 : corriger l'algo à partir de l'article)
+
 ---
+
+
+<br/>
+
+### TRPO
+
+(à faire 1)
+
+
+
+
+
+<br/>
+
+### PPO
+
+
+(à faire 2)
 
 
 
