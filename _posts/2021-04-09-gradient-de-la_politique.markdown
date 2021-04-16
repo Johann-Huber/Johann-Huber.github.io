@@ -35,7 +35,7 @@ Dans cette branche de l'IA, l’objectif est de trouver une stratégie de compor
 
 La fonction de récompense (ou fonction de performance) est définie par :
 <p align="center">
-	<img src="https://latex.codecogs.com/svg.image?J(\theta)=\sum_{s\in&space;S}&space;\mu(s)v_\pi(s)&space;=&space;\sum_{s\in&space;S}&space;\mu(s)\sum_{a\in&space;A}\pi_\theta(a|s)q_\pi(s)" title="J(\theta)=\sum_{s\in S} \mu(s)v_\pi(s) = \sum_{s\in S} \mu(s)\sum_{a\in A}\pi_\theta(a|s)q_\pi(s)" />
+	<img src="https://latex.codecogs.com/svg.image?J(\theta)=\sum_{s\in&space;S}&space;\mu(s)v_\pi(s)&space;=&space;\sum_{s\in&space;S}&space;\mu(s)\sum_{a\in&space;A}\pi_\theta(a|s)q_\pi(s)"/>
 </p>
 
 Avec <img src="https://latex.codecogs.com/svg.image?\mu(s)" title="\mu(s)" />: la distribution stationnaire de la chaïne markovienne sous la politique <img src="https://latex.codecogs.com/svg.image?\pi_\theta" title="\pi_\theta" />.
@@ -356,14 +356,14 @@ En résumé : la politique agit, et le retour 1-pas critique.
 		- <img src="https://latex.codecogs.com/svg.image?s&space;\leftarrow&space;s^\prime" title="s \leftarrow s^\prime" />
 
 
-Par convention, on a <img src="https://latex.codecogs.com/svg.image?\hat{v}(s^\prime,w)&space;\doteq&space;0" title="\hat{v}(s^\prime,w) \doteq 0" /> si S' est terminal. 
+Par convention, on a <img src="https://latex.codecogs.com/svg.image?\hat{v}(s^\prime,w)&space;\doteq&space;0" title="\hat{v}(s^\prime,w) \doteq 0" /> si <img src="https://latex.codecogs.com/svg.image?s^\prime" title="s^\prime" /> est terminal. 
 
 Cette version ne tient compte que d'une transition pour réaliser les mises-à-jours de poids, ce qui a toutes les chances de rendre l'optimisation difficile en raison de la large variance dans les données d'entraînement d'une itération à l'autre. Il existe des approches plus sophistiquées qui s'appuient sur la parallélisation pour rendre cet algorithme plus stable (voir [A3C](https://arxiv.org/pdf/1602.01783.pdf)).
 
 En pratique, on peut simplement étendre cet algorithme aux itérations sur des lots, en accumulant un nombre <img src="https://latex.codecogs.com/svg.image?n" title="n" /> de transitions, et en appliquant les mêmes étapes mentionnées ci-dessus. À noter qu'il n'y aucune nécessité de lien entre les transitions (i.e. elles n'ont pas à provenir d'une même trajectoire) ; tant que l'on a des quadruplets <img src="https://latex.codecogs.com/svg.image?(s,a,s^\prime,r)" title="(s,a,s^\prime,r)" />, nous serons en mesure d'appliquer l'algorithme.
 
 
-
+	
 
 ---
 
