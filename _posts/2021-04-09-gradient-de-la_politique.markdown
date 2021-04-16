@@ -238,10 +238,10 @@ Autrement dit, on peut optimiser <img src="https://latex.codecogs.com/svg.image?
 
 <ins>Exécution :</ins>
 - Pour chaque épisode :
-	- Générer la trajectoire <img src="https://latex.codecogs.com/svg.image?S_1,A_1,R_2,S_2,A_2,&space;...&space;,&space;A_{T-1},&space;S_T" title="S_1,A_1,R_2,S_2,A_2, ... , A_{T-1}, S_T" /> en suivant <img src="https://latex.codecogs.com/svg.image?\pi_\theta" title="\pi_\theta" />
+	- Générer la trajectoire <img src="https://latex.codecogs.com/svg.image?s_1,a_1,r_2,s_2,a_2,&space;...&space;,&space;a_{T-1},&space;s_T" title="s_1,a_1,r_2,s_2,a_2, ... , a_{T-1}, s_T" /> en suivant <img src="https://latex.codecogs.com/svg.image?\pi_\theta" title="\pi_\theta" />
 	- Pour chaque étape de l'épisode <img src="https://latex.codecogs.com/svg.image?t=0,1,...,T-1,T" title="t=0,1,...,T-1,T" /> :
-		- <img src="https://latex.codecogs.com/svg.image?G\leftarrow&space;\sum_{k=t&plus;1}^T&space;\gamma^{k-t-1}R_k" title="G\leftarrow \sum_{k=t+1}^T \gamma^{k-t-1}R_k" />
-		- <img src="https://latex.codecogs.com/svg.image?\theta&space;\leftarrow&space;\theta&space;&plus;&space;\alpha&space;\gamma^t&space;\nabla\ln\pi(A_t|S_t,\theta)" title="\theta \leftarrow \theta + \alpha \gamma^t \nabla\ln\pi(A_t|S_t,\theta)" />
+		- <img src="https://latex.codecogs.com/svg.image?G\leftarrow&space;\sum_{k=t&plus;1}^T&space;\gamma^{k-t-1}r_k" title="G\leftarrow \sum_{k=t+1}^T \gamma^{k-t-1}r_k" />
+		- <img src="https://latex.codecogs.com/svg.image?\theta&space;\leftarrow&space;\theta&space;&plus;&space;\alpha&space;\gamma^t&space;\nabla\ln\pi(a_t|s_t,\theta)" title="\theta \leftarrow \theta + \alpha \gamma^t \nabla\ln\pi(a_t|s_t,\theta)" />
 
 ---
 
@@ -307,12 +307,12 @@ L'intuition derrière l'utilisation de la valeur de référence est la suivante 
 	
 <ins>Exécution :</ins>
 - Pour chaque épisode :
-	- Générer la trajectoire <img src="https://latex.codecogs.com/svg.image?S_1,A_1,R_2,S_2,A_2,&space;...&space;,&space;A_{T-1},&space;S_T" title="S_1,A_1,R_2,S_2,A_2, ... , A_{T-1}, S_T" /> en suivant <img src="https://latex.codecogs.com/svg.image?\pi_\theta" title="\pi_\theta" />
+	- Générer la trajectoire <img src="https://latex.codecogs.com/svg.image?s_1,a_1,r_2,s_2,a_2,&space;...&space;,&space;a_{T-1},&space;s_T" title="s_1,a_1,r_2,s_2,a_2, ... , a_{T-1}, s_T" /> en suivant <img src="https://latex.codecogs.com/svg.image?\pi_\theta" title="\pi_\theta" />
 	- Pour chaque étape de l'épisode <img src="https://latex.codecogs.com/svg.image?t=0,1,...,T-1,T" title="t=0,1,...,T-1,T" /> :
-		- <img src="https://latex.codecogs.com/svg.image?G\leftarrow&space;\sum_{k=t&plus;1}^T&space;\gamma^{k-t-1}R_k" title="G\leftarrow \sum_{k=t+1}^T \gamma^{k-t-1}R_k" />
-		- <img src="https://latex.codecogs.com/svg.image?\delta&space;\leftarrow&space;G&space;-&space;\hat{v}(S_t,w)" title="\delta \leftarrow G - \hat{v}(S_t,w)" />
-		- <img src="https://latex.codecogs.com/svg.image?w&space;\leftarrow&space;w&space;&plus;&space;\alpha^w&space;\delta&space;\nabla&space;\hat{v}(S_t,w)" title="w \leftarrow w + \alpha^w \delta \nabla \hat{v}(S_t,w)" />
-		- <img src="https://latex.codecogs.com/svg.image?\theta&space;\leftarrow&space;\theta&space;&plus;&space;\alpha^\theta&space;\gamma^t&space;\delta&space;\nabla\ln\pi(A_t|S_t,\theta)" title="\theta \leftarrow \theta + \alpha^\theta \gamma^t \delta \nabla\ln\pi(A_t|S_t,\theta)" />
+		- <img src="https://latex.codecogs.com/svg.image?G\leftarrow&space;\sum_{k=t&plus;1}^T&space;\gamma^{k-t-1}r_k" title="G\leftarrow \sum_{k=t+1}^T \gamma^{k-t-1}r_k" />
+		- <img src="https://latex.codecogs.com/svg.image?\delta&space;\leftarrow&space;G&space;-&space;\hat{v}(s_t,w)" title="\delta \leftarrow G - \hat{v}(s_t,w)" />
+		- <img src="https://latex.codecogs.com/svg.image?w&space;\leftarrow&space;w&space;&plus;&space;\alpha^w&space;\delta&space;\nabla&space;\hat{v}(s_t,w)" title="w \leftarrow w + \alpha^w \delta \nabla \hat{v}(s_t,w)" />
+		- <img src="https://latex.codecogs.com/svg.image?\theta&space;\leftarrow&space;\theta&space;&plus;&space;\alpha^\theta&space;\gamma^t&space;\delta&space;\nabla\ln\pi(a_t|s_t,\theta)" title="\theta \leftarrow \theta + \alpha^\theta \gamma^t \delta \nabla\ln\pi(a_t|s_t,\theta)" />
 
 ---
 
