@@ -326,9 +326,14 @@ L'algorithme **Acteur-Critique** ressemble beaucoup à l'algorithme REINFORCE av
 
 Comme toutes les méthodes de type Monte-Carlo, REINFORCE ne fait pas de mise-à-jour avant la fin de l'épisode. Par ailleurs, la valeur de référence ne tient compte que de la valeur de l'état initial (avant de prendre l'action), et ne permet par conséquent pas de juger de la qualité de l'action choisie. Par cette approche, on répond à la question : **"L'agent a-t-il bien fait de se trouver à cette position au temps t ?"**, en tenant compte de l'épisode entier.
 
-Dans la méthode Acteur-Critique, le retour utilisé dans la mise-à-jour des paramètres de la politique calcule la différence entre la valeur de l'état au temps t, et celle de l'état au temps t+1 (en tenant compte du facteur d'atténuation) ; c'est le retour 1-pas, noté <img src="https://latex.codecogs.com/svg.image?G_{t:t&plus;1}"/> (comme dans les méthodes TD(0), SARSA(0) ou Q-apprentissage). Cette approche permet donc d'évaluer la différence de valeur entre l'état initial et le nouvel état, autrement dit de juger de la qualité de l'action prise par l'agent. On répond ici à la question : **"L'agent a-t-il bien fait de choisir cette action au temps t?"**, en ne tenant compte que de la transition entre les temps t et t+1.
+Dans le cas le plus simple de la méthode Acteur-Critique, le retour utilisé dans la mise-à-jour des paramètres de la politique calcule la différence entre la valeur de l'état au temps t, et celle de l'état au temps t+1 (en tenant compte du facteur d'atténuation) ; c'est le retour 1-pas, noté <img src="https://latex.codecogs.com/svg.image?G_{t:t&plus;1}"/> (comme dans les méthodes TD(0), SARSA(0) ou Q-apprentissage). Cette approche permet donc d'évaluer la différence de valeur entre l'état initial et le nouvel état, autrement dit de juger de la qualité de l'action prise par l'agent. On répond ici à la question : **"L'agent a-t-il bien fait de choisir cette action au temps t?"**, en ne tenant compte que de la transition entre les temps t et t+1.
 
-En résumé : la politique agit, et le retour 1-pas critique.
+En résumé : la politique agit, et la méthode de retour intermédiaire critique.
+
+
+Il existe de nombreuses variantes, impliquant entre autres : la fonction d'avanntage, les valeurs-Q, la méthode SARSA 1-étape, le retour n-étapes, et différentes approches d'entraîements (séquentiel, asynchronisé).
+
+L'algorithme présenté dans cette section correspond donc à une certaine variante de la méthode Acteur-Critique : cas épisodique, 1-étape, entièrement en ligne (i.e. sans avoir recourt à une mémoire tampon), avec fonction d'avantage.
 
 ---
 
@@ -358,9 +363,9 @@ En résumé : la politique agit, et le retour 1-pas critique.
 
 Par convention, on a <img src="https://latex.codecogs.com/svg.image?\hat{v}(s^\prime,w)&space;\doteq&space;0"/> si <img src="https://latex.codecogs.com/svg.image?s^\prime"/> est terminal. 
 
-Cette version ne tient compte que d'une transition pour réaliser les mises-à-jours de poids, ce qui a toutes les chances de rendre l'optimisation difficile en raison de la large variance dans les données d'entraînement d'une itération à l'autre. Il existe des approches plus sophistiquées qui s'appuient sur la parallélisation pour rendre cet algorithme plus stable (voir [A3C](https://arxiv.org/pdf/1602.01783.pdf)).
+Cette version ne tient compte que d'une transition pour réaliser les mises-à-jours de poids, ce qui a toutes les chances de rendre l'optimisation difficile en raison de la large variance dans les données d'entraînement d'une itération à l'autre. L'objectif de cette section n'est pas donner le meilleur algorithme acteur-critique, mais d'expliciter les principales composantes de cette approche.
 
-En pratique, on peut simplement étendre cet algorithme aux itérations sur des lots, en accumulant un nombre <img src="https://latex.codecogs.com/svg.image?n"/> de transitions, et en appliquant les mêmes étapes mentionnées ci-dessus. À noter qu'il n'y aucune nécessité de lien entre les transitions (i.e. elles n'ont pas à provenir d'une même trajectoire) ; tant que l'on a des quadruplets <img src="https://latex.codecogs.com/svg.image?(s,a,s^\prime,r)"/>, nous serons en mesure d'appliquer l'algorithme.
+<ins>Remarque :</ins> En pratique, on peut simplement étendre cet algorithme aux itérations sur des lots, en accumulant un nombre <img src="https://latex.codecogs.com/svg.image?n"/> de transitions, et en appliquant les mêmes étapes mentionnées ci-dessus. À noter qu'il n'y aucune nécessité de lien entre les transitions (i.e. elles n'ont pas à provenir d'une même trajectoire) ; tant que l'on a des quadruplets <img src="https://latex.codecogs.com/svg.image?(s,a,s^\prime,r)"/>, nous serons en mesure d'appliquer l'algorithme.
 
 
 	
@@ -371,10 +376,10 @@ En pratique, on peut simplement étendre cet algorithme aux itérations sur des 
 <br/>
 
 
-### Acteur-Critique Hors-Politique
+### Gradient de la politique en contexte Hors-Politique
 
 
-Tous les algorithmes jusqu'ici présentés optimisent la politique qui a été utilisée pour obtenir des trajectoires. Dans cette section, nous abordons une variante de l'algorithme Acteur-Critique dans laquelle **la politique d'exploration n'est pas la même que la politique cible**. 
+Tous les algorithmes jusqu'ici présentés optimisent la politique qui a été utilisée pour obtenir des trajectoires. Dans cette section, nous considérons les cas dans lesquels **la politique d'exploration n'est pas la même que la politique cible**. 
 
 Jetons à nouveau un coup d'oeil à l'estimateur utilisé par les algorithmes de gradient de la politique :
 
@@ -389,46 +394,92 @@ Pour cette raison, il est souhaitable de définir des algorithmes permettant d'o
 Par ailleurs, une telle approche permet d'utiliser une politique la plus efficace pour l'exploration, sans avoir à contraindre la politique que l'on est en train d'optimiser pour qu'inciter à explorer de nouvelles trajectoires.
 
 
+## Échantillonnage préférentiel 
+
+Pour rappel, on cherche <img src="https://latex.codecogs.com/svg.image?\theta^*&space;=&space;\operatorname*{argmax}_\theta&space;J(\theta)" title="\theta^* = \operatorname*{argmax}_\theta J(\theta)" />, que l'on optimise à partir de : 
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?J(\theta)&space;=&space;\mathop{\mathbb{E}}_{\tau\sim\pi_\theta(\tau)}&space;[r(\tau)]" title="J(\theta) = \mathop{\mathbb{E}}_{\tau\sim\pi_\theta(\tau)} [r(\tau)]" />	
+</p>
+
+Supposons que nous ne disposons pas d'exemples de trajectoires correspondant à <img src="https://latex.codecogs.com/svg.image?\tau\sim\pi_\theta(\tau)" title="\tau\sim\pi_\theta(\tau)" />, mais que nous ayons à la place des trajectoires <img src="https://latex.codecogs.com/svg.image?\tau\sim\pi_{\theta^\prime}(\tau)" title="\tau\sim\pi_{\theta^\prime}(\tau)" /> pour un autre jeu de paramtère <img src="https://latex.codecogs.com/svg.image?\theta^\prime" title="\theta^\prime" />.
+
+On a :
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\begin{align*}\mathop{\mathbb{E}}_{\tau\sim\pi_\theta}&space;&=&space;\int&space;\pi_\theta(\tau)r(\tau)d\tau&space;\\&=&space;\int&space;\pi_{\theta^\prime}(\tau)&space;\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}&space;r(\tau)d\tau&space;\\&=&space;\mathop{\mathbb{E}}_{\tau\sim\pi_{\theta^\prime}}[\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}r(\tau)]\end{align*}" title="\begin{align*}\mathop{\mathbb{E}}_{\tau\sim\pi_\theta} &= \int \pi_\theta(\tau)r(\tau)d\tau \\&= \int \pi_{\theta^\prime}(\tau) \frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)} r(\tau)d\tau \\&= \mathop{\mathbb{E}}_{\tau\sim\pi_{\theta^\prime}}[\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}r(\tau)]\end{align*}" />
+</p>
+
+On appelle "poids d'importance" le coefficient <img src="https://latex.codecogs.com/svg.image?\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}" title="\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}" />. On parle des poids d'importance au pluriels, dans le sens où chaque terme en <img src="https://latex.codecogs.com/svg.image?\tau" title="\tau" /> comprend implicitement le produit des termes en <img src="https://latex.codecogs.com/svg.image?(s_i,&space;a_i)" title="(s_i, a_i)" /> associés à la trajectoire.
+
+Ainsi : 
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\nabla&space;J(\theta)&space;=&space;\mathop{\mathbb{E}}_{\tau\sim\pi_{\theta^\prime}}[\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}r(\tau)]" title="\nabla J(\theta) = \mathop{\mathbb{E}}_{\tau\sim\pi_{\theta^\prime}}[\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}r(\tau)]" />
+</p>
+
+Or :
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\pi_\theta(\tau)&space;\doteq&space;p(s_1)&space;\prod_{t=1}^{T}\pi_\theta(s_t|s_t)p(s_{t&plus;1}|s_t,a_t)" title="\pi_\theta(\tau) \doteq p(s_1) \prod_{t=1}^{T}\pi_\theta(s_t|s_t)p(s_{t+1}|s_t,a_t)" />
+</p>
+
+Avec <img src="https://latex.codecogs.com/svg.image?p(s_1)" title="p(s_1)" /> la probabilité de démarrer l'épisode à l'état <img src="https://latex.codecogs.com/svg.image?s_1" title="s_1" />, et <img src="https://latex.codecogs.com/svg.image?T" title="T" /> le nombre d'étape dans l'épisode avant que l'état terminal n'ait été atteint.
+
+Les poids d'importance s'exprime donc de la façon suivant :
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}&space;=&space;\frac{p(s_1)\prod_{t=1}^{T}\pi_\theta(a_t|s_t)p(s_{t&plus;1}|s_t,a_t)}{p(s_1)\prod_{t=1}^{T}\pi_{\theta^\prime}(a_t|s_t)p(s_{t&plus;1}|s_t,a_t)}" title="\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)} = \frac{p(s_1)\prod_{t=1}^{T}\pi_\theta(a_t|s_t)p(s_{t+1}|s_t,a_t)}{p(s_1)\prod_{t=1}^{T}\pi_{\theta^\prime}(a_t|s_t)p(s_{t+1}|s_t,a_t)}" />
+</p>
+
+Il apparaît clairement que les facteurs relatifs aux dynamiques du système s'annulent :
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}&space;=&space;\frac{\prod_{t=1}^{T}\pi_\theta(a_t|s_t)}{\prod_{t=1}^{T}\pi_{\theta^\prime}(a_t|s_t)}" title="\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)} = \frac{\prod_{t=1}^{T}\pi_\theta(a_t|s_t)}{\prod_{t=1}^{T}\pi_{\theta^\prime}(a_t|s_t)}" />
+</p>
+
+De la même manière que pour le théorème du gradient de la politique, on obtient une forme qui ne dépend que des politiques, et qui est donc calculable même sans connaître les dynamiques du système.
+
+Ce coefficient nous permet donc d'estimer le gradient de la performance pour estimer de nouveaux paramètres <img src="https://latex.codecogs.com/svg.image?\theta" title="\theta" /> à partir de nos anciens paramètres <img src="https://latex.codecogs.com/svg.image?\theta^\prime" title="\theta^\prime" />.
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?J(\theta^\prime)&space;=&space;\mathop{\mathbb{E}_{\tau\sim&space;\pi_{\theta^\prime}(\tau)}[r(\tau)]" title="J(\theta^\prime) = \mathop{\mathbb{E}_{\tau\sim \pi_{\theta^\prime}(\tau)}[r(\tau)]" />
+</p>
+
+Soit :
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\begin{align*}J(\theta)&space;&=&space;\mathop{\mathbb{E}_{\tau\sim&space;\pi_{\theta^\prime}}(\tau)}[\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}r(\tau)]&space;\\\nabla_\theta&space;J(\theta)&space;&=&space;\mathop{\mathbb{E}_{\tau\sim&space;\pi_{\theta^\prime}}(\tau)}&space;\left[&space;{\frac{\nabla_\theta&space;\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}r(\tau)}&space;\right]&space;\\&=&space;\mathop{\mathbb{E}_{\tau\sim&space;\pi_{\theta^\prime}}(\tau)}&space;\left[&space;{\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}}&space;\nabla_\theta&space;\ln\pi_\theta(\tau)&space;&space;r(\tau)&space;\right]\end{align*}" title="\begin{align*}J(\theta) &= \mathop{\mathbb{E}_{\tau\sim \pi_{\theta^\prime}}(\tau)}[\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}r(\tau)] \\\nabla_\theta J(\theta) &= \mathop{\mathbb{E}_{\tau\sim \pi_{\theta^\prime}}(\tau)} \left[ {\frac{\nabla_\theta \pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}r(\tau)} \right] \\&= \mathop{\mathbb{E}_{\tau\sim \pi_{\theta^\prime}}(\tau)} \left[ {\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}} \nabla_\theta \ln\pi_\theta(\tau) r(\tau) \right]\end{align*}" />
+</p>
+
+
+Pour <img src="https://latex.codecogs.com/svg.image?\theta&space;\neq&space;\theta^\prime" title="\theta \neq \theta^\prime" />. 
+
+En explicitant les trajectoires, on trouve la forme suivante :
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\nabla_\theta&space;J(\theta)&space;=&space;\mathop{\mathbb{E}_{\tau\sim&space;\pi_{\theta^\prime}}(\tau)}&space;\left[&space;(\prod_{t=1}^{T}\frac{\pi_\theta(a_t|s_t)}{\pi_{\theta^\prime}(a_t|s_t)})&space;(\sum_{t=1}^{T}\nabla_\theta&space;\ln\pi_\theta(a_t|s_t))(\sum_{t=1}^{T}r(s_t,a_t))&space;\right]" title="\nabla_\theta J(\theta) = \mathop{\mathbb{E}_{\tau\sim&space;\pi_{\theta^\prime}}(\tau)} \left[ (\prod_{t=1}^{T}\frac{\pi_\theta(a_t|s_t)}{\pi_{\theta^\prime}(a_t|s_t)}) (\sum_{t=1}^{T}\nabla_\theta \ln\pi_\theta(a_t|s_t))(\sum_{t=1}^{T}r(s_t,a_t)) \right]" />
+</p>
+
+Puisque <img src="https://latex.codecogs.com/svg.image?r(\tau)&space;\doteq&space;\sum_{t=1}^{T}r(s_t,a_t)" title="r(\tau) \doteq \sum_{t=1}^{T}r(s_t,a_t)" />, et que <img src="https://latex.codecogs.com/svg.image?\nabla_\theta&space;\ln&space;(\prod_{t=1}^{T}\pi_\theta(a_t|s_t))=\sum_{t=1}^{T}\nabla_\theta&space;\ln\pi_\theta(a_t|s_t)" title="\nabla_\theta \ln (\prod_{t=1}^{T}\pi_\theta(a_t|s_t))=\sum_{t=1}^{T}\nabla_\theta \ln\pi_\theta(a_t|s_t)" />.
+
+<ins>Principe de causalité :</ins> En remarquant que la politique au temps <img src="https://latex.codecogs.com/svg.image?t" title="t" /> ne peut affecter les récompenses au temps <img src="https://latex.codecogs.com/svg.image?t^\prime" title="t^\prime" /> si <img src="https://latex.codecogs.com/svg.image?t&space;<&space;t^\prime" title="t < t^\prime" />, on peut récrire <img src="https://latex.codecogs.com/svg.image?\nabla_\theta&space;J(\theta)" title="\nabla_\theta J(\theta)" /> pour obtenir la forme finale avec laquelle travailler dans un contexte hors-politique :
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\nabla_\theta&space;J(\theta)&space;=&space;\mathop{\mathbb{E}_{\tau\sim&space;\pi_{\theta^\prime}}(\tau)}&space;\left[&space;\sum_{t=1}^{T}\nabla_\theta&space;\ln\pi_\theta(a_t|s_t)&space;(\prod_{t^\prime=1}^{t}&space;\frac{\pi_\theta(s_{t^\prime}|a_{t^\prime})}{\pi_{\theta^\prime}(a_{t^\prime}|s_{t^\prime})})&space;(\sum_{t^\prime=t}^{T}r(s_{t^\prime},a_{t^\prime}))&space;\right]" title="\nabla_\theta J(\theta) = \mathop{\mathbb{E}_{\tau\sim \pi_{\theta^\prime}}(\tau)} \left[ \sum_{t=1}^{T}\nabla_\theta \ln\pi_\theta(a_t|s_t) (\prod_{t^\prime=1}^{t} \frac{\pi_\theta(s_{t^\prime}|a_{t^\prime})}{\pi_{\theta^\prime}(a_{t^\prime}|s_{t^\prime})}) (\sum_{t^\prime=t}^{T}r(s_{t^\prime},a_{t^\prime})) \right]" />
+</p>
+
+Cette forme convient aux deux cas évoqués en début de partie : on peut remplacer <img src="https://latex.codecogs.com/svg.image?\pi_{\theta^\prime}" title="\pi_{\theta^\prime}" /> par une politique d'exploration <img src="https://latex.codecogs.com/svg.image?b" title="b" />, ou considérer le cas de mises-à-jours asynchronisées.
+
+Les méthodes Hors-Politique en apprentissage par renforcement (et en particulier appliqués aux méthodes du gradient de la politique) font l'objet de recherches actives, et une importante quantité d'articles publiés dans les grandes revues scientifiques du domaine y sont consacré. Cette section pose les fondement de l'approche Hors-Politique ; nous entretrons dans davantage de détails au cas-par-cas si le besoin s'en fait sentir pour les méthodes présentées ci-dessous.
+
+
 ---
-**Algorithme : Acteur-critique Hors-Politique (épisodique)**
 
-<ins>Initialisation :</ins>
-- Définir :
-	- <img src="https://latex.codecogs.com/svg.image?e_v&space;\leftarrow&space;0"/>, (trace d'éligibilité sur les valeurs ?)
-	- <img src="https://latex.codecogs.com/svg.image?e_u&space;\leftarrow&space;0"/>, (trace d'éligibilité sur la politique ?)
-	- <img src="https://latex.codecogs.com/svg.image?w&space;\leftarrow&space;0"/>, (? utilisation de w (i) ?)
-	- <img src="https://latex.codecogs.com/svg.image?s&space;\leftarrow&space;s_0"/>, état initial
-- Initialiser aléatoirement :
-	- v, les poids associés aux valeurs d'états
-	- u, les poids associés aux caractéristiques définissant la politique
-	
-<ins>Exécution :</ins>
-- Pour chaque étape :
-	- <img src="https://latex.codecogs.com/svg.image?a&space;\sim&space;b(\cdot|s)"/>
-	- Appliquer l'action a, observer (s',r)
-	- <img src="https://latex.codecogs.com/svg.image?\delta&space;\leftarrow&space;r&space;&plus;&space;\gamma(s^\prime)&space;v^Tx_{s^\prime}&space;-&space;v^Tx_s"/>
-	- <img src="https://latex.codecogs.com/svg.image?\rho&space;\leftarrow&space;\frac{\pi_u(a|s)}{b(a|s)}"/>
-	- Mettre à jour le critique :
-		- <img src="https://latex.codecogs.com/svg.image?e_v&space;\leftarrow&space;\rho(x_s&plus;\gamma(s)\lambda&space;e_v)"/>
-		- <img src="https://latex.codecogs.com/svg.image?v&space;\leftarrow&space;v&space;&plus;&space;\alpha_v[\delta&space;e_v&space;-&space;\gamma(s^\prime)(1-\lambda)(w^Te_v)x_s]"/>
-		- <img src="https://latex.codecogs.com/svg.image?w&space;\leftarrow&space;w&space;&plus;&space;\alpha_w[\delta&space;e_v&space;-&space;(w^Tx_s)x_s]"/>
-	- Mettre à jour l'acteur :
-		- <img src="https://latex.codecogs.com/svg.image?e_u&space;\leftarrow&space;\rho&space;[\frac{\nabla_u\pi_u(a|s)}{\pi_u(a|s)}&plus;\gamma(s)\lambda&space;e_u]"/>
-		- <img src="https://latex.codecogs.com/svg.image?u&space;\leftarrow&space;u&space;&plus;&space;\alpha_u&space;\delta&space;e_u" />
-	
-	- <img src="https://latex.codecogs.com/svg.image?s&space;\leftarrow&space;s^\prime"/>
-	
-
-Avec <img src="https://latex.codecogs.com/svg.image?x_s"/>, le vecteur de caractéristique correspondant à l'état observé <img src="https://latex.codecogs.com/svg.image?s"/>.
-
-(à faire 3 : corriger l'algo à partir de l'article)
-
----
-
+<br/>
 
 <ins>En rédaction :</ins> A3C, TRPO, PPO
 
+<br/>
 
+---
 
 
 
