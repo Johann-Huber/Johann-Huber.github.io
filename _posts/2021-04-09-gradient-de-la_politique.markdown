@@ -7,12 +7,12 @@ categories: Apprentissage-profond
 
 
 
-Le Gradient de la Politique (ou *Policy Gradient*) est une approche de résolution de problèmes en Apprentissage par Renforcement. Dans ce paradigme d'apprentissage automatique, il s'agit de trouver une stratégie de comportement optimale pour un ou plusieurs agents, de manière à maximiser les récompenses obtenues. Les méthodes de **gradient de la politique** visent à modéliser et à optimiser la politique directement. En général, cette dernière est modélisée par une fonction paramétrique de <img src="https://latex.codecogs.com/svg.image?\theta"/>, notée <img src="https://latex.codecogs.com/svg.image?\pi_\theta(a|s)"/>. Les valeurs de la fonction de récompenses (fonction objectif) dépendent de cette politique. Plusieurs algorithmes peuvent être appliqués pour optimiser <img src="https://latex.codecogs.com/svg.image?\theta"/> de sorte à maximiser les performances de l’agent sur une tâche donnée.
+Le Gradient de la Politique (ou *Policy Gradient*) est une approche de résolution de problèmes en Apprentissage par Renforcement. Dans ce paradigme d'Apprentissage Automatique, il s'agit de trouver une stratégie de comportement optimale pour un ou plusieurs agents, de manière à maximiser les récompenses obtenues. Les méthodes de **gradient de la politique** visent à modéliser et à optimiser la politique directement. En général, cette dernière est modélisée par une fonction paramétrique de <img src="https://latex.codecogs.com/svg.image?\theta"/>, notée <img src="https://latex.codecogs.com/svg.image?\pi_\theta(a|s)"/>. Les valeurs de la fonction de récompenses (fonction objectif) dépendent de cette politique. Plusieurs algorithmes peuvent être appliqués pour optimiser <img src="https://latex.codecogs.com/svg.image?\theta"/> de sorte à maximiser les performances de l’agent sur une tâche donnée.
 
 
-<ins>Note de rédaction :</ins> Je mettrai à jour régulièrement cette liste pour qu'elle contiennent l'essentiel des informations pour appréhender les algorithmes de l'État de l'Art sans avoir à plonger trop en détail dans les articles originaux. J'ajouterai par ailleurs, autant que possible, une implémentation python sous la forme de script unique autant que possible.
+<ins>Note de rédaction :</ins> Je mettrai à jour régulièrement cette liste pour qu'elle contiennent l'essentiel des informations pour appréhender les algorithmes de l'État de l'Art sans avoir à plonger trop en détail dans les articles originaux. J'ajouterai par ailleurs, autant que possible, une implémentation simple en python.
 
-<ins>Crédit :</ins> Ces notes s'appuient très largement sur le [blog de lilian weng](https://lilianweng.github.io/lil-log/2018/04/08/policy-gradient-algorithms.html#off-policy-policy-gradient) et sur les [notes de cours de Serguey Levine, CS182 à UC Berkeley](https://cs182sp21.github.io/). L'ensemble des sources utiliées sont listés à la fin de l'article.
+<ins>Crédit :</ins> Ces notes s'appuient très largement sur le [blog de Lilian Weng](https://lilianweng.github.io/lil-log/2018/04/08/policy-gradient-algorithms.html#off-policy-policy-gradient) et sur les [notes de cours de Serguey Levine, CS182 à l'UC Berkeley](https://cs182sp21.github.io/). L'ensemble des ressources utiliées sont listées à la fin de l'article.
 
 
 
@@ -30,10 +30,10 @@ Avec <img src="https://latex.codecogs.com/svg.image?\mu(s)"/>: la distribution s
 
 On cherche donc à trouver les valeurs de <img src="https://latex.codecogs.com/svg.image?\theta"/> qui maximisent la récompense. Ce problème peut être résolu via la méthode d'ascension de gradient :
 <p align="center">
-	<img src="https://latex.codecogs.com/svg.image?\theta_{t&plus;1}=&space;\theta_t&space;&plus;&space;\alpha*&space;\widehat{\nabla&space;J(\theta_t)}"/>
+	<img src="https://latex.codecogs.com/svg.image?\theta_{t&plus;1}=&space;\theta_t&space;&plus;&space;\alpha*&space;\widehat{\nabla_\theta&space;J(\theta_t)}"/>
 </p>
 
-Où <img src="https://latex.codecogs.com/svg.image?\widehat{\nabla&space;J(\theta_t)}" /> est une estimation stochastique, dont l'espérence est le gradient de la performance mesurée par rapport à <img src="https://latex.codecogs.com/svg.image?\theta_t"/>.
+Où <img src="https://latex.codecogs.com/svg.image?\widehat{\nabla_\theta&space;J(\theta_t)}"/> est une estimation stochastique, dont l'espérence est le gradient de la performance mesurée par rapport à <img src="https://latex.codecogs.com/svg.image?\theta_t"/>.
 
 En dérivant, on obtient :
 <p align="center">
@@ -75,13 +75,18 @@ On distingue le **cas épisodique** du **cas continue**, pour lesquels la foncti
 On obtient une forme recursive, reliant l'état s à l'état suivant s'.
 
 
-Pour alléger l'écriture, posons : <img src="https://latex.codecogs.com/svg.image?\phi(s)&space;\doteq&space;\sum_{a&space;\in&space;A}&space;\nabla&space;\pi(a|s)q_\pi(s,a)"/>.
+Pour alléger l'écriture, posons : 
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\phi(s)&space;\doteq&space;\sum_{a&space;\in&space;A}&space;\nabla&space;\pi(a|s)q_\pi(s,a)"/>.
+</p>
 
 Soit <img src="https://latex.codecogs.com/svg.image?p_\pi(s\rightarrow&space;s^\prime,&space;k)"/> la probabilité de transitionner d'un état s à s' en suivant la politique <img src="https://latex.codecogs.com/svg.image?\pi_\theta"/>. On notera <img src="https://latex.codecogs.com/svg.image?p_\pi(s\rightarrow&space;s^\prime,&space;k)&space;=&space;p(s\rightarrow&space;s^\prime,&space;k)"/> par commodité d'écriture.
 
 Cette probabilité s'exprime comme produit de la probabilité de choisir l'action a à partir de s (liée à la politique), et de la probabilité d'atteindre l'état s' en partant de l'état s et de l'action a (probabilité liée aux dynamiques de l'environnement). On somme les probabilités sur chaque action pour obtenir la probabilité de transition : <img src="https://latex.codecogs.com/svg.image?p(s\rightarrow&space;s^\prime,&space;k=1)=\sum_a&space;\pi(a|s)p(s^\prime|s,a)"/>.
 
-Notons par ailleurs que l'on peut exprimer la probabilité de transitionner d'un état vers un autre sur plusieurs pas sous la forme d'un produit des probabilités des transitions intermédiaires. Pour <img src="https://latex.codecogs.com/svg.image?\forall&space;(s,s^\prime,s^{\prime\prime})&space;\in&space;S^3"/>, et <img src="https://latex.codecogs.com/svg.image?\forall&space;k\in\mathbb{N}^{*}"/>, on a : <img src="https://latex.codecogs.com/svg.image?p_\pi(s\rightarrow&space;s^{\prime\prime},&space;k)&space;=&space;p(s\rightarrow&space;s^\prime,&space;k-1)&space;p(s^\prime&space;\rightarrow&space;s^{\prime\prime},&space;1)"/>.
+Notons par ailleurs que l'on peut exprimer la probabilité de transitionner d'un état vers un autre sur plusieurs pas sous la forme d'un produit des probabilités des transitions intermédiaires :
+
+<img src="https://latex.codecogs.com/svg.image?\forall&space;(s,s^\prime,s^{\prime\prime})&space;\in&space;S^3"/>, et <img src="https://latex.codecogs.com/svg.image?\forall&space;k\in\mathbb{N}^{*}"/>, on a : <img src="https://latex.codecogs.com/svg.image?p_\pi(s\rightarrow&space;s^{\prime\prime},&space;k)&space;=&space;p(s\rightarrow&space;s^\prime,&space;k-1)&space;p(s^\prime&space;\rightarrow&space;s^{\prime\prime},&space;1)"/>.
 
 Grâce à ces expression, on peut dérouler la récursion :
 
@@ -90,7 +95,7 @@ Grâce à ces expression, on peut dérouler la récursion :
 </p>
 
 
-Le théorème du gradient de la politique fait intervenir la distribution stationnaire des états <img src="https://latex.codecogs.com/svg.image?\mu_\pi(s)"/> - notée <img src="https://latex.codecogs.com/svg.image?\mu(s)"/>) - définit de la façon suivante :
+Le théorème du gradient de la politique fait intervenir la distribution stationnaire des états <img src="https://latex.codecogs.com/svg.image?\mu_\pi(s)"/> - notée <img src="https://latex.codecogs.com/svg.image?\mu(s)"/> - définit de la façon suivante :
 <p align="center">
 	<img src="https://latex.codecogs.com/svg.image?\mu(s)&space;\doteq&space;\frac{\eta(s)&space;}{\sum_{s^\prime&space;\in&space;S}\eta(s^\prime)}"/>
 </p>
@@ -132,7 +137,10 @@ Ce qui nous permet d'isoler <img src="https://latex.codecogs.com/svg.image?\nabl
 	<img src="https://latex.codecogs.com/svg.image?\nabla&space;r(\theta)&space;=&space;\sum_a&space;\nabla\pi(a|s)q_\pi(s,a)&space;&plus;&space;\sum_a&space;\pi(a|s)\sum_{s^\prime}p(s^\prime|s,a)\nabla&space;v_\pi(s^\prime)-\nabla&space;v_\pi(s)"/>
 </p>
 
-Par définition, <img src="https://latex.codecogs.com/svg.image?J(\theta)=r(\theta)"/>. Or <img src="https://latex.codecogs.com/svg.image?r(\theta)"/> est indépendant de s. L'équation du gradient de la performance est donc toujours juste si l'on multiplie le terme de droite par <img src="https://latex.codecogs.com/svg.image?\sum_s&space;\mu(s)"/>, puisque <img src="https://latex.codecogs.com/svg.image?\sum_s&space;\mu(s)&space;=&space;1"/>.
+Par définition, <img src="https://latex.codecogs.com/svg.image?J(\theta)=r(\theta)"/>. Or <img src="https://latex.codecogs.com/svg.image?r(\theta)"/> est indépendant de s. L'équation du gradient de la performance est donc toujours juste si l'on multiplie le terme de droite par <img src="https://latex.codecogs.com/svg.image?\sum_s&space;\mu(s)"/>, puisque:
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\sum_s&space;\mu(s)&space;\doteq&space;1" title="\sum_s&space;\mu(s)&space;\doteq&space;1" />
+</p>
 
 Ainsi :
 <p align="center">
@@ -170,9 +178,7 @@ Cette forme constitue les fondements de la plupart des algorithmes du gradient d
 
 L'article Estimation de l'Avantage Généralisée (GAE) [Schulman et al., 2016](https://arxiv.org/pdf/1506.02438.pdf) ((i) trad ?) propose une forme générale du gradient de la performance, mettant en lumière les différentes déclinaisons de cette forme que l'on peut trouver dans la littérature :
 
-En posant g, le gradient de la performance, tel que <img src="https://latex.codecogs.com/svg.image?g&space;\doteq&space;\nabla_\theta&space;\mathop{\mathbb{E}}[\sum_{t=0}^\infty&space;r_t]"/>
-
-On a la forme générale : 
+En posant g, le gradient de la performance, tel que <img src="https://latex.codecogs.com/svg.image?g&space;\doteq&space;\nabla_\theta&space;\mathop{\mathbb{E}}[\sum_{t=0}^\infty&space;r_t]"/>, on a la forme générale : 
 <p align="center">
 	<img src="https://latex.codecogs.com/svg.image?g&space;=&space;\mathop{\mathbb{E}}[\sum_{t=0}^\infty&space;\Psi_t&space;\nabla_\theta&space;log&space;\pi_\theta(a_t|s_t)]"/>
 </p>
@@ -201,7 +207,7 @@ Et la fonction d'avantage :
 
 ## Algorithmes du Gradient de la Politique
 
-Les algorithmes présentés font tous mention du paramètre <img src="https://latex.codecogs.com/svg.image?\gamma&space;\in&space;&space;\]0;1\]"/>, le facteur d'atténuation. Sa définition est implicite, afin d'éviter les redondances.
+Les algorithmes présentés font tous mention du paramètre <img src="https://latex.codecogs.com/svg.image?\gamma&space;\in&space;&space;\]0;1\]"/>, le facteur d'atténuation. Sa définition sera donc implicite, afin d'éviter les redondances.
 
 <br/>
 
@@ -214,7 +220,7 @@ L'algorithme **REINFORCE** (gradient de la Politique avec méthode Monte-Carlo) 
 	<img src="https://latex.codecogs.com/svg.image?\begin{align*}&space;\nabla_\theta&space;J(\theta)&space;&=&space;\mathop{\mathbb{E}}_\pi[q_\pi(s,a)&space;\nabla_\theta\ln\pi_\theta(a,s)]&space;\\&=&space;\mathop{\mathbb{E}}_\pi[G_t&space;\nabla_\theta\ln\pi_\theta(a,s)]\end{align*}"/>
 </p>
 
-Autrement dit, on peut optimiser <img src="https://latex.codecogs.com/svg.image?\theta"/> à partir du retour obtenu au cours d'un épisode. Cette approche exploite la trajectoire observée sur l'épisode entier pour faire ses mises à jours, c'est pourquoi on parle de méthode de type Monte Carlo.
+Autrement dit, on peut optimiser <img src="https://latex.codecogs.com/svg.image?\theta"/> à partir du retour obtenu au cours d'un épisode. Cette approche exploite la trajectoire observée sur l'épisode entier pour faire ses mises à jours ; c'est pourquoi on parle de méthode de type Monte Carlo.
 
 ---
 
@@ -235,13 +241,13 @@ Autrement dit, on peut optimiser <img src="https://latex.codecogs.com/svg.image?
 
 <br/>
 
-Avec Reinforce, <img src="https://latex.codecogs.com/svg.image?\theta"/> est mis-à-jour en utilisant directement le retour observé lors d'une interaction avec l'environnement. Il n'y a donc **pas de biais** : la montée de gradient fera toujours évoluer <img src="https://latex.codecogs.com/svg.image?\theta"/> vers des valeurs qui augmenteront l'espérence de retour. En revanche, cette méthode introduit une **forte variance** : de trop grands pas sont réalisés en fonction de l'échantillon de trajectoire considéré, rendant la convergence vers une configuration optimale plus difficile.
+Avec Reinforce, <img src="https://latex.codecogs.com/svg.image?\theta"/> est mis-à-jour en utilisant directement le retour observé lors d'une interaction avec l'environnement. Il n'y a donc **pas de biais** : la montée de gradient fera toujours évoluer <img src="https://latex.codecogs.com/svg.image?\theta"/> vers des valeurs qui augmenteront l'espérence de retour. En revanche, cette méthode est très dépendante des valeurs de récompenses obtenues, introduisant une **forte variance**, rendant l'entraînement instable.
 
 
 
 ### REINFORCE avec valeurs de référence
 
-L'algorithme **REINFORCE avec valeurs de référence** est variante bien connue de l'algorithme REINFORCE. Il s'agit simplement de retrancher au retour de l'épisode une valeur de référence dans le calcul du gradient de la performance. Cette modification a pour effet de **réduire la variance** tout en assurant l'absence de biais.
+L'algorithme **REINFORCE avec valeurs de référence** est une variante bien connue de l'algorithme REINFORCE. Il s'agit simplement de retrancher au retour de l'épisode une valeur de référence dans le calcul du gradient de la performance. Cette modification a pour effet de **réduire la variance** tout en assurant l'absence de biais.
 
 On utilise souvent la **valeur d'état** en guise de valeur de référence, de sorte que l'on utilise la **fonction d'avantage** dans la mise à jour du gradient.
 
@@ -276,9 +282,9 @@ Insérer <img src="https://latex.codecogs.com/svg.image?b(s)"/> dans l'expressio
 </p>
 
 
-Pour comprendre en quoi cette idée permet de faciliter grandement l'entraînement, imaginons un [MDP](https://fr.wikipedia.org/wiki/Processus_de_d%C3%A9cision_markovien) à récompenses positives. Imaginons que trois essais nous donne les trois trajectoires, représentées ci-dessus (en z se trouve la performance, que l'on cherche à maximiser); nous aurions trois récomponses positives, plus ou moins grandes selon la qualité de la trajectoire. Pourtant, il serait souhaitable d'augmenter la probabilité de choisir la meilleure trajectoire, et de réduire celle de choisir la moins bonne.
+Pour comprendre en quoi cette idée permet de faciliter grandement l'entraînement, considérons un [MDP](https://fr.wikipedia.org/wiki/Processus_de_d%C3%A9cision_markovien) à récompenses positives. Imaginons que trois essais nous donne les trois trajectoires, représentées ci-dessus (en z se trouve la performance, que l'on cherche à maximiser); nous aurions trois récomponses positives, plus ou moins grandes selon la qualité de la trajectoire. Pourtant, il serait souhaitable d'augmenter la probabilité de choisir la meilleure trajectoire, et de réduire celle de choisir la moins bonne.
 
-L'intuition derrière l'utilisation de la valeur de référence est la suivante : en soustrayant la récompense à la récompose moyenne, on incitera la politique à **choisir plus souvent des trajectoires qui ont permis l'obtention d'une récompense plus élevée que la moyenne**, tout en l'incitant à **moins choisir les trajectoires ayant abouties à une récompense inférieure à la moyenne**.
+L'intuition derrière l'utilisation de la valeur de référence est la suivante : en soustrayant la récompense moyenne à la récompose obtenue, on incitera la politique à **choisir plus souvent des trajectoires qui ont permis l'obtention d'une récompense plus élevée que la moyenne**, tout en l'incitant à **moins choisir les trajectoires ayant abouties à une récompense inférieure à la moyenne**.
 
 
 ---
@@ -310,7 +316,7 @@ L'intuition derrière l'utilisation de la valeur de référence est la suivante 
 
 ### Acteur-Critique
 
-L'algorithme **Acteur-Critique** ressemble beaucoup à l'algorithme REINFORCE avec valeurs de référence : il s'agit de calculer une différence entre un retour, et une valeur de référence. En revanche, deux différences importantes les distinguent.
+L'algorithme **Acteur-Critique** ressemble beaucoup à l'algorithme REINFORCE avec valeurs de référence : il s'agit de calculer une différence entre un retour, et une valeur de référence. En revanche, deux différences importantes les distinguent : la possibilité d'effectuer des mises-à-jours en ligne, et la mécanique d'évaluation des actions prises par l'agent.
 
 Comme toutes les méthodes de type Monte-Carlo, REINFORCE ne fait pas de mise-à-jour avant la fin de l'épisode. Par ailleurs, la valeur de référence ne tient compte que de la valeur de l'état initial (avant de prendre l'action), et ne permet par conséquent pas de juger de la qualité de l'action choisie. Par cette approche, on répond à la question : **"L'agent a-t-il bien fait de se trouver à cette position au temps t ?"**, en tenant compte de l'épisode entier.
 
@@ -319,9 +325,9 @@ Dans le cas le plus simple de la méthode Acteur-Critique, le retour utilisé da
 En résumé : la politique agit, et la méthode de retour intermédiaire critique.
 
 
-Il existe de nombreuses variantes, impliquant entre autres : la fonction d'avanntage, les valeurs-Q, la méthode SARSA 1-étape, le retour n-étapes, et différentes approches d'entraîements (séquentiel, asynchronisé).
+Il existe de nombreuses variantes autour des méthodes de type Acteur-Critique, impliquant entre autres : la fonction d'avanntage, les valeurs-Q, la méthode SARSA 1-pas, le retour n-pas, et différentes approches d'entraîements (séquentiel, asynchronisé). Toutes ces méthodes ont les deux composantes qui caractérisent ce type d'approche, à savoir 1) la possibilité de réaliser les mises-à-jours sans avoir à attendre la fin de l'épisode (retour n-pas), et 2) la mécanique d'évaluation des décisions prises dans le processus d'optimisation. 
 
-L'algorithme présenté dans cette section correspond donc à une certaine variante de la méthode Acteur-Critique : cas épisodique, 1-étape, entièrement en ligne (i.e. sans avoir recourt à une mémoire tampon), avec fonction d'avantage.
+L'algorithme présenté dans cette section correspond donc à une certaine variante de la méthode Acteur-Critique : cas épisodique, 1-étape, pas de mémoire tampon, et utilisation de la fonction d'avantage.
 
 ---
 
@@ -356,7 +362,7 @@ Par convention, on a <img src="https://latex.codecogs.com/svg.image?\hat{v}(s^\p
 
 Cette version ne tient compte que d'une transition pour réaliser les mises-à-jours de poids, ce qui a toutes les chances de rendre l'optimisation difficile en raison de la large variance dans les données d'entraînement d'une itération à l'autre. L'objectif de cette section n'est pas donner le meilleur algorithme acteur-critique, mais d'expliciter les principales composantes de cette approche.
 
-<ins>Remarque :</ins> En pratique, on peut simplement étendre cet algorithme aux itérations sur des lots, en accumulant un nombre <img src="https://latex.codecogs.com/svg.image?n"/> de transitions, et en appliquant les mêmes étapes mentionnées ci-dessus. À noter qu'il n'y aucune nécessité de lien entre les transitions (i.e. elles n'ont pas à provenir d'une même trajectoire) ; tant que l'on a des quadruplets <img src="https://latex.codecogs.com/svg.image?(s,a,s^\prime,r)"/>, nous serons en mesure d'appliquer l'algorithme.
+<ins>Remarque :</ins> En pratique, on peut simplement étendre cet algorithme aux itérations sur des lots, en accumulant un nombre <img src="https://latex.codecogs.com/svg.image?n"/> de transitions, et en appliquant les mêmes étapes mentionnées ci-dessus. À noter qu'il n'y aucune nécessité de lien entre les transitions (i.e. elles n'ont pas à provenir d'une même trajectoire) ; tant que l'on a des quadruplets <img src="https://latex.codecogs.com/svg.image?(s,a,s^\prime,r)"/>, on est en mesure d'appliquer l'algorithme.
 
 
 <br/>
@@ -377,12 +383,17 @@ Le gradient de la performance est calculé à partir de l'espérence sur <img sr
 
 Pour cette raison, il est souhaitable de définir des algorithmes permettant d'optimiser une politique à partir de mesures réalisées *Hors-Politique*, c'est-à-dire avec une autre politique que celle que l'on optimise.
 
-Par ailleurs, une telle approche permet d'utiliser une politique la plus efficace pour l'exploration, sans avoir à contraindre la politique que l'on est en train d'optimiser pour qu'inciter à explorer de nouvelles trajectoires.
+Par ailleurs, une telle approche permet d'utiliser une politique la plus efficace pour l'exploration, sans avoir à contraindre la politique que l'on est en train d'optimiser pour l'inciter à explorer de nouvelles trajectoires.
 
 
 ## Échantillonnage préférentiel 
 
-Pour rappel, on cherche <img src="https://latex.codecogs.com/svg.image?\theta^*&space;=&space;\operatorname*{argmax}_\theta&space;J(\theta)" title="\theta^* = \operatorname*{argmax}_\theta J(\theta)" />, que l'on optimise à partir de : 
+Pour rappel, on cherche :
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\theta^*&space;=&space;\operatorname*{argmax}_\theta&space;J(\theta)" title="\theta^* = \operatorname*{argmax}_\theta J(\theta)" />
+</p>
+
+que l'on optimise à partir de : 
 
 <p align="center">
 	<img src="https://latex.codecogs.com/svg.image?J(\theta)&space;=&space;\mathop{\mathbb{E}}_{\tau\sim\pi_\theta(\tau)}&space;[r(\tau)]" title="J(\theta) = \mathop{\mathbb{E}}_{\tau\sim\pi_\theta(\tau)} [r(\tau)]" />	
