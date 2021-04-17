@@ -7,31 +7,21 @@ categories: Apprentissage-profond
 
 
 
+Le Gradient de la Politique (ou *Policy Gradient*) est une approche de résolution de problèmes en Apprentissage par Renforcement.
 
+Dans ce paradigme d'apprentissage automatique, il s'agit de trouver une stratégie de comportement optimale pour un ou plusieurs agents, de manière à maximiser les récompenses obtenues. Les méthodes de **gradient de la politique** visent à modéliser et à optimiser la politique directement. En général, cette dernière est modélisée par une fonction paramétrique de <img src="https://latex.codecogs.com/svg.image?\theta"/>, notée <img src="https://latex.codecogs.com/svg.image?\pi_\theta(a|s)"/>. Les valeurs de la fonction de récompenses (fonction objectif) dépendent de cette politique. Plusieurs algorithmes peuvent être appliqués pour optimiser <img src="https://latex.codecogs.com/svg.image?\theta"/> de sorte à maximiser les performances de l’agent sur une tâche donnée.
 
-Les résultats spectaculaires obtenus depuis 2015 (DQN, GO, DOTA, Alphafold) grâce à l'apprentissage par renforcement proviennent de deux raisons majeurs : D'une part, l'augmentation toujours croissante de la capacité de calcul (SOURCE?), et d'autre part, l'émergence de méthodes d'apprentissages capables d'approximer des fonctions dans des espaces de très grandes dimensions. On regroupe ces méthodes sous le nom de d'algorithmes de **gradient de la politique**.
 
 <ins>Note de rédaction :</ins> Je mettrai à jour régulièrement cette liste pour qu'elle contiennent l'essentiel des informations pour appréhender les algorithmes de l'État de l'Art sans avoir à plonger trop en détail dans les articles originaux. J'ajouterai par ailleurs, autant que possible, une implémentation python sous la forme de script unique autant que possible.
 
-<ins>Crédit :</ins> : Ces notes s'appuient très largement sur le [blog de lilian weng](https://lilianweng.github.io/lil-log/2018/04/08/policy-gradient-algorithms.html#off-policy-policy-gradient) et sur les [notes de cours de Serguey Levine, CS182 à UC Berkeley](https://cs182sp21.github.io/). L'ensemble des sources utiliées sont listés à la fin de l'article.
+<ins>Crédit :</ins> Ces notes s'appuient très largement sur le [blog de lilian weng](https://lilianweng.github.io/lil-log/2018/04/08/policy-gradient-algorithms.html#off-policy-policy-gradient) et sur les [notes de cours de Serguey Levine, CS182 à UC Berkeley](https://cs182sp21.github.io/). L'ensemble des sources utiliées sont listés à la fin de l'article.
 
 
 
 <br/>
 
-## Qu’est-ce que le Gradient de la Politique ?
 
-Le Gradient de la Politique (ou *Policy Gradient*) est une approche de résolution de problèmes en Apprentissage par Renforcement.
-
-Dans cette branche de l'IA, l’objectif est de trouver une stratégie de comportement optimale pour un agent, de sorte qu’il puisse maximiser ses récompenses. Les méthodes de **gradient de la politique** visent à modéliser et à optimiser la politique directement. En général, cette dernière est modélisée par une fonction paramétrique de <img src="https://latex.codecogs.com/svg.image?\theta"/>, notée <img src="https://latex.codecogs.com/svg.image?\pi_\theta(a|s)"/>. Les valeurs de la fonction de récompenses (fonction objectif) dépendent de cette politique. Plusieurs algorithmes peuvent être appliqués pour optimiser <img src="https://latex.codecogs.com/svg.image?\theta"/> de sorte à maximiser les performances de l’agent sur une tâche donnée.
-
-<br/>
-
-
-### Notations
-
-(Ajouter tableau notations)
-
+### Comment optimiser la politique d'un agent ?
 
 La fonction de récompense (ou fonction de performance) est définie par :
 <p align="center">
@@ -363,14 +353,12 @@ L'algorithme présenté dans cette section correspond donc à une certaine varia
 
 Par convention, on a <img src="https://latex.codecogs.com/svg.image?\hat{v}(s^\prime,w)&space;\doteq&space;0"/> si <img src="https://latex.codecogs.com/svg.image?s^\prime"/> est terminal. 
 
+---
+
+
 Cette version ne tient compte que d'une transition pour réaliser les mises-à-jours de poids, ce qui a toutes les chances de rendre l'optimisation difficile en raison de la large variance dans les données d'entraînement d'une itération à l'autre. L'objectif de cette section n'est pas donner le meilleur algorithme acteur-critique, mais d'expliciter les principales composantes de cette approche.
 
 <ins>Remarque :</ins> En pratique, on peut simplement étendre cet algorithme aux itérations sur des lots, en accumulant un nombre <img src="https://latex.codecogs.com/svg.image?n"/> de transitions, et en appliquant les mêmes étapes mentionnées ci-dessus. À noter qu'il n'y aucune nécessité de lien entre les transitions (i.e. elles n'ont pas à provenir d'une même trajectoire) ; tant que l'on a des quadruplets <img src="https://latex.codecogs.com/svg.image?(s,a,s^\prime,r)"/>, nous serons en mesure d'appliquer l'algorithme.
-
-
-	
-
----
 
 
 <br/>
@@ -410,7 +398,7 @@ On a :
 	<img src="https://latex.codecogs.com/svg.image?\begin{align*}\mathop{\mathbb{E}}_{\tau\sim\pi_\theta}&space;&=&space;\int&space;\pi_\theta(\tau)r(\tau)d\tau&space;\\&=&space;\int&space;\pi_{\theta^\prime}(\tau)&space;\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}&space;r(\tau)d\tau&space;\\&=&space;\mathop{\mathbb{E}}_{\tau\sim\pi_{\theta^\prime}}[\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}r(\tau)]\end{align*}" title="\begin{align*}\mathop{\mathbb{E}}_{\tau\sim\pi_\theta} &= \int \pi_\theta(\tau)r(\tau)d\tau \\&= \int \pi_{\theta^\prime}(\tau) \frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)} r(\tau)d\tau \\&= \mathop{\mathbb{E}}_{\tau\sim\pi_{\theta^\prime}}[\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}r(\tau)]\end{align*}" />
 </p>
 
-On appelle "poids d'importance" le coefficient <img src="https://latex.codecogs.com/svg.image?\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}" title="\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}" />. On parle des poids d'importance au pluriels, dans le sens où chaque terme en <img src="https://latex.codecogs.com/svg.image?\tau" title="\tau" /> comprend implicitement le produit des termes en <img src="https://latex.codecogs.com/svg.image?(s_i,&space;a_i)" title="(s_i, a_i)" /> associés à la trajectoire.
+On appelle **poids d'importance** le coefficient <img src="https://latex.codecogs.com/svg.image?\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}" title="\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}" />. On parle des poids d'importance au pluriels, dans le sens où chaque terme en <img src="https://latex.codecogs.com/svg.image?\tau" title="\tau" /> comprend implicitement le produit des termes en <img src="https://latex.codecogs.com/svg.image?(s_i,&space;a_i)" title="(s_i, a_i)" /> associés à la trajectoire.
 
 Ainsi : 
 <p align="center">
@@ -424,7 +412,7 @@ Or :
 
 Avec <img src="https://latex.codecogs.com/svg.image?p(s_1)" title="p(s_1)" /> la probabilité de démarrer l'épisode à l'état <img src="https://latex.codecogs.com/svg.image?s_1" title="s_1" />, et <img src="https://latex.codecogs.com/svg.image?T" title="T" /> le nombre d'étape dans l'épisode avant que l'état terminal n'ait été atteint.
 
-Les poids d'importance s'exprime donc de la façon suivant :
+Les poids d'importance s'expriment donc de la façon suivant :
 <p align="center">
 	<img src="https://latex.codecogs.com/svg.image?\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}&space;=&space;\frac{p(s_1)\prod_{t=1}^{T}\pi_\theta(a_t|s_t)p(s_{t&plus;1}|s_t,a_t)}{p(s_1)\prod_{t=1}^{T}\pi_{\theta^\prime}(a_t|s_t)p(s_{t&plus;1}|s_t,a_t)}" title="\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)} = \frac{p(s_1)\prod_{t=1}^{T}\pi_\theta(a_t|s_t)p(s_{t+1}|s_t,a_t)}{p(s_1)\prod_{t=1}^{T}\pi_{\theta^\prime}(a_t|s_t)p(s_{t+1}|s_t,a_t)}" />
 </p>
@@ -475,13 +463,13 @@ Les méthodes Hors-Politique en apprentissage par renforcement (et en particulie
 
 <br/>
 
-<ins>En rédaction :</ins> A3C, TRPO, PPO
+*<ins>En rédaction :</ins> A3C, TRPO, PPO*
 
 <br/>
 
 ---
 
-
+<br/>
 
 #### Sources
 
