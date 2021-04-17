@@ -276,7 +276,7 @@ Insérer <img src="https://latex.codecogs.com/svg.image?b(s)"/> dans l'expressio
 #### Intuition
 
 <p align="center">
-  (AJOUTER IMAGE TRAJECTOIRE MAX PERFS)
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/gradient_de_la_politique/trajectoires_max_perf.png"/> 
   <br/>
   Example tiré du <a href="http://rail.eecs.berkeley.edu/deeprlcourse-fa17/f17docs/lecture_4_policy_gradient.pdf">cours de S. Levine à l'UC Berkeley</a>
 </p>
