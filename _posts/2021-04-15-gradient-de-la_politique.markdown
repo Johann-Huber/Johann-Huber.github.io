@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Gradient de la politique"
-date:   2021-04-09 21:07:00 +0200
-categories: Apprentissage-profond
+date:   2021-04-15 21:07:00 +0200
+categories: Apprentissage-par-renforcement
 ---
 
 
@@ -12,7 +12,7 @@ Le Gradient de la Politique (ou *Policy Gradient*) est une approche de résoluti
 
 <ins>Note de rédaction :</ins> Je mettrai à jour régulièrement cette liste pour qu'elle contiennent l'essentiel des informations pour appréhender les algorithmes de l'État de l'Art sans avoir à plonger trop en détail dans les articles originaux. J'ajouterai par ailleurs, autant que possible, une implémentation simple en python.
 
-<ins>Crédit :</ins> Ces notes s'appuient très largement sur le [blog de Lilian Weng](https://lilianweng.github.io/lil-log/2018/04/08/policy-gradient-algorithms.html#off-policy-policy-gradient) et sur les [notes de cours de Serguey Levine, CS182 à l'UC Berkeley](https://cs182sp21.github.io/). L'ensemble des ressources utiliées sont listées à la fin de l'article.
+<ins>Crédit :</ins> Ces notes s'appuient très largement sur le [blog de Lilian Weng](https://lilianweng.github.io/lil-log/2018/04/08/policy-gradient-algorithms.html#off-policy-policy-gradient) et sur les [notes de cours de Serguey Levine, CS182 à l'UC Berkeley](https://cs182sp21.github.io/) (que je recommande aux lecteurs anglophones). L'ensemble des ressources utiliées sont listées à la fin de l'article.
 
 
 
@@ -176,7 +176,7 @@ Le théorème du gradient de la politique nous permet d'exprimer le gradient de 
 
 Cette forme constitue les fondements de la plupart des algorithmes du gradient de la politique. Elle a pour particularité de ne **pas** avoir **de biais**, mais d'être soumis à une **forte variance**. Les algorithmes évoqués dans cet article proposent des solutions pour réduire la variance sans (trop) affecter le bias.
 
-L'article Estimation de l'Avantage Généralisée (GAE) [Schulman et al., 2016](https://arxiv.org/pdf/1506.02438.pdf) ((i) trad ?) propose une forme générale du gradient de la performance, mettant en lumière les différentes déclinaisons de cette forme que l'on peut trouver dans la littérature :
+L'article *Estimation de l'Avantage Généralisé* (GAE) [Schulman et al., 2016](https://arxiv.org/pdf/1506.02438.pdf) propose une forme générale du gradient de la performance, mettant en lumière les différentes déclinaisons de cette forme que l'on peut trouver dans la littérature :
 
 En posant g, le gradient de la performance, tel que <img src="https://latex.codecogs.com/svg.image?g&space;\doteq&space;\nabla_\theta&space;\mathop{\mathbb{E}}[\sum_{t=0}^\infty&space;r_t]"/>, on a la forme générale : 
 <p align="center">
@@ -407,7 +407,7 @@ On a :
 	<img src="https://latex.codecogs.com/svg.image?\begin{align*}\mathop{\mathbb{E}}_{\tau\sim\pi_\theta}&space;&=&space;\int&space;\pi_\theta(\tau)r(\tau)d\tau&space;\\&=&space;\int&space;\pi_{\theta^\prime}(\tau)&space;\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}&space;r(\tau)d\tau&space;\\&=&space;\mathop{\mathbb{E}}_{\tau\sim\pi_{\theta^\prime}}[\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}r(\tau)]\end{align*}" title="\begin{align*}\mathop{\mathbb{E}}_{\tau\sim\pi_\theta} &= \int \pi_\theta(\tau)r(\tau)d\tau \\&= \int \pi_{\theta^\prime}(\tau) \frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)} r(\tau)d\tau \\&= \mathop{\mathbb{E}}_{\tau\sim\pi_{\theta^\prime}}[\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}r(\tau)]\end{align*}" />
 </p>
 
-On appelle **poids d'importance** le coefficient <img src="https://latex.codecogs.com/svg.image?\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}" title="\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}" />. On parle des poids d'importance au pluriels, dans le sens où chaque terme en <img src="https://latex.codecogs.com/svg.image?\tau" title="\tau" /> comprend implicitement le produit des termes en <img src="https://latex.codecogs.com/svg.image?(s_i,&space;a_i)" title="(s_i, a_i)" /> associés à la trajectoire.
+On appelle **poids d'importance** le coefficient <img src="https://latex.codecogs.com/svg.image?\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}" title="\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}" />. On parle de poids d'importance au pluriel, dans le sens où chaque terme en <img src="https://latex.codecogs.com/svg.image?\tau" title="\tau" /> comprend implicitement le produit des termes en <img src="https://latex.codecogs.com/svg.image?(s_i,&space;a_i)" title="(s_i, a_i)" /> associés à la trajectoire.
 
 Ainsi : 
 <p align="center">
@@ -421,7 +421,7 @@ Or :
 
 Avec <img src="https://latex.codecogs.com/svg.image?p(s_1)" title="p(s_1)" /> la probabilité de démarrer l'épisode à l'état <img src="https://latex.codecogs.com/svg.image?s_1" title="s_1" />, et <img src="https://latex.codecogs.com/svg.image?T" title="T" /> le nombre d'étape dans l'épisode avant que l'état terminal n'ait été atteint.
 
-Les poids d'importance s'expriment donc de la façon suivant :
+Les poids d'importance s'expriment donc de la façon suivante :
 <p align="center">
 	<img src="https://latex.codecogs.com/svg.image?\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)}&space;=&space;\frac{p(s_1)\prod_{t=1}^{T}\pi_\theta(a_t|s_t)p(s_{t&plus;1}|s_t,a_t)}{p(s_1)\prod_{t=1}^{T}\pi_{\theta^\prime}(a_t|s_t)p(s_{t&plus;1}|s_t,a_t)}" title="\frac{\pi_\theta(\tau)}{\pi_{\theta^\prime}(\tau)} = \frac{p(s_1)\prod_{t=1}^{T}\pi_\theta(a_t|s_t)p(s_{t+1}|s_t,a_t)}{p(s_1)\prod_{t=1}^{T}\pi_{\theta^\prime}(a_t|s_t)p(s_{t+1}|s_t,a_t)}" />
 </p>
@@ -447,7 +447,7 @@ Soit :
 </p>
 
 
-Pour <img src="https://latex.codecogs.com/svg.image?\theta&space;\neq&space;\theta^\prime" title="\theta \neq \theta^\prime" />. 
+pour <img src="https://latex.codecogs.com/svg.image?\theta&space;\neq&space;\theta^\prime" title="\theta \neq \theta^\prime" />. 
 
 En explicitant les trajectoires, on trouve la forme suivante :
 
@@ -465,7 +465,7 @@ Puisque <img src="https://latex.codecogs.com/svg.image?r(\tau)&space;\doteq&spac
 
 Cette forme convient aux deux cas évoqués en début de partie : on peut remplacer <img src="https://latex.codecogs.com/svg.image?\pi_{\theta^\prime}" title="\pi_{\theta^\prime}" /> par une politique d'exploration <img src="https://latex.codecogs.com/svg.image?b" title="b" />, ou considérer le cas de mises-à-jours asynchronisées.
 
-Les méthodes Hors-Politique en apprentissage par renforcement (et en particulier appliqués aux méthodes du gradient de la politique) font l'objet de recherches actives, et une importante quantité d'articles publiés dans les grandes revues scientifiques du domaine y sont consacré. Cette section pose les fondement de l'approche Hors-Politique ; nous entretrons dans davantage de détails au cas-par-cas si le besoin s'en fait sentir pour les méthodes présentées ci-dessous.
+Les méthodes Hors-Politique en Apprentissage par Renforcement (et en particulier appliqués aux méthodes du gradient de la politique) font l'objet de recherches actives, et de nombreux articles y sont consacré dans les grandes revues scientifiques du domaine. Cette section pose les fondement de l'approche Hors-Politique ; nous entretrons dans davantage de détails au cas-par-cas si le besoin s'en fait sentir pour les méthodes présentées ci-dessous.
 
 
 ---
@@ -492,6 +492,7 @@ Les méthodes Hors-Politique en apprentissage par renforcement (et en particulie
 
 ["Introduction à l'apprentissage par renforcement", 2e édition](http://incompleteideas.net/book/the-book-2nd.html), l'ouvrage de référence de Sutton et Barto.
 
+["Transparents de Jie-Han Chen, DASI spring 2018, National Cheng Kung University, Taiwan"](https://fr.slideshare.net/zhihua98/policy-gradient-98034864)
 
 
 **Articles originaux, ayant proposés les méthodes :**
