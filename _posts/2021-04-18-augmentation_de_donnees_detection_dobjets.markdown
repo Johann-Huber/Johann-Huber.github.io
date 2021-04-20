@@ -42,9 +42,22 @@ Transformations incluses dans les environnement de développement : [Pytorch](ht
 ## Arborescence des catégories de transformations
 
 
-(Schéma en français de : https://journalofbigdata.springeropen.com/articles/10.1186/s40537-019-0197-0)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/augmentation_dimages.jpg" alt="arbo_augmentation_dimages" width="500">
+  Adapté depuis : https://journalofbigdata.springeropen.com/articles/10.1186/s40537-019-0197-0
+</p>
 
-Adapté depuis : https://journalofbigdata.springeropen.com/articles/10.1186/s40537-019-0197-0
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/augmentation_dimages.jpg" alt="arbo_augmentation_dimages" width="1000">
+  Adapté depuis : https://journalofbigdata.springeropen.com/articles/10.1186/s40537-019-0197-0
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/augmentation_dimages.jpg" alt="arbo_augmentation_dimages" width="1200">
+  Adapté depuis : https://journalofbigdata.springeropen.com/articles/10.1186/s40537-019-0197-0
+</p>
+
+
 
 
 <br/>
@@ -292,15 +305,14 @@ Voici quelques examples d'images générées par la méthodes pix2pix sur le jeu
 
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/single_pix2pix_gwd.jpg">
-  Sur des images simples
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/single_pix2pix_gwd.jpg" alt="mosaic_pix2pix_gwd" width="1000">
+  À partir d'images simples
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/mosaic_pix2pix_gwd.jpg">
-  Sur des images mosaïque (voir plus haut)
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/mosaic_pix2pix_gwd.jpg" alt="mosaic_pix2pix_gwd" width="1000">
+  À partir d'images mosaïques (voir plus haut)
 </p>
-
 
 
 Comme on peut le voir, les résultats peuvent être d'une qualité variable. Mais les résultats spectaculaires obtenus par les GANs ces dernières années laissent supposer que cette piste sera de plus en plus (et de mieux en mieux) exploitée à l'avenir.
