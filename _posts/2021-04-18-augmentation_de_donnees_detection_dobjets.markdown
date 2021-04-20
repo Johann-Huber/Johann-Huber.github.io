@@ -47,7 +47,7 @@ Transformations incluses dans les environnement de développement : [Pytorch](ht
 
 ### 1.1 Transformation géométriques
 
-- **Transormation horizontale** (*HorizontalFlip* dans albumentation)
+- **Transformation horizontale** (*HorizontalFlip* dans albumentation)
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/transfo_horiz_ex.png" alt="transfo_horiz" width="500">
@@ -56,7 +56,7 @@ Transformations incluses dans les environnement de développement : [Pytorch](ht
 <br/>
 
 
-- **Transormation verticale** (*VerticalFlip* dans albumentation)
+- **Transformation verticale** (*VerticalFlip* dans albumentation)
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/transfo_verti_ex.png" alt="transfo_verti" width="500">	
@@ -89,7 +89,7 @@ Transformations incluses dans les environnement de développement : [Pytorch](ht
 - **Compression d'image** (*ImageCompression* dans albumentation) (dans cette section ?)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/compression_dimage_ex.png">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/compression_dimage_ex.png" alt="transfo_verti" width="500">
 </p>
 
 <br/>
@@ -103,7 +103,7 @@ Transformations incluses dans les environnement de développement : [Pytorch](ht
 - **Contraste de luminosité aléatoire** (*RandomBrightnessContrast* dans albumentation) (dans cette section ?)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/contraste_lumino_alea_ex.png">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/contraste_lumino_alea_ex.png" alt="transfo_verti" width="500">
 </p>
 
 <br/>
@@ -111,7 +111,7 @@ Transformations incluses dans les environnement de développement : [Pytorch](ht
 - **Saturation de teinte aléatoire** (*HueSaturationValue* dans albumentation)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/saturation_teinte_alea_ex.png">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/saturation_teinte_alea_ex.png" alt="transfo_verti" width="500">
 </p>
 
 <br/>
@@ -119,7 +119,7 @@ Transformations incluses dans les environnement de développement : [Pytorch](ht
 - **Décalage RVB** (*RGBShift* dans albumentation)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/decalage_rvb_ex.png">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/decalage_rvb_ex.png" alt="transfo_verti" width="500">
 </p>
 
 <br/>
@@ -127,7 +127,7 @@ Transformations incluses dans les environnement de développement : [Pytorch](ht
 - **Gamma aléatoire** (*RandomGamma* dans albumentation) ( ? )
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/gamma_alea_ex.png">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/gamma_alea_ex.png" alt="transfo_verti" width="500">
 </p>
 
 <br/>
@@ -140,7 +140,7 @@ CLAHE (Contrast Limited Adaptive Histogram Equalization)
 - **Transfert de couleur** (article [ColorTransfer](https://www.cs.tau.ac.il/~turkel/imagepapers/ColorTransfer.pdf))
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/transfert_couleur_ex.png">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/transfert_couleur_ex.png" alt="transfo_verti" width="500">
 </p>
 
 <br/>
@@ -184,7 +184,7 @@ CLAHE (Contrast Limited Adaptive Histogram Equalization)
 - **Bruit gaussien** (*GaussNoise* dans albumentation)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/bruit_gauss_ex.png">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/bruit_gauss_ex.png" alt="transfo_verti" width="500">
 </p>
 
 <br/>
@@ -193,7 +193,7 @@ CLAHE (Contrast Limited Adaptive Histogram Equalization)
 - **Flou** (*Blur* dans albumentation)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/flou_ex.png">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/flou_ex.png" alt="transfo_verti" width="500">
 </p>
 
 <br/>
@@ -202,7 +202,7 @@ CLAHE (Contrast Limited Adaptive Histogram Equalization)
 - **Flou cinétique** (*MotionBlur* dans albumentation)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/flou_cinetique_ex.png">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/flou_cinetique_ex.png" alt="transfo_verti" width="500">
 </p>
 
 <br/>
@@ -217,7 +217,7 @@ CLAHE (Contrast Limited Adaptive Histogram Equalization)
 - **Découpage avec nombre minimal de boite englobante** (vu pour la première fois [ici](https://www.kaggle.com/c/global-wheat-detection/discussion/172569); s'il existe une source antérieure, merci de me la faire parvenir !)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/decoupe_nboites_min_ex.png">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/decoupe_nboites_min_ex.png" alt="transfo_verti" width="500">
 </p>
 
 <br/>
@@ -256,7 +256,7 @@ Article original : [Gatys, L. A., Ecker, A. S., & Bethge, M. (2015). A neural al
 Un exemple sur le Global Wheat Dataset :
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/transfert_style_neuronal_ex.png">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/transfert_style_neuronal_ex.png" alt="transfo_verti" width="500">
 </p>
 
 
