@@ -50,7 +50,7 @@ Transformations incluses dans les environnement de développement : [Pytorch](ht
 - **Transormation horizontale** (*HorizontalFlip* dans albumentation)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/transfo_horiz_ex.png">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/transfo_horiz_ex.png" alt="transfo_horiz" width="200">
 </p>
 
 <br/>
@@ -59,7 +59,7 @@ Transformations incluses dans les environnement de développement : [Pytorch](ht
 - **Transormation verticale** (*VerticalFlip* dans albumentation)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/transfo_verti_ex.png">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/transfo_verti_ex.png" alt="transfo_verti" width="200">
 </p>
 
 <br/>
