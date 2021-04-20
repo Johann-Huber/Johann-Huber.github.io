@@ -41,23 +41,11 @@ Transformations incluses dans les environnement de développement : [Pytorch](ht
 
 ## Arborescence des catégories de transformations
 
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/augmentation_dimages.jpg" alt="arbo_augmentation_dimages" width="500">
-  Adapté depuis : https://journalofbigdata.springeropen.com/articles/10.1186/s40537-019-0197-0
-</p>
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/augmentation_dimages.jpg" alt="arbo_augmentation_dimages" width="1000">
-  Adapté depuis : https://journalofbigdata.springeropen.com/articles/10.1186/s40537-019-0197-0
-</p>
-
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/augmentation_dimages.jpg" alt="arbo_augmentation_dimages" width="1200">
-  Adapté depuis : https://journalofbigdata.springeropen.com/articles/10.1186/s40537-019-0197-0
 </p>
 
-
+*Schéma adapté depuis : [Shorten, C., & Khoshgoftaar, T. M. (2019). A survey on image data augmentation for deep learning. Journal of Big Data, 6(1), 1-48.](https://link.springer.com/article/10.1186/s40537-019-0197-0?code=a6ae644c-3bfc-43d9-b292-82d77d5890d5)*
 
 
 <br/>
@@ -105,7 +93,7 @@ Transformations incluses dans les environnement de développement : [Pytorch](ht
 
 
 
-- **Compression d'image** (*ImageCompression* dans albumentation) (dans cette section ?)
+- **Compression d'image** (*ImageCompression* dans albumentation)
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/compression_dimage_ex.png" alt="transfo_verti" width="500">
@@ -129,7 +117,7 @@ Transformations incluses dans les environnement de développement : [Pytorch](ht
 <br/>
 
 
-- **Gamma aléatoire** (*RandomGamma* dans albumentation) ( ? )
+- **Gamma aléatoire** (*RandomGamma* dans albumentation)
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/gamma_alea_ex.png" alt="transfo_verti" width="500">
@@ -138,7 +126,7 @@ Transformations incluses dans les environnement de développement : [Pytorch](ht
 <br/>
 
 
-- **Contraste de luminosité aléatoire** (*RandomBrightnessContrast* dans albumentation) (dans cette section ?)
+- **Contraste de luminosité aléatoire** (*RandomBrightnessContrast* dans albumentation)
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/contraste_lumino_alea_ex.png" alt="transfo_verti" width="500">
@@ -212,7 +200,9 @@ Il serait pertinent de diminuer le taux de confiance associé à la rétropropag
 
 
 
-- **Découpage avec nombre minimal de boite englobante** (vu pour la première fois [ici](https://www.kaggle.com/c/global-wheat-detection/discussion/172569); s'il existe une source antérieure, merci de me la faire parvenir !)
+- **Découpage avec nombre minimal de boite englobante** 
+
+Source : Vu pour la première fois [ici](https://www.kaggle.com/c/global-wheat-detection/discussion/172569); s'il existe une source antérieure, merci de me la faire parvenir !
 
 Approche intéressante pour les scènes très denses, comme dans GWD. Le découpage permet d'obtenir des images tout à fait cohérentes. Combinée avec d'autres augmentations, le contenu généré est très intéressant pour aider à la généralisation.
 
@@ -303,17 +293,17 @@ Voici quelques examples d'images générées par la méthodes pix2pix sur le jeu
 
 *Crédit : Ces images pix2pix ont été publiées par [bendang sur Kaggle](https://www.kaggle.com/bendang/synthetic-wheat-images)*
 
+- À partir d'images simples :
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/single_pix2pix_gwd.jpg" alt="mosaic_pix2pix_gwd" width="1000">
-  À partir d'images simples
 </p>
+
+- À partir d'images mosaïques (voir plus haut) :
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/mosaic_pix2pix_gwd.jpg" alt="mosaic_pix2pix_gwd" width="1000">
-  À partir d'images mosaïques (voir plus haut)
 </p>
-
 
 Comme on peut le voir, les résultats peuvent être d'une qualité variable. Mais les résultats spectaculaires obtenus par les GANs ces dernières années laissent supposer que cette piste sera de plus en plus (et de mieux en mieux) exploitée à l'avenir.
 
