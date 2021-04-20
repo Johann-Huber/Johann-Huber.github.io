@@ -18,7 +18,7 @@ Le choix des transformations passent donc souvent par leur visualisation sur que
 
 Bien que cet article se concentre sur la détection d'objet, il apparaît que beaucoup des méthodes évoquées sont tout aussi valable sur d'autres tâches de vision, comme la segmentation d'image, ou la classification.
 
-<ins>Note de rédaction :</ins> La plupart des visuels ont été réalisée à partir du jeu de donnée [Global Wheat Dataset](http://www.global-wheat.com/).
+<ins>Note de rédaction :</ins> La plupart des visuels ont été réalisée à partir du jeu de donnée [Global Wheat Dataset](http://www.global-wheat.com/) (que l'on nommera indifféremment GWD).
 
 <br/>
 
@@ -103,7 +103,7 @@ Transformations incluses dans les environnement de développement : [Pytorch](ht
 
 
 
-### 1.2 Tranformations d'espace colorimétrique
+### 1.2 Transformations d'espace colorimétrique
 
 
 - **Contraste de luminosité aléatoire** (*RandomBrightnessContrast* dans albumentation) (dans cette section ?)
@@ -122,13 +122,6 @@ Transformations incluses dans les environnement de développement : [Pytorch](ht
 
 <br/>
 
-- **Décalage RVB** (*RGBShift* dans albumentation)
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/decalage_rvb_ex.png" alt="transfo_verti" width="500">
-</p>
-
-<br/>
 
 - **Gamma aléatoire** (*RandomGamma* dans albumentation) ( ? )
 
@@ -138,9 +131,14 @@ Transformations incluses dans les environnement de développement : [Pytorch](ht
 
 <br/>
 
-- **Égalisation adaptative d'histogramme sous contrainte de contraste** (*CLAHE* dans albumentation) ( int8? )
-CLAHE (Contrast Limited Adaptive Histogram Equalization)
 
+- **Décalage RVB** (*RGBShift* dans albumentation)
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/decalage_rvb_ex.png" alt="transfo_verti" width="500">
+</p>
+
+<br/>
 
 
 - **Transfert de couleur** (article [ColorTransfer](https://www.cs.tau.ac.il/~turkel/imagepapers/ColorTransfer.pdf))
@@ -155,8 +153,12 @@ CLAHE (Contrast Limited Adaptive Histogram Equalization)
 
 ### 1.3 Mélange d'image
 
+Ces méthodes récentes s'avèrent être très efficace sur certaines tâches. On peut voir que les images générées reproduisent un certain nombre de contraintes liées au contexte de détection en champs de blé (notamment des scènes très denses avec occlusions).
+
 
 - **Patchwork d'images** (article [cutmix](https://arxiv.org/abs/1905.04899))
+
+Il existe également des variantes avec deux images (juxtaposition horizontale, ou verticale).
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/patchword_dimage_ex.png">
@@ -166,6 +168,9 @@ CLAHE (Contrast Limited Adaptive Histogram Equalization)
 
 
 - **Mélange d'images** (article [mixup](https://arxiv.org/abs/1710.09412))
+
+Il serait pertinent de diminuer le taux de confiance associé à la rétropropagation de ces exemples. En pratique, j'ai toujours vu cette augmentation utilisée dans des premières phases d'entraînement. On s'assume alors que les dernières phases ne contiennent que des augmentations n'alterant pas la vraisemblance des images pour affiner l'apprentissage sur des exemples de la meilleure qualité possible.
+
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/melange_dimage_ex.png">
@@ -222,6 +227,8 @@ CLAHE (Contrast Limited Adaptive Histogram Equalization)
 
 - **Découpage avec nombre minimal de boite englobante** (vu pour la première fois [ici](https://www.kaggle.com/c/global-wheat-detection/discussion/172569); s'il existe une source antérieure, merci de me la faire parvenir !)
 
+Approche intéressante pour les scènes très denses, comme dans GWD. Le découpage permet d'obtenir des images tout à fait cohérentes. Combinée avec d'autres augmentations, le contenu généré est très intéressant pour aider à la généralisation.
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/decoupe_nboites_min_ex.png" alt="transfo_verti" width="500">
 </p>
@@ -231,7 +238,6 @@ CLAHE (Contrast Limited Adaptive Histogram Equalization)
 
 
 ## 2. Apprentissage profond
-
 
 
 ### 2.1 Exemples adverses
@@ -255,11 +261,7 @@ Une meilleure compréhension des attaques adverses dans les réseaux de neurones
 
 ### 2.2 Transfert de style
 
-Article original : [Gatys, L. A., Ecker, A. S., & Bethge, M. (2015). A neural algorithm of artistic style. arXiv preprint arXiv:1508.06576.](https://arxiv.org/pdf/1508.06576.pdf)
-
-Étude des différentes approches de transfert de style par réseaux de neurones (évoque également quelques approches de type GAN) : [Jing, Y., Yang, Y., Feng, Z., Ye, J., Yu, Y., & Song, M. (2019). Neural style transfer: A review. IEEE transactions on visualization and computer graphics, 26(11), 3365-3385.](https://arxiv.org/pdf/1705.04058.pdf)
-
-Un exemple sur le Global Wheat Dataset :
+Il s'agit d'appliquer un [transfert de style neuronal](https://arxiv.org/pdf/1508.06576.pdf) sur les images de notre jeu de données.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/transfert_style_neuronal_ex.png">
@@ -269,15 +271,38 @@ Un exemple sur le Global Wheat Dataset :
 <br/>
 
 
+Note : [Cette étude](https://arxiv.org/pdf/1705.04058.pdf) explore des différentes approches de transfert de style par réseaux de neurones (évoque également quelques approches de type GAN) : [Jing, Y., Yang, Y., Feng, Z., Ye, J., Yu, Y., & Song, M. (2019). Neural style transfer: A review. IEEE transactions on visualization and computer graphics, 26(11), 3365-3385.
+
 
 ### 2.3 GAN
 
 Article de la méthode *pix2pix* : [Isola, P., Zhu, J. Y., Zhou, T., & Efros, A. A. (2017). Image-to-image translation with conditional adversarial networks. In Proceedings of the IEEE conference on computer vision and pattern recognition (pp. 1125-1134).](https://arxiv.org/pdf/1611.07004.pdf)
 
 
-Piste très prometteuse.
+Piste prometteuse, qui a fait l'objet de [nombreux](https://arxiv.org/pdf/1711.04340.pdf) [travaux](https://arxiv.org/pdf/1801.05401.pdf) [de](https://arxiv.org/pdf/1803.01229.pdf) recherches et a déjà été [utilisée](https://arxiv.org/pdf/1907.12902.pdf) avec [succès](https://www.nature.com/articles/s41598-019-52737-x.pdf). Cette approche nécessite cependant des GANs bien entraîné, faute de quoi les images produites ne seront pas d'une qualité suffisannte pour aider à la généralisation. 
 
 
+
+Voici quelques examples d'images générées par la méthodes pix2pix sur le jeu de donnée GWD (Crédit : [bendang sur Kaggle](https://www.kaggle.com/bendang/synthetic-wheat-images)) :
+
+
+Sur des images simples
+AJOUTER
+Sur des images mosaïque (voir plus haut)
+AJOUTER
+
+
+
+Les résultats peuvent donc être d'une qualité variable. Mais les résultats spectaculaires obtenus par les GANs ces dernières années laissent supposer que cette piste sera de plus en plus (et de mieux en mieux) exploitée à l'avenir.
+
+
+
+
+
+
+(i) Où mettre l'auto encodeur ?
+
+	
 
 <br/>
 
@@ -286,7 +311,13 @@ Piste très prometteuse.
 [https://neptune.ai/blog/data-augmentation-in-python](https://neptune.ai/blog/data-augmentation-in-python)
 
 
+
+
 **Articles :**
+
+(Article original : [Gatys, L. A., Ecker, A. S., & Bethge, M. (2015). A neural algorithm of artistic style. arXiv preprint arXiv:1508.06576.](https://arxiv.org/pdf/1508.06576.pdf)
+
+Étude des différentes approches de transfert de style par réseaux de neurones (évoque également quelques approches de type GAN) : [Jing, Y., Yang, Y., Feng, Z., Ye, J., Yu, Y., & Song, M. (2019). Neural style transfer: A review. IEEE transactions on visualization and computer graphics, 26(11), 3365-3385.](https://arxiv.org/pdf/1705.04058.pdf)
 
 
 
