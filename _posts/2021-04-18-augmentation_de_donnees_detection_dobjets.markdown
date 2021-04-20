@@ -257,7 +257,7 @@ Approche intéressante pour les scènes très denses, comme dans GWD. Le découp
 <br/>
 
 
-Les attaques adverses ([articles](https://arxiv.org/pdf/1312.6199.pdf) [pionniers](https://arxiv.org/pdf/1412.6572.pdf)) pour les réseaux de neurones consistent à modifier très légèrement nos données d'entrées (dans notre cas une image) de sorte à provoquer de très fortes erreurs de prédiction sur un réseau. Une idée d'augmentation de donnée apparaît alors clairement : si l'on soumet un réseau à des exemples adverses, sans doute y sera-t-il plus robuste. Il devrait donc pouvoir en tirer des conclusions sur les données pour généraliser plus efficacement.
+Les attaques adverses ([articles](https://arxiv.org/pdf/1312.6199.pdf) [pionniers](https://arxiv.org/pdf/1412.6572.pdf)) pour les réseaux de neurones consistent à modifier très légèrement nos données d'entrées (dans notre cas une image) de sorte à provoquer de très grandes erreurs de prédiction sur un réseau. Une idée d'augmentation de donnée apparaît alors clairement : si l'on soumet un réseau à des exemples adverses, sans doute y sera-t-il plus robuste. Il devrait donc pouvoir en tirer des conclusions sur les données pour généraliser plus efficacement.
 
 Si l'idée est attrayante, elle ne fonctionne pas très bien en pratique. Yann Goodfellow a lui-même affirmé que cette approche ne pouvait apporter que des améliorations marginales (dans [cette interview](https://www.youtube.com/watch?v=Z6rxFNMGdn0), me semble-t-il).
 
@@ -282,12 +282,11 @@ Note : [Cette étude](https://arxiv.org/pdf/1705.04058.pdf) explore des différe
 
 ### 2.3 GAN
 
-Article de la méthode *pix2pix* : [Isola, P., Zhu, J. Y., Zhou, T., & Efros, A. A. (2017). Image-to-image translation with conditional adversarial networks. In Proceedings of the IEEE conference on computer vision and pattern recognition (pp. 1125-1134).](https://arxiv.org/pdf/1611.07004.pdf)
+Les [réseaux de neurones antagonistes génératifs](https://arxiv.org/abs/1406.2661) sont capables de générer des images [particulièrement réalistes](https://arxiv.org/pdf/1812.04948.pdf). Il pourrait donc être intéressant de se servir d'une approche de ce type pour générer de nouvelles images de bonnes qualités.
 
+C'est une piste prometteuse, qui a fait l'objet de [nombreux](https://arxiv.org/pdf/1711.04340.pdf) [travaux](https://arxiv.org/pdf/1801.05401.pdf) [de](https://arxiv.org/pdf/1803.01229.pdf) recherches et a déjà été [utilisée](https://arxiv.org/pdf/1907.12902.pdf) avec [succès](https://www.nature.com/articles/s41598-019-52737-x.pdf). Mais cette approche nécessite des GANs bien entraîné, faute de quoi les images produites ne seront pas d'une qualité suffisante pour aider à la généralisation. 
 
-Piste prometteuse, qui a fait l'objet de [nombreux](https://arxiv.org/pdf/1711.04340.pdf) [travaux](https://arxiv.org/pdf/1801.05401.pdf) [de](https://arxiv.org/pdf/1803.01229.pdf) recherches et a déjà été [utilisée](https://arxiv.org/pdf/1907.12902.pdf) avec [succès](https://www.nature.com/articles/s41598-019-52737-x.pdf). Cette approche nécessite cependant des GANs bien entraîné, faute de quoi les images produites ne seront pas d'une qualité suffisante pour aider à la généralisation. 
-
-
+La méthode [pix2pix](https://arxiv.org/pdf/1611.07004.pdf) est souvent utilisée dans ce sens. 
 
 Voici quelques examples d'images générées par la méthodes pix2pix sur le jeu de donnée GWD :
 
@@ -311,9 +310,9 @@ Comme on peut le voir, les résultats peuvent être d'une qualité variable. Mai
 
 ## Conclusion
 
-Il existe donc une multitude de méthodes pour générer de nouvelles données à partir d'un jeu initial, dans des problèmes de détection d'objets. En combinant des méthodes fondées sur les réseaux de neurones profonds (souvent en amont de l'entraîenement) et des méthodes de traitement d'images plus classiques (moins coûteuses en calcul, donc souvent mises en oeuvre au moment de l'entraîenement), on peut obtenir un jeu de donnée d'entraînement suffisamment divers pour augmenter les capacités généralisantes d'un réseau de neurones.
+Il existe donc une multitude de méthodes pour générer de nouvelles données à partir d'un jeu initial, dans des problèmes de détection d'objets. En combinant des méthodes fondées sur les réseaux de neurones profonds (souvent en amont de l'entraînement) et des méthodes de traitement d'images plus classiques (moins coûteuses en calcul, donc souvent mises en oeuvre au moment de l'entraînement), on peut obtenir un jeu de données suffisamment divers pour augmenter les capacités généralisantes d'un réseau de neurones.
 
-On aurait pu mentionner les augmentations par auto-encodeurs, avec lesquels on peut augmenter la résolution des images. Les augmentations de données dans l'espace des caractéristiques serait une autre pise à considérer à l'avenir ; bien que [certaines travaux](https://arxiv.org/pdf/1702.05538.pdf) explorent cette approche, elle n'est pas encore couramment employée.
+On aurait pu mentionner les augmentations par auto-encodeurs, avec lesquels on peut accroître la résolution des images. Les augmentations de données dans l'espace des caractéristiques serait une autre pise à considérer à l'avenir ; bien que [certaines travaux](https://arxiv.org/pdf/1702.05538.pdf) explorent cette approche, elle n'est pas encore couramment employée.
 
 
 
@@ -334,8 +333,7 @@ On aurait pu mentionner les augmentations par auto-encodeurs, avec lesquels on p
 
 [Jing, Y., Yang, Y., Feng, Z., Ye, J., Yu, Y., & Song, M. (2019). Neural style transfer: A review. IEEE transactions on visualization and computer graphics, 26(11), 3365-3385.](https://arxiv.org/pdf/1705.04058.pdf)
 
-
-
+[Isola, P., Zhu, J. Y., Zhou, T., & Efros, A. A. (2017). Image-to-image translation with conditional adversarial networks. In Proceedings of the IEEE conference on computer vision and pattern recognition (pp. 1125-1134).](https://arxiv.org/pdf/1611.07004.pdf)
 
 
 
