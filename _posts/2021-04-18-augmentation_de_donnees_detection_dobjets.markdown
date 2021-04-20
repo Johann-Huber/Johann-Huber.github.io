@@ -1,18 +1,24 @@
 ---
 layout: post
-title:  "Augmentation de données pour la détection d'objets"
+title:  "Visualisation des méthodes d'Augmentation de Données pour la Détection d'objets"
 date:   2021-04-18 21:50:00 +0200
 categories: Apprentissage-profond
 ---
 
 
-L'augmentation de données est une étape indispensable sitôt que l'on souhaite utiliser un réseau de neurones pour de la détection d'objet sur une tâche précise. Cette méthode permet générer de nouvelles images d'entraînement à partir d'un jeu de donnée initial. Un jeu de donnée plus étendu rend le travail de généralisation du réseau plus facile, en diminuant les risques de surrapprentissage. Mais si l'augmentation de données est très communément exploitée, **sa mise en oeuvre repose souvent sur un processus empirique** : On réfléchit à la cohérence des transformations sur le problème ciblé, et on applique celles qui nous semblent les plus à même de produire un contenu diversifié.
+L'augmentation de données est une étape indispensable sitôt que l'on souhaite utiliser un réseau de neurones pour de la détection d'objet. Il s'agit d'appliquer des transformations plus ou moins complexes pour générer de nouvelles images d'entraînement à partir d'un jeu de donnée initial. Cela a pour effet de diminuer les risques de surrapprentissage, et de faciliter le travail de généralisation du réseau. Mais si l'augmentation de données est très communément exploitée, **sa mise en oeuvre repose souvent sur un processus empirique** : On réfléchit à la cohérence des transformations sur le problème ciblé, et l'on applique celles qui nous semblent les plus appropriées pour produire un contenu diversifié.
 
-Le choix des transformations passent donc souvent par les yeux : on visualise sur quelques exemples, et choisit. Dans cet article, nous allons voir **à quoi ressemble chaque transformation**, **comment les implémenter**, ou quelles sont les **librairies** qui peuvent nous faciliter la tâche.
+Le choix des transformations passent donc souvent par leur visualisation sur quelques exemples. Cet article s'inscrit dans le sens de cette démarche.
 
-Notons enfin que cet article se concentre sur la détection d'objet, mais que beaucoup de ces opérations sont tout aussi valable sur d'autres tâches de vision, comme la segmentation d'image, ou la classification.
+**Objectifs de cet article** : 
+- Répertorier les **librairies** python les plus importantes pour l'augmentation de données adaptées à la détection d'objet ;
+- Donner un **aperçu des méthodes** les plus utilisées ;
+- Proposer une cahier jupyter permettant de manipuler les méthodes évoquées (*En cours de nettoyage*).
 
-Note de rédaction : La plupart des visuels a été réalisée à partir du jeu de donnée [Global Wheat Dataset](http://www.global-wheat.com/). J'ajouterai le code sitôt que je l'aurais nettoyé.
+
+Bien que cet article se concentre sur la détection d'objet, il apparaît que beaucoup des méthodes évoquées sont tout aussi valable sur d'autres tâches de vision, comme la segmentation d'image, ou la classification.
+
+<ins>Note de rédaction :</ins> La plupart des visuels ont été réalisée à partir du jeu de donnée [Global Wheat Dataset](http://www.global-wheat.com/).
 
 <br/>
 
