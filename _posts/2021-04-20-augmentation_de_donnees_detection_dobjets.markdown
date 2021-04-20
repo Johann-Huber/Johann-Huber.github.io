@@ -18,24 +18,24 @@ Le choix des transformations passent donc souvent par leur visualisation sur que
 
 Bien que cet article se concentre sur la détection d'objet, il apparaît que beaucoup des méthodes évoquées sont tout aussi valable sur d'autres tâches de vision, comme la segmentation d'image, ou la classification.
 
-<ins>Note de rédaction :</ins> La plupart des visuels ont été réalisée à partir du jeu de donnée [Global Wheat Dataset](http://www.global-wheat.com/) (que l'on nommera indifféremment GWD).
+<ins>Note de rédaction :</ins> La plupart des visuels ont été réalisées à partir du jeu de donnée [Global Wheat Dataset](http://www.global-wheat.com/) (que l'on nommera indifféremment GWD).
 
 <br/>
 
 
 ## Tour d'horizon des librairies utiles (Python)
 
-[Albumentation](https://github.com/albumentations-team/albumentations) : Contient une grande parties des transformations les plus couramment utilisées. Conçue pour fonctionner avec Pytorch (mais fonctionne très bien avec Keras & tf). C'est une référence, et à ma connaissance la lib [la mieux optimisée](https://github.com/albumentations-team/albumentations#benchmarking-results).
+- [Albumentation](https://github.com/albumentations-team/albumentations) : Contient une grande parties des transformations les plus couramment utilisées. Conçue pour fonctionner avec Pytorch (mais fonctionne très bien avec Keras & tf). C'est une référence, et à ma connaissance la librairie [la mieux optimisée](https://github.com/albumentations-team/albumentations#benchmarking-results).
 
-[imgaug](https://imgaug.readthedocs.io/en/latest/) : Faite pour la parallélisation sur plusieurs CPUs, mais à ma connaissance, rien de ce que fait imgaug n'est pas fait aussi bien par albumentation.
+- [imgaug](https://imgaug.readthedocs.io/en/latest/) : Faite pour la parallélisation sur plusieurs CPUs, mais à ma connaissance, tout ce que fait imgaug est (au moins aussi bien) fait par albumentation.
 
-Transformations incluses dans les environnement de développement : [Pytorch](https://pytorch.org/vision/stable/transforms.html), [Keras](https://keras.io/api/preprocessing/image/), [Mxnet](https://mxnet.apache.org/versions/1.8.0/api/python/docs/api/mxnet/image/index.html#mxnet.image.Augmenter)
+- Transformations incluses dans les environnement de développement : [Pytorch](https://pytorch.org/vision/stable/transforms.html), [Keras](https://keras.io/api/preprocessing/image/), [Mxnet](https://mxnet.apache.org/versions/1.8.0/api/python/docs/api/mxnet/image/index.html#mxnet.image.Augmenter)
 
-[Augmentor](https://github.com/mdbloice/Augmentor) : Librairie surtout axée sur les transormations géométriques. Elle n'est cependant pas assez complète / rapide / modulable pour être très populaire.
+- [Augmentor](https://github.com/mdbloice/Augmentor) : Librairie surtout axée sur les transformations géométriques. Elle n'est cependant pas assez complète / rapide / modulable pour être très populaire.
 
-[Deepaugment](https://github.com/barisozmen/deepaugment) : Implémentation de l'approche [AutoAugment](https://arxiv.org/pdf/1805.09501.pdf), qui est une sorte d'autoML pour l'augmentation du données : l'algorithme recherche dans un espace d'augmentation possible la combinaison qui maximise une certaine métrique (la précision, par exemple). Peut utilisé, car les gains de performances sont souvent minimes et très coûteux.
+- [Deepaugment](https://github.com/barisozmen/deepaugment) : Implémentation de l'approche [AutoAugment](https://arxiv.org/pdf/1805.09501.pdf), qui est une sorte d'autoML pour l'augmentation du données : l'algorithme recherche dans un espace d'augmentation possible la combinaison qui maximise une certaine métrique (la précision, par exemple). Peut utilisé, car les gains de performances sont souvent minimes et très coûteux.
 
-À noter que Pytorch et MxNet ont chacun une libraire intitulée "Transforms" (respectivement dans torchvision et gluon.data.vision) qui contient un certain nombre de transformation très rapide à l'exécution. Les possibilitiés sont cependant limitées si l'on ne s'en tient qu'à ces opérations.
+À noter que Pytorch et MxNet ont chacun une libraire intitulée "Transforms" (respectivement dans torchvision et gluon.data.vision) qui contient un certain nombre de transformations très rapides à l'exécution. Les possibilitiés sont cependant limitées si l'on ne s'en tient qu'à ces opérations.
 
 <br/>
 
@@ -202,11 +202,11 @@ Il serait pertinent de diminuer le taux de confiance associé à la rétropropag
 
 
 
-Note : À l'heure où j'écris ces lignes, cette fonction d'albumentation [ne supporte pas la prise en compte de boites englobantes](https://github.com/albumentations-team/albumentations/issues/666). Mais la méthode est si utile - surtout si l'on travaille avec des scènes soumises à de fortes occlusions - que je ne peux pas ne pas la mentionner ici. On peut toujours implémenter cette fonction à la main sous numpy, en attendant d'avoir une version plus optimisée.
+Note : À l'heure où j'écris ces lignes, cette fonction d'albumentation [ne supporte pas la prise en compte de boites englobantes](https://github.com/albumentations-team/albumentations/issues/666). Mais la méthode est si utile - surtout si l'on travaille avec des scènes soumises à de fortes occlusions - qu'il m'est impossible de ne pas en faire mention. On peut toujours implémenter cette fonction à la main sous numpy, en attendant d'avoir une version plus optimisée.
 
 
 
-- **Découpage avec nombre minimal de boite englobante** 
+- **Découpage avec nombre minimum de boites englobantes** 
 
 Source : Vu pour la première fois [ici](https://www.kaggle.com/c/global-wheat-detection/discussion/172569); s'il existe une source antérieure, merci de me la faire parvenir !
 
@@ -283,16 +283,16 @@ Il s'agit d'appliquer un [transfert de style neuronal](https://arxiv.org/pdf/150
 <br/>
 
 
-Note : [Cette étude](https://arxiv.org/pdf/1705.04058.pdf) explore des différentes approches de transfert de style par réseaux de neurones (évoque également quelques approches de type GAN).
+Note : [Cette étude](https://arxiv.org/pdf/1705.04058.pdf) explore les différentes approches de transfert de style par réseaux de neurones (évoque également quelques approches de type GAN).
 
 
 ### 2.3 GAN
 
 Les [réseaux de neurones antagonistes génératifs](https://arxiv.org/abs/1406.2661) sont capables de générer des images [particulièrement réalistes](https://arxiv.org/pdf/1812.04948.pdf). Il pourrait être intéressant de se servir d'une approche de ce type pour générer de nouvelles images de bonnes qualités.
 
-C'est une piste prometteuse, qui a fait l'objet de [nombreux](https://arxiv.org/pdf/1711.04340.pdf) [travaux](https://arxiv.org/pdf/1801.05401.pdf) [de](https://arxiv.org/pdf/1803.01229.pdf) recherches et a déjà été [utilisée](https://arxiv.org/pdf/1907.12902.pdf) avec [succès](https://www.nature.com/articles/s41598-019-52737-x.pdf). Mais cette approche nécessite des GANs bien entraîné, faute de quoi les images produites ne seront pas d'une qualité suffisante pour aider à la généralisation. 
+C'est une piste prometteuse, qui a fait l'objet de [nombreux](https://arxiv.org/pdf/1711.04340.pdf) [travaux](https://arxiv.org/pdf/1801.05401.pdf) [de](https://arxiv.org/pdf/1803.01229.pdf) recherches et a déjà été [utilisée](https://arxiv.org/pdf/1907.12902.pdf) avec [succès](https://www.nature.com/articles/s41598-019-52737-x.pdf). Mais cette approche nécessite des GANs bien entraînés, faute de quoi les images produites ne seront pas d'une qualité suffisante pour aider à la généralisation. 
 
-La méthode [pix2pix](https://arxiv.org/pdf/1611.07004.pdf) est souvent utilisée dans ce sens. 
+La méthode [pix2pix](https://arxiv.org/pdf/1611.07004.pdf) est souvent utilisée à cette fin. 
 
 Voici quelques examples d'images générées par la méthodes pix2pix sur le jeu de donnée GWD :
 
@@ -318,7 +318,7 @@ Comme on peut le voir, les résultats peuvent être d'une qualité variable. Mai
 
 Il existe donc une **multitude de méthodes** pour **générer de nouvelles données** à partir d'un jeu initial, dans des problèmes de détection d'objets. En combinant des **méthodes fondées sur les réseaux de neurones profonds** (souvent en amont de l'entraînement) et des **méthodes de traitement d'images plus classiques** (moins coûteuses en calcul, donc souvent mises en oeuvre au moment de l'entraînement), on peut obtenir un jeu de données suffisamment divers pour augmenter les capacités généralisantes d'un réseau de neurones.
 
-On aurait pu mentionner les augmentations par auto-encodeurs, avec lesquels on peut accroître la résolution des images. Les augmentations de données dans l'espace des caractéristiques serait une autre pise à considérer à l'avenir ; bien que [certaines travaux](https://arxiv.org/pdf/1702.05538.pdf) explorent cette approche, elle n'est pas encore couramment employée.
+On aurait pu mentionner les augmentations par auto-encodeurs, avec lesquels on peut accroître la résolution des images. Les augmentations de données dans l'espace des caractéristiques serait une autre piste à considérer à l'avenir ; bien que [certains travaux](https://arxiv.org/pdf/1702.05538.pdf) explorent cette approche, elle n'est pas encore couramment employée.
 
 
 
