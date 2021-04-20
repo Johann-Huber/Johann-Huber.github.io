@@ -45,7 +45,7 @@ Transformations incluses dans les environnement de développement : [Pytorch](ht
 ## 1. Manipulations classiques d'images 
 
 
-### 1.1 Transformation géométriques
+### 1.1 Transformations géométriques
 
 - **Transformation horizontale** (*HorizontalFlip* dans albumentation)
 
@@ -97,7 +97,7 @@ Transformations incluses dans les environnement de développement : [Pytorch](ht
 
 
 
-### 1.2 Tranformation d'espace colorimétrique
+### 1.2 Tranformations d'espace colorimétrique
 
 
 - **Contraste de luminosité aléatoire** (*RandomBrightnessContrast* dans albumentation) (dans cette section ?)
@@ -140,7 +140,7 @@ CLAHE (Contrast Limited Adaptive Histogram Equalization)
 - **Transfert de couleur** (article [ColorTransfer](https://www.cs.tau.ac.il/~turkel/imagepapers/ColorTransfer.pdf))
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/transfert_couleur_ex.png" alt="transfo_verti" width="500">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/transfert_couleur_ex.png">
 </p>
 
 <br/>
@@ -256,7 +256,7 @@ Article original : [Gatys, L. A., Ecker, A. S., & Bethge, M. (2015). A neural al
 Un exemple sur le Global Wheat Dataset :
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/transfert_style_neuronal_ex.png" alt="transfo_verti" width="500">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/transfert_style_neuronal_ex.png">
 </p>
 
 
