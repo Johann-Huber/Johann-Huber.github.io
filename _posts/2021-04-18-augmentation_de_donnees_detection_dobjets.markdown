@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Gradient de la politique"
+title:  "Augmentation de données pour la détection d'objets"
 date:   2021-04-18 21:50:00 +0200
 categories: Apprentissage-profond
 ---
@@ -14,7 +14,7 @@ Notons enfin que cet article se concentre sur la détection d'objet, mais que be
 
 Note de rédaction : La plupart des visuels a été réalisée à partir du jeu de donnée [Global Wheat Dataset](http://www.global-wheat.com/). J'ajouterai le code sitôt que je l'aurais nettoyé.
 
-</br>
+<br/>
 
 
 ## Tour d'horizon des librairies utiles (Python)
@@ -53,19 +53,46 @@ Transformations incluses dans les environnement de développement : [Pytorch](ht
   <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/transfo_horiz_ex.png">
 </p>
 
+<br/>
 
 
 - **Transormation verticale** (*VerticalFlip* dans albumentation)
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/transfo_verti_ex.png">
+</p>
 
-- **Rotation aléatoire** (*RandomRotate90* dans albumentation)
+<br/>
+
+
+- **Rotation aléatoire (pas de 90°)** (*RandomRotate90* dans albumentation)
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/rotation_aleatoire_ex.png">
+</p>
+
+<br/>
+
 
 
 - **Translation, rotation, échelle** (*ShiftScaleRotate* dans albumentation)
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/translat_rota_echelle_ex.png">
+</p>
+
+<br/>
+
+
+
 
 - **Compression d'image** (*ImageCompression* dans albumentation) (dans cette section ?)
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/compression_dimage_ex.png">
+</p>
+
+<br/>
 
 
 
@@ -75,21 +102,48 @@ Transformations incluses dans les environnement de développement : [Pytorch](ht
 
 - **Contraste de luminosité aléatoire** (*RandomBrightnessContrast* dans albumentation) (dans cette section ?)
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/contraste_lumino_alea_ex.png">
+</p>
+
+<br/>
 
 - **Saturation de teinte aléatoire** (*HueSaturationValue* dans albumentation)
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/saturation_teinte_alea_ex.png">
+</p>
+
+<br/>
 
 - **Décalage RVB** (*RGBShift* dans albumentation)
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/decalage_rvb_ex.png">
+</p>
+
+<br/>
 
 - **Gamma aléatoire** (*RandomGamma* dans albumentation) ( ? )
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/gamma_alea_ex.png">
+</p>
+
+<br/>
 
 - **Égalisation adaptative d'histogramme sous contrainte de contraste** (*CLAHE* dans albumentation) ( int8? )
 CLAHE (Contrast Limited Adaptive Histogram Equalization)
 
 
-- **Égalisation adaptative d'histogramme sous contrainte de contraste** (article [ColorTransfer](https://www.cs.tau.ac.il/~turkel/imagepapers/ColorTransfer.pdf))
+
+- **Transfert de couleur** (article [ColorTransfer](https://www.cs.tau.ac.il/~turkel/imagepapers/ColorTransfer.pdf))
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/transfert_couleur_ex.png">
+</p>
+
+<br/>
 
 
 
@@ -98,12 +152,29 @@ CLAHE (Contrast Limited Adaptive Histogram Equalization)
 
 - **Patchwork d'images** (article [cutmix](https://arxiv.org/abs/1905.04899))
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/patchword_dimage_ex.png">
+</p>
+
+<br/>
+
 
 - **Mélange d'images** (article [mixup](https://arxiv.org/abs/1710.09412))
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/melange_dimage_ex.png">
+</p>
+
+<br/>
 
 
 - **Mosaïque d'images** (article [yolo-v4](https://arxiv.org/pdf/2004.10934.pdf))
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/mosaique_dimage_ex.png">
+</p>
+
+<br/>
 
 
 
@@ -112,17 +183,46 @@ CLAHE (Contrast Limited Adaptive Histogram Equalization)
 
 - **Bruit gaussien** (*GaussNoise* dans albumentation)
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/bruit_gauss_ex.png">
+</p>
+
+<br/>
+
 
 - **Flou** (*Blur* dans albumentation)
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/flou_ex.png">
+</p>
+
+<br/>
+
+
+- **Flou cinétique** (*MotionBlur* dans albumentation)
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/flou_cinetique_ex.png">
+</p>
+
+<br/>
 
 
 - **Décrochage grossier** (*CoarseDropout* dans albumentation) ( corriger ? )
 
 
+
+
+
 - **Découpage avec nombre minimal de boite englobante** (vu pour la première fois [ici](https://www.kaggle.com/c/global-wheat-detection/discussion/172569); s'il existe une source antérieure, merci de me la faire parvenir !)
 
+<p align="center">
+  <img src="">
+</p>
 
-</br>
+<br/>
+
+
 
 ## 2) Apprentissage profond
 
@@ -130,7 +230,13 @@ CLAHE (Contrast Limited Adaptive Histogram Equalization)
 
 ### Attaques adverses
 
-(ajouter img)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/adversarial_attack_paper_img.png">
+  (Source)[https://arxiv.org/pdf/1412.6572.pdf]
+</p>
+
+<br/>
+
 
 Les attaques adverses ([articles](https://arxiv.org/pdf/1312.6199.pdf) [pionniers](https://arxiv.org/pdf/1412.6572.pdf)) pour les réseaux de neurones consistent à modifier très légèrement nos données d'entrées (dans notre cas une image) de sorte de provoquer de très fortes erreurs de prédiction sur un réseau. Une idée d'augmentation de donnée apparaît alors clairement : si l'on soumet un réseau à des exemples adverses, sans doute y sera-t-il plus robuste. Il devrait donc pouvoir en tirer des conclusions sur les données pour généraliser plus efficacement.
 
@@ -147,8 +253,11 @@ Article original : [Gatys, L. A., Ecker, A. S., & Bethge, M. (2015). A neural al
 Étude des différentes approches de transfert de style par réseaux de neurones (évoque également quelques approches de type GAN) : [Jing, Y., Yang, Y., Feng, Z., Ye, J., Yu, Y., & Song, M. (2019). Neural style transfer: A review. IEEE transactions on visualization and computer graphics, 26(11), 3365-3385.](https://arxiv.org/pdf/1705.04058.pdf)
 
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/transfert_style_neuronal_ex.png">
+</p>
 
-		
+
 
 
 ### Augmentation de données GAN
@@ -160,7 +269,7 @@ Piste très prometteuse.
 
 
 
-</br>
+<br/>
 
 ## Source 
 
