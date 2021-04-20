@@ -50,7 +50,7 @@ Transformations incluses dans les environnement de développement : [Pytorch](ht
 - **Transormation horizontale** (*HorizontalFlip* dans albumentation)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/transfo_horiz_ex.png" alt="transfo_horiz" width="700">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/transfo_horiz_ex.png" alt="transfo_horiz" width="500">
 </p>
 
 <br/>
@@ -59,7 +59,7 @@ Transformations incluses dans les environnement de développement : [Pytorch](ht
 - **Transormation verticale** (*VerticalFlip* dans albumentation)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/transfo_verti_ex.png" alt="transfo_verti" width="700">	
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/transfo_verti_ex.png" alt="transfo_verti" width="500">	
 </p>
 
 <br/>
@@ -68,7 +68,7 @@ Transformations incluses dans les environnement de développement : [Pytorch](ht
 - **Rotation aléatoire (pas de 90°)** (*RandomRotate90* dans albumentation)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/rotation_aleatoire_ex.png">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/rotation_aleatoire_ex.png" alt="transfo_verti" width="500">
 </p>
 
 <br/>
@@ -78,7 +78,7 @@ Transformations incluses dans les environnement de développement : [Pytorch](ht
 - **Translation, rotation, échelle** (*ShiftScaleRotate* dans albumentation)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/translat_rota_echelle_ex.png">
+  <img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/augmentation_dimages/translat_rota_echelle_ex.png" alt="transfo_verti" width="500">
 </p>
 
 <br/>
