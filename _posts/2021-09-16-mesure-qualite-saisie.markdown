@@ -47,18 +47,22 @@ Pour déterminer les bons points de contacts et la bonne configuraztion de préh
 Les algorithmes de saisie tiennent compte des propriétés suivantes :
 
 * **Résistances aux perturbations** (*Disturbance resistance*) → Traité par l'article
+
 Une saisie doit pouvoir résister à des perturbations dans n’importe quelle directions à partir du moment où l’immobilité de l’objet est garantie (saisie réalisée), grâce à la positions des doigts, ou - jusqu’à une certaine magnitude - grâce aux forces appliquées par les doigts.
 <ins>Pb :</ins> : détermination des points de contacts sur l’objet
 
 * **Dextérité** (*Dexterity*) → Traité par l'article
+
 Il y a dextérité dans la saisie si la main peut déplacer l’objet autant que nécessaire pour la réalisation de la tâche (ou dans n’importe quelle direction s’il n’y a pas assez de spécifications).
 <ins>Pb :</ins> : détermination de la configuration de la main
 
 * **Équilibre** (*Equilibrium*)
+
 Une saisie est à l’équilibre si la résultante des forces et des couples appliqués sur l’objet (par les doigts ou par n’importe quelle perturbation) est nulle.
 <ins>Pb :</ins> : détermination et contrôle des forces de contact appropriées
 
 * **Stabilité** (*Stablity*)
+
 Une saisie est stable si n’importe quelle erreur causée dans la position de l’objet par une perturbation extérieure disparaît après la fin de la perturbation.
 <ins>Pb :</ins> : contrôle des forces vouées à corriger l’erreur
 
