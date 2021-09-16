@@ -113,6 +113,24 @@ Les forces <img src="https://latex.codecogs.com/svg.image?f"/> et les vitesses <
 	<img src="https://latex.codecogs.com/svg.image?J_h&space;=&space;diag[J_1,...,J_i]&space;\in&space;\mathbb{R}^{nr\times&space;nm}"/>
 </p>
 
+Où <img src="https://latex.codecogs.com/svg.image?J_i&space;\in&space;\mathbb{R}^{n\times&space;m},&space;i=1,...,n"/> est la jacobienne pour le doigt i qui relie les variables des articulations des doigts avec les variables du bout des doigts :
+
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\nu&space;=&space;J_h&space;\dot{\theta}" title="\nu = J_h \dot{\theta}" />
+</p>
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?T&space;=&space;J_h&space;f"/>
+</p>
+
+La relation entre les forces <img src="https://latex.codecogs.com/svg.image?f"/> au bout des doigts et le torseur d'effort appliqué à l'objet d'une part, et la relation entre les vitesse <img src="https://latex.codecogs.com/svg.image?\nu"/> aux points de contacts et le vecteur cinématique <img src="https://latex.codecogs.com/svg.image?\dot{x}"/> d'autre part, sont données par la matrice de saisie <img src="https://latex.codecogs.com/svg.image?G\in\mathbb{R}^{d&space;\times&space;nr}"/> :
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\nu=G^T\dot{x}" title="\nu=G^T\dot{x}" />
+</p>
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\omega=Gf" title="\omega=Gf" />
+</p>
 
 
 Test.
