@@ -136,6 +136,8 @@ La relation entre les forces <img src="https://latex.codecogs.com/svg.image?f"/>
 
 Test.
 
+<br/>
+
 #### 2.2) Relation forces / vitesses
 
 ### 2.2) Relation forces / vitesses
@@ -145,6 +147,10 @@ Test.
 # 2.2) Relation forces / vitesses
 
 <br/>
+
+<br/>
+
+
 ### 3) Mesures de qualité associés aux positions de points de contact
 
 <br/>
