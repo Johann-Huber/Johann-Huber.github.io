@@ -117,9 +117,11 @@ Les forces <img src="https://latex.codecogs.com/svg.image?f"/> et les vitesses <
 Où <img src="https://latex.codecogs.com/svg.image?J_i&space;\in&space;\mathbb{R}^{n\times&space;m},&space;i=1,...,n"/> est la jacobienne pour le doigt i qui relie les variables des articulations des doigts avec les variables du bout des doigts :
 <p align="center">
 
-</p>
+<p align="center">
 	<img src="https://latex.codecogs.com/svg.image?\nu&space;=&space;J_h&space;\dot{\theta}" title="\nu = J_h \dot{\theta}" />
 	<img src="https://latex.codecogs.com/svg.image?T&space;=&space;J_h&space;f"/>
+</p>
+
 <br/>
 
 
