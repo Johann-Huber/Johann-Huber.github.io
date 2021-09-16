@@ -12,15 +12,11 @@ Revue de l'article : Roa, M. A., & Suárez, R. (2015). Grasp quality measures: r
 
 #### Résumé
 
-Pour qu’un algorithme obtienne une bonne saisie, il faut : 
-- déterminer de bons points de contacts avec l’objet
-- déterminer une bonne configuration du préhenseur
+Pour qu’un algorithme obtienne une bonne saisie, il faut **déterminer de bons points de contacts avec l’objet**, et **déterminer une bonne configuration du préhenseur**.
 
 La quantification d’une “bonne” saisie nécessite la définition de métriques appropriées.
 
-Dans la littérature, on distingue deux groupes de métriques, selon l’aspect évalué :
-- localisation des points de contact sur l’objet
-- configuration du préhenseur / de la main
+Dans la littérature, on distingue deux groupes de métriques, selon l’aspect évalué : **localisation des points de contact sur l’objet**, et **configuration du préhenseur**.
 
 Cette article présente : 
 - une étude de la littérature
@@ -38,33 +34,33 @@ Cette article présente :
 Pour déterminer les bons points de contacts et la bonne configuraztion de préhenseur nécessaires à la saisie, on distingue deux approches :
 * **Approche empirique**
 	* Approche physiologique
-	* Essaye d’imiter le comportement de la main humaine
+	* Tente d’imiter le comportement de la main humaine
 	* Utilise : apprentissage par démonstrations, NN, fuzzy logic (i), systèmes basées connaissances
 
 * **Approche analytique**
 	* Approche mécanique
 	* Considère les propriétés mécaniques et physiques impliquées dans le geste de saisie.
-	* Utilise : modèles mathématiques de l’interaction objet / main
+	* Utilise : modèles mathématiques de l’interaction objet / main	
 
 #### B) Quelles sont les propriétés d'une bonne saisie ?
 
 Les algorithmes de saisie tiennent compte des propriétés suivantes :
 
-**Résistances aux perturbations** (*Disturbance resistance*) [TRAITÉ PAR L'ARTICLE]
+* **Résistances aux perturbations** (*Disturbance resistance*) → Traité par l'article
 Une saisie doit pouvoir résister à des perturbations dans n’importe quelle directions à partir du moment où l’immobilité de l’objet est garantie (saisie réalisée), grâce à la positions des doigts, ou - jusqu’à une certaine magnitude - grâce aux forces appliquées par les doigts.
-→ <ins>Pb :</ins> : détermination des points de contacts sur l’objet
+<ins>Pb :</ins> : détermination des points de contacts sur l’objet
 
-**Dextérité** (*Dexterity*) [TRAITÉ PAR L'ARTICLE]
+* **Dextérité** (*Dexterity*) → Traité par l'article
 Il y a dextérité dans la saisie si la main peut déplacer l’objet autant que nécessaire pour la réalisation de la tâche (ou dans n’importe quelle direction s’il n’y a pas assez de spécifications).
-→ <ins>Pb :</ins> : détermination de la configuration de la main
+<ins>Pb :</ins> : détermination de la configuration de la main
 
-**Équilibre** (*Equilibrium*)
+* **Équilibre** (*Equilibrium*)
 Une saisie est à l’équilibre si la résultante des forces et des couples appliqués sur l’objet (par les doigts ou par n’importe quelle perturbation) est nulle.
-→ <ins>Pb :</ins> : détermination et contrôle des forces de contact appropriées
+<ins>Pb :</ins> : détermination et contrôle des forces de contact appropriées
 
-**Stabilité** (*Stablity*)
+* **Stabilité** (*Stablity*)
 Une saisie est stable si n’importe quelle erreur causée dans la position de l’objet par une perturbation extérieure disparaît après la fin de la perturbation.
-→ <ins>Pb :</ins> : contrôle des forces vouées à corriger l’erreur
+<ins>Pb :</ins> : contrôle des forces vouées à corriger l’erreur
 
 
 En général, il existe plusieurs saisies possible d'un objet par un préhenseur.
