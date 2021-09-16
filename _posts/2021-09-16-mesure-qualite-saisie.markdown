@@ -168,30 +168,87 @@ Où <img src="https://latex.codecogs.com/svg.image?H=(G^T)^&plus;J_h\in&space;\m
 
 #### 3.1) Mesures fondées sur des propriétés algébriques de la matrice de saisie G
 
-##### 3.1.1) Valeur singulière minimale de G
+**3.1.1) Valeur singulière minimale de G**
 
-	
+Une matrice de rang complet <img src="https://latex.codecogs.com/svg.image?G&space;\in&space;\mathbb{R}^{6&space;\times&space;r}"/> a 6 valeurs singulières dominées par les racines carrés des valeurs propres de <img src="https://latex.codecogs.com/svg.image?GG^T"/>.
 
-##### 3.1.2) Volume de l'ellipsoïde de l'espace du torseur
+Lorsqu'une saisie est en configuration singulière, au moins une des valeurs de G vaut 0. Dans ce cas, la saisie perd la capacité à resister à une contrainte extérieure dans au moins une direction.
+
+La plus petite valeur singulière de la matrice de saisie G, <img src="https://latex.codecogs.com/svg.image?\sigma_{min}(G)" title="\sigma_{min}(G)" />, est une mesure de qualité qui indique si la configuration de saisie est proche d'une configuration singulière ou non. 
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?(8):&space;Q_{MSV}&space;=&space;\sigma_{min}(G)"/>
+</p>
+
+**Plus <img src="https://latex.codecogs.com/svg.image?Q_{MSV}"/> est élevé, meilleure est la saisie.**
+
+Plus <img src="https://latex.codecogs.com/svg.image?Q_{MSV}"/> est élevé, plus grande est la contribution minimum (gain de transmission) des forces <img src="https://latex.codecogs.com/svg.image?f_i" /> aux points de contact vers le torseur <img src="https://latex.codecogs.com/svg.image?\omega" /> sur l'objet - aussi un critère d'optimisation de saisie (voir [1]).
+
+(+) Indicateur critique : la saisie risque t-elle de ne pas pouvoir être réalisée en pratique ?
+(-) <img src="https://latex.codecogs.com/svg.image?Q_{MSV}"/> n'est pas invariant aux changements de référentiels utilisés pour calculer les couples.
 
 
-##### 3.1.3) Indice d'isotropie de la saisie
+**3.1.2) Volume de l'ellipsoïde de l'espace du torseur**
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?(4):&space;\omega=Gf"/>
+</p>
+
+Les effets de G sur (4) peuvent être visualisés ainsi : (4) projette une sphère de rayon unitaire du domaine des forces aux points de contact vers une ellispoïde dans l'espace des efforts.
+
+La contribution globale de toutes les forces de contact peut être considérée en utilisant le volume de cette ellipsoïde comme mesure de qualité.
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?Q_{VEW}&space;=&space;\sqrt{det(GG')}&space;=&space;\sigma_1&space;\sigma_2&space;...&space;\sigma_d"/>
+</p>
+
+Où <img src="https://latex.codecogs.com/svg.image?\sigma_1&space;\sigma_2&space;...&space;\sigma_d"/> sont les valeurs singulières de G (toutes sont donc considérées avec le même poids).
+
+**<img src="https://latex.codecogs.com/svg.image?Q_{VEW}"/> doit être maximisé poru obtenir une aisie optimale.**
+
+(+) Invariant aux changements de référentiels pour les couples
+(-) Ne précise pas la contribution relative de chaque doigt
+
+
+**3.1.3) Indice d'isotropie de la saisie**
+
+Ce critère cherche une contribution uniforme des forces de contact au torseur global appliqué à l'objet.
+
+L'objectif est d'obtenir une saisie isotropique, dans laquelle chaque force de contact contribue aux forces internes de l'objet d'une manière similaire.
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?(10):&space;Q_{GII}&space;=&space;\frac{\sigma_{min}(G)}{\sigma_{max}(G)}"/>
+</p>
+
+Où sont utilisées les valeur singulières minimales et maximales de G.
+
+La saisie est isotropique si <img src="https://latex.codecogs.com/svg.image?Q_{GII}&space;\approx&space;1&space;"/>, et est proche d'une configuration singuluère si <img src="https://latex.codecogs.com/svg.image?Q_{GII}&space;\approx&space;0"/>.
+
+(+) <img src="https://latex.codecogs.com/svg.image?Q_{GII}"/> indique si une saisie a un comportement équivalent dans n'importe quelle direction : saisies robustes pour n'importe quel usage.
+(+) Indicateur critique : la saisie risque t-elle de ne pas pouvoir être réalisée en pratique ?
+
+
 
 #### 3.2) Mesures fondées sur les relations géométriques
 
-
-#### 3.2.2) Aire du polygône de saisie
-
-#### 3.2.3) Distance entre le centre de gravité du polygône de pts de contact et le CM de l'objet
+**3.2.1) Forme du polygône de saisie**
 
 
-#### 3.2.4) Orthogonalité
+
+**3.2.2) Aire du polygône de saisie**
 
 
-#### 3.2.5) Marges d'incertitudes dans les positions des doigts
+**3.2.3) Distance entre le centre de gravité du polygône de pts de contact et le CM de l'objet**
 
 
-#### 3.2.6) Régions de contact indépendantes
+**3.2.4) Orthogonalité**
+
+
+**3.2.5) Marges d'incertitudes dans les positions des doigts**
+
+
+**3.2.6) Régions de contact indépendantes**
+
 
 
 
@@ -229,9 +286,9 @@ Où <img src="https://latex.codecogs.com/svg.image?H=(G^T)^&plus;J_h\in&space;\m
 
 Roa, M. A., & Suárez, R. (2015). Grasp quality measures: review and performance. Autonomous robots, 38(1), 65-88.
 
+**Articles cités :**
 
-
-
+[1] (Kim et al. 2001)
 
 
 _____________
