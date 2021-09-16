@@ -188,6 +188,7 @@ Plus <img src="https://latex.codecogs.com/svg.image?Q_{MSV}"/> est élevé, plus
 
 (-) <img src="https://latex.codecogs.com/svg.image?Q_{MSV}"/> n'est pas invariant aux changements de référentiels utilisés pour calculer les couples.
 
+<br/>
 
 **3.1.2) Volume de l'ellipsoïde de l'espace du torseur**
 
@@ -211,6 +212,7 @@ Où <img src="https://latex.codecogs.com/svg.image?\sigma_1&space;\sigma_2&space
 
 (-) Ne précise pas la contribution relative de chaque doigt
 
+<br/>
 
 **3.1.3) Indice d'isotropie de la saisie**
 
@@ -230,7 +232,7 @@ La saisie est isotropique si <img src="https://latex.codecogs.com/svg.image?Q_{G
 
 (+) Indicateur critique : la saisie risque t-elle de ne pas pouvoir être réalisée en pratique ?
 
-
+<br/>
 
 #### 3.2) Mesures fondées sur les relations géométriques
 
@@ -254,6 +256,7 @@ Avec <img src="https://latex.codecogs.com/svg.image?\bar{\theta}&space;=&space;\
 
 (-) Peut parfois mener à des saisies inadéquates d'un point de vue pratique, pour les objets allongés par exemple.
 
+<br/>
 
 **3.2.2) Aire du polygône de saisie**
 
@@ -279,9 +282,10 @@ Dans un premier temps, définir un polygône avec 3 doigts. Puis, projeter la su
 
 <ins>En pratique :</ins> Ces méthodes doivent être combinées à d'autres mesures directement liées aux propriétés de saisie.
 
-
+<br/>
 
 **3.2.3) Distance entre le centre de gravité du polygône de pts de contact et le CM de l'objet**
+
 
 
 **3.2.4) Orthogonalité**
