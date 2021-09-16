@@ -126,8 +126,32 @@ La relation entre les forces <img src="https://latex.codecogs.com/svg.image?f"/>
 </p>
 
 
+À partir de (1) et de (3), on peut relier les vitesses articulaires et les vitesses de l'objet sous la forme suivante (**contrainte fondamentale de saisie**) :
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?(5):&space;J_h\dot{\theta}&space;=&space;G^T\dot{x}"/>
+</p>
+
+Et à partir de (3), on peut obtenir la relation entre la vitesse de l'objet en fonction des vitesse aux points de contact :
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?(6):&space;\dot{x}=(G^T)^&plus;\nu&plus;N(G^T)\nu_0" />
+</p>
+
+Où <img src="https://latex.codecogs.com/svg.image?(G^T)^&plus;"/> est la pseudoinverse de <img src="https://latex.codecogs.com/svg.image?G^T"/>, <img src="https://latex.codecogs.com/svg.image?N(G^T)"/> est la matrice dont les colonnes forment une base pour le noyau de <img src="https://latex.codecogs.com/svg.image?G^T"/>, et <img src="https://latex.codecogs.com/svg.image?\nu_0"/> est un vecteur arbitraire qui paramétrise l'ensemble des solutions. La pseudoinverse est nécessaire, car <img src="https://latex.codecogs.com/svg.image?G^T\in&space;\mathbb{R}^{nr\times&space;d}"/> n'est généralement pas une matrice carré. Pour produire n'importe quel effort ou torsion **(i)** sur un objet, il est nécessaire d'avoir <img src="https://latex.codecogs.com/svg.image?N(G^T)=0"/>, ou <img src="https://latex.codecogs.com/svg.image?rang(G)=d"/> (ce qui simplifie (6) pour réduire l'expression à : <img src="https://latex.codecogs.com/svg.image?\dot{x}=(G^T)^&plus;\nu"/>).
+
+La transformation directe dans le domaine des vitesses d'un espace articulaire de la main en grandes dimensions vers un espace de l'objet en plus petites dimensions peut être obtenu par la jacobienne <img src="https://latex.codecogs.com/svg.image?H"/> de l'objet-main :
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?(7):&space;\dot{x}=H\dot{\theta}"/>
+</p>
+
+Où <img src="https://latex.codecogs.com/svg.image?H=(G^T)^&plus;J_h\in&space;\mathbb{R}^{d&space;\times&space;nm}"/>.
 
 
+<ins>Note :</ins> On se place dans une approche quasi-statique, étant donné que les dynamiques ne sont pas considérées comme  jouant un rôle majeur dans les tâches de saisies. (Certains travaux explorent des cas de saisies / manipulations dynamiques.)
+
+<ins>Note :</ins> On suppose ici que chaque doigt a un mobilité totale dans l'espace de la tâche : on ne se place pas dans le cas de système défectueux (*defective systems*) à mobilité réduites.
 
 
 
