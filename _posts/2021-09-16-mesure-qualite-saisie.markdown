@@ -163,17 +163,40 @@ Où <img src="https://latex.codecogs.com/svg.image?H=(G^T)^&plus;J_h\in&space;\m
 
 #### 2.3) Visualisation
 
-<ins>Crédit ::</ins> L'image qui sert de base aux schémas provient de <a href="https://technologiemedia.net/2018/07/31/une-main-robotique-qui-apprend-par-elle-meme/">(technologiemedia.net)</a>.
+<ins>Crédit :</ins> L'image qui sert de base aux schémas provient de <a href="https://technologiemedia.net/2018/07/31/une-main-robotique-qui-apprend-par-elle-meme/">technologiemedia.net</a>.
 
 
-Explicitons ces formalisations par un exemple visuel :
+Explicitons ces formalisations par un exemple visuel. 
+
+Dans le domaine des vitesses :
 
 <p align="center">
 	<img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/mesure_qualite_saisie/formalisation_saisie_domaine_vitesse.png">
 	Schéma 2. Visualisation du formalisme dans le domaine des vitesses
 </p>
 
+On peut voir :
 
+* Les vitesses articulaires <img src="https://latex.codecogs.com/svg.image?\dot{\theta}&space;\in&space;\mathbb{R}^{nm}"/>, où n est le nombre de doigts et m le nombre d'articulations. Pour une main donnée, on obtient une matrice de la forme : 
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\dot{\theta}&space;=&space;\begin{bmatrix}\dot{\theta}_{11}&space;&&space;\cdots&space;&space;&&space;\dot{\theta}_{n1}&space;&space;\\\vdots&space;&space;&&space;\ddots&space;&space;&&space;\vdots&space;\\\dot{\theta}_{1m}&space;&&space;\cdots&space;&space;&&space;\dot{\theta}_{nm}&space;&space;\\\end{bmatrix}"/>
+</p>
+
+Où chaque colonne contient les m vitesses associées à chaque doigt.
+
+* Les vitesses associées à chaque points de contact <img src="https://latex.codecogs.com/svg.image?\nu&space;\in&space;\mathbb{R}^{nr}"/>, , où n est le nombre de doigts et r le nombre de composantes indépendantes des efforts appliqués au point de contact, et qui dépend du type de contrainte. Pour une main et un type de contrainte données, on obtient une matrice de la forme :
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\nu&space;=&space;\begin{bmatrix}\nu_{11}&space;&&space;\cdots&space;&space;&&space;\nu_{n1}&space;&space;\\\vdots&space;&space;&&space;\ddots&space;&space;&&space;\vdots&space;\\\nu_{1r}&space;&&space;\cdots&space;&space;&&space;\nu_{nr}&space;&space;\\\end{bmatrix}"/>
+</p>
+
+Où chaque colonne contient les r composantes de vitesses au bout de chaque doigt.
+
+* La vitesse de l'objet (translations <img src="https://latex.codecogs.com/svg.image?v"/> et rotations <img src="https://latex.codecogs.com/svg.image?w"/>), qui forme le vecteur <img src="https://latex.codecogs.com/svg.image?\dot{x}=(v,w)^T&space;\in&space;\mathbb{R}^d"/>, où d=3 en 2D et d=6 en 3D, c'est à dire <img src="https://latex.codecogs.com/svg.image?\dot{x}=[v_x,v_y,w_z]^T" title="\dot{x}=[v_x,v_y,w_z]^T" /> ou <img src="https://latex.codecogs.com/svg.image?\dot{x}=[v_x,v_y,v_z,w_x,w_y,w_z]^T"/>.
+
+
+Dans le domaine des efforts :
 
 <p align="center">
 	<img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/mesure_qualite_saisie/formalisation_saisie_domaine_efforts.png">
