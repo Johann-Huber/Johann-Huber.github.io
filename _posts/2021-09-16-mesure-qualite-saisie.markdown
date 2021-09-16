@@ -185,6 +185,7 @@ La plus petite valeur singulière de la matrice de saisie G, <img src="https://l
 Plus <img src="https://latex.codecogs.com/svg.image?Q_{MSV}"/> est élevé, plus grande est la contribution minimum (gain de transmission) des forces <img src="https://latex.codecogs.com/svg.image?f_i" /> aux points de contact vers le torseur <img src="https://latex.codecogs.com/svg.image?\omega" /> sur l'objet - aussi un critère d'optimisation de saisie (voir [1]).
 
 (+) Indicateur critique : la saisie risque t-elle de ne pas pouvoir être réalisée en pratique ?
+
 (-) <img src="https://latex.codecogs.com/svg.image?Q_{MSV}"/> n'est pas invariant aux changements de référentiels utilisés pour calculer les couples.
 
 
@@ -204,9 +205,10 @@ La contribution globale de toutes les forces de contact peut être considérée 
 
 Où <img src="https://latex.codecogs.com/svg.image?\sigma_1&space;\sigma_2&space;...&space;\sigma_d"/> sont les valeurs singulières de G (toutes sont donc considérées avec le même poids).
 
-**<img src="https://latex.codecogs.com/svg.image?Q_{VEW}"/> doit être maximisé poru obtenir une aisie optimale.**
+**<img src="https://latex.codecogs.com/svg.image?Q_{VEW}"/> doit être maximisé pour obtenir une saisie optimale.**
 
 (+) Invariant aux changements de référentiels pour les couples
+
 (-) Ne précise pas la contribution relative de chaque doigt
 
 
@@ -225,6 +227,7 @@ Où sont utilisées les valeur singulières minimales et maximales de G.
 La saisie est isotropique si <img src="https://latex.codecogs.com/svg.image?Q_{GII}&space;\approx&space;1&space;"/>, et est proche d'une configuration singuluère si <img src="https://latex.codecogs.com/svg.image?Q_{GII}&space;\approx&space;0"/>.
 
 (+) <img src="https://latex.codecogs.com/svg.image?Q_{GII}"/> indique si une saisie a un comportement équivalent dans n'importe quelle direction : saisies robustes pour n'importe quel usage.
+
 (+) Indicateur critique : la saisie risque t-elle de ne pas pouvoir être réalisée en pratique ?
 
 
@@ -233,9 +236,49 @@ La saisie est isotropique si <img src="https://latex.codecogs.com/svg.image?Q_{G
 
 **3.2.1) Forme du polygône de saisie**
 
+En saisie planaire (lorsque les points de contact sont coplanaires), on veut que les points soient uniformément distribués sur la surface de l'objet pour améliorer la stabilité de saisie.
+
+La moyenne des différences à la moyenne des angles internes du polygone de saisie est un critère de qualité de saisie.
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?(11):&space;Q_{SGP}=\frac{1}{\theta_{max}}\sum_{i=1}^{n}\left|&space;\theta_i&space;-&space;\bar{\theta}&space;\right|" title="(11): Q_{SGP}=\frac{1}{\theta_{max}}\sum_{i=1}^{n}\left| \theta_i - \bar{\theta} \right|" />
+</p>
+
+Avec <img src="https://latex.codecogs.com/svg.image?\bar{\theta}&space;=&space;\frac{180(n-2)}{n}"/>, et <img src="https://latex.codecogs.com/svg.image?\theta_{max}&space;=&space;(n-2)(180-\bar{\theta})&space;&plus;&space;2&space;\bar{\theta}"/>. <img src="https://latex.codecogs.com/svg.image?\theta_{max}" title="\theta_{max}" /> correspond à la somme des angles internes lorsque le polygône a la configuration la moins favorable (dégénérescence du polygône en ligne, et <img src="https://latex.codecogs.com/svg.image?\theta_{i}=\begin{Bmatrix}0&space;\\&space;\pi\end{Bmatrix}"/>.
+
+**La saisie est optimale lorsque <img src="https://latex.codecogs.com/svg.image?Q_{SGP}"/> est minimum (cas d'un polygône régulier).**
+
+(+) Interprétation simple, léger en calculs.
+
+(-) Limité aux saisies planaires
+
+(-) Peut parfois mener à des saisies inadéquates d'un point de vue pratique, pour les objets allongés par exemple.
 
 
 **3.2.2) Aire du polygône de saisie**
+
+* Cas saisie 3 doigts : 
+
+Plus le triangle des points de contact est large, meilleure est la saisie. Une même force fournie par les doigts aboutirait à une saisie plus robuste (c-à-d résistante à des couples externes plus importants).
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?Q_{AGP}&space;=&space;Aire(Triangle(p_1,p_2,p_3))"/>
+</p>
+
+(+) Interprétation simple, léger en calculs.
+
+* Extension à plus de 3 doigts : 
+
+Dans un premier temps, définir un polygône avec 3 doigts. Puis, projeter la surface pour déterminer les autres points de contact possibles. Enfin, choisir parmi ces points la positions des doigts restant en veillant à maximiser l'air du polygône.
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?(13):&space;Q_{AGP'}=&space;Aire(Polygone(p_1,p_2,p_3,p_4,...,p_n))&space;" />
+</p>
+
+(-) Comme <img src="https://latex.codecogs.com/svg.image?Q_{SGP}"/>, <img src="https://latex.codecogs.com/svg.image?Q_{AGP}"/> et <img src="https://latex.codecogs.com/svg.image?Q_{AGP'}"/> peuvent mener à des saisies inapplicables.
+
+<ins>En pratique :</ins> Ces méthodes doivent être combinées à d'autres mesures directement liées aux propriétés de saisie.
+
 
 
 **3.2.3) Distance entre le centre de gravité du polygône de pts de contact et le CM de l'objet**
