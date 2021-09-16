@@ -98,7 +98,7 @@ Le nombre r de composantes indépendantes des torseurs appliqués aux points de 
 
 Une force <img src="https://latex.codecogs.com/svg.image?F_i"/> appliquée sur un objet en un point <img src="https://latex.codecogs.com/svg.image?p_i"/> génère un couple <img src="https://latex.codecogs.com/svg.image?\tau_i&space;=&space;p_i&space;\times&space;F_i"/> par rapport au centre de masse de l'objet (CM). La force et le couple sont groupés dans un torseur d'efforts <img src="https://latex.codecogs.com/svg.image?\omega_i"/>, de dimension d=3 en 2D et d=6 en 3D.
 
-Le mouvement d'un objet est décrit par la vitesse de translation <img src="https://latex.codecogs.com/svg.image?v"/> de son CM, et par sa vitesse de rotation <img src="https://latex.codecogs.com/svg.image?w"/>. Chaque vitesse est resprésentée par un torseur cinématique <img src="https://latex.codecogs.com/svg.image?\dot{x}=(v,w)^T&space;\in&space;\mathbb{R}^d"/>.
+Le mouvement d'un objet est décrit par la vitesse de translation <img src="https://latex.codecogs.com/svg.image?v"/> de son CM, et par sa vitesse de rotation <img src="https://latex.codecogs.com/svg.image?w"/>. Chaque vitesse est resprésentée par un vecteur cinématique <img src="https://latex.codecogs.com/svg.image?\dot{x}=(v,w)^T&space;\in&space;\mathbb{R}^d"/>.
 
 La force <img src="https://latex.codecogs.com/svg.image?f_i"/> au bout du doigt i est produit par les couples <img src="https://latex.codecogs.com/svg.image?T_{ij}"/>, <img src="https://latex.codecogs.com/svg.image?j=1,...,m"/>, m étant le nombre d'articulations. Pour une main de n doigts, un vecteur <img src="https://latex.codecogs.com/svg.image?T=[T_{1j}^{T}...T_{nj}^{T}]&space;\in&space;\mathbb{R}^{nm}"/> est défini pour grouper les couples appliqués sur chaque articulations de la main. Les vitesse au niveau des articulations de la main <img src="https://latex.codecogs.com/svg.image?\dot{\theta}_{ij}"/>, sont aussi groupées dans une unique vecteur <img src="https://latex.codecogs.com/svg.image?\dot{\theta}=[\dot{\theta}_{1j}^{T}...\dot{\theta}_{nj}^{T}]^T&space;\in&space;\mathbb{R}^{nm}"/>.
 
@@ -119,8 +119,23 @@ Où <img src="https://latex.codecogs.com/svg.image?J_i&space;\in&space;\mathbb{R
 
 <p align="center">
 	<img src="https://latex.codecogs.com/svg.image?\nu&space;=&space;J_h&space;\dot{\theta}" title="\nu = J_h \dot{\theta}" />
+</p>
+<p align="center">
 	<img src="https://latex.codecogs.com/svg.image?T&space;=&space;J_h&space;f"/>
 </p>
+
+La relation entre les forces <img src="https://latex.codecogs.com/svg.image?f"/> au bout des doigts et le torseur d'effort appliqué à l'objet d'une part, et la relation entre les vitesse <img src="https://latex.codecogs.com/svg.image?\nu"/> aux points de contacts et le vecteur cinématique <img src="https://latex.codecogs.com/svg.image?\dot{x}"/> d'autre part, sont données par la matrice de saisie <img src="https://latex.codecogs.com/svg.image?G\in\mathbb{R}^{d&space;\times&space;nr}"/> :
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\nu=G^T\dot{x}" title="\nu=G^T\dot{x}" />
+</p>
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\omega=Gf" title="\omega=Gf" />
+</p>
+
+
+
+
 
 <br/>
 
