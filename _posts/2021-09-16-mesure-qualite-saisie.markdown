@@ -155,6 +155,11 @@ Où <img src="https://latex.codecogs.com/svg.image?H=(G^T)^&plus;J_h\in&space;\m
 
 
 
+<p align="center">
+	<img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/mesure_qualite_saisie/schema_relation_forces_vitesses.png">
+	Schéma 1. Relations entre les forces de saisies et les domaines de vitesses
+</p>
+
 
 
 <br/>
