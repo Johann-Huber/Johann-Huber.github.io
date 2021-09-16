@@ -262,7 +262,7 @@ Avec <img src="https://latex.codecogs.com/svg.image?\bar{\theta}&space;=&space;\
 Plus le triangle des points de contact est large, meilleure est la saisie. Une même force fournie par les doigts aboutirait à une saisie plus robuste (c-à-d résistante à des couples externes plus importants).
 
 <p align="center">
-	<img src="https://latex.codecogs.com/svg.image?Q_{AGP}&space;=&space;Aire(Triangle(p_1,p_2,p_3))"/>
+	<img src="https://latex.codecogs.com/svg.image?(12):&space;Q_{AGP}&space;=&space;Aire(Triangle(p_1,p_2,p_3))"/>
 </p>
 
 (+) Interprétation simple, léger en calculs.
