@@ -161,6 +161,26 @@ Où <img src="https://latex.codecogs.com/svg.image?H=(G^T)^&plus;J_h\in&space;\m
 </p>
 
 
+#### 2.3) Visualisation
+
+Explicitons ces formalisations par un exemple visuel :
+
+<p align="center">
+	<img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/mesure_qualite_saisie/formalisation_saisie_domaine_vitesse.png">
+	Schéma 2. Visualisation du formalisme dans le domaine des vitesses
+</p>
+
+
+
+<p align="center">
+	<img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/mesure_qualite_saisie/formalisation_saisie_domaine_efforts.png">
+	Schéma 3. Visualisation du formalisme dans le domaine des efforts
+</p>
+
+
+
+
+
 
 <br/>
 
