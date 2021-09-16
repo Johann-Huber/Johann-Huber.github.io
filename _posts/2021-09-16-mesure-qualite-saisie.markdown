@@ -166,6 +166,43 @@ Où <img src="https://latex.codecogs.com/svg.image?H=(G^T)^&plus;J_h\in&space;\m
 
 ### 3) Mesures de qualité associés aux positions de points de contact
 
+#### 3.1) Mesures fondées sur des propriétés algébriques de la matrice de saisie G
+
+##### 3.1.1) Valeur singulière minimale de G
+
+	
+
+##### 3.1.2) Volume de l'ellipsoïde de l'espace du torseur
+
+
+##### 3.1.3) Indice d'isotropie de la saisie
+
+#### 3.2) Mesures fondées sur les relations géométriques
+
+
+#### 3.2.2) Aire du polygône de saisie
+
+#### 3.2.3) Distance entre le centre de gravité du polygône de pts de contact et le CM de l'objet
+
+
+#### 3.2.4) Orthogonalité
+
+
+#### 3.2.5) Marges d'incertitudes dans les positions des doigts
+
+
+#### 3.2.6) Régions de contact indépendantes
+
+
+
+#### 3.3) Mesures considérant les limites de forces de saisie
+
+
+
+
+
+
+
 <br/>
 
 ### 4) Mesures de qualité associés aux configurations de la main
