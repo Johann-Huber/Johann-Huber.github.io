@@ -134,12 +134,10 @@ La relation entre les forces <img src="https://latex.codecogs.com/svg.image?f"/>
 </p>
 
 
-
+Test.
 
 
 <br/>
-
-
 
 ### 3) Mesures de qualité associés aux positions de points de contact
 
