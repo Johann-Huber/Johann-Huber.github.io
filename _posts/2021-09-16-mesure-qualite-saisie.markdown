@@ -26,6 +26,7 @@ Cette article présente :
 
 <ins>Note de rédaction :</ins> On utilisera indifféremment les mots **préhenseur** et **main** dans cet article.
 
+<br/>
 
 ### 1) Introduction
 
@@ -41,6 +42,7 @@ Pour déterminer les bons points de contacts et la bonne configuraztion de préh
 	* Approche mécanique
 	* Considère les propriétés mécaniques et physiques impliquées dans le geste de saisie.
 	* Utilise : modèles mathématiques de l’interaction objet / main	
+
 
 #### B) Quelles sont les propriétés d'une bonne saisie ?
 
@@ -70,6 +72,7 @@ Une saisie est stable si n’importe quelle erreur causée dans la position de l
 En général, il existe plusieurs saisies possible d'un objet par un préhenseur.
 Le choix d'une saisie optimale nécessite une **métrique de qualité** (*quality measure*).
 
+
 #### C) Plan
 ```
 2) Formalisme requis
@@ -80,21 +83,31 @@ Le choix d'une saisie optimale nécessite une **métrique de qualité** (*qualit
 7) Discussion
 ```
 
-
+<br/>
 
 ### 2) Introduction
 
+<br/>
+
 ### 3) Mesures de qualité associés aux positions de points de contact
+
+<br/>
 
 ### 4) Mesures de qualité associés aux configurations de la main
 
+<br/>
+
 ### 5) Approche combinant points de contacts et configuration de main
+
+<br/>
 
 ### 6) Autres approches
 
+<br/>
+
 ### 7) Discussion
 
-
+<br/>
 
 
 
