@@ -163,6 +163,9 @@ Où <img src="https://latex.codecogs.com/svg.image?H=(G^T)^&plus;J_h\in&space;\m
 
 #### 2.3) Visualisation
 
+<ins>Crédit ::</ins> L'image qui sert de base aux schémas provient de <a href="https://technologiemedia.net/2018/07/31/une-main-robotique-qui-apprend-par-elle-meme/">(technologiemedia.net)</a>.
+
+
 Explicitons ces formalisations par un exemple visuel :
 
 <p align="center">
