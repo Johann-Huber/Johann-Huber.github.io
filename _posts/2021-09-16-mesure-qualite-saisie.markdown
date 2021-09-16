@@ -107,6 +107,17 @@ Les forces et les vitesses aux bouts des doigts peuvent être exprimées dans un
 
 #### 2.2) Relation forces / vitesses
 
+-
+
+#### 2.2) Relation forces / vitesses
+
+### 2.2) Relation forces / vitesses
+
+## 2.2) Relation forces / vitesses
+
+# 2.2) Relation forces / vitesses
+
+-
 
 Les forces <img src="https://latex.codecogs.com/svg.image?f"/> et les vitesses <img src="https://latex.codecogs.com/svg.image?\nu"/> aux bouts des doigts sont reliés aux couples <img src="https://latex.codecogs.com/svg.image?T"/> et aux vitesses <img src="https://latex.codecogs.com/svg.image?\dot{\theta}"/> aux articulations des doigts par la jacobienne de la main :
 
