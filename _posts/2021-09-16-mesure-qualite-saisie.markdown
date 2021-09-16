@@ -49,35 +49,36 @@ Les algorithmes de saisie tiennent compte des propriétés suivantes :
 * **Résistances aux perturbations** (*Disturbance resistance*) → Traité par l'article
 
 Une saisie doit pouvoir résister à des perturbations dans n’importe quelle directions à partir du moment où l’immobilité de l’objet est garantie (saisie réalisée), grâce à la positions des doigts, ou - jusqu’à une certaine magnitude - grâce aux forces appliquées par les doigts.
-<ins>Pb :</ins> : détermination des points de contacts sur l’objet
+<ins>Pb :</ins> détermination des points de contacts sur l’objet
 
 * **Dextérité** (*Dexterity*) → Traité par l'article
 
 Il y a dextérité dans la saisie si la main peut déplacer l’objet autant que nécessaire pour la réalisation de la tâche (ou dans n’importe quelle direction s’il n’y a pas assez de spécifications).
-<ins>Pb :</ins> : détermination de la configuration de la main
+<ins>Pb :</ins> détermination de la configuration de la main
 
 * **Équilibre** (*Equilibrium*)
 
 Une saisie est à l’équilibre si la résultante des forces et des couples appliqués sur l’objet (par les doigts ou par n’importe quelle perturbation) est nulle.
-<ins>Pb :</ins> : détermination et contrôle des forces de contact appropriées
+<ins>Pb :</ins> détermination et contrôle des forces de contact appropriées
 
 * **Stabilité** (*Stablity*)
 
 Une saisie est stable si n’importe quelle erreur causée dans la position de l’objet par une perturbation extérieure disparaît après la fin de la perturbation.
-<ins>Pb :</ins> : contrôle des forces vouées à corriger l’erreur
+<ins>Pb :</ins> contrôle des forces vouées à corriger l’erreur
 
 
 En général, il existe plusieurs saisies possible d'un objet par un préhenseur.
 Le choix d'une saisie optimale nécessite une **métrique de qualité** (*quality measure*).
 
 #### C) Plan
-
+```
 2) Formalisme requis
 3) Mesures de qualité associés aux positions de points de contact
 4) Mesures de qualité associés aux configurations du préhenseur / de la main
 5) Approche combinant points de contacts et configuration de main
 6) Autres approches
 7) Discussion
+```
 
 
 
