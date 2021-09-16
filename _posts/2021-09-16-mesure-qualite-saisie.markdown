@@ -284,26 +284,132 @@ Dans un premier temps, définir un polygône avec 3 doigts. Puis, projeter la su
 
 <br/>
 
-**3.2.3) Distance entre le centre de gravité du polygône de pts de contact et le CM de l'objet**
+**3.2.3) Distance entre le centre de gravité du polygône de points de contact et le CM de l'objet**
+
+Plus la distance entre le centre de gravité du polygône de contact et le centre de masse de l'objet diminue, plus les effets des forces gravitationnelles et inertielles diminuent.
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?(14):&space;Q_{DCC}=dist(CM,C)" title="(14): Q_{DCC}=dist(CM,C)"/>
+</p>
+
+Où C est le centre de gravité du polygône (2D) ou du polyhèdre (3D) de contact, et CM est le centre de masse de l'objet.
+
+(+) Interprétation simple, léger en calculs si le CM est connu.
+
+(-) En pratique, CM n'est jamais connu précisément /!\
+
+(-) Le nombre de points de contact n'influence pas <img src="https://latex.codecogs.com/svg.image?Q_{DCC}"/> (alors que la stabilité est améliorée ...)
 
 
+<br/>
 
 **3.2.4) Orthogonalité**
 
+Les êtres humains ont tendance à aligner leur main avec l'axe principal d'inertie à saisir.
+
+Soit z le vecteur normal à la paume de la main, et soit u l'axe principal d'inertie de l'objet. L'angle entre ces deux vecteurs peut être calculé comme <img src="https://latex.codecogs.com/svg.image?\delta&space;=&space;\arccos(z&space;\cdot&space;u)"/>. La mesure est alors :
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?\begin{align*}(15):&space;Q_O&space;=&space;\left\{\begin{matrix}\delta,&space;&&space;\textrm{if}&space;\hspace{0.1cm}&space;\delta&space;<&space;\pi/4&space;\\\pi/2-\delta,&space;&&space;\textrm{if}&space;\hspace{0.1cm}&space;\pi/4&space;<&space;\delta&space;<&space;\pi/2&space;\\\delta-\pi/2,&space;&&space;\textrm{if}&space;\hspace{0.1cm}&space;\pi/2&space;<&space;\delta&space;<&space;3\pi/4&space;\\\pi&space;-&space;\delta,&space;&&space;\textrm{if}&space;\hspace{0.1cm}&space;\delta&space;>&space;3\pi/4\end{matrix}\right&space;.\end{align*}&space;"/>
+</p>
+
+Avec <img src="https://latex.codecogs.com/svg.image?\left\{\begin{matrix}max(Q_0)&space;=&space;\pi/4&space;\\&space;min(Q_0)&space;=&space;0\end{matrix}\right.&space;"/>. 
+
+**La saisie est optimale lorsque <img src="https://latex.codecogs.com/svg.image?Q_0&space;\equiv&space;0"/>.** (u et z colinéaires ou coplanaires).
+
+<br/>
 
 **3.2.5) Marges d'incertitudes dans les positions des doigts**
 
+<ins>Espace de saisie (ou espace de contact) :</ins> Espace defini par les n paramètres représentant les points de contact possibles de n doigts sur le contour 2D de l'objet.
+
+<ins>Espace des forces de saisie :</ins> Sous-espace de l'espace de saisie représentant les force appliquées aux points de contact.
+
+FCS est l'union d'un ensemble de polyhèdres convexes <img src="https://latex.codecogs.com/svg.image?CP_i" />, et est utilisé dans plusieurs travaux pour calculer le FCS d'objets polygonaux et n'importe quel nombre de doigts, avec ou sans fonctions.
+
+Une plus grande distance avec le contour de FCS implique une saisie plus sûre.
+
+Soit p un point de l'espace de saisie. Le rayon de l'hypersphère la plus large qui a pour centre p et qui est entièrement contenue dans l'un des polyhèdres convexes <img src="https://latex.codecogs.com/svg.image?CP_i" /> qui forment le FCS est une métrique de qualité de saisie.
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?(16):&space;Q_{MUF}=\min_{p_j\in\partial&space;CP_i}&space;\left\|&space;p&space;-&space;p_j&space;\right\|"/>
+</p>
+
+Où <img src="https://latex.codecogs.com/svg.image?\partial&space;CP_i"/> est le contour de <img src="https://latex.codecogs.com/svg.image?CP_i" />.
+
+(+) : Maximise l'effet de l'incertitude sur la position des doigts pendant la saisie.
+
+(-) : Difficile à appliquer à des objets non-polygonaux (2D ou 3D), de fait de la complexité et la grande dimensionnalité de l'espace de saisie qui en résulte.
+
+<br/>
 
 **3.2.6) Régions de contact indépendantes**
 
+<ins>Variante 1 :</ins> Objets polynomiaux
+
+Régions de contact indépendantes (*independent contact regions*) : ensemble de régions <img src="https://latex.codecogs.com/svg.image?ICR_i"/> sur les contours de l'objet tels qu'elles produisent une force de saisie indépendante des points de contacts. On nomme cet ensemble ICRS (pour *ICR Set*).
+
+Il s'agit d'une région fermée dans l'espace de saisie contenue entièrement dans l'espace des forces de saisie.
+
+Pour des objets 2D et n doigts, la région est un parallélépipède B aligné avec l'axe de référence.
+
+De plus grandes régions de B impliquent un plus grand ensemble de saisies FC possibles, et saisir en plaçant chaque doigt au centre de chaque ICR permet de plus larges erreurs de positionnement autorisées pour chaque doigt.
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?(17):&space;Q_{ICR}=L_{min}"/>
+</p>
+
+Avec <img src="https://latex.codecogs.com/svg.image?L_{min}"/> étant la taille de la région indépendante <img src="https://latex.codecogs.com/svg.image?ICR_i"/> la plus petite (c-à-d la taille de la plus petite arrête de B).
+
+Un <img src="https://latex.codecogs.com/svg.image?Q_{ICR}" title="Q_{ICR}"/> élevé implique de meilleures possibilités de trouver un ensemble de positions de contact permettant la saisie.
+
+(+) : Interprétable physiquement, utile dans le cas d'incertitude sur la position des doigts.
+
+(-) : Lourd en calculs (en particulier l'ICRS, c-à-d B)
+
+<ins>Variante 2 :</ins> Objets 2D non-polynomiaux (pince : 2 doigts)
+
+Dans ce cas, l'espace des forces de saisies sont limités par des courbes.
+
+L'ICRS est obtenu en maximisant l'aire de B.
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?(18):&space;Q_{ICR'}=aire(B)"/>
+</p>
+
+À noter que <img src="https://latex.codecogs.com/svg.image?Q_{ICR}"/> et <img src="https://latex.codecogs.com/svg.image?Q_{ICR'}"/> sont adaptés pour des objets 2D discrétisés de n'importe quelle forme (contours représentés par un nombre fini de points). La qualité de saisie est alors associée au nombre de points sur le contour de B (<img src="https://latex.codecogs.com/svg.image?Q_{ICR}"/>) ou dans B (<img src="https://latex.codecogs.com/svg.image?Q_{ICR'}"/>).
 
 
+<ins>Variante 3 :</ins> Objets polyhédriques
+
+La mesure de qualité est basée sur un ensemble ICRS : somme des distances entre chacuns des i points de contact <img src="https://latex.codecogs.com/svg.image?(x_{i},y_{i},z_{i})"/> et le centre <img src="https://latex.codecogs.com/svg.image?(x_{i0},y_{i0},z_{i0})"/> de la région de contact indépendant correspondante.
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?(19):&space;Q_{ICR^n}=\frac{1}{n}\sum_{i=1}^{n}\sqrt{(x_i-x_{i0})^2&plus;(y_i-y_{i0})^2&plus;(z_i-z_{i0})^2}"/>
+</p>
+
+On nomme <img src="https://latex.codecogs.com/svg.image?Q_{ICR^n}"/> l'indice d'incertitude de saisie (*uncertainty grasp index*), ou la marge de saisie (*grasp margin*).
+
+La saisie est optimale lorsque <img src="https://latex.codecogs.com/svg.image?Q_{ICR^n}&space;=&space;0"/>, c-à-d lorsque les doigts sont localisés au centre de chaque <img src="https://latex.codecogs.com/svg.image?ICR_i"/>.
+
+
+<br/>
 
 #### 3.3) Mesures considérant les limites de forces de saisie
 
 
 
 
+**3.3.1) La plus grande contrainte minimale resisté**
+**3.3.2) Volume de l'espace d'efforts de saisie (volume de P)**
+**3.3.3) Découplage des forces et des couples**
+**3.3.4) Composantes normales des forces**
+**3.3.5) Mesure adaptée à la tâche**
+
+
+<br/>
+
+#### 3.4) Exemples
 
 
 
