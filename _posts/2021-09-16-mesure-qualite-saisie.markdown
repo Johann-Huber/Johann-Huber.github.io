@@ -193,7 +193,7 @@ Où chaque colonne contient les m vitesses associées à chaque doigt.
 
 Où chaque colonne contient les r composantes de vitesses au bout de chaque doigt.
 
-* La vitesse de l'objet (translations <img src="https://latex.codecogs.com/svg.image?v"/> et rotations <img src="https://latex.codecogs.com/svg.image?w"/>), qui forme le vecteur <img src="https://latex.codecogs.com/svg.image?\dot{x}=(v,w)^T&space;\in&space;\mathbb{R}^d"/>, où d=3 en 2D et d=6 en 3D, c'est à dire <img src="https://latex.codecogs.com/svg.image?\dot{x}=[v_x,v_y,w_z]^T" title="\dot{x}=[v_x,v_y,w_z]^T" /> ou <img src="https://latex.codecogs.com/svg.image?\dot{x}=[v_x,v_y,v_z,w_x,w_y,w_z]^T"/>.
+* La vitesse de l'objet (translations <img src="https://latex.codecogs.com/svg.image?v"/> et rotations <img src="https://latex.codecogs.com/svg.image?w"/>), qui forme le vecteur <img src="https://latex.codecogs.com/svg.image?\dot{x}=(v,w)^T&space;\in&space;\mathbb{R}^d"/>, où d=3 en 2D et d=6 en 3D, c'est à dire <img src="https://latex.codecogs.com/svg.image?\dot{x}=[v_x,v_y,w_z]^T"/> ou <img src="https://latex.codecogs.com/svg.image?\dot{x}=[v_x,v_y,v_z,w_x,w_y,w_z]^T"/>.
 
 
 Dans le domaine des efforts :
@@ -204,7 +204,27 @@ Dans le domaine des efforts :
 </p>
 
 
+On voit ici :
 
+* Les couples appliqués aux articulations <img src="https://latex.codecogs.com/svg.image?T\in\mathbb{R}^{nm}"/>, avec n est le nombre de doigts et m le nombre d'articulations. Pour une main donnée, on obtient une matrice de la forme :
+
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?T&space;=&space;\begin{bmatrix}T_{11}&space;&&space;\cdots&space;&space;&&space;T_{n1}&space;&space;\\\vdots&space;&space;&&space;\ddots&space;&space;&&space;\vdots&space;\\T_{1m}&space;&&space;\cdots&space;&space;&&space;T_{nm}&space;&space;\\\end{bmatrix}"/>
+</p>
+
+Où chaque colonne contient les m couples associées aux articulations de chaque doigt.
+
+* Les forces de contact <img src="https://latex.codecogs.com/svg.image?f\in\mathbb{R}^{nr}"/>, où n est le nombre de doigts et r le nombre de composantes indépendantes des efforts appliqués au point de contact, et qui dépend du type de contrainte. Pour une main et un type de contrainte données, on obtient une matrice de la forme :
+<p align="center">
+	<img src="https://latex.codecogs.com/svg.image?f&space;=&space;\begin{bmatrix}f_{11}&space;&&space;\cdots&space;&space;&&space;f_{n1}&space;&space;\\\vdots&space;&space;&&space;\ddots&space;&space;&&space;\vdots&space;\\f_{1r}&space;&&space;\cdots&space;&space;&&space;f_{nr}&space;&space;\\\end{bmatrix}"/>
+</p>
+
+Où chaque colonne contient les r composantes de la force de contact associée à chaque doigt.
+
+* Les efforts appliqués sur l'objet (résultante des efforts <img src="https://latex.codecogs.com/svg.image?F"/> et le couple généré <img src="https://latex.codecogs.com/svg.image?\tau"/>), qui forme le vecteur <img src="https://latex.codecogs.com/svg.image?\omega=\begin{bmatrix}F&space;\\&space;\tau\end{bmatrix}&space;\in&space;\mathbb{R}^d"/>, où d=3 en 2D et d=6 en 3D, c'est à dire <img src="https://latex.codecogs.com/svg.image?\omega=[F_x,F_y,\tau_z]^T"/> ou <img src="https://latex.codecogs.com/svg.image?\omega=[F_x,F_y,F_z,\tau_x,\tau_y,\tau_z]^T"/>.
+
+
+**A FAIRE : Expliciter le rôle de G et Jh**
 
 
 
