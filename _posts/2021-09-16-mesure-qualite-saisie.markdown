@@ -119,10 +119,10 @@ Les forces <img src="https://latex.codecogs.com/svg.image?f"/> et les vitesses <
 La relation entre les forces <img src="https://latex.codecogs.com/svg.image?f"/> au bout des doigts et le torseur d'effort appliqué à l'objet d'une part, et la relation entre les vitesse <img src="https://latex.codecogs.com/svg.image?\nu"/> aux points de contacts et le vecteur cinématique <img src="https://latex.codecogs.com/svg.image?\dot{x}"/> d'autre part, sont données par la matrice de saisie <img src="https://latex.codecogs.com/svg.image?G\in\mathbb{R}^{d&space;\times&space;nr}"/> :
 
 <p align="center">
-	<img src="https://latex.codecogs.com/svg.image?\nu=G^T\dot{x}" title="\nu=G^T\dot{x}&space;\hspace{1cm}&space;(3)" />
+	<img src="https://latex.codecogs.com/svg.image?\nu=G^T\dot{x}&space;\hspace{1cm}&space;(3)"/>
 </p>
 <p align="center">
-	<img src="https://latex.codecogs.com/svg.image?\omega=Gf" title="\omega=Gf&space;\hspace{1cm}&space;(4)"/>
+	<img src="https://latex.codecogs.com/svg.image?\omega=Gf&space;\hspace{1cm}&space;(4)"/>
 </p>
 
 
