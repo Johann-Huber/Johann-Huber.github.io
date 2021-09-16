@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Revue d'article : Mesures de la qualité de saisie en robotique"
-date:   2021-09-16 21:07:00 +0200
+date:   2021-09-16 08:07:00 +0200
 categories: Robotique
 ---
 
