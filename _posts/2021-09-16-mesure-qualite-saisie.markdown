@@ -111,11 +111,18 @@ Les forces et les vitesses aux bouts des doigts peuvent être exprimées dans un
 Les forces <img src="https://latex.codecogs.com/svg.image?f"/> et les vitesses <img src="https://latex.codecogs.com/svg.image?\nu"/> aux bouts des doigts sont reliés aux couples <img src="https://latex.codecogs.com/svg.image?T"/> et aux vitesses <img src="https://latex.codecogs.com/svg.image?\dot{\theta}"/> aux articulations des doigts par la jacobienne de la main :
 
 <p align="center">
-<img src="https://latex.codecogs.com/svg.image?J_h&space;=&space;diag[J_1,...,J_i]&space;\in&space;\mathbb{R}^{nr\times&space;nm}"/>
+	<img src="https://latex.codecogs.com/svg.image?J_h&space;=&space;diag[J_1,...,J_i]&space;\in&space;\mathbb{R}^{nr\times&space;nm}"/>
 </p>
 
+Où <img src="https://latex.codecogs.com/svg.image?J_i&space;\in&space;\mathbb{R}^{n\times&space;m},&space;i=1,...,n"/> est la jacobienne pour le doigt i qui relie les variables des articulations des doigts avec les variables du bout des doigts :
+<p align="center">
 
+</p>
+	<img src="https://latex.codecogs.com/svg.image?\nu&space;=&space;J_h&space;\dot{\theta}" title="\nu = J_h \dot{\theta}" />
+	<img src="https://latex.codecogs.com/svg.image?T&space;=&space;J_h&space;f"/>
 <br/>
+
+
 
 ### 3) Mesures de qualité associés aux positions de points de contact
 
