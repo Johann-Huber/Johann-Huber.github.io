@@ -30,7 +30,7 @@ Cette article présente :
 
 ### 1) Introduction
 
-#### A) Comment déterminer une bonne saisie ?
+#### 1.1) Comment déterminer une bonne saisie ?
 
 Pour déterminer les bons points de contacts et la bonne configuraztion de préhenseur nécessaires à la saisie, on distingue deux approches :
 * **Approche empirique**
@@ -44,7 +44,7 @@ Pour déterminer les bons points de contacts et la bonne configuraztion de préh
 	* Utilise : modèles mathématiques de l’interaction objet / main	
 
 
-#### B) Quelles sont les propriétés d'une bonne saisie ?
+#### 1.2) Quelles sont les propriétés d'une bonne saisie ?
 
 Les algorithmes de saisie tiennent compte des propriétés suivantes :
 
@@ -73,7 +73,7 @@ En général, il existe plusieurs saisies possible d'un objet par un préhenseur
 Le choix d'une saisie optimale nécessite une **métrique de qualité** (*quality measure*).
 
 
-#### C) Plan
+#### 1.3) Plan
 ```
 2) Formalisme requis
 3) Mesures de qualité associés aux positions de points de contact
@@ -85,7 +85,34 @@ Le choix d'une saisie optimale nécessite une **métrique de qualité** (*qualit
 
 <br/>
 
-### 2) Introduction
+### 2) Formalisme requis
+
+#### 2.1) Modélisation des contacts, positions, forces et vitesses
+
+Les forces aux points de contacts ne peuvent agir que contre l'objet (contraites positives).
+Le nombre r de de composantes indépendantes des torseurs appliqués aux points de contacts dépendent du type de contrainte.
+
+* **Contact ponctuel sans frictions** : les forces appliquées sont normales à la surface de contact. r=1
+* **Contact ponctuel avec frictions** (*hard contact*) : composante normale, et peuvent avoir une composante tangentielle. r=2 (2D) ou r=3 (3D)
+* **Contact doux** (*soft contact*) : Idem que prec., plus un couple autour de la direction normale à la surface de contact. r=4
+
+Une force <img src="https://latex.codecogs.com/svg.image?F_i"/> appliqué sur un objet en un point <img src="https://latex.codecogs.com/svg.image?p_i"/> génère un couple <img src="https://latex.codecogs.com/svg.image?\tau_i&space;=&space;p_i&space;\times&space;F_i"/> par rapport au centre de masse de l'objet (CM). La force et le couple sont groupés dans un torseur d'efforts <img src="https://latex.codecogs.com/svg.image?\omega_i"/>, de dimension d=3 en 2D et d=6 en 3D.
+
+Le mouvement d'un objet est décrit par la vitesse de translation <img src="https://latex.codecogs.com/svg.image?v"/> de son CM, et par sa vitesse de rotation <img src="https://latex.codecogs.com/svg.image?w"/>. Chaque vitesse est resprésentée par un torseur cinématique <img src="https://latex.codecogs.com/svg.image?\dot{x}=(v,w)^T&space;\in&space;\mathbb{R}^d"/>.
+
+La force <img src="https://latex.codecogs.com/svg.image?f_i"/> au bout du doigt i est produit par les couples <img src="https://latex.codecogs.com/svg.image?T_{ij}"/>, <img src="https://latex.codecogs.com/svg.image?j=1,...,m"/>. Pour une main de n doigts, un vecteur <img src="https://latex.codecogs.com/svg.image?T=[T_{1j}^{T}...T_{nj}^{T}]&space;\in&space;\mathbb{R}^{nm}"/> est défini pour grouper les couples appliqués sur chaque articulations de la main.
+
+Les vitesse au niveau des articulations de la main, <img src="https://latex.codecogs.com/svg.image?\dot{\theta}=[\dot{\theta}_{1j}^{T}...\dot{\theta}_{nj}^{T}]^T&space;\in&space;\mathbb{R}^{nm}"/>.
+
+Les forces et les vitesses aux bouts des doigts peuvent être exprimées dans un référentiel local. De plus, le vecteur <img src="https://latex.codecogs.com/svg.image?f=[f_{1k}^T...f_{nk}^T]\in\mathbb{R}^{nr}(k=1,...,r)"/> regroupe toutes les composantes de forces appliquées aux points de contacts, et le vecteur <img src="https://latex.codecogs.com/svg.image?\nu&space;=[\nu_{1k}^T...\nu_{nk}^T]\in\mathbb{R}^{nr}"/> contient toutes les composantes de vitesses aux bouts des doigts. 
+
+
+#### 2.2) Relation forces / vitesses
+
+
+
+
+
 
 <br/>
 
