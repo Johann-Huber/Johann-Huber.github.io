@@ -151,7 +151,7 @@ Où <img src="https://latex.codecogs.com/svg.image?H=(G^T)^&plus;J_h\in&space;\m
 
 <ins>Note :</ins> On se place dans une approche quasi-statique, étant donné que les dynamiques ne sont pas considérées comme  jouant un rôle majeur dans les tâches de saisies. (Certains travaux explorent des cas de saisies / manipulations dynamiques.)
 
-<ins>Note :</ins> On suppose ici que chaque doigt a un mobilité totale dans l'espace de la tâche : on ne se place pas dans le cas de système défectueux (*defective systems*) à mobilité réduites.
+<ins>Note :</ins> On suppose ici que chaque doigt a un mobilité totale dans l'espace de la tâche : on ne se place pas dans le cas de systèmes défectueux (*defective systems*) à mobilité réduites.
 
 
 
@@ -161,7 +161,7 @@ Où <img src="https://latex.codecogs.com/svg.image?H=(G^T)^&plus;J_h\in&space;\m
 </p>
 
 
-#### 2.3) Visualisation
+#### 2.3) Visualisation et récapitulatif
 
 <ins>Crédit :</ins> L'image qui sert de base aux schémas provient de <a href="https://technologiemedia.net/2018/07/31/une-main-robotique-qui-apprend-par-elle-meme/">technologiemedia.net</a>.
 
@@ -185,7 +185,7 @@ On peut voir :
 
 Où chaque colonne contient les m vitesses associées à chaque doigt.
 
-* Les vitesses associées à chaque points de contact <img src="https://latex.codecogs.com/svg.image?\nu&space;\in&space;\mathbb{R}^{nr}"/>, , où n est le nombre de doigts et r le nombre de composantes indépendantes des efforts appliqués au point de contact, et qui dépend du type de contrainte. Pour une main et un type de contrainte données, on obtient une matrice de la forme :
+* Les vitesses associées à chaque points de contact <img src="https://latex.codecogs.com/svg.image?\nu&space;\in&space;\mathbb{R}^{nr}"/>, , où n est le nombre de doigts et r le nombre de composantes indépendantes des efforts appliqués au point de contact, et qui dépend du type de contrainte. Pour une main et un type de contrainte donnés, on obtient une matrice de la forme :
 
 <p align="center">
 	<img src="https://latex.codecogs.com/svg.image?\nu&space;=&space;\begin{bmatrix}\nu_{11}&space;&&space;\cdots&space;&space;&&space;\nu_{n1}&space;&space;\\\vdots&space;&space;&&space;\ddots&space;&space;&&space;\vdots&space;\\\nu_{1r}&space;&&space;\cdots&space;&space;&&space;\nu_{nr}&space;&space;\\\end{bmatrix}"/>
@@ -194,6 +194,18 @@ Où chaque colonne contient les m vitesses associées à chaque doigt.
 Où chaque colonne contient les r composantes de vitesses au bout de chaque doigt.
 
 * La vitesse de l'objet (translations <img src="https://latex.codecogs.com/svg.image?v"/> et rotations <img src="https://latex.codecogs.com/svg.image?w"/>), qui forme le vecteur <img src="https://latex.codecogs.com/svg.image?\dot{x}=(v,w)^T&space;\in&space;\mathbb{R}^d"/>, où d=3 en 2D et d=6 en 3D, c'est à dire <img src="https://latex.codecogs.com/svg.image?\dot{x}=[v_x,v_y,w_z]^T"/> ou <img src="https://latex.codecogs.com/svg.image?\dot{x}=[v_x,v_y,v_z,w_x,w_y,w_z]^T"/>.
+
+
+Dans l'équation <img src="https://latex.codecogs.com/svg.image?(1):&space;\nu=J_h\dot{\theta}"/>, la jacobienne de la main <img src="https://latex.codecogs.com/svg.image?J_h"/> relie les vitesses articulaires des doigts aux vitesses des points de contact, tandis que dans l'équation <img src="https://latex.codecogs.com/svg.image?(3):&space;\nu=G^T\dot{x}"/>, la matrice de saisie <img src="https://latex.codecogs.com/svg.image?G"/> relie les vitesses des points de contact avec la vitesse de l'objet. 
+
+La contrainte fondamentale de saisie <img src="https://latex.codecogs.com/svg.image?(5):&space;J_h\dot{\theta}&space;=&space;G^T\dot{x}"/> établie donc le lien entre les vitesses articulaires des doigts et la vitesse de l'objet.
+
+De même que <img src="https://latex.codecogs.com/svg.image?(3):&space;\nu=G^T\dot{x}"/> permet d'obtenir les vitesses des points de contacts à partir de la vitesse de l'objet, <img src="https://latex.codecogs.com/svg.image?(6):&space;\dot{x}=(G^T)^&plus;\nu&plus;N(G^T)\nu_0" /> permet d'obtenir la vitesse de l'objet à partir des vitesses des points de contact.
+
+Finalement, <img src="https://latex.codecogs.com/svg.image?(7):&space;\dot{x}=H\dot{\theta}"/> permet d'obtenir la vitesse de l'objet a partir des vitesses articulaires seulement grâce à la matrice jacobienne <img src="https://latex.codecogs.com/svg.image?(7):&space;\dot{x}=H\dot{\theta}"/> de l'objet-main.
+
+
+<br/>
 
 
 Dans le domaine des efforts :
@@ -223,8 +235,9 @@ Où chaque colonne contient les r composantes de la force de contact associée �
 
 * Les efforts appliqués sur l'objet (résultante des efforts <img src="https://latex.codecogs.com/svg.image?F"/> et le couple généré <img src="https://latex.codecogs.com/svg.image?\tau"/>), qui forme le vecteur <img src="https://latex.codecogs.com/svg.image?\omega=\begin{bmatrix}F&space;\\&space;\tau\end{bmatrix}&space;\in&space;\mathbb{R}^d"/>, où d=3 en 2D et d=6 en 3D, c'est à dire <img src="https://latex.codecogs.com/svg.image?\omega=[F_x,F_y,\tau_z]^T"/> ou <img src="https://latex.codecogs.com/svg.image?\omega=[F_x,F_y,F_z,\tau_x,\tau_y,\tau_z]^T"/>.
 
+Dans <img src="https://latex.codecogs.com/svg.image?(2):&space;T&space;=&space;J_h&space;f"/>, la jacobienne de la main relie les forces exercées par les doigts sur l'objet aux points de contact avec la matrice des efforts exercés sur les articulations de la main. Dans <img src="https://latex.codecogs.com/svg.image?(4):&space;\omega=Gf"/>, la matrice de saisie relie les force exercées au niveau des points de contact avec les efforts exercés sur l'objet.
 
-**A FAIRE : Expliciter le rôle de G et Jh**
+
 
 
 
