@@ -202,7 +202,7 @@ La contrainte fondamentale de saisie <img src="https://latex.codecogs.com/svg.im
 
 De même que <img src="https://latex.codecogs.com/svg.image?(3):&space;\nu=G^T\dot{x}"/> permet d'obtenir les vitesses des points de contacts à partir de la vitesse de l'objet, <img src="https://latex.codecogs.com/svg.image?(6):&space;\dot{x}=(G^T)^&plus;\nu&plus;N(G^T)\nu_0" /> permet d'obtenir la vitesse de l'objet à partir des vitesses des points de contact.
 
-Finalement, <img src="https://latex.codecogs.com/svg.image?(7):&space;\dot{x}=H\dot{\theta}"/> permet d'obtenir la vitesse de l'objet a partir des vitesses articulaires seulement grâce à la matrice jacobienne <img src="https://latex.codecogs.com/svg.image?(7):&space;\dot{x}=H\dot{\theta}"/> de l'objet-main.
+Finalement, <img src="https://latex.codecogs.com/svg.image?(7):&space;\dot{x}=H\dot{\theta}"/> permet d'obtenir la vitesse de l'objet a partir des vitesses articulaires seulement grâce à la matrice jacobienne <img src="https://latex.codecogs.com/svg.image?H"/> de l'objet-main.
 
 
 <br/>
@@ -400,11 +400,17 @@ Avec <img src="https://latex.codecogs.com/svg.image?\left\{\begin{matrix}max(Q_0
 
 **3.2.5) Marges d'incertitudes dans les positions des doigts**
 
+<p align="center">
+	<img src="https://raw.githubusercontent.com/Johann-Huber/Johann-Huber.github.io/master/assets/mesure_qualite_saisie/schema_3_2_5_qmuf.png">
+	Schéma 4. Principe de maximisation de la marge d'incertitude et saisie optimale assosiée dans l'espace physique.
+</p>
+
+
 <ins>Espace de saisie (ou espace de contact) :</ins> Espace defini par les n paramètres représentant les points de contact possibles de n doigts sur le contour 2D de l'objet.
 
-<ins>Espace des forces de saisie :</ins> Sous-espace de l'espace de saisie représentant les force appliquées aux points de contact.
+<ins>Espace des forces de saisie (*force closure space*, FCS) :</ins> Sous-espace de l'espace de saisie représentant les force appliquées aux points de contact.
 
-FCS est l'union d'un ensemble de polyhèdres convexes <img src="https://latex.codecogs.com/svg.image?CP_i" />, et est utilisé dans plusieurs travaux pour calculer le FCS d'objets polygonaux et n'importe quel nombre de doigts, avec ou sans fonctions.
+FCS est l'union d'un ensemble de polyhèdres convexes <img src="https://latex.codecogs.com/svg.image?CP_i" />, utilisée dans plusieurs travaux pour calculer le FCS d'objets polygonaux et n'importe quel nombre de doigts, avec ou sans fonctions.
 
 Une plus grande distance avec le contour de FCS implique une saisie plus sûre.
 
@@ -416,7 +422,7 @@ Soit p un point de l'espace de saisie. Le rayon de l'hypersphère la plus large 
 
 Où <img src="https://latex.codecogs.com/svg.image?\partial&space;CP_i"/> est le contour de <img src="https://latex.codecogs.com/svg.image?CP_i" />.
 
-(+) : Maximise l'effet de l'incertitude sur la position des doigts pendant la saisie.
+(+) : Minimize les effets liées à l'incertitude sur la position des doigts pendant la saisie.
 
 (-) : Difficile à appliquer à des objets non-polygonaux (2D ou 3D), de fait de la complexité et la grande dimensionnalité de l'espace de saisie qui en résulte.
 
